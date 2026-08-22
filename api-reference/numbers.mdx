@@ -1,0 +1,141 @@
+---
+title: "Numbers API Reference — Manage Phone Numbers"
+sidebarTitle: "Numbers"
+description: "List provisioned phone numbers, retrieve individual number details and capabilities, and update routing settings using the Amplify Numbers API."
+---
+
+The Numbers resource provides access to the phone numbers provisioned on your Amplify account. Each number has a set of capabilities — such as SMS, voice, or fax — and configuration settings that control how inbound traffic is handled. Use this resource to list all your numbers, inspect their properties, and update routing or labeling settings. Number provisioning is managed through the Amplify dashboard.
+
+<Note>
+  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/v1/numbers` | List numbers |
+| `GET` | `/v1/numbers/{id}` | Get a number |
+| `PATCH` | `/v1/numbers/{id}` | Update number settings |
+
+---
+
+## GET /v1/numbers
+
+Retrieve a paginated list of all phone numbers provisioned on your Amplify account.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+<ParamField query="type" type="string">
+  Filter by number type. One of `local`, `toll-free`, or `fax`.
+</ParamField>
+
+<ParamField query="capability" type="string">
+  Filter to numbers that support a specific capability. One of `sms`, `mms`, `voice`, or `fax`.
+</ParamField>
+
+### Code example
+
+```bash cURL
+curl https://api.amplify.xyz/v1/numbers \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+---
+
+## GET /v1/numbers/{id}
+
+Retrieve the full configuration and capabilities for a single phone number.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the phone number.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the number, prefixed with `num_`.
+</ResponseField>
+
+<ResponseField name="number" type="string">
+  The phone number in E.164 format (e.g., `+18005550199`).
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Number type. One of `local`, `toll-free`, or `fax`.
+</ResponseField>
+
+<ResponseField name="capabilities" type="array">
+  Array of strings listing the capabilities enabled on this number. Possible values include `sms`, `mms`, `voice`, and `fax`.
+</ResponseField>
+
+<ResponseField name="label" type="string">
+  Optional human-readable label assigned to this number for internal identification.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the number was provisioned on your account.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "num_01HZHD9MXRS4T7BVPW5R8ZKGF",
+    "number": "+18005550199",
+    "type": "toll-free",
+    "capabilities": ["sms", "mms", "voice"],
+    "label": "Main Support Line",
+    "created_at": "2024-01-15T08:00:00Z"
+  }
+}
+```
+
+---
+
+## PATCH /v1/numbers/{id}
+
+Update configuration settings for a phone number, such as its label or routing behavior.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the phone number to update.
+</ParamField>
+
+### Request body
+
+<ParamField body="label" type="string">
+  Human-readable label for internal identification of this number.
+</ParamField>
+
+<ParamField body="webhook_url" type="string">
+  HTTPS URL to receive inbound message and call webhook events for this number. Overrides the account-level default if set.
+</ParamField>
+
+### Code example
+
+```bash cURL
+curl -X PATCH https://api.amplify.xyz/v1/numbers/num_01HZHD9MXRS4T7BVPW5R8ZKGF \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "label": "Sales Hotline",
+    "webhook_url": "https://example.com/webhooks/inbound"
+  }'
+```
+
+<Info>
+  To add or remove numbers from your account, visit the Numbers section of the Amplify dashboard. API-based number provisioning will be documented here once available in the OpenAPI specification.
+</Info>

@@ -1,0 +1,137 @@
+---
+title: "Send a Fax with the Amplify API"
+sidebarTitle: "Send a Fax"
+description: "Learn how to send faxes programmatically using the Amplify API, from document preparation to submission and response handling."
+---
+
+Sending a fax through the Amplify API lets you integrate fax delivery directly into your application without managing physical fax hardware or legacy telephony infrastructure. You submit a document and a destination number, and Amplify handles transmission, queuing, and delivery confirmation on your behalf.
+
+## Prerequisites
+
+Before you send your first fax, make sure you have the following:
+
+- An Amplify API key, passed as a Bearer token in the `Authorization` header
+- A fax-enabled phone number provisioned in your Amplify account (used as the `from` number)
+
+<Steps>
+
+### Prepare your document
+
+Amplify accepts documents via a publicly accessible URL. The document must be reachable by Amplify's servers at the time of transmission.
+
+Supported formats include PDF, TIFF, and DOCX. PDF is recommended for the most reliable rendering across receiving fax machines.
+
+If your document is not already hosted at a stable URL, upload it first using the Amplify file upload API, then use the returned URL in your fax request. See [File Uploads](/platform/file-uploads) for instructions.
+
+### Send the fax
+
+Make a `POST` request to `/v1/faxes` with your document URL, destination number, and sender number. Amplify queues the fax immediately and returns a fax object with a unique ID.
+
+<CodeGroup>
+
+```bash cURL
+curl --request POST \
+  --url https://api.amplify.xyz/v1/faxes \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "to": "+15551234567",
+    "from": "+15557654321",
+    "document_url": "https://example.com/document.pdf"
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.amplify.xyz/v1/faxes",
+    headers={
+        "Authorization": "Bearer YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "to": "+15551234567",
+        "from": "+15557654321",
+        "document_url": "https://example.com/document.pdf",
+    },
+)
+
+fax = response.json()
+print(fax["id"])   # e.g. fax_01hx...
+print(fax["status"])  # queued
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/faxes", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    to: "+15551234567",
+    from: "+15557654321",
+    document_url: "https://example.com/document.pdf",
+  }),
+});
+
+const fax = await response.json();
+console.log(fax.id);      // fax_01hx...
+console.log(fax.status);  // queued
+```
+
+</CodeGroup>
+
+#### Key request fields
+
+<ParamField body="to" type="string" required>
+  The recipient's fax number in E.164 format (e.g. `+15551234567`).
+</ParamField>
+
+<ParamField body="from" type="string" required>
+  Your Amplify-provisioned fax number in E.164 format. This number must be active in your account.
+</ParamField>
+
+<ParamField body="document_url" type="string" required>
+  A publicly accessible URL pointing to the document you want to fax. Amplify fetches this document at send time, so the URL must be reachable without authentication.
+</ParamField>
+
+#### Example request
+
+```json
+{
+  "to": "+15551234567",
+  "from": "+15557654321",
+  "document_url": "https://example.com/document.pdf"
+}
+```
+
+#### Example response
+
+```json
+{
+  "id": "fax_01hx...",
+  "status": "queued",
+  "to": "+15551234567",
+  "from": "+15557654321",
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+### Save the fax ID
+
+Store the `id` value returned in the response (e.g. `fax_01hx...`). You need this ID to poll for delivery status or to reference the fax in webhook events.
+
+Persist the ID in your database or job queue before proceeding so you can correlate status updates back to the originating send request.
+
+</Steps>
+
+<Tip>
+  Instead of polling for status updates, configure a webhook to receive real-time delivery notifications. Amplify sends `fax.delivered` and `fax.failed` events to your endpoint automatically. See [Webhooks Overview](/platform/webhooks/overview) to get started.
+</Tip>
+
+## Next steps
+
+- [Track fax delivery status](/guides/fax/track-fax-status) — learn about status transitions and how to handle failures
+- [Full parameter reference](/api-reference/faxes) — explore all available request fields, error codes, and response schemas

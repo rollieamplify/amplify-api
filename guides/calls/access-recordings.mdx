@@ -1,0 +1,101 @@
+---
+title: "Access and Download Call Recordings"
+sidebarTitle: "Recordings"
+description: "Learn how to enable call recording, retrieve recording files after a call completes, and download audio using the Amplify API."
+---
+
+Amplify can automatically record any outbound or inbound call and make the audio available for download once the call completes. Recordings are useful for quality assurance, compliance archiving, and training workflows. You opt into recording at the time the call is created — no dashboard configuration required.
+
+<Warning>
+  Recording calls may be subject to federal, state, or local wiretapping and consent laws depending on the jurisdictions of both parties. In many places you are legally required to inform all participants that the call is being recorded before or at the start of the conversation. Consult your legal counsel before enabling recording in production. Amplify does not provide legal advice.
+</Warning>
+
+## Enable recording on a call
+
+Set `"record": true` in the request body when you create the call via `POST /v1/calls`:
+
+```bash
+curl --request POST \
+  --url https://api.amplify.xyz/v1/calls \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "to": "+15551234567",
+    "from": "+15557654321",
+    "callback_url": "https://yourapp.com/webhooks/calls",
+    "record": true
+  }'
+```
+
+When `record` is `true`, Amplify begins capturing audio as soon as the call is answered. The recording is finalised and made available shortly after the `call.completed` event fires.
+
+## Retrieve recordings for a call
+
+Once the call has a `completed` status, fetch the list of recordings attached to it:
+
+```bash
+curl --request GET \
+  --url https://api.amplify.xyz/v1/calls/call_01hx.../recordings \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+```
+
+The response is an array of recording objects:
+
+```json
+{
+  "data": [
+    {
+      "id": "rec_01hx...",
+      "call_id": "call_01hx...",
+      "duration_seconds": 135,
+      "mime_type": "audio/mpeg",
+      "size_bytes": 2162688,
+      "download_url": "https://recordings.amplify.xyz/rec_01hx...?token=...",
+      "created_at": "2024-01-15T10:32:30Z"
+    }
+  ]
+}
+```
+
+Most calls produce a single recording object. Calls that were placed on hold and resumed may produce multiple segments.
+
+## Download a recording
+
+The `download_url` in each recording object is a pre-signed URL that allows direct download without an additional API key. Use it with any HTTP client:
+
+```bash
+curl --output recording.mp3 \
+  "https://recordings.amplify.xyz/rec_01hx...?token=..."
+```
+
+```python Python
+import requests
+
+download_url = "https://recordings.amplify.xyz/rec_01hx...?token=..."
+response = requests.get(download_url)
+
+with open("recording.mp3", "wb") as f:
+    f.write(response.content)
+```
+
+<Note>
+  Pre-signed download URLs expire after a set period. Check your **Dashboard → Settings → Recording Retention** to see your account's URL expiry and storage retention window. After the retention period, recordings are permanently deleted and cannot be recovered. Download and archive any recordings you need to keep before they expire.
+</Note>
+
+## Listing all recordings across calls
+
+To retrieve recordings across all calls — not just a single one — use the top-level recordings endpoint:
+
+```bash
+curl --request GET \
+  --url 'https://api.amplify.xyz/v1/recordings?limit=50' \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+```
+
+Filter by date range using the `created_after` and `created_before` query parameters to scope results to a specific time window.
+
+## Next steps
+
+- Review full recording object schemas and query parameters in the [Call Recordings API Reference](/api-reference/call-recordings)
+- Learn how to initiate calls in [Make a Call](/guides/calls/make-a-call)
+- Set up webhook alerts when recordings are ready via the [Webhooks Overview](/platform/webhooks/overview)

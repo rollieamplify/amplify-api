@@ -1,0 +1,153 @@
+---
+title: "Automations API Reference — Workflow Triggers"
+sidebarTitle: "Automations"
+description: "List automations, retrieve workflow configurations, and manually trigger automations to test or run on-demand using the Amplify Automations API."
+---
+
+The Automations resource provides access to the workflow automations configured in your Amplify account. Automations execute a sequence of actions in response to a trigger — such as an inbound fax, a completed eSign document, or a scheduled time. Use this resource to list all automations, inspect their configuration and current status, and manually trigger an automation for testing or on-demand execution.
+
+<Note>
+  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/v1/automations` | List automations |
+| `GET` | `/v1/automations/{id}` | Get an automation |
+| `POST` | `/v1/automations/{id}/trigger` | Manually trigger an automation |
+
+---
+
+## GET /v1/automations
+
+Retrieve a paginated list of all automations on your account.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+<ParamField query="status" type="string">
+  Filter by automation status. One of `active` or `inactive`.
+</ParamField>
+
+### Code example
+
+```bash cURL
+curl https://api.amplify.xyz/v1/automations \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+---
+
+## GET /v1/automations/{id}
+
+Retrieve the full configuration for a single automation by its ID.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the automation.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the automation, prefixed with `auto_`.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the automation.
+</ResponseField>
+
+<ResponseField name="trigger_type" type="string">
+  The event or condition that activates this automation. Examples include `fax.received`, `esign.completed`, `message.received`, and `schedule`.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Whether the automation is currently `active` (will fire on trigger events) or `inactive` (disabled).
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the automation was created.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "auto_01HZMK3NSTU5V9EYQX7T0CJIG",
+    "name": "Notify Team on Signed Contract",
+    "trigger_type": "esign.completed",
+    "status": "active",
+    "created_at": "2024-04-15T10:00:00Z"
+  }
+}
+```
+
+---
+
+## POST /v1/automations/{id}/trigger
+
+Manually trigger an automation, bypassing the configured trigger condition. Use this endpoint to test an automation or to execute it on demand without waiting for the trigger event to occur naturally.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the automation to trigger.
+</ParamField>
+
+### Request body
+
+<ParamField body="payload" type="object">
+  Optional context data to pass to the automation run. The expected shape depends on the automation's `trigger_type`. Refer to the automation's configuration for accepted fields.
+</ParamField>
+
+### Code example
+
+```bash cURL
+curl -X POST https://api.amplify.xyz/v1/automations/auto_01HZMK3NSTU5V9EYQX7T0CJIG/trigger \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "payload": {
+      "document_id": "esign_01HZDR7UVZA9X2GBSR8U1CNIH"
+    }
+  }'
+```
+
+### Response
+
+Returns an object representing the triggered automation run.
+
+<ResponseField name="run_id" type="string">
+  Unique identifier for this automation run, prefixed with `run_`.
+</ResponseField>
+
+<ResponseField name="automation_id" type="string">
+  ID of the automation that was triggered.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Initial status of the run. Typically `queued` immediately after triggering.
+</ResponseField>
+
+<ResponseField name="triggered_at" type="string">
+  ISO 8601 timestamp of when the run was initiated.
+</ResponseField>
+
+<Warning>
+  Manually triggering an automation executes all of its configured actions (for example, sending messages or updating records). Use a test environment or a dedicated test automation when verifying behavior.
+</Warning>
+
+<Info>
+  Automation creation and step configuration are available through the Amplify dashboard. Full API management of automation workflows will be documented here once available in the OpenAPI specification.
+</Info>

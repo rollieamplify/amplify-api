@@ -1,0 +1,98 @@
+---
+title: "Receive Incoming Faxes via Amplify API"
+sidebarTitle: "Receive a Fax"
+description: "Configure your Amplify account to receive inbound faxes, handle webhook events, and access fax documents delivered to your number."
+---
+
+Amplify automatically receives inbound faxes sent to any fax-enabled number provisioned in your account. When a fax arrives, Amplify processes the transmission, converts it to a downloadable PDF, and notifies your application by delivering a `fax.received` webhook event to your configured endpoint.
+
+<Steps>
+
+### Provision a fax number
+
+To receive faxes, you need at least one fax-enabled number assigned to your Amplify account. You can provision a new number or enable fax on an existing number from the Amplify dashboard or via the Numbers API.
+
+See [Manage Numbers](/guides/numbers/manage-numbers) for step-by-step instructions on provisioning and configuring a fax-capable number.
+
+### Configure a webhook endpoint
+
+Amplify notifies your application of incoming faxes by sending a `POST` request to a webhook URL you specify. Set up your endpoint before testing inbound delivery so you don't miss any events.
+
+To register your webhook endpoint:
+
+1. Navigate to **Settings → Webhooks** in the Amplify dashboard, or use the Webhooks API.
+2. Add your endpoint URL (e.g. `https://yourapp.example.com/webhooks/amplify`).
+3. Subscribe to the `fax.received` event.
+
+<Note>
+  Amplify signs every webhook request with an HMAC-SHA256 signature included in the `Amplify-Signature` header. Always verify this signature before processing the payload to confirm the request originated from Amplify. See [Webhooks Overview](/platform/webhooks/overview) for verification instructions and example code.
+</Note>
+
+### Handle the webhook payload
+
+When a fax is fully received and processed, Amplify sends a `fax.received` event to your endpoint. Parse the request body and use the `data` object to identify the fax and route it within your application.
+
+#### Example `fax.received` payload
+
+```json
+{
+  "event": "fax.received",
+  "data": {
+    "id": "fax_01hx...",
+    "status": "received",
+    "to": "+15557654321",
+    "from": "+15551234567",
+    "pages": 2,
+    "received_at": "2024-01-15T10:30:00Z",
+    "download_url": "https://api.amplify.xyz/v1/faxes/fax_01hx.../download"
+  }
+}
+```
+
+<ResponseField name="event" type="string">
+  The event type. Always `fax.received` for inbound fax notifications.
+</ResponseField>
+
+<ResponseField name="data.id" type="string">
+  The unique identifier for the received fax. Store this to retrieve or reference the fax later.
+</ResponseField>
+
+<ResponseField name="data.status" type="string">
+  The current status of the fax. For inbound faxes this is `received`.
+</ResponseField>
+
+<ResponseField name="data.to" type="string">
+  The Amplify number that received the fax, in E.164 format.
+</ResponseField>
+
+<ResponseField name="data.from" type="string">
+  The sender's fax number, in E.164 format.
+</ResponseField>
+
+<ResponseField name="data.pages" type="integer">
+  The total number of pages in the received fax.
+</ResponseField>
+
+<ResponseField name="data.received_at" type="string">
+  ISO 8601 timestamp of when the fax was received.
+</ResponseField>
+
+<ResponseField name="data.download_url" type="string">
+  A URL you can use to download the fax document. Use the [Download a Fax](/guides/fax/download-a-fax) guide rather than calling this URL directly, as download URLs are time-limited.
+</ResponseField>
+
+Your webhook handler should respond with an HTTP `200` status as quickly as possible. If you need to perform time-consuming processing (such as storing the document or notifying users), acknowledge the webhook immediately and handle the work asynchronously.
+
+### Download the fax document
+
+Once you have the fax `id` from the webhook payload, retrieve the document using the download endpoint. Amplify returns the fax as a PDF file.
+
+See [Download a Fax](/guides/fax/download-a-fax) for a complete walkthrough including code examples and guidance on saving the file.
+
+</Steps>
+
+## Next steps
+
+- [Download a Fax](/guides/fax/download-a-fax) — fetch and save the fax document as a PDF
+- [Track Fax Status](/guides/fax/track-fax-status) — understand fax status values and lifecycle
+- [API Reference: Faxes](/api-reference/faxes) — full schema for fax objects and endpoints

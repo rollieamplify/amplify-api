@@ -1,0 +1,148 @@
+---
+title: "Calls API Reference — Initiate Voice Calls"
+sidebarTitle: "Calls"
+description: "Initiate outbound voice calls, retrieve call records with duration and status, and list call history using the Amplify Calls API."
+---
+
+The Calls resource lets you programmatically initiate outbound voice calls between two phone numbers, track call status and duration, and list historical call records. When you create a call, Amplify dials the `to` number and bridges it to the `from` number. Provide a `callback_url` to receive real-time status updates via webhook, or enable recording with `record: true` to capture the audio for later retrieval from the [Call Recordings](/api-reference/call-recordings) resource.
+
+<Note>
+  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/v1/calls` | Initiate a call |
+| `GET` | `/v1/calls` | List calls |
+| `GET` | `/v1/calls/{id}` | Get a call |
+
+---
+
+## POST /v1/calls
+
+Initiate an outbound voice call. Amplify dials `to` first, then bridges the call to `from` once the recipient answers. The response returns immediately with a `queued` status — the call progresses asynchronously.
+
+### Request body
+
+<ParamField body="to" type="string" required>
+  Destination phone number in E.164 format (e.g., `+14155550100`).
+</ParamField>
+
+<ParamField body="from" type="string" required>
+  Caller phone number in E.164 format. Must be a voice-capable number provisioned on your Amplify account.
+</ParamField>
+
+<ParamField body="callback_url" type="string">
+  HTTPS URL to receive call status webhook events (`call.initiated`, `call.answered`, `call.completed`, `call.failed`). Must be publicly reachable.
+</ParamField>
+
+<ParamField body="record" type="boolean">
+  Set to `true` to record the call. Recordings are accessible via the [Call Recordings](/api-reference/call-recordings) resource after the call ends. Defaults to `false`.
+</ParamField>
+
+### Code example
+
+```bash cURL
+curl -X POST https://api.amplify.xyz/v1/calls \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "to": "+14155550100",
+    "from": "+18005550199",
+    "callback_url": "https://example.com/webhooks/calls",
+    "record": true
+  }'
+```
+
+---
+
+## GET /v1/calls
+
+Retrieve a paginated list of call records. Filter by direction, status, or phone number.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+<ParamField query="direction" type="string">
+  Filter by `inbound` or `outbound`.
+</ParamField>
+
+<ParamField query="status" type="string">
+  Filter by call status. One of `queued`, `initiated`, `ringing`, `in-progress`, `completed`, `failed`, `busy`, or `no-answer`.
+</ParamField>
+
+---
+
+## GET /v1/calls/{id}
+
+Retrieve the full record for a single call by its ID.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the call.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the call, prefixed with `call_`.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current or final status of the call. One of `queued`, `initiated`, `ringing`, `in-progress`, `completed`, `failed`, `busy`, or `no-answer`.
+</ResponseField>
+
+<ResponseField name="to" type="string">
+  Destination phone number in E.164 format.
+</ResponseField>
+
+<ResponseField name="from" type="string">
+  Originating phone number in E.164 format.
+</ResponseField>
+
+<ResponseField name="duration" type="integer">
+  Call duration in seconds. `null` while the call is in progress or if it was not answered.
+</ResponseField>
+
+<ResponseField name="direction" type="string">
+  Whether this call was `inbound` or `outbound`.
+</ResponseField>
+
+<ResponseField name="record" type="boolean">
+  Whether recording was enabled for this call.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the call was initiated or received.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "call_01HZBM4RQSX6U9DYPW5R8ZKGF",
+    "status": "completed",
+    "to": "+14155550100",
+    "from": "+18005550199",
+    "duration": 142,
+    "direction": "outbound",
+    "record": true,
+    "created_at": "2024-06-01T14:00:00Z"
+  }
+}
+```
+
+<Tip>
+  If you enabled recording on a call, access the audio files through the [Call Recordings](/api-reference/call-recordings) resource using the call's `id` as the `call_id`.
+</Tip>

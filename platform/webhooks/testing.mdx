@@ -1,0 +1,97 @@
+---
+title: "Test Webhooks Locally with Amplify"
+sidebarTitle: "Testing"
+description: "Expose your local server to the internet with ngrok or Cloudflare Tunnel, then use Amplify's test sender to debug webhook payloads quickly."
+---
+
+Testing webhooks during development presents a common challenge: your local server runs on `localhost`, which is not reachable from the public internet. Amplify cannot send events to `http://localhost:3000`. You have two main options to work around this — expose your local server through a tunneling tool, or use the built-in test sender in the Amplify dashboard to fire a sample payload at any registered endpoint.
+
+## Option 1: Expose Localhost with a Tunnel
+
+A tunneling tool creates a publicly accessible HTTPS URL that forwards traffic to your local server. This lets you register a real endpoint with Amplify and receive live events as you develop.
+
+### Using ngrok
+
+ngrok is the most widely used tunneling tool for webhook development. Follow these steps to set it up:
+
+<Steps>
+  <Step title="Install ngrok">
+    Install ngrok globally via npm, or download the binary directly from [ngrok.com](https://ngrok.com).
+
+    ```bash
+    npm install -g ngrok
+    ```
+  </Step>
+  <Step title="Start your local server">
+    Run your application on a local port. For this example, assume it listens on port `3000`.
+
+    ```bash
+    node server.js
+    # or: python app.py, etc.
+    ```
+  </Step>
+  <Step title="Start the ngrok tunnel">
+    In a separate terminal, run the following command to create a public tunnel to port `3000`.
+
+    ```bash
+    ngrok http 3000
+    ```
+
+    ngrok will display output similar to:
+
+    ```
+    Forwarding   https://a1b2-203-0-113-42.ngrok-free.app -> http://localhost:3000
+    ```
+
+    Copy the `https://` URL — this is your public endpoint.
+  </Step>
+  <Step title="Register the ngrok URL in Amplify">
+    Go to **Settings → Webhooks → Add Endpoint** in the Amplify dashboard. Paste your ngrok URL, appending the path your handler listens on, for example:
+
+    ```
+    https://a1b2-203-0-113-42.ngrok-free.app/webhooks/amplify
+    ```
+
+    Select the events you want to test, save the endpoint, and copy the signing secret.
+  </Step>
+  <Step title="Trigger events and inspect payloads">
+    Perform an action in Amplify that fires one of your subscribed events — send a test fax, initiate a signature request, and so on. Watch your local server logs and the ngrok web interface at `http://127.0.0.1:4040` to inspect the full request and response in real time.
+  </Step>
+</Steps>
+
+<Note>
+  ngrok's free tier generates a **new random URL every time you restart the tunnel**. You will need to update the registered endpoint URL in the Amplify dashboard at the start of each development session. Consider ngrok's paid plans or a static domain to avoid this friction.
+</Note>
+
+### Using Cloudflare Tunnel
+
+Cloudflare Tunnel (`cloudflared`) is a free alternative that provides persistent URLs even on the free tier.
+
+```bash
+# Install cloudflared, then:
+cloudflared tunnel --url http://localhost:3000
+```
+
+The command prints a stable `https://*.trycloudflare.com` URL you can register with Amplify.
+
+## Option 2: Send a Test Payload from the Dashboard
+
+If you already have a publicly accessible staging endpoint — or just want to verify your signature verification logic without triggering a real event — use Amplify's built-in test sender.
+
+1. Go to **Settings → Webhooks** in the dashboard.
+2. Click the endpoint you want to test.
+3. Select **Send Test** and choose an event type from the dropdown.
+4. Click **Send** — Amplify immediately delivers a sample payload to your endpoint.
+5. Check your server logs or the delivery log in the dashboard to confirm receipt.
+
+<Tip>
+  Use [webhook.site](https://webhook.site) as a quick throwaway endpoint when you want to inspect the raw payload structure without running any local code. Open webhook.site, copy the generated URL, register it as a webhook endpoint in Amplify, and send a test payload — you'll see the full request headers and body instantly in your browser.
+</Tip>
+
+## Verifying Your Signature Logic During Testing
+
+Make sure your local handler verifies the `Amplify-Signature` header even in development. The test sender signs payloads with your real signing secret, so verification should pass if your implementation is correct. If you see `403` responses in your local logs, double-check that:
+
+- You are reading the raw request body before parsing JSON
+- Your signing secret matches the one shown in the dashboard for that endpoint
+- You are not accidentally stripping or modifying the `Amplify-Signature` header in middleware

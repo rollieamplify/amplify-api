@@ -1,0 +1,102 @@
+---
+title: "Manage Phone and Fax Numbers in Amplify"
+sidebarTitle: "Manage Numbers"
+description: "Learn how to list, inspect, and assign your provisioned Amplify phone and fax numbers to messaging, voice, and fax workflows."
+---
+
+Amplify gives you a unified place to manage all your phone and fax numbers — whether you're running SMS campaigns, handling inbound calls, or sending faxes. Every number in your account is provisioned through the Amplify dashboard and immediately available to the API for assignment to your workflows.
+
+## List your numbers
+
+Retrieve all numbers provisioned on your account by calling `GET /v1/numbers`:
+
+```bash
+curl --request GET \
+  --url https://api.amplify.xyz/v1/numbers \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+```
+
+```json
+{
+  "data": [
+    {
+      "id": "num_01hx...",
+      "number": "+15557654321",
+      "type": "local",
+      "capabilities": ["sms", "voice"],
+      "assigned_to": null,
+      "created_at": "2024-01-10T08:00:00Z"
+    },
+    {
+      "id": "num_01hy...",
+      "number": "+18005550199",
+      "type": "toll-free",
+      "capabilities": ["sms", "voice"],
+      "assigned_to": "workflow_01hx...",
+      "created_at": "2024-01-12T09:15:00Z"
+    },
+    {
+      "id": "num_01hz...",
+      "number": "+15559876543",
+      "type": "fax",
+      "capabilities": ["fax"],
+      "assigned_to": null,
+      "created_at": "2024-01-14T11:30:00Z"
+    }
+  ]
+}
+```
+
+Each number object includes its `type`, supported `capabilities`, and the `assigned_to` workflow ID (if any).
+
+## Number types
+
+Amplify supports three number types:
+
+| Type | Description | Common Use Cases |
+|---|---|---|
+| `local` | 10-digit numbers with an area code | SMS, voice calls |
+| `toll-free` | 800/888/877/etc. numbers | High-volume SMS, customer support lines |
+| `fax` | Numbers dedicated to fax transmission | Document delivery, healthcare, legal |
+
+<Warning>
+  Certain number types and use cases — particularly toll-free numbers used for A2P (application-to-person) messaging — require carrier registration and brand approval before use in production. Sending high volumes from unregistered toll-free numbers may result in message filtering or number suspension. Complete registration in the **Dashboard → Compliance** section before launching campaigns.
+</Warning>
+
+## Provision a new number
+
+Number provisioning is handled through the **Amplify dashboard** at [app.amplify.xyz/numbers](https://app.amplify.xyz/numbers). Use the number search to find available local, toll-free, or fax numbers by area code or region, then click **Provision** to add them to your account.
+
+<Info>
+  Provisioning numbers directly via the API is on the Amplify roadmap. When available, it will be documented in the [Numbers API Reference](/api-reference/numbers). Watch the [Amplify changelog](https://app.amplify.xyz/changelog) for updates.
+</Info>
+
+## Assign a number to a workflow
+
+An unassigned number (where `assigned_to` is `null`) is provisioned but not yet connected to any sending or receiving logic. Assign it by updating the number with a `workflow_id` via `PATCH /v1/numbers/{id}`:
+
+```bash
+curl --request PATCH \
+  --url https://api.amplify.xyz/v1/numbers/num_01hx... \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "assigned_to": "workflow_01hx..."
+  }'
+```
+
+Once assigned, Amplify routes inbound messages, calls, or faxes on that number to the specified workflow automatically.
+
+You can also use a number directly as a `from` value when sending messages or initiating calls without assigning it to a workflow — the workflow assignment controls inbound routing only.
+
+## Port an existing number
+
+<Note>
+  Number porting — transferring a number you already own from another carrier to Amplify — is supported but must be initiated through the **Dashboard → Numbers → Port a Number** flow. Porting typically takes 5–10 business days depending on the losing carrier. You will need your current carrier's account details and a Letter of Authorization (LOA) to complete the transfer. Numbers remain active on your current carrier until porting completes.
+</Note>
+
+## Next steps
+
+- View full number object schemas and query parameters in the [Numbers API Reference](/api-reference/numbers)
+- Use a provisioned number to send messages in [Send a Message](/guides/messaging/send-a-message)
+- Initiate outbound calls from a provisioned number in [Make a Call](/guides/calls/make-a-call)

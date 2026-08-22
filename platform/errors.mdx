@@ -1,0 +1,113 @@
+---
+title: "Amplify API Error Codes and Responses"
+sidebarTitle: "Errors"
+description: "Understand Amplify API HTTP status codes, error response structure, and how to handle failures gracefully in your code."
+---
+
+The Amplify API uses standard HTTP status codes to communicate the outcome of every request. A `2xx` response indicates success, a `4xx` response means something was wrong with your request, and a `5xx` response means something went wrong on Amplify's side. Alongside the HTTP status code, every error response includes a structured JSON body that gives you machine-readable codes and human-readable messages to act on.
+
+## Error Response Envelope
+
+All error responses share the same JSON structure:
+
+```json
+{
+  "error": {
+    "code": "validation_error",
+    "message": "The 'to' field is required.",
+    "details": [
+      { "field": "to", "issue": "required" }
+    ]
+  }
+}
+```
+
+<ResponseField name="error.code" type="string">
+  A stable, machine-readable string identifying the error type. Use this field in your error-handling logic rather than parsing the human-readable `message`.
+</ResponseField>
+
+<ResponseField name="error.message" type="string">
+  A plain-English description of the error intended for developers. Do not display this string directly to end users, as the wording may change between API versions.
+</ResponseField>
+
+<ResponseField name="error.details" type="array">
+  An optional array of per-field validation issues. Present on `validation_error` responses. Each object contains a `field` name and an `issue` description.
+</ResponseField>
+
+## HTTP Status Codes
+
+| Status Code | Name | When You'll See It |
+|---|---|---|
+| `400` | Bad Request | The request is malformed — for example, invalid JSON, a missing required header, or an unsupported `Content-Type`. |
+| `401` | Unauthorized | The `Authorization` header is missing, malformed, or contains an invalid or revoked API key. |
+| `403` | Forbidden | The API key is valid, but it lacks permission to perform the requested action. |
+| `404` | Not Found | The requested resource does not exist, or you do not have access to it. |
+| `422` | Unprocessable Entity | The request is well-formed but contains semantic errors — for example, a phone number in an invalid format. |
+| `429` | Too Many Requests | You have exceeded your [rate limit](/platform/rate-limits). Retry after the interval indicated in the `Retry-After` header. |
+| `500` | Internal Server Error | An unexpected error occurred on Amplify's servers. These are rare; check the [status page](https://status.amplify.xyz) for incidents. |
+| `503` | Service Unavailable | The API is temporarily unavailable, typically during maintenance. Retry with exponential backoff. |
+
+## Common Error Codes
+
+These `code` values appear across multiple endpoints:
+
+| Code | HTTP Status | Meaning |
+|---|---|---|
+| `unauthorized` | `401` | No API key was provided, or the key is invalid or revoked. |
+| `forbidden` | `403` | The API key does not have the required permissions for this operation. |
+| `not_found` | `404` | The specified resource does not exist or is not accessible with your credentials. |
+| `validation_error` | `422` | One or more request fields failed validation. Check the `details` array for specifics. |
+| `rate_limit_exceeded` | `429` | Your request rate has exceeded the allowed limit. See the `retry_after` field for how long to wait. |
+| `internal_error` | `500` | An unexpected server-side error occurred. Retrying after a short delay may succeed. |
+
+## Handle Errors in Your Code
+
+Wrap every API call in error-handling logic that checks the HTTP status code and branches on the `error.code` field for recoverable errors:
+
+```javascript Node.js
+import fetch from "node-fetch";
+
+async function sendFax(payload) {
+  const response = await fetch("https://api.amplify.xyz/v1/faxes", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.AMPLIFY_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    return await response.json();
+  }
+
+  const { error } = await response.json();
+
+  switch (error.code) {
+    case "unauthorized":
+      throw new Error("Invalid API key. Check your AMPLIFY_API_KEY environment variable.");
+
+    case "validation_error": {
+      const issues = error.details
+        .map((d) => `${d.field}: ${d.issue}`)
+        .join(", ");
+      throw new Error(`Validation failed — ${issues}`);
+    }
+
+    case "rate_limit_exceeded":
+      // Caller should implement retry logic with backoff
+      throw new RateLimitError(error.message, error.retry_after);
+
+    case "internal_error":
+      // Safe to retry after a short delay
+      throw new RetryableError(error.message);
+
+    default:
+      throw new Error(`API error ${response.status}: ${error.message}`);
+  }
+}
+```
+
+<Tip>
+For mutating operations such as sending a fax or creating a document, use idempotency keys to safely retry requests without risk of duplication. Pass a unique `Idempotency-Key` header with each request — if the server already processed a request with that key, it returns the original response without executing the operation again. Use a UUID or a hash of the request payload as the key.
+</Tip>

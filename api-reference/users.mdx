@@ -1,0 +1,148 @@
+---
+title: "Users API Reference — Manage Team Members"
+sidebarTitle: "Users"
+description: "List team members, retrieve individual user profiles and roles, and update user settings using the Amplify Users API."
+---
+
+The Users resource provides read and update access to the team member accounts on your Amplify organization. Each user has a name, email address, and an assigned role that determines their access level. Use this resource to list all users in your organization, retrieve a specific user's profile, and update user properties such as their role or display name. User invitations and account deletion are managed through the Amplify dashboard.
+
+<Note>
+  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/v1/users` | List users |
+| `GET` | `/v1/users/{id}` | Get a user |
+| `PATCH` | `/v1/users/{id}` | Update a user |
+
+---
+
+## GET /v1/users
+
+Retrieve a paginated list of all active users in your Amplify organization.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+<ParamField query="search" type="string">
+  Filter users by name or email using a partial string match.
+</ParamField>
+
+<ParamField query="role" type="string">
+  Filter by user role (e.g., `admin`, `member`).
+</ParamField>
+
+### Code example
+
+```bash cURL
+curl https://api.amplify.xyz/v1/users \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+---
+
+## GET /v1/users/{id}
+
+Retrieve the full profile for a single user by their ID.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the user, prefixed with `usr_`.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Full display name of the user.
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address of the user.
+</ResponseField>
+
+<ResponseField name="role" type="string">
+  Role assigned to the user. Controls access permissions within the organization.
+</ResponseField>
+
+<ResponseField name="permission_group_id" type="string">
+  ID of the permission group assigned to this user, if any. See [Permission Groups](/api-reference/permission-groups).
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the user was added to the organization.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "usr_01HZKH1MRST4U8DXQW6S9BHIF",
+    "name": "Alex Lee",
+    "email": "alex@example.com",
+    "role": "admin",
+    "permission_group_id": null,
+    "created_at": "2024-03-10T08:00:00Z"
+  }
+}
+```
+
+---
+
+## PATCH /v1/users/{id}
+
+Update a user's profile or role. Only include fields you want to change.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user to update.
+</ParamField>
+
+### Request body
+
+<ParamField body="name" type="string">
+  Updated display name for the user.
+</ParamField>
+
+<ParamField body="role" type="string">
+  Updated role assignment. Changing a user's role takes effect immediately.
+</ParamField>
+
+<ParamField body="permission_group_id" type="string">
+  ID of the permission group to assign. Pass `null` to remove the user from any permission group.
+</ParamField>
+
+### Code example
+
+```bash cURL
+curl -X PATCH https://api.amplify.xyz/v1/users/usr_01HZKH1MRST4U8DXQW6S9BHIF \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "role": "member"
+  }'
+```
+
+<Warning>
+  Changing your own role may reduce your own access permissions. Ensure at least one other admin exists in your organization before downgrading your own account.
+</Warning>
+
+<Info>
+  To invite new users or deactivate accounts, use the Amplify dashboard. API-based user provisioning will be documented here once available in the OpenAPI specification.
+</Info>

@@ -1,0 +1,155 @@
+---
+title: "Initiate Outbound Voice Calls with Amplify"
+sidebarTitle: "Make a Call"
+description: "Learn how to programmatically initiate outbound voice calls, handle call lifecycle events, and track call status with Amplify."
+---
+
+Amplify's calls API lets you programmatically dial any phone number from a provisioned Amplify number. You provide a `callback_url` and Amplify posts status events to it as the call progresses — from ringing through to completion — so your application always knows the current call state without polling.
+
+## Prerequisites
+
+Before initiating a call, confirm you have:
+
+- An **Amplify API key** — available in your [dashboard settings](https://app.amplify.xyz/settings/api-keys)
+- A **provisioned phone number** in your Amplify account to use as the caller ID
+- A **publicly reachable webhook URL** to receive call lifecycle events
+
+## Initiate a call
+
+<Steps>
+  <Step title="POST to /v1/calls">
+    Send a `POST` request to `/v1/calls` with the destination number, your provisioned caller ID, and the URL where Amplify should send status updates.
+
+    ```json
+    {
+      "to": "+15551234567",
+      "from": "+15557654321",
+      "callback_url": "https://yourapp.com/webhooks/calls"
+    }
+    ```
+
+    <CodeGroup>
+      ```bash curl
+      curl --request POST \
+        --url https://api.amplify.xyz/v1/calls \
+        --header 'Authorization: Bearer YOUR_API_KEY' \
+        --header 'Content-Type: application/json' \
+        --data '{
+          "to": "+15551234567",
+          "from": "+15557654321",
+          "callback_url": "https://yourapp.com/webhooks/calls"
+        }'
+      ```
+
+      ```python Python
+      import requests
+
+      url = "https://api.amplify.xyz/v1/calls"
+      headers = {
+          "Authorization": "Bearer YOUR_API_KEY",
+          "Content-Type": "application/json",
+      }
+      payload = {
+          "to": "+15551234567",
+          "from": "+15557654321",
+          "callback_url": "https://yourapp.com/webhooks/calls",
+      }
+
+      response = requests.post(url, json=payload, headers=headers)
+      print(response.json())
+      ```
+
+      ```javascript Node.js
+      const response = await fetch("https://api.amplify.xyz/v1/calls", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer YOUR_API_KEY",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: "+15551234567",
+          from: "+15557654321",
+          callback_url: "https://yourapp.com/webhooks/calls",
+        }),
+      });
+
+      const call = await response.json();
+      console.log(call);
+      ```
+    </CodeGroup>
+
+    A successful request returns `201 Created`:
+
+    ```json
+    {
+      "id": "call_01hx...",
+      "status": "initiated",
+      "to": "+15551234567",
+      "from": "+15557654321",
+      "callback_url": "https://yourapp.com/webhooks/calls",
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+    ```
+
+    Save the `id` — you'll use it to fetch call details, retrieve recordings, and correlate webhook events.
+  </Step>
+
+  <Step title="Call connects — status transitions to ringing">
+    After `initiated`, Amplify dials the destination number. Your `callback_url` receives a `call.ringing` event as soon as the carrier begins alerting the recipient:
+
+    ```json
+    {
+      "event": "call.ringing",
+      "created_at": "2024-01-15T10:30:02Z",
+      "data": {
+        "call_id": "call_01hx...",
+        "status": "ringing"
+      }
+    }
+    ```
+
+    If the call is answered, Amplify sends a `call.answered` event and status becomes `in-progress`.
+  </Step>
+
+  <Step title="Handle the call.completed event">
+    When the call ends — whether the recipient hangs up, the caller disconnects, or the call is not answered — Amplify posts a `call.completed` event to your `callback_url`:
+
+    ```json
+    {
+      "event": "call.completed",
+      "created_at": "2024-01-15T10:32:15Z",
+      "data": {
+        "call_id": "call_01hx...",
+        "status": "completed",
+        "duration_seconds": 135,
+        "answered_at": "2024-01-15T10:30:05Z",
+        "ended_at": "2024-01-15T10:32:15Z"
+      }
+    }
+    ```
+
+    Use `duration_seconds` for billing reconciliation and audit logs. A `status` of `no-answer`, `busy`, or `failed` indicates the call did not connect successfully.
+  </Step>
+</Steps>
+
+<Tip>
+  You can record any call by adding `"record": true` to your request body. After the call completes, retrieve the audio files through the recordings endpoint. See [Access and Download Call Recordings](/guides/calls/access-recordings) for the full workflow.
+</Tip>
+
+## Call status reference
+
+| Status | Meaning |
+|---|---|
+| `initiated` | API accepted the request; dialing has not begun |
+| `ringing` | Carrier is alerting the destination |
+| `in-progress` | Call is active |
+| `completed` | Call ended normally |
+| `no-answer` | Destination did not pick up |
+| `busy` | Destination line was busy |
+| `failed` | Call could not be connected |
+
+## Next steps
+
+- Review all request parameters and response fields in the [Calls API Reference](/api-reference/calls)
+- Enable call recording and download audio in [Access and Download Call Recordings](/guides/calls/access-recordings)
+- Configure and verify webhook delivery in the [Webhooks Overview](/platform/webhooks/overview)

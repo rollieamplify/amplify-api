@@ -1,0 +1,158 @@
+---
+title: "Send SMS and MMS Messages with Amplify"
+sidebarTitle: "Send a Message"
+description: "Learn how to send SMS and MMS messages through the Amplify API using your provisioned number and a simple POST request."
+---
+
+Amplify makes it straightforward to send SMS and MMS messages programmatically. Whether you're sending a single transactional notification or building a full messaging workflow, the same `/v1/messages` endpoint handles both message types — the presence of a `media_url` field is all that distinguishes an MMS from an SMS.
+
+## Prerequisites
+
+Before you send your first message, make sure you have:
+
+- An **Amplify API key** — find yours in the [dashboard](https://app.amplify.xyz/settings/api-keys)
+- A **provisioned phone number** in your Amplify account to use as the sender
+
+<Note>
+  The `from` number must be provisioned in your Amplify account. Attempting to send from an unrecognised number will return a `403` error. See [Manage Numbers](/guides/numbers/manage-numbers) to provision one.
+</Note>
+
+## Send a message
+
+<Steps>
+  <Step title="Compose the message">
+    Build the request body with the required fields:
+
+    | Field | Type | Required | Description |
+    |---|---|---|---|
+    | `to` | string | ✅ | Recipient phone number in E.164 format |
+    | `from` | string | ✅ | Your provisioned Amplify number in E.164 format |
+    | `body` | string | ✅ | The text content of the message |
+    | `media_url` | string | ❌ | A publicly accessible URL to a media file (sends as MMS) |
+
+    A minimal SMS request body looks like this:
+
+    ```json
+    {
+      "to": "+15551234567",
+      "from": "+15557654321",
+      "body": "Hello from Amplify!"
+    }
+    ```
+
+    To send an MMS, add the `media_url` field pointing to a publicly accessible image or file:
+
+    ```json
+    {
+      "to": "+15551234567",
+      "from": "+15557654321",
+      "body": "Here's your document.",
+      "media_url": "https://yourapp.com/files/document.pdf"
+    }
+    ```
+  </Step>
+
+  <Step title="POST to /v1/messages">
+    Send the request to the Amplify API. Replace `YOUR_API_KEY` with your actual key.
+
+    <CodeGroup>
+      ```bash curl
+      curl --request POST \
+        --url https://api.amplify.xyz/v1/messages \
+        --header 'Authorization: Bearer YOUR_API_KEY' \
+        --header 'Content-Type: application/json' \
+        --data '{
+          "to": "+15551234567",
+          "from": "+15557654321",
+          "body": "Hello from Amplify!"
+        }'
+      ```
+
+      ```python Python
+      import requests
+
+      url = "https://api.amplify.xyz/v1/messages"
+      headers = {
+          "Authorization": "Bearer YOUR_API_KEY",
+          "Content-Type": "application/json",
+      }
+      payload = {
+          "to": "+15551234567",
+          "from": "+15557654321",
+          "body": "Hello from Amplify!",
+      }
+
+      response = requests.post(url, json=payload, headers=headers)
+      print(response.json())
+      ```
+
+      ```javascript Node.js
+      const response = await fetch("https://api.amplify.xyz/v1/messages", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer YOUR_API_KEY",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: "+15551234567",
+          from: "+15557654321",
+          body: "Hello from Amplify!",
+        }),
+      });
+
+      const message = await response.json();
+      console.log(message);
+      ```
+    </CodeGroup>
+
+    A successful request returns `201 Created` with a message object:
+
+    ```json
+    {
+      "id": "msg_01hx...",
+      "status": "queued",
+      "to": "+15551234567",
+      "from": "+15557654321",
+      "body": "Hello from Amplify!",
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+    ```
+  </Step>
+
+  <Step title="Save the message ID">
+    Persist the `id` field from the response (e.g. `msg_01hx...`). You'll use this ID to:
+
+    - Poll message status via `GET /v1/messages/{id}`
+    - Correlate delivery webhook events back to the original send
+    - Look up full message details in the dashboard
+
+    The initial `status` will be `queued`. Amplify transitions this to `sent`, then `delivered` (or `failed`) as the message moves through the carrier network.
+  </Step>
+</Steps>
+
+<Tip>
+  SMS messages are limited to **160 GSM-7 characters** per segment. Longer messages are automatically split into multiple segments and reassembled on the recipient's device — but each segment counts toward your usage. Unicode characters (emoji, accented letters) reduce the per-segment limit to **70 characters**. Keep messages concise to control costs.
+</Tip>
+
+## Track delivery with webhooks
+
+Amplify fires a `message.delivered` event to your configured webhook URL when the carrier confirms delivery. The payload includes the original `message_id` so you can match it to your records.
+
+```json
+{
+  "event": "message.delivered",
+  "created_at": "2024-01-15T10:30:45Z",
+  "data": {
+    "message_id": "msg_01hx...",
+    "to": "+15551234567",
+    "status": "delivered"
+  }
+}
+```
+
+Set up your webhook endpoint in the dashboard, then read the full event reference in the [Webhooks Overview](/platform/webhooks/overview).
+
+## Next steps
+
+- Explore full request and response schemas in the [Messages API Reference](/api-reference/messages)
+- Handle inbound replies and two-way threads in [Work with Conversations](/guides/messaging/work-with-conversations)

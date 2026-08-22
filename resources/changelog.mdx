@@ -1,0 +1,60 @@
+---
+title: "Amplify API Changelog — Latest Updates"
+sidebarTitle: "Changelog"
+description: "Stay current with every Amplify API release: new endpoints, improvements, bug fixes, and breaking changes with migration guidance."
+---
+
+Stay up to date with every change made to the Amplify API. This changelog lists new features, improvements, bug fixes, and breaking changes in reverse-chronological order — review it regularly to ensure your integration continues to work as expected and to take advantage of new capabilities as they ship.
+
+<Note>
+  Subscribe to changelog notifications by visiting your [Amplify dashboard](https://app.amplify.xyz) and enabling **API release emails** under **Settings → Notifications**. You'll receive a summary email whenever a new entry is published.
+</Note>
+
+<Info>
+  Amplify follows a stable versioning policy — breaking changes are introduced only in a new major API version and are announced at least 90 days in advance. Learn more in the [API Versioning guide](/platform/api-versioning).
+</Info>
+
+## Release History
+
+<AccordionGroup>
+  <Accordion title="January 2024 — Conversations filtering, eSign roles, fax webhooks">
+    **Released:** January 2024
+
+    This release improves filtering capabilities for the Conversations API, expands eSign template flexibility, and enriches fax webhook payloads.
+
+    - **New** — The Conversations API now supports filtering by participant phone number. Pass the `participant_phone` query parameter to `/v1/conversations` to narrow results to a specific number.
+    - **New** — eSign templates now support multiple recipient roles. Define named roles (e.g., `signer`, `approver`, `witness`) on a template and assign contacts to each role at send time.
+    - **Improved** — Fax delivery webhooks now include a `page_count` field in the payload, giving you an accurate count of delivered pages without an additional API call.
+    - **Fixed** — The pagination cursor no longer produces incorrect results when iterating over large result sets (>10 000 records). Existing cursors remain valid; re-paginate from the start to pick up corrected ordering.
+  </Accordion>
+
+  <Accordion title="December 2023 — Forms API beta, call recordings, rate-limit headers, breaking fax status change">
+    **Released:** December 2023
+
+    This release introduces document data extraction, surfaces call recordings via the API, improves visibility into rate limits, and includes one breaking change to the fax response schema.
+
+    - **New** — The **Forms API** (beta) enables programmatic extraction of structured data from documents and filled forms. Access it at `/v1/forms`. Because this feature is in beta, the schema may change; pin to the `beta` preview header if you build against it.
+    - **New** — Call recordings are now available via the API. Retrieve a recording by calling `GET /v1/calls/{call_id}/recording`. Recordings are retained for 90 days by default.
+    - **Improved** — Rate-limit headers (`X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset`) are now included on **all** API responses, not just responses that hit the limit.
+    - **Breaking** — The `status` field in fax response objects has changed from an **integer** to a **string** (e.g., `1` → `"delivered"`). Update any code that compares `status` to a numeric value. See the [migration guide](/platform/api-versioning) for the full mapping table.
+  </Accordion>
+
+  <Accordion title="November 2023 — Initial public API release">
+    **Released:** November 2023
+
+    Welcome to the Amplify API. This is the first public release, covering the full suite of communications and document automation endpoints.
+
+    - **New** — Initial public API release at base URL `https://api.amplify.xyz/v1`.
+    - The following resource groups are available from day one:
+      - **Faxes** — Send, receive, and track fax transmissions.
+      - **eSign** — Create, send, and manage electronic signature envelopes and templates.
+      - **Messages** — Send and receive SMS and MMS messages.
+      - **Calls** — Initiate and manage voice calls programmatically.
+      - **Documents** — Upload, store, and retrieve documents.
+      - **Numbers** — Provision and manage phone numbers.
+      - **Contacts** — Create and manage your contact list.
+      - **Users** — Manage user accounts within your organization.
+      - **Webhooks** — Register and manage webhook endpoints for real-time event delivery.
+      - **API Keys** — Create, rotate, and revoke API keys for authentication.
+  </Accordion>
+</AccordionGroup>

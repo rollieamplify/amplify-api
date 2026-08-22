@@ -1,0 +1,117 @@
+---
+title: "Rate Limits and Throttling for the Amplify API"
+sidebarTitle: "Rate Limits"
+description: "Learn Amplify API rate limits, how to read throttle headers, and how to implement exponential backoff to handle 429 responses."
+---
+
+Amplify enforces rate limits on all API endpoints to protect service availability and ensure consistent performance for every account. Each limit is applied per API key per minute. If your requests exceed a limit, the API returns a `429 Too Many Requests` response and tells you exactly how long to wait before retrying.
+
+## Default Rate Limits
+
+The following limits apply by default to all accounts:
+
+| Endpoint Group | Limit |
+|---|---|
+| General (all endpoints) | 1,000 requests / minute |
+| Fax sends (`POST /v1/faxes`) | 100 requests / minute |
+| Message sends (`POST /v1/messages`) | 500 requests / minute |
+
+Limits are enforced on a rolling one-minute window, not a fixed clock interval. This means bursts may still be throttled even if you are below the per-minute average.
+
+## Rate Limit Response Headers
+
+Every API response includes headers that tell you your current limit status:
+
+| Header | Description |
+|---|---|
+| `X-RateLimit-Limit` | The maximum number of requests allowed in the current window. |
+| `X-RateLimit-Remaining` | The number of requests you can still make before being throttled. |
+| `X-RateLimit-Reset` | A Unix timestamp indicating when the current window resets and your allowance refreshes. |
+
+Read these headers proactively to throttle your own request rate before the API does it for you:
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/faxes", {
+  headers: { Authorization: `Bearer ${process.env.AMPLIFY_API_KEY}` },
+});
+
+const limit     = response.headers.get("X-RateLimit-Limit");
+const remaining = response.headers.get("X-RateLimit-Remaining");
+const reset     = response.headers.get("X-RateLimit-Reset");
+
+console.log(`${remaining} / ${limit} requests remaining`);
+console.log(`Resets at ${new Date(Number(reset) * 1000).toISOString()}`);
+```
+
+## 429 Too Many Requests
+
+When you exceed a rate limit, the API responds with `429 Too Many Requests`. The response body identifies the error and includes a `retry_after` field (in seconds), and the response also carries a `Retry-After` header:
+
+```json
+{
+  "error": {
+    "code": "rate_limit_exceeded",
+    "message": "Rate limit exceeded. Retry after 30 seconds.",
+    "retry_after": 30
+  }
+}
+```
+
+Always use the `retry_after` value from the response rather than guessing a wait time.
+
+## Best Practices
+
+### Respect the Retry-After Header
+
+When you receive a `429`, wait at least the number of seconds specified in `retry_after` (or the `Retry-After` response header) before retrying. Sending additional requests during this window will continue to return `429` and does not reset the timer.
+
+### Implement Exponential Backoff
+
+For resilient integrations, combine the `Retry-After` value with exponential backoff to avoid hammering the API after transient errors:
+
+```javascript Node.js
+async function requestWithBackoff(url, options, maxRetries = 5) {
+  let attempt = 0;
+
+  while (attempt < maxRetries) {
+    const response = await fetch(url, options);
+
+    if (response.status !== 429) {
+      return response;
+    }
+
+    const body = await response.json();
+    const retryAfter = body.error?.retry_after ?? Math.pow(2, attempt);
+
+    // Add a small random jitter to avoid synchronized retry storms
+    const jitter = Math.random() * 1000;
+    const waitMs = retryAfter * 1000 + jitter;
+
+    console.warn(
+      `Rate limited. Attempt ${attempt + 1}/${maxRetries}. ` +
+      `Waiting ${(waitMs / 1000).toFixed(1)}s before retrying...`
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, waitMs));
+    attempt++;
+  }
+
+  throw new Error(`Request failed after ${maxRetries} retries due to rate limiting.`);
+}
+
+// Usage
+const response = await requestWithBackoff(
+  "https://api.amplify.xyz/v1/faxes",
+  {
+    headers: { Authorization: `Bearer ${process.env.AMPLIFY_API_KEY}` },
+  }
+);
+```
+
+### Distribute Load Evenly
+
+If you need to send a large batch of requests, spread them out over time rather than sending them all at once. Use a queue or a token-bucket algorithm to smooth your request rate and stay comfortably under the limit.
+
+<Note>
+If your use case requires higher rate limits than the defaults shown above, contact [Amplify support](https://support.amplify.xyz) to discuss a limit increase. Include your account ID and a description of your use case so the team can evaluate the appropriate tier for your workload.
+</Note>

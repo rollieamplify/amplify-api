@@ -1,0 +1,313 @@
+---
+title: "Amplify Webhook Event Types Reference"
+sidebarTitle: "Event Types"
+description: "Complete reference of every webhook event type available in Amplify, organized by product area: fax, eSign, messaging, and voice calls."
+---
+
+Amplify emits webhook events across four product areas: fax, eSign, messaging, and calls. You can subscribe to individual event types or to all events within a product group. This page describes every available event type and shows an example payload for each product area so you know exactly what data to expect in your handler.
+
+## Fax Events
+
+These events fire at each stage of an outbound fax transmission, and whenever an inbound fax is received on one of your numbers.
+
+| Event | Description |
+|---|---|
+| `fax.queued` | The fax has been accepted and queued for sending |
+| `fax.sending` | Transmission to the receiving fax machine has started |
+| `fax.delivered` | The fax was successfully received by the destination |
+| `fax.failed` | The fax could not be delivered after all retry attempts |
+| `fax.received` | An inbound fax was received on one of your Amplify numbers |
+
+<AccordionGroup>
+  <Accordion title="fax.delivered — Example Payload">
+    ```json
+    {
+      "event": "fax.delivered",
+      "data": {
+        "id": "fax_01hxabcdef123456",
+        "status": "delivered",
+        "direction": "outbound",
+        "to": "+15551234567",
+        "from": "+15559876543",
+        "pages": 3,
+        "duration_seconds": 47,
+        "created_at": "2024-01-15T10:28:00Z",
+        "delivered_at": "2024-01-15T10:30:00Z"
+      },
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="fax.failed — Example Payload">
+    ```json
+    {
+      "event": "fax.failed",
+      "data": {
+        "id": "fax_01hxabcdef789012",
+        "status": "failed",
+        "direction": "outbound",
+        "to": "+15551234567",
+        "from": "+15559876543",
+        "pages": 3,
+        "failure_reason": "no_answer",
+        "created_at": "2024-01-15T09:00:00Z",
+        "failed_at": "2024-01-15T11:05:00Z"
+      },
+      "created_at": "2024-01-15T11:05:00Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="fax.received — Example Payload">
+    ```json
+    {
+      "event": "fax.received",
+      "data": {
+        "id": "fax_01hxabcdef345678",
+        "status": "received",
+        "direction": "inbound",
+        "to": "+15559876543",
+        "from": "+15551234567",
+        "pages": 2,
+        "media_url": "https://api.amplify.xyz/v1/faxes/fax_01hxabcdef345678/media",
+        "received_at": "2024-01-15T10:30:00Z"
+      },
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## eSign Events
+
+These events track the lifecycle of a signature request from the moment a document is sent to a recipient through completion, declination, or expiry.
+
+| Event | Description |
+|---|---|
+| `esign.sent` | The signature request was sent to the recipient |
+| `esign.viewed` | The recipient opened the document |
+| `esign.completed` | All required signers have signed the document |
+| `esign.declined` | A signer chose to decline the request |
+| `esign.expired` | The signing deadline passed before all signers completed |
+
+<AccordionGroup>
+  <Accordion title="esign.completed — Example Payload">
+    ```json
+    {
+      "event": "esign.completed",
+      "data": {
+        "id": "esign_01hxghijkl123456",
+        "status": "completed",
+        "title": "Service Agreement — Acme Corp",
+        "signers": [
+          {
+            "id": "signer_01hx...",
+            "name": "Jane Smith",
+            "email": "jane.smith@acme.com",
+            "signed_at": "2024-01-15T14:22:00Z"
+          },
+          {
+            "id": "signer_02hx...",
+            "name": "John Doe",
+            "email": "john.doe@example.com",
+            "signed_at": "2024-01-15T14:55:00Z"
+          }
+        ],
+        "document_url": "https://api.amplify.xyz/v1/esign/esign_01hxghijkl123456/document",
+        "completed_at": "2024-01-15T14:55:00Z",
+        "created_at": "2024-01-14T09:00:00Z"
+      },
+      "created_at": "2024-01-15T14:55:00Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="esign.declined — Example Payload">
+    ```json
+    {
+      "event": "esign.declined",
+      "data": {
+        "id": "esign_01hxghijkl789012",
+        "status": "declined",
+        "title": "NDA — Partner Onboarding",
+        "declined_by": {
+          "id": "signer_03hx...",
+          "name": "Alice Johnson",
+          "email": "alice@partner.com",
+          "reason": "Requires legal review before signing",
+          "declined_at": "2024-01-15T16:10:00Z"
+        },
+        "created_at": "2024-01-14T11:00:00Z"
+      },
+      "created_at": "2024-01-15T16:10:00Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="esign.expired — Example Payload">
+    ```json
+    {
+      "event": "esign.expired",
+      "data": {
+        "id": "esign_01hxghijkl345678",
+        "status": "expired",
+        "title": "Vendor Contract Q1",
+        "pending_signers": [
+          {
+            "id": "signer_04hx...",
+            "name": "Bob Wilson",
+            "email": "bob.wilson@vendor.com"
+          }
+        ],
+        "expired_at": "2024-01-22T00:00:00Z",
+        "created_at": "2024-01-15T08:00:00Z"
+      },
+      "created_at": "2024-01-22T00:00:00Z"
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Messaging Events
+
+These events cover the full lifecycle of an outbound message and fire in real time when an inbound message arrives on your number.
+
+| Event | Description |
+|---|---|
+| `message.sent` | The outbound message was accepted and sent |
+| `message.delivered` | The carrier confirmed delivery to the recipient's device |
+| `message.failed` | The message could not be delivered |
+| `message.received` | An inbound message was received on one of your Amplify numbers |
+
+<AccordionGroup>
+  <Accordion title="message.delivered — Example Payload">
+    ```json
+    {
+      "event": "message.delivered",
+      "data": {
+        "id": "msg_01hxmnopqr123456",
+        "status": "delivered",
+        "direction": "outbound",
+        "to": "+15551234567",
+        "from": "+15559876543",
+        "body": "Your appointment is confirmed for tomorrow at 2 PM.",
+        "sent_at": "2024-01-15T10:29:45Z",
+        "delivered_at": "2024-01-15T10:29:52Z"
+      },
+      "created_at": "2024-01-15T10:29:52Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="message.received — Example Payload">
+    ```json
+    {
+      "event": "message.received",
+      "data": {
+        "id": "msg_01hxmnopqr789012",
+        "status": "received",
+        "direction": "inbound",
+        "to": "+15559876543",
+        "from": "+15551234567",
+        "body": "Thanks, see you then!",
+        "received_at": "2024-01-15T10:31:00Z"
+      },
+      "created_at": "2024-01-15T10:31:00Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="message.failed — Example Payload">
+    ```json
+    {
+      "event": "message.failed",
+      "data": {
+        "id": "msg_01hxmnopqr345678",
+        "status": "failed",
+        "direction": "outbound",
+        "to": "+15550000000",
+        "from": "+15559876543",
+        "body": "Your verification code is 482910.",
+        "failure_reason": "invalid_destination_number",
+        "sent_at": "2024-01-15T10:30:00Z",
+        "failed_at": "2024-01-15T10:30:03Z"
+      },
+      "created_at": "2024-01-15T10:30:03Z"
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Call Events
+
+These events track the state of outbound and inbound calls, and fire a separate event when a call recording becomes available for download.
+
+| Event | Description |
+|---|---|
+| `call.initiated` | An outbound call has been initiated |
+| `call.answered` | The call was answered by the recipient |
+| `call.completed` | The call ended normally |
+| `call.failed` | The call could not be connected |
+| `call.recording_available` | A call recording has finished processing and is ready to download |
+
+<AccordionGroup>
+  <Accordion title="call.completed — Example Payload">
+    ```json
+    {
+      "event": "call.completed",
+      "data": {
+        "id": "call_01hxstuvwx123456",
+        "status": "completed",
+        "direction": "outbound",
+        "to": "+15551234567",
+        "from": "+15559876543",
+        "duration_seconds": 183,
+        "answered_at": "2024-01-15T10:30:05Z",
+        "ended_at": "2024-01-15T10:33:08Z",
+        "recording": false
+      },
+      "created_at": "2024-01-15T10:33:08Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="call.recording_available — Example Payload">
+    ```json
+    {
+      "event": "call.recording_available",
+      "data": {
+        "id": "rec_01hxstuvwx789012",
+        "call_id": "call_01hxstuvwx456789",
+        "status": "available",
+        "duration_seconds": 245,
+        "recording_url": "https://api.amplify.xyz/v1/calls/call_01hxstuvwx456789/recording",
+        "expires_at": "2024-02-15T10:35:00Z",
+        "created_at": "2024-01-15T10:35:00Z"
+      },
+      "created_at": "2024-01-15T10:35:00Z"
+    }
+    ```
+  </Accordion>
+  <Accordion title="call.failed — Example Payload">
+    ```json
+    {
+      "event": "call.failed",
+      "data": {
+        "id": "call_01hxstuvwx345678",
+        "status": "failed",
+        "direction": "outbound",
+        "to": "+15551234567",
+        "from": "+15559876543",
+        "failure_reason": "no_answer",
+        "initiated_at": "2024-01-15T10:30:00Z",
+        "failed_at": "2024-01-15T10:30:30Z"
+      },
+      "created_at": "2024-01-15T10:30:30Z"
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+  Subscribe only to the specific event types your application needs. Subscribing to events you do not process adds unnecessary load to your endpoint and makes delivery logs harder to audit.
+</Info>

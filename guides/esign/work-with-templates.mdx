@@ -1,0 +1,188 @@
+---
+title: "Use eSign Templates for Repeatable Workflows"
+sidebarTitle: "Templates"
+description: "Create reusable eSign templates with pre-placed signing fields in the Amplify dashboard, then send them via the API for consistent, efficient document workflows."
+---
+
+Templates let you define the structure of a signable document once — including where signature fields, initials, dates, and text inputs appear — and reuse that layout every time you send the same document type. Instead of asking signers to locate where to sign on a raw PDF, templates guide them directly to the right fields, reducing errors and speeding up completion.
+
+## Create a template in the dashboard
+
+You create and manage templates in the Amplify dashboard rather than through the API. The visual template editor lets you upload a PDF, drag signing fields onto the pages, and assign each field to a named recipient role.
+
+To create a template:
+
+1. Go to **eSign → Templates** in the Amplify dashboard.
+2. Click **New Template** and upload your PDF.
+3. Drag fields (signature, initials, date, text) onto the document pages.
+4. Assign each field to a recipient role (e.g. `signer`, `counter-signer`).
+5. Save the template — Amplify assigns it a unique `template_id`.
+
+Record the `template_id` from the template's detail page. You use this ID in all API calls that reference the template.
+
+## List your templates
+
+To retrieve a list of all templates in your account, make a `GET` request to `/v1/esign/templates`.
+
+<CodeGroup>
+
+```bash cURL
+curl --request GET \
+  --url https://api.amplify.xyz/v1/esign/templates \
+  --header 'Authorization: Bearer YOUR_API_KEY'
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.amplify.xyz/v1/esign/templates",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+)
+
+templates = response.json()
+for t in templates["data"]:
+    print(t["id"], t["name"])
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/esign/templates", {
+  headers: { Authorization: "Bearer YOUR_API_KEY" },
+});
+
+const { data: templates } = await response.json();
+templates.forEach((t) => console.log(t.id, t.name));
+```
+
+</CodeGroup>
+
+#### Example response
+
+```json
+{
+  "data": [
+    {
+      "id": "tmpl_01hx...",
+      "name": "Standard NDA",
+      "roles": ["signer"],
+      "created_at": "2024-01-10T08:00:00Z"
+    },
+    {
+      "id": "tmpl_02hx...",
+      "name": "Service Agreement",
+      "roles": ["client", "account-manager"],
+      "created_at": "2024-01-12T09:15:00Z"
+    }
+  ]
+}
+```
+
+## Send from a template
+
+To send a document using a template, make a `POST` request to `/v1/esign/documents` and provide the `template_id` instead of a `document_url`. Supply a recipients array that maps real signers to the roles defined in the template.
+
+<CodeGroup>
+
+```bash cURL
+curl --request POST \
+  --url https://api.amplify.xyz/v1/esign/documents \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "template_id": "tmpl_01hx...",
+    "recipients": [
+      {
+        "name": "Jane Smith",
+        "email": "jane@example.com",
+        "role": "signer"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.amplify.xyz/v1/esign/documents",
+    headers={
+        "Authorization": "Bearer YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "template_id": "tmpl_01hx...",
+        "recipients": [
+            {
+                "name": "Jane Smith",
+                "email": "jane@example.com",
+                "role": "signer",
+            }
+        ],
+    },
+)
+
+doc = response.json()
+print(doc["id"])      # esign_01hx...
+print(doc["status"])  # pending
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/esign/documents", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    template_id: "tmpl_01hx...",
+    recipients: [
+      {
+        name: "Jane Smith",
+        email: "jane@example.com",
+        role: "signer",
+      },
+    ],
+  }),
+});
+
+const doc = await response.json();
+console.log(doc.id);      // esign_01hx...
+console.log(doc.status);  // pending
+```
+
+</CodeGroup>
+
+#### Key request fields
+
+<ParamField body="template_id" type="string" required>
+  The unique ID of the template to use, as returned by `GET /v1/esign/templates` or shown in the Amplify dashboard.
+</ParamField>
+
+<ParamField body="recipients" type="array" required>
+  An array of recipient objects. Each must include `name`, `email`, and `role`. The `role` value must match a role defined in the template exactly.
+</ParamField>
+
+#### Example request
+
+```json
+{
+  "template_id": "tmpl_01hx...",
+  "recipients": [
+    {
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "signer"
+    }
+  ]
+}
+```
+
+<Note>
+  The `role` value in each recipient object must exactly match a role name defined in your template. If the template defines a role called `client`, passing `"role": "signer"` will return a validation error. Check your template's `roles` array (returned by `GET /v1/esign/templates`) to confirm the correct role names before sending.
+</Note>
+
+## Next steps
+
+- [Send for Signature](/guides/esign/send-for-signature) — send documents without a template using a direct document URL
+- [Track Signature Status](/guides/esign/track-signature-status) — monitor signing progress and handle completion events
+- [API Reference: eSign Templates](/api-reference/esign-templates) — full template schema, filtering options, and error codes

@@ -1,5 +1,5 @@
 ---
-title: "Quickstart: Make Your First Amplify API Request"
+title: "Quickstart: Your First Successful Amplify API Call"
 sidebarTitle: "Quickstart"
 description: "Get a successful response from the Amplify API in under five minutes. Grab your API key, fire a request, and read the JSON response."
 ---
@@ -33,29 +33,32 @@ This guide walks you through making your first successful call to the Amplify AP
     <CodeGroup>
       ```bash curl
       curl https://api.amplify.xyz/v1/faxes \
-        -H "Authorization: Bearer ak_live_..."
+        -H "Authorization: Bearer $AMPLIFY_API_KEY"
       ```
 
       ```python Python
+      import os
       import requests
+
+      api_key = os.environ["AMPLIFY_API_KEY"]
 
       response = requests.get(
           "https://api.amplify.xyz/v1/faxes",
-          headers={"Authorization": "Bearer ak_live_..."}
+          headers={"Authorization": f"Bearer {api_key}"}
       )
       print(response.json())
       ```
 
       ```javascript Node.js
+      const apiKey = process.env.AMPLIFY_API_KEY;
+
       const response = await fetch("https://api.amplify.xyz/v1/faxes", {
-        headers: { "Authorization": "Bearer ak_live_..." }
+        headers: { "Authorization": `Bearer ${apiKey}` }
       });
       const data = await response.json();
       console.log(data);
       ```
     </CodeGroup>
-
-    Replace `ak_live_...` with your actual API key, or reference the environment variable you set in the previous step (e.g., `Bearer $AMPLIFY_API_KEY` in curl).
 
     <Tip>
       If your account is in test mode, all API calls operate against a sandboxed environment — no real faxes are sent and no charges are incurred. Look for a **Test Mode** toggle in the dashboard under Settings.

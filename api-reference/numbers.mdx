@@ -1,5 +1,5 @@
 ---
-title: "Numbers API Reference — Manage Phone Numbers"
+title: "Numbers API Reference — Manage Your Phone Numbers"
 sidebarTitle: "Numbers"
 description: "List provisioned phone numbers, retrieve individual number details and capabilities, and update routing settings using the Amplify Numbers API."
 ---
@@ -7,7 +7,7 @@ description: "List provisioned phone numbers, retrieve individual number details
 The Numbers resource provides access to the phone numbers provisioned on your Amplify account. Each number has a set of capabilities — such as SMS, voice, or fax — and configuration settings that control how inbound traffic is handled. Use this resource to list all your numbers, inspect their properties, and update routing or labeling settings. Number provisioning is managed through the Amplify dashboard.
 
 <Note>
-  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+  The full interactive reference for this resource is generated from the Amplify OpenAPI spec. The endpoints and parameters below reflect the current public API surface.
 </Note>
 
 ## Endpoints
@@ -44,10 +44,23 @@ Retrieve a paginated list of all phone numbers provisioned on your Amplify accou
 
 ### Code example
 
+<CodeGroup>
+
 ```bash cURL
 curl https://api.amplify.xyz/v1/numbers \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/numbers", {
+  headers: { "Authorization": "Bearer YOUR_API_KEY" },
+});
+
+const { data } = await response.json();
+console.log(data); // Array of number objects
+```
+
+</CodeGroup>
 
 ---
 
@@ -126,6 +139,8 @@ Update configuration settings for a phone number, such as its label or routing b
 
 ### Code example
 
+<CodeGroup>
+
 ```bash cURL
 curl -X PATCH https://api.amplify.xyz/v1/numbers/num_01HZHD9MXRS4T7BVPW5R8ZKGF \
   -H "Authorization: Bearer YOUR_API_KEY" \
@@ -135,6 +150,28 @@ curl -X PATCH https://api.amplify.xyz/v1/numbers/num_01HZHD9MXRS4T7BVPW5R8ZKGF \
     "webhook_url": "https://example.com/webhooks/inbound"
   }'
 ```
+
+```javascript Node.js
+const response = await fetch(
+  "https://api.amplify.xyz/v1/numbers/num_01HZHD9MXRS4T7BVPW5R8ZKGF",
+  {
+    method: "PATCH",
+    headers: {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      label: "Sales Hotline",
+      webhook_url: "https://example.com/webhooks/inbound",
+    }),
+  }
+);
+
+const { data } = await response.json();
+console.log(data.label); // "Sales Hotline"
+```
+
+</CodeGroup>
 
 <Info>
   To add or remove numbers from your account, visit the Numbers section of the Amplify dashboard. API-based number provisioning will be documented here once available in the OpenAPI specification.

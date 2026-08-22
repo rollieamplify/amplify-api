@@ -1,5 +1,5 @@
 ---
-title: "Test Webhooks Locally with Amplify"
+title: "Test Amplify Webhooks Locally with ngrok or Tunnels"
 sidebarTitle: "Testing"
 description: "Expose your local server to the internet with ngrok or Cloudflare Tunnel, then use Amplify's test sender to debug webhook payloads quickly."
 ---
@@ -39,7 +39,7 @@ ngrok is the most widely used tunneling tool for webhook development. Follow the
 
     ngrok will display output similar to:
 
-    ```
+    ```text
     Forwarding   https://a1b2-203-0-113-42.ngrok-free.app -> http://localhost:3000
     ```
 
@@ -48,7 +48,7 @@ ngrok is the most widely used tunneling tool for webhook development. Follow the
   <Step title="Register the ngrok URL in Amplify">
     Go to **Settings → Webhooks → Add Endpoint** in the Amplify dashboard. Paste your ngrok URL, appending the path your handler listens on, for example:
 
-    ```
+    ```text
     https://a1b2-203-0-113-42.ngrok-free.app/webhooks/amplify
     ```
 

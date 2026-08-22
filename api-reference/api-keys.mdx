@@ -1,5 +1,5 @@
 ---
-title: "API Keys Reference — Create and Manage Keys"
+title: "API Keys Reference — Create, List, and Revoke Keys"
 sidebarTitle: "API Keys"
 description: "Create API keys with optional permission scopes, list active keys, retrieve metadata, and revoke keys using the Amplify API Keys resource."
 ---
@@ -7,8 +7,12 @@ description: "Create API keys with optional permission scopes, list active keys,
 The API Keys resource lets you programmatically create and manage the credentials used to authenticate requests to the Amplify API. Each key can optionally be scoped to a specific set of permissions, limiting what the key can do even if the creating user has broader access. The raw key value is returned only once — at creation time — so store it securely in an environment variable or secrets manager immediately after creating it.
 
 <Note>
-  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+  The full interactive reference for this resource is generated from the Amplify OpenAPI spec. The endpoints and parameters below reflect the current public API surface.
 </Note>
+
+<Warning>
+  The `key` value is returned **only once**, in the response to `POST /v1/api-keys`. It cannot be retrieved again via the API. Store it in an environment variable or secrets manager immediately after creation. If you lose the key, revoke it and create a new one.
+</Warning>
 
 ## Endpoints
 

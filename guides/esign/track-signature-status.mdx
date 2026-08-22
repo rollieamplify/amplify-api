@@ -111,9 +111,16 @@ For production applications, subscribing to webhook events is more efficient tha
 
 ## When signing is completed
 
-Once the document status is `completed`, download the signed PDF using the fax download endpoint. The signed document includes an audit trail page appended by Amplify, recording each recipient's name, email, IP address, and timestamp.
+Once the document status is `completed`, download the signed PDF by calling `GET /v1/esign/documents/{id}/download`. The signed document includes an audit trail page appended by Amplify, recording each recipient's name, email, IP address, and timestamp.
 
-To retrieve the signed document, call `GET /v1/esign/documents/{id}/download` — see [Download a Fax](/guides/fax/download-a-fax) for a pattern you can adapt.
+```bash cURL
+curl --request GET \
+  --url https://api.amplify.xyz/v1/esign/documents/esign_01hx4kpz9m2q3r8s/download \
+  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --output signed-document.pdf
+```
+
+See the [eSign Documents API Reference](/api-reference/esign-documents) for the full response schema and error codes.
 
 ## Expiry settings
 

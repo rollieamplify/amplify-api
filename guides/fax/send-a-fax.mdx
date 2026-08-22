@@ -1,7 +1,7 @@
 ---
 title: "Send a Fax with the Amplify API"
 sidebarTitle: "Send a Fax"
-description: "Learn how to send faxes programmatically using the Amplify API, from document preparation to submission and response handling."
+description: "Send faxes programmatically with the Amplify API. Covers document preparation, API request format, response handling, and delivery tracking."
 ---
 
 Sending a fax through the Amplify API lets you integrate fax delivery directly into your application without managing physical fax hardware or legacy telephony infrastructure. You submit a document and a destination number, and Amplify handles transmission, queuing, and delivery confirmation on your behalf.
@@ -21,7 +21,7 @@ Amplify accepts documents via a publicly accessible URL. The document must be re
 
 Supported formats include PDF, TIFF, and DOCX. PDF is recommended for the most reliable rendering across receiving fax machines.
 
-If your document is not already hosted at a stable URL, upload it first using the Amplify file upload API, then use the returned URL in your fax request. See [File Uploads](/platform/file-uploads) for instructions.
+If your document is not already hosted at a stable URL, upload it to a cloud storage service or your own file host first, then use the returned public URL in your fax request.
 
 ### Send the fax
 
@@ -96,16 +96,6 @@ console.log(fax.status);  // queued
 <ParamField body="document_url" type="string" required>
   A publicly accessible URL pointing to the document you want to fax. Amplify fetches this document at send time, so the URL must be reachable without authentication.
 </ParamField>
-
-#### Example request
-
-```json
-{
-  "to": "+15551234567",
-  "from": "+15557654321",
-  "document_url": "https://example.com/document.pdf"
-}
-```
 
 #### Example response
 

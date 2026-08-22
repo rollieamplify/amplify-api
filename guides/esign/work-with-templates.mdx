@@ -1,7 +1,7 @@
 ---
 title: "Use eSign Templates for Repeatable Workflows"
 sidebarTitle: "Templates"
-description: "Create reusable eSign templates with pre-placed signing fields in the Amplify dashboard, then send them via the API for consistent, efficient document workflows."
+description: "Create reusable eSign templates with pre-placed signing fields in the Amplify dashboard, then send them via the API for consistent document workflows."
 ---
 
 Templates let you define the structure of a signable document once — including where signature fields, initials, dates, and text inputs appear — and reuse that layout every time you send the same document type. Instead of asking signers to locate where to sign on a raw PDF, templates guide them directly to the right fields, reducing errors and speeding up completion.
@@ -161,21 +161,6 @@ console.log(doc.status);  // pending
 <ParamField body="recipients" type="array" required>
   An array of recipient objects. Each must include `name`, `email`, and `role`. The `role` value must match a role defined in the template exactly.
 </ParamField>
-
-#### Example request
-
-```json
-{
-  "template_id": "tmpl_01hx...",
-  "recipients": [
-    {
-      "name": "Jane Smith",
-      "email": "jane@example.com",
-      "role": "signer"
-    }
-  ]
-}
-```
 
 <Note>
   The `role` value in each recipient object must exactly match a role name defined in your template. If the template defines a role called `client`, passing `"role": "signer"` will return a validation error. Check your template's `roles` array (returned by `GET /v1/esign/templates`) to confirm the correct role names before sending.

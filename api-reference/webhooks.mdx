@@ -1,14 +1,18 @@
 ---
-title: "Webhooks API Reference — Configure Endpoints"
+title: "Webhooks API Reference — Register Event Endpoints"
 sidebarTitle: "Webhooks"
-description: "Register HTTPS endpoints to receive real-time event notifications, manage subscribed event types, and rotate signing secrets using the Amplify Webhooks API."
+description: "Register HTTPS endpoints to receive real-time event notifications, manage subscribed event types, and verify signatures using the Amplify Webhooks API."
 ---
 
 The Webhooks resource lets you register HTTPS endpoints that Amplify will call with a `POST` request each time a subscribed event occurs — such as a fax being delivered, a signature being completed, or an inbound message arriving. Each webhook has a `signing_secret` you use to verify that requests genuinely originate from Amplify. Manage which events each endpoint receives by updating the `events` array on the webhook.
 
 <Note>
-  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+  The full interactive reference for this resource is generated from the Amplify OpenAPI spec. The endpoints and parameters below reflect the current public API surface.
 </Note>
+
+<Warning>
+  The `signing_secret` returned when you create a webhook is shown **only once**. Copy it to a secure location immediately — it cannot be retrieved again. If you lose it, delete the webhook and create a new one.
+</Warning>
 
 ## Endpoints
 
@@ -191,6 +195,8 @@ Delete a webhook endpoint. Amplify immediately stops sending events to the regis
 
 Amplify signs every webhook request with an HMAC-SHA256 signature computed from the raw request body using your `signing_secret`. Verify the signature before processing any event payload.
 
+<CodeGroup>
+
 ```javascript Node.js
 import crypto from "crypto";
 
@@ -206,6 +212,22 @@ function verifyWebhookSignature(rawBody, signatureHeader, signingSecret) {
   return crypto.timingSafeEqual(trusted, received);
 }
 ```
+
+```python Python
+import hmac
+import hashlib
+
+def verify_webhook_signature(raw_body: bytes, signature_header: str, signing_secret: str) -> bool:
+    expected = hmac.new(
+        signing_secret.encode("utf-8"),
+        raw_body,
+        hashlib.sha256,
+    ).hexdigest()
+    trusted = f"sha256={expected}"
+    return hmac.compare_digest(trusted, signature_header)
+```
+
+</CodeGroup>
 
 <Warning>
   Always verify the webhook signature before acting on an event payload. Failing to do so leaves your endpoint open to spoofed requests.

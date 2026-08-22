@@ -1,7 +1,7 @@
 ---
 title: "Track Fax Delivery Status with Amplify"
 sidebarTitle: "Track Status"
-description: "Monitor outbound fax delivery through polling or webhooks, understand status transitions, and handle failures with retry logic."
+description: "Monitor fax delivery with the Amplify API. Understand all status values, use polling or webhooks for updates, and handle failures with retry logic."
 ---
 
 After you send a fax, Amplify moves it through a series of status states as it progresses from queuing through transmission to final delivery. Understanding the fax lifecycle lets you build reliable workflows that react correctly to successful deliveries, transient failures, and permanent errors.
@@ -14,9 +14,10 @@ After you send a fax, Amplify moves it through a series of status states as it p
 | `sending` | Amplify is actively transmitting the fax to the recipient. |
 | `delivered` | The recipient's fax machine confirmed successful receipt. |
 | `failed` | Transmission failed after all retry attempts were exhausted. |
+| `received` | An inbound fax has been fully received and is ready to download. |
 | `cancelled` | The fax was cancelled before transmission began. |
 
-Faxes move forward through `queued → sending → delivered` on success, or `queued → sending → failed` when all attempts are unsuccessful. A fax in the `queued` state can also transition directly to `cancelled` if you cancel it before transmission starts.
+Outbound faxes move through `queued → sending → delivered` on success, or `queued → sending → failed` when all attempts are unsuccessful. A fax in the `queued` state can also transition directly to `cancelled` if you cancel it before transmission starts. Inbound faxes arrive with the `received` status once Amplify has finished processing the transmission.
 
 ## Option 1: Poll for status
 

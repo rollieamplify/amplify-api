@@ -1,7 +1,7 @@
 ---
 title: "API Key Authentication for the Amplify API"
 sidebarTitle: "Authentication"
-description: "Secure every Amplify API request with an API key passed as a Bearer token in the Authorization header."
+description: "Learn how to authenticate Amplify API requests using API keys in the Bearer token format, including security best practices and error handling."
 ---
 
 Every request you make to the Amplify API must include a valid API key. The API uses key-based authentication — there are no sessions, cookies, or OAuth flows to manage. You attach your key to each request via the `Authorization` header, and the API validates it before processing anything.
@@ -12,7 +12,7 @@ To create a new API key, open the [Amplify dashboard](https://app.amplify.xyz), 
 
 All Amplify API keys follow this format:
 
-```
+```text
 ak_live_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
@@ -22,7 +22,7 @@ Store this value securely before closing the dialog.
 
 Include your API key in the `Authorization` header of every request using the `Bearer` scheme:
 
-```
+```http
 Authorization: Bearer ak_live_...
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: "Verify Webhook Signatures from Amplify"
+title: "Verify Amplify Webhook Signatures with HMAC-SHA256"
 sidebarTitle: "Authentication"
 description: "Use HMAC-SHA256 signature verification to confirm that every incoming webhook request genuinely originates from Amplify, not a third party."
 ---
@@ -10,7 +10,7 @@ Amplify signs every webhook payload so you can confirm that a request genuinely 
 
 When Amplify delivers a webhook, it computes an **HMAC-SHA256** digest of the raw request body using your endpoint's signing secret. It then sends that digest in the `Amplify-Signature` request header, prefixed with the algorithm name:
 
-```
+```http
 Amplify-Signature: sha256=<hex-encoded digest>
 ```
 

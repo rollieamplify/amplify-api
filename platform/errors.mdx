@@ -1,7 +1,7 @@
 ---
 title: "Amplify API Error Codes and Responses"
 sidebarTitle: "Errors"
-description: "Understand Amplify API HTTP status codes, error response structure, and how to handle failures gracefully in your code."
+description: "Understand Amplify API HTTP status codes, the standard error envelope structure, and common error codes to handle failures gracefully in your integration."
 ---
 
 The Amplify API uses standard HTTP status codes to communicate the outcome of every request. A `2xx` response indicates success, a `4xx` response means something was wrong with your request, and a `5xx` response means something went wrong on Amplify's side. Alongside the HTTP status code, every error response includes a structured JSON body that gives you machine-readable codes and human-readable messages to act on.

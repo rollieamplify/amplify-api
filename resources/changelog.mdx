@@ -1,5 +1,5 @@
 ---
-title: "Amplify API Changelog — Latest Updates"
+title: "Amplify API Changelog — Updates and Release Notes"
 sidebarTitle: "Changelog"
 description: "Stay current with every Amplify API release: new endpoints, improvements, bug fixes, and breaking changes with migration guidance."
 ---
@@ -17,6 +17,63 @@ Stay up to date with every change made to the Amplify API. This changelog lists 
 ## Release History
 
 <AccordionGroup>
+  <Accordion title="June 2024 — Automations API, document URL import, contact search improvements">
+    **Released:** June 2024
+
+    This release adds programmatic access to workflow automations, expands document upload options, and improves contact search accuracy.
+
+    - **New** — The **Automations API** is now available. List all configured automations, retrieve their settings, and manually trigger an automation via `POST /v1/automations/{id}/trigger`. Automation creation and step editing remain available in the dashboard.
+    - **New** — Documents can now be imported directly from a remote URL. Pass `document_url` to `POST /v1/documents` to have Amplify fetch and store the file on your behalf.
+    - **Improved** — Contact search (`GET /v1/contacts?search=`) now matches against phone numbers in addition to name and email, and handles partial E.164 number matching.
+    - **Fixed** — `GET /v1/contacts/{id}` no longer returns a `404` for contacts created via an inbound message when the contact's phone number contains formatting characters (e.g., dashes or spaces).
+  </Accordion>
+
+  <Accordion title="May 2024 — Permission Groups API, scoped API keys, webhook event expansion">
+    **Released:** May 2024
+
+    This release introduces granular access control via permission groups, scoped API key creation, and a broader set of subscribable webhook events.
+
+    - **New** — The **Permission Groups API** is now available at `/v1/permission-groups`. Retrieve the permission groups configured in your organization and assign them to users via `PATCH /v1/users/{id}`.
+    - **New** — API keys can now be scoped to a specific set of permissions. Pass a `permissions` array to `POST /v1/api-keys` to restrict what the key can access, independent of the creating user's broader access.
+    - **New** — Three additional webhook event types are now available: `esign.viewed` (a recipient opened the signing link), `form.extraction.completed` (data extraction finished), and `call.failed` (a voice call failed to connect).
+    - **Improved** — Webhook delivery retries now use exponential back-off with a maximum of 5 attempts over 24 hours. The final failure status and last attempted timestamp are recorded on the event object.
+    - **Fixed** — Webhooks registered with uppercase characters in the URL scheme (e.g., `HTTPS://`) are now accepted and normalized to lowercase.
+  </Accordion>
+
+  <Accordion title="April 2024 — Folders API, document metadata update, pagination cursor stability">
+    **Released:** April 2024
+
+    This release introduces folder organization for documents, adds metadata editing for uploaded files, and stabilizes pagination cursors across all list endpoints.
+
+    - **New** — The **Folders API** is now available at `/v1/folders`. Create nested folder hierarchies and organize documents by providing a `folder_id` when uploading or updating a document.
+    - **New** — `PATCH /v1/documents/{id}` now supports renaming a document and moving it between folders. Pass `folder_id: null` to move a document to the root level.
+    - **Improved** — Pagination cursors are now stable across concurrent writes. Adding or deleting records while iterating through pages no longer causes items to be skipped or duplicated in subsequent pages.
+    - **Fixed** — `GET /v1/documents` returned an empty `data` array instead of a `404` when the specified `folder_id` did not exist. It now returns `404 Not Found` with a descriptive error message.
+  </Accordion>
+
+  <Accordion title="March 2024 — Numbers API, inbound webhook routing, MMS support">
+    **Released:** March 2024
+
+    This release exposes phone number configuration via the API, adds per-number webhook routing, and enables MMS media retrieval.
+
+    - **New** — The **Numbers API** is now available at `/v1/numbers`. List all provisioned numbers, inspect their capabilities, and update their label and inbound webhook URL.
+    - **New** — Per-number webhook routing is now supported. Set `webhook_url` on a number via `PATCH /v1/numbers/{id}` to override the account-level default for inbound events on that number.
+    - **New** — Inbound MMS messages now include a `media` array in the webhook payload, with each entry containing a `url` and `content_type` for the attached media file.
+    - **Improved** — `GET /v1/numbers` now accepts `type` and `capability` query parameters so you can filter numbers by type (`local`, `toll-free`, `fax`) or capability (`sms`, `mms`, `voice`, `fax`).
+    - **Fixed** — Number labels containing non-ASCII characters (e.g., accented characters) are now stored and returned correctly.
+  </Accordion>
+
+  <Accordion title="February 2024 — API Keys resource, last_used_at tracking, error response improvements">
+    **Released:** February 2024
+
+    This release adds API-level key management, surfaces key usage metadata, and standardizes error response bodies across all endpoints.
+
+    - **New** — The **API Keys API** is now available at `/v1/api-keys`. Create keys with optional permission scopes, list all active keys, retrieve metadata, and revoke keys programmatically.
+    - **New** — API key records now include a `last_used_at` field, showing the ISO 8601 timestamp of the most recent authenticated request made with that key.
+    - **Improved** — All `4xx` and `5xx` error responses now include a consistent `error` object with a `code` (machine-readable string) and `message` (human-readable description) field. Update your error handling if you previously parsed bare message strings.
+    - **Fixed** — Creating an API key with an empty `permissions` array (`[]`) previously granted full access instead of returning a validation error. It now returns `422 Unprocessable Entity` with an appropriate message. Pass `null` or omit the field to create an unscoped key.
+  </Accordion>
+
   <Accordion title="January 2024 — Conversations filtering, eSign roles, fax webhooks">
     **Released:** January 2024
 

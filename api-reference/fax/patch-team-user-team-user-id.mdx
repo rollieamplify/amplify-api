@@ -1,0 +1,387 @@
+---
+title: "PATCH /team-user/{team_user_id}"
+description: "Captured contract for PATCH /team-user/{team_user_id}."
+api: "PATCH /team-user/{team_user_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /team-user/{team_user_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Update Sub-User API
+
+**Endpoint:**  
+
+PATCH: api/team-user/{team_user_id}
+
+# Description :
+
+Updates an existing sub-user's profile and permissions. `user_permissions` is always required and must contain the full permission set for the user.
+
+# Request Body :
+
+{
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "email": "jane.updated@example.com",
+  "job_title": "Support Lead",
+  "user_note": "webapp owner note update",
+  "role_id": null,
+  "user_permissions": {
+        "access_ifax": true,
+        "access_numbers": true,
+        "access_numbers_value": "1,6,65",
+        "view_documents": true,
+        "view_documents_value": "all_documents",
+        "send_faxes": true,
+        "monthly_page_limit": true,
+        "monthly_page_limit_value": 0
+    },
+    "user_notifications": [
+        {
+            "key": "transmission_started_accessible_number_client",
+            "product": "fax",
+            "category": "inbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": true,
+                "show_open_link": false
+            }
+        }
+    ]
+}
+
+| Field | Type | Required | Description |
+
+|-------|------|----------|-------------|
+
+| first_name | string | Yes | Max 50 characters. |
+
+| last_name | string | No | Optional. |
+
+| email | string | Yes | Valid email, unique excluding current user. |
+
+| job_title | string | No | Must exist in `job_titles` if provided. |
+
+| role_id | int | No | nullable, must exist in `roles`. |
+
+| user_permissions | object | Yes | Full permission set; always required. |
+
+# Response Format :
+
+## Success Response :
+
+{
+    "data": {
+        "id": 691,
+        "account_id": 259,
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "job_title": "Accountant",
+        "email": "jane.updated@example.com",
+        "password": "",
+        "phone_number": "",
+        "status": "Active",
+        "created_at": "2026-02-17T11:32:27Z",
+        "created_by": 270,
+        "reference_id": "",
+        "referred_by": "",
+        "timezone": "",
+        "permission_id": "",
+        "role_id": "",
+        "role_name": "",
+        "type": "user",
+        "last_login_at": "",
+        "signature_id": "",
+        "invitation_link": "",
+        "user_permissions": {
+            "Product": [
+                {
+                    "id": 1,
+                    "title": "iFax",
+                    "key": "access_ifax",
+                    "enabled": true,
+                    "value": "",
+                    "category": "product"
+                },
+                {
+                    "id": 2,
+                    "title": "Connect",
+                    "key": "access_connect",
+                    "enabled": false,
+                    "value": "",
+                    "category": "product"
+                },
+                {
+                    "id": 3,
+                    "title": "eSign",
+                    "key": "access_esign",
+                    "enabled": false,
+                    "value": "",
+                    "category": "product"
+                },
+                {
+                    "id": 4,
+                    "title": "Forms",
+                    "key": "access_forms",
+                    "enabled": false,
+                    "value": "",
+                    "category": "product"
+                }
+            ],
+            "General": [
+                {
+                    "id": 5,
+                    "title": "Access Numbers",
+                    "key": "access_numbers",
+                    "enabled": true,
+                    "value": "1,6,65",
+                    "category": "general"
+                },
+                {
+                    "id": 6,
+                    "title": "View Numbers",
+                    "key": "view_numbers",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 7,
+                    "title": "Add Numbers",
+                    "key": "add_numbers",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 8,
+                    "title": "Port Numbers",
+                    "key": "port_numbers",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 9,
+                    "title": "Edit Number Configuration",
+                    "key": "edit_number_configuration",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 10,
+                    "title": "Delete Numbers",
+                    "key": "delete_numbers",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 11,
+                    "title": "Block Numbers",
+                    "key": "block_numbers",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 12,
+                    "title": "Manage Personal Contacts",
+                    "key": "manage_personal_contacts",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 13,
+                    "title": "View Contact Groups",
+                    "key": "view_contact_groups",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 14,
+                    "title": "Create/Edit Contact Groups",
+                    "key": "create_edit_contact_groups",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 15,
+                    "title": "Delete Contact Groups",
+                    "key": "delete_contact_groups",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 16,
+                    "title": "Manage Custom Fields",
+                    "key": "manage_custom_fields",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 17,
+                    "title": "Import Contacts",
+                    "key": "import_contacts",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 18,
+                    "title": "Export Contacts",
+                    "key": "export_contacts",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 19,
+                    "title": "Use Labels",
+                    "key": "use_labels",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 20,
+                    "title": "Create/Edit Labels",
+                    "key": "create_edit_labels",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 21,
+                    "title": "Delete Labels",
+                    "key": "delete_labels",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 22,
+                    "title": "View Automations",
+                    "key": "view_automations",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 23,
+                    "title": "Create/Edit Automations",
+                    "key": "create_edit_automations",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 24,
+                    "title": "Delete Automations",
+                    "key": "delete_automations",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 25,
+                    "title": "View Users",
+                    "key": "view_users",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 26,
+                    "title": "Create/Edit Users",
+                    "key": "create_edit_users",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 27,
+                    "title": "Delete Users",
+                    "key": "delete_users",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 28,
+                    "title": "Manage Personal Folders",
+                    "key": "manage_personal_folders",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 29,
+                    "title": "View Shared Folders",
+                    "key": "view_shared_folders",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 30,
+                    "title": "Create/Edit Shared Folders",
+                    "key": "create_edit_shared_folders",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 31,
+                    "title": "Delete Shared Folders",
+                    "key": "delete_shared_folders",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 32,
+                    "title": "Sync folders",
+                    "key": "sync_folders",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 33,
+                    "title": "Manage Account Details",
+                    "key": "manage_account_details",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 34,
+                    "title": "Manage Subscription Plan",
+                    "key": "manage_subscription_plan",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 35,
+                    "title": "Manage Payments & Billing",
+                    "key": "manage_payments_billing",
+                    "en
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,56 @@
+---
+title: "POST /shortcuts/reorder"
+description: "Captured contract for POST /shortcuts/reorder."
+api: "POST /shortcuts/reorder"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /shortcuts/reorder.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Reorder shortcuts API.
+
+Endpoint:
+POST: api/shortcuts/reorder
+
+Body:
+{
+    "ids": [6,4,3,5,2]
+}
+
+Response:
+{
+    "data": [
+        {
+            "id": 6,
+            "priority": 1
+        },
+        {
+            "id": 4,
+            "priority": 2
+        },
+        {
+            "id": 3,
+            "priority": 3
+        },
+        {
+            "id": 5,
+            "priority": 4
+        },
+        {
+            "id": 2,
+            "priority": 5
+        }
+    ],
+    "meta": {
+        "request_id": "9caa468e-e59c-40fd-9e99-f728aff5dcc8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

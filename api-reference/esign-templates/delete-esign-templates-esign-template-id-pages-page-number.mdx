@@ -1,0 +1,63 @@
+---
+title: "DELETE /esign_templates/{esign_template_id}/pages/{page_number}"
+description: "Captured contract for DELETE /esign_templates/{esign_template_id}/pages/{page_number}."
+api: "DELETE /esign_templates/{esign_template_id}/pages/{page_number}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /esign_templates/{esign_template_id}/pages/{page_number}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+DELETE : api/esign_templates/{esign_template_id}/pages/{page_number}
+
+
+
+
+Description :
+
+
+
+
+Deletes all fields on the specified page, shifts higher page numbers down, and decrements template page_count.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

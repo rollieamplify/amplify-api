@@ -1,0 +1,39 @@
+---
+title: "POST /fax/caller_id/list"
+description: "Captured contract for POST /fax/caller_id/list."
+api: "POST /fax/caller_id/list"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/caller_id/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/fax/caller_id/list
+
+Body:
+{
+    "type": "fax"  // fax,voice
+}
+
+Response:
+{
+    "data": [
+        {
+            "fax_number": "19073131400",
+            "fax_number_label": "",
+            "template_id": ""
+        }
+    ],
+    "meta": {
+        "request_id": "d8b6d1d8-2010-4ad4-aa0d-1a90450e22e3"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

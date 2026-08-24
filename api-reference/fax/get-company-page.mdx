@@ -1,0 +1,57 @@
+---
+title: "GET /company_page"
+description: "Captured contract for GET /company_page."
+api: "GET /company_page"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /company_page.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Company Page Details API:
+
+Endpoint:
+GET: api/company_page
+
+Body:
+{
+  "id": "2"
+}
+
+Response:
+{
+    "data": {
+        "id": 2,
+        "account_id": 58,
+        "user_id": 57,
+        "email": "abc@gmail.com",
+        "view_name": "test",
+        "title": "test",
+        "fax_number_id": null,
+        "billing_type": 1,
+        "domain": "domain_name",
+        "is_published": 0,
+        "include_cover_page": 0,
+        "cover_page_id": null,
+        "template_id": null,
+        "color": null,
+        "accent_color": null,
+        "received_by_email_toggle": 1,
+        "received_by_email": "test@gmail.com",
+        "status": 0,
+        "created_at": 1767351743,
+        "updated_at": 1767351743,
+        "deleted_at": null
+    },
+    "meta": {
+        "request_id": "1ea924bb-9d64-4719-8536-8962f0fc135e"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

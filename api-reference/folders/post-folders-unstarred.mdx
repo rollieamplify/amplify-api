@@ -1,0 +1,64 @@
+---
+title: "POST /folders/unstarred"
+description: "Captured contract for POST /folders/unstarred."
+api: "POST /folders/unstarred"
+public: true
+---
+
+This internal review page records the behavior captured for POST /folders/unstarred.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Description:
+This API is used to mark a folder as unstarred for the logged-in user. It supports both single and multiple folder IDs in a single request and removes the specified folder(s) from the user’s starred folders list.
+
+Endpoint :
+POST - /api/folders/unstarred
+
+Body:
+
+# unstar folder with single folder id
+{
+    "folder_id": [754, 745]
+}
+
+
+# unstar folder with multiple folder ids
+{
+    "folder_id": [754, 745]
+}
+
+Response:
+{
+    "data": {
+        "message": "Folder removed from starred folders."
+    },
+    "meta": {
+        "request_id": "4e70e266-cf12-4814-9ff9-6e32f7b4036a"
+    }
+}
+
+Validations:
+{
+    "folder_id": ""
+}
+
+# Validation error response if send request without folder id
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "folder_id": [
+            "The folder id field is required."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

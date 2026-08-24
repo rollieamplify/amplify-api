@@ -1,0 +1,91 @@
+---
+title: "DELETE /reseller/branding/reset"
+description: "Captured contract for DELETE /reseller/branding/reset."
+api: "DELETE /reseller/branding/reset"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /reseller/branding/reset.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+DELETE /api/reseller/branding/reset
+
+
+
+
+Resets account branding visual/sender fields (primary user only). Does not clear reseller_details / configuration.
+
+
+
+
+Request
+DELETE /api/reseller/branding/reset
+Authorization: Bearer {token}
+
+
+
+
+No body.
+
+Response — Case A: Success 200
+
+
+
+
+Returns full GET shape after reset (custom_branding falls back to defaults / cleared values).
+
+
+
+
+{
+  "data": {
+    "configuration": {
+      "is_active_reseller": true,
+      "sales_inquiries": "...",
+      "support_email": "...",
+      "support_number": "...",
+      "support_message": "...",
+      "default_domain": "amplify.fax.cc",
+      "domain_verification": false,
+      "provisioning_mode": "client",
+      "is_client_auto_topup_enabled": true,
+      "topup_amount": 20,
+      "balance_trigger": 50,
+      "reseller_mode": true,
+      "product_name": "Amplify"
+    },
+    "custom_branding": {
+      "logo_light_background": "https://dev-api.amplify.xyz/images/email_logo_light.png",
+      "logo_dark_background": "https://dev-api.amplify.xyz/images/email_logo_grey.png",
+      "primary_color": "#FFFFFF",
+      "accent_color": "#9432fd",
+      "sender_email_address": "no-reply@amplify.xyz",
+      "sender_email_verified": true,
+      "company_name": "Amplify",
+      "is_sender_email_enabled": true,
+      "enable_portal_access": true,
+      "email_footer_text": "Use Amplify to simplify the process of agreement management and obtaining eSignatures.",
+      "remove_amplify_branding_in_subject": false
+    }
+  },
+  "meta": {
+    "request_id": "..."
+  }
+}
+Response — Case B: Non-primary / client 403
+{
+  "data": {
+    "error": {
+      "code": "PERMISSION_DENIED",
+      "message": "Only the primary user can reset branding."
+    }
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

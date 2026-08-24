@@ -1,0 +1,42 @@
+---
+title: "POST /epic/clinical_note/save"
+description: "Captured contract for POST /epic/clinical_note/save."
+api: "POST /epic/clinical_note/save"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /epic/clinical_note/save.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Save Clinical Notes of Patient
+Endpoint:
+POST: epic/clinical_note/save
+
+Request:
+{
+    "patient_id" : "egqBHVfQlt4Bw3XGXoxVxHg3",
+    "encounter_id" : "emhwuharfnf8VhCQg97qP7Q3",
+    "message" : "test",
+    "doc_code" : "11506-3",
+    "doc_text" : "Progress note",
+    "fax_id" : ""
+}
+
+Response:
+{
+    "data": {
+        "message": "Data sent to Epic.",
+        "data": ""
+    },
+    "meta": {
+        "request_id": "3ce05337-a01d-4334-83c8-cb303253f5f0"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

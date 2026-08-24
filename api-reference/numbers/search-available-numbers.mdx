@@ -1,0 +1,26 @@
+---
+title: "Search available numbers"
+description: "Find available numbers for a country and geographic area."
+api: "GET /numbers/available"
+public: true
+---
+
+`GET /numbers/available` searches for numbers that can be purchased.
+
+## Query parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `country_iso_code` | string | Two-letter country code, such as `GB`. |
+| `state` | string | Geographic area selector. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/available?country_iso_code=GB&state=1224" \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+```
+
+## Response
+
+The `data` object contains the calling prefix, selected area, and available-number information. `meta` includes the total, pagination cursor, and request identifier.
+
+<Note>The exact shape of available-number groups varies by country and carrier inventory.</Note>

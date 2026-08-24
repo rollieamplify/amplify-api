@@ -1,0 +1,80 @@
+---
+title: "POST /meetings/validate_link"
+description: "Captured contract for POST /meetings/validate_link."
+api: "POST /meetings/validate_link"
+public: true
+---
+
+This page documents the behavior captured for POST /meetings/validate_link in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/meetings/validate_link
+    
+    
+    
+    
+    Body:
+    
+    {
+        "developer@example.com",
+        "room_id": "DCfz-FRl-NqsM"
+    }
+    
+    
+    Validation Error Response:
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The room id field is required."
+        }
+    }
+    
+    
+    Error response:
+    
+    {
+        "error": {
+            "code": "INVALID_LINK",
+            "message": "Invalid Meeting Link"
+        }
+    }
+    
+    
+    Response:
+    
+    {
+        "data": {
+            "invited": false,
+            "host_details": {
+                "first_name": "Web",
+                "last_name": "Twenty",
+                "email": "developer@example.com"
+            }
+        },
+        "meta": {
+            "request_id": "538a32b0-a627-40a9-b19a-7c12c0a7aeaf"
+        }
+    }
+    {
+        "data": {
+            "invited": true,
+            "host_details": {
+                "first_name": "Web",
+                "last_name": "Twenty",
+                "email": "developer@example.com"
+            }
+        },
+        "meta": {
+            "request_id": "ecf98c60-bdbc-4a45-ab7f-0b0ff279dbf7"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

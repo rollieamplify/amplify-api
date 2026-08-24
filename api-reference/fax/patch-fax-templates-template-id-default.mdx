@@ -1,0 +1,30 @@
+---
+title: "PATCH /fax_templates/{template_id}/default"
+description: "Captured contract for PATCH /fax_templates/{template_id}/default."
+api: "PATCH /fax_templates/{template_id}/default"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /fax_templates/{template_id}/default.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Set personal default
+Endpoint: PATCH /fax_templates/{template_id}/default
+Body:
+{
+  "is_default": true
+}
+Response Example
+{
+    "data": [],
+    "meta": {}
+}
+Description: When is_default is true, writes UserConfiguration (default_fax_template = template id) for the current user only. Template must be in allowed scope. No create/edit permission flag required.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

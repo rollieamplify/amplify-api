@@ -1,0 +1,51 @@
+---
+title: "GET /fax/broadcast_lists"
+description: "Captured contract for GET /fax/broadcast_lists."
+api: "GET /fax/broadcast_lists"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/broadcast_lists.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/fax/broadcast_lists
+
+Response:
+{
+    "data": [
+        {
+            "id": 4,
+            "name": "Broadcast List 2",
+            "recipients_count": 2,
+            "last_fax_sent_time": ""
+        },
+        {
+            "id": 3,
+            "name": "Broadcast List 1",
+            "recipients_count": 2,
+            "last_fax_sent_time": ""
+        },
+        {
+            "id": 2,
+            "name": "Broadcast List",
+            "recipients_count": 2,
+            "last_fax_sent_time": ""
+        }
+    ],
+    "meta": {
+        "total": 3,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 10,
+        "request_id": "325a5f54-4ef3-4a6a-bbfd-e220495d4340"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

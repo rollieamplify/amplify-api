@@ -1,0 +1,45 @@
+---
+title: "GET /email_to_fax"
+description: "Captured contract for GET /email_to_fax."
+api: "GET /email_to_fax"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /email_to_fax.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Email To Fax Configurations Details
+
+Endpoint:
+GET: api/email_to_fax
+Response:
+{
+    "data": {
+        "enabled_email_to_fax": "anyone_with_allowed_domains",
+        "allowed_domains": [
+            {
+                "id": 6,
+                "domain": "test2.com"
+            }
+        ],
+        "custom_domain": {
+            "id": 3,
+            "domain": "asdssd.com",
+            "is_verified": false
+        },
+        "populate_cover_page_from_sender_name": true,
+        "use_new_page_for_comment" : 0,
+        "comment_render_format" : "plain_text"
+    },
+    "meta": {
+        "request_id": "cfe73131-2835-4b31-a759-ab487935bcdf"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

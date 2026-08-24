@@ -1,0 +1,101 @@
+---
+title: "PATCH /broadcast_lists/{broadcast_list_id}"
+description: "Captured contract for PATCH /broadcast_lists/{broadcast_list_id}."
+api: "PATCH /broadcast_lists/{broadcast_list_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /broadcast_lists/{broadcast_list_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update Broadcast List API :
+
+
+Endpoint :
+PATCH: api/broadcast_lists/{broadcast_list_id}
+
+
+Body :
+{
+    "name": "Updated Broadcast List Name",
+    "recipients": [
+        {
+            "id": 1,
+            "fax_number": "1234567890",
+            "country_code": "US",
+            "area_code": "123",
+            "metadata": {
+                "region": "US",
+                "cost": 0.06,
+                "price_per_page": 0.03, 
+                "broadcast_label_id": null
+            },
+            "fields": [
+                {
+                    "key": "firstName",
+                    "value": "John Updated"
+                },
+                {
+                    "key": "lastName",
+                    "value": "Doe Updated"
+                }
+            ]
+        },
+        {
+            "fax_number": "1111111111",
+            "country_code": "US",
+            "area_code": "111",
+            "metadata": {
+                "region": "US",
+                "cost": 0.06,
+                "price_per_page": 0.03, 
+                "broadcast_label_id": 1
+            },
+            "fields": [
+                {
+                    "key": "firstName",
+                    "value": "New"
+                },
+                {
+                    "key": "lastName",
+                    "value": "Recipient"
+                }
+            ]
+        }
+    ],
+    "fields": [
+        {
+            "key": "firstName",
+            "cover_page_field": "to"
+        },
+        {
+            "key": "lastName",
+            "cover_page_field": null
+        }
+    ],
+    "deleted_records": [2, 3],
+    "total_cost": 0.12,
+    "invalid_nums_count": 0,
+    "is_repeat": false,
+    "is_favorite": true,
+    "recipients_optout_count": 0
+}
+
+
+Response :
+{
+    "data": {
+        "broadcast_id": 1
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

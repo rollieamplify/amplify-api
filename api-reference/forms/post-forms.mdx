@@ -1,0 +1,65 @@
+---
+title: "POST /forms"
+description: "Captured contract for POST /forms."
+api: "POST /forms"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms
+
+
+
+
+Description :
+
+
+
+
+-> Creates a new online form in draft or active status. 
+-> Supports creation from blank, template, template gallery, existing form duplicate, or AI source.
+-> Copies theme, fields, variables, and field rules when cloning from a source.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

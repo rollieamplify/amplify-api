@@ -1,0 +1,67 @@
+---
+title: "GET /reseller/plan_defaults"
+description: "Captured contract for GET /reseller/plan_defaults."
+api: "GET /reseller/plan_defaults"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/plan_defaults.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Reseller Plan Default API.
+
+Endpoint :
+
+GET - api/reseller/plan_defaults
+
+
+Response:
+
+{
+    "data": {
+        "account_id": 422,
+        "credit_allowed": 1000,
+        "credit_price": 0,
+        "is_auto_topup": 1,
+        "auto_topup_credit": 3,
+        "numbers": 10,
+        "numbers_price": 5,
+        "numbers_1": 2,
+        "numbers_1_price": 2.5,
+        "numbers_2": 3,
+        "numbers_2_price": 0,
+        "numbers_3": 0,
+        "numbers_3_price": 0,
+        "numbers_4": 0,
+        "numbers_4_price": 0,
+        "numbers_5": 0,
+        "numbers_5_price": 0,
+        "basic_license": 25,
+        "basic_license_price": 2.5,
+        "plus_license": 15,
+        "plus_license_price": 5,
+        "pro_license": 5,
+        "pro_license_price": 10,
+        "custom_email_domain": true,
+        "custom_email_domain_price": 15,
+        "lab_ai_license": true,
+        "lab_ai_license_price": 25,
+        "api_license": true,
+        "api_license_price": 50,
+        "broadcast_fax": false,
+        "broadcast_fax_price": 0,
+        "document_splitting": 1,
+        "document_splitting_price": "3.000"
+    },
+    "meta": {
+        "request_id": "bba6b090-f24d-4bc9-a4fc-d9ef2c1bfbf7"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,168 @@
+---
+title: "POST /onboarding/details"
+description: "Captured contract for POST /onboarding/details."
+api: "POST /onboarding/details"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /onboarding/details.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+POST: /api/onboarding/details
+
+
+Body:
+
+{
+    "goals": "resell_to_customers",
+    "estimated_clients": "6-50",
+    "services_to_resell": [
+        "fax",
+        "fax_ocr",
+        "ai_data_extraction",
+        "broadcast_fax",
+        "hipaa_cloud_storage",
+        "video_meetings",
+        "sms_messages",
+        "voice_calls",
+        "api",
+        "forms_intake",
+        "esign_documents"
+    ],
+    "planned_features": [
+        "replace_fax_machine_legacy_providers",
+        "send_broadcast_faxes",
+        "extract_and_structure_data_from_documents",
+        "improve_data_accuracy_and_completeness",
+        "send_documents_for_signature",
+        "collect_legally_binding_signatures",
+        "automate_fax_intake_and_routing_to_the_right_teams",
+        "automate_form_intake_workflows_and_routing",
+        "replace_paper_forms_and_manual_intake",
+        "collect_structured_data_from_patients_or_customers",
+        "make_and_receive_calls",
+        "send_and_receive_messages_sms"
+    ],
+   "usage_profile": {
+        "fax_handling": "Traditional fax machine",
+        "current_fax_provider": "mFax",
+        "estimated_fax_pages": "22",
+        "document_data_extraction": "Built into our EHR/software",
+        "monthly_ai_data_extraction": "23",
+        "esign_handling": "Built into our EHR/software",
+        "forms_intake_handling": "Online forms tool",
+        "calling_messaging_handling": "Traditional phone lines / PBX",
+        "calling_messaging_volume": "32",
+        "calling_messaging_minutes": "23",
+        "esign_usage_range": "233",
+        "form_submissions_range": "333"
+    },
+    "organization": {
+        "organization_name": "Acme Health",
+        "industry": "Healthcare",
+        "organization_size": "11_50",
+        "department": "34",
+        "tool_selection_role": "Final Decision Maker"
+    },
+    "profile": {
+        "first_name": "web",
+        "last_name": "web",
+        "email": "developer@example.com",
+        "job_title": 41,
+        "planned_start_timeline": "<1 Month",
+        "planned_usage_timeline": "Just once",
+        "improvements": [
+            "Go paperless"
+        ]
+    },
+    "hear_about_us": [
+        "search",
+        "referral"
+    ]
+}
+
+
+Response:
+
+{
+    "data": {
+        "id": 31,
+        "account_id": 422,
+        "goals": "resell_to_customers",
+        "estimated_clients": "",
+        "services_to_resell": [
+            "fax",
+            "fax_ocr",
+            "broadcast_fax",
+            "hipaa_cloud_storage",
+            "ai_data_extraction",
+            "video_meetings",
+            "sms_messages",
+            "voice_calls",
+            "api",
+            "forms_intake",
+            "esign_documents"
+        ],
+        "planned_features": [
+            "replace_fax_machine_legacy_providers",
+            "send_broadcast_faxes",
+            "extract_and_structure_data_from_documents",
+            "improve_data_accuracy_and_completeness",
+            "send_documents_for_signature",
+            "collect_legally_binding_signatures",
+            "automate_fax_intake_and_routing_to_the_right_teams",
+            "automate_form_intake_workflows_and_routing",
+            "replace_paper_forms_and_manual_intake",
+            "collect_structured_data_from_patients_or_customers",
+            "make_and_receive_calls",
+            "send_and_receive_messages_sms"
+        ],
+        "usage_profile": {
+            "fax_handling": "Traditional fax machine",
+            "current_fax_provider": "mFax",
+            "estimated_fax_pages": "22",
+            "document_data_extraction": "Built into our EHR/software",
+            "monthly_ai_data_extraction": "23",
+            "esign_handling": "Built into our EHR/software",
+            "forms_intake_handling": "Online forms tool",
+            "calling_messaging_handling": "Traditional phone lines / PBX",
+            "calling_messaging_volume": "32",
+            "calling_messaging_minutes": "23",
+            "esign_usage_range": "233",
+            "form_submissions_range": "333"
+        },
+        "organization": {
+            "organization_name": "Acme Health",
+            "industry": "Healthcare",
+            "organization_size": "11_50",
+            "department": "34",
+            "tool_selection_role": "Final Decision Maker"
+        },
+        "profile": {
+            "first_name": "web",
+            "last_name": "web",
+            "email": "developer@example.com",
+            "planned_start_timeline": "<1 Month",
+            "planned_usage_timeline": "Just once",
+            "job_title": 41,
+            "improvements": []
+        },
+        "hear_about_us": [
+            "search",
+            "referral"
+        ]
+    },
+    "meta": {
+        "request_id": "e64b54fe-befb-4fce-a22a-f7e297c03f89"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

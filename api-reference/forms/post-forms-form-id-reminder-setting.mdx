@@ -1,0 +1,63 @@
+---
+title: "POST /forms/{form_id}/reminder_setting"
+description: "Captured contract for POST /forms/{form_id}/reminder_setting."
+api: "POST /forms/{form_id}/reminder_setting"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{form_id}/reminder_setting.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{form_id}/reminder_setting
+
+
+
+
+Description :
+
+
+
+
+-> Creates or updates automatic reminder settings for a form. 
+-> Controls when the first reminder is sent to incomplete respondents and whether repeating reminders are enabled.
+
+ 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

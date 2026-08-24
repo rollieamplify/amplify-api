@@ -1,0 +1,50 @@
+---
+title: "POST /conversations/bulk_delete"
+description: "Captured contract for POST /conversations/bulk_delete."
+api: "POST /conversations/bulk_delete"
+public: true
+---
+
+This page documents the behavior captured for POST /conversations/bulk_delete in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/conversations/bulk_delete
+    
+    Body:
+    
+    {
+        "delete_all": true,
+        "ids": [4063]  // required if delete_all is false
+        "number_id": 1378,
+        "is_open": true,
+        "unread": true,
+        "start_date": "2026-05-27 18:30:00",
+        "end_date": "2026-05-28 18:29:59"
+    }
+    
+    
+    Error response:
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The ids field is required when delete all is false."
+        }
+    }
+    
+    
+    Response:
+    
+    image.png
+    
+    
+    NOTE: We have managed bulk delete using job.
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

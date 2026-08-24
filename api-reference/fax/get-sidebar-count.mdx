@@ -1,0 +1,69 @@
+---
+title: "GET /sidebar/count"
+description: "Captured contract for GET /sidebar/count."
+api: "GET /sidebar/count"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /sidebar/count.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Descriptions: This api used for getting all the sidebar counts. If you pass any types in the request, then api will retrun onlt those types' counts. If types blank, then all the sidebar counts will return in this api.
+
+Endpoint:
+
+POST: api/sidebar/count
+
+
+Request:
+
+{
+    "types": [
+        "dashboard",
+        "inbox",
+        "inbox_unread",
+        "my_assignments",
+        "pending_approval",
+        "draft_faxes",
+        "done_faxes",
+        "sent_faxes",
+        "all_faxes",
+        "fax_number",
+        "team_users",
+        "active_automations"
+    ],
+   "exclude_folder_faxes": true  // my_assignments
+}
+
+ By default, if types is null, counts for all available types are returned. 
+
+
+Response:
+
+{
+    "data": {
+        "dashboard": 167,
+        "inbox": 0,
+        "inbox_unread": 0,
+        "my_assignments": 0,
+        "pending_approval": 0,
+        "draft_faxes": 24,
+        "done_faxes": 97,
+        "sent_faxes": 68,
+        "all_faxes": 167,
+        "fax_number": 4,
+        "team_users": 0,
+        "active_automations": 0
+    },
+    "meta": {
+        "request_id": "62c536d7-1512-4431-9bea-7d8054ea4eba"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

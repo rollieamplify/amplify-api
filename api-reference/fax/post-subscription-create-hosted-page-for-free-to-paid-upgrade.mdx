@@ -1,0 +1,66 @@
+---
+title: "POST /subscription/create_hosted_page_for_free_to_paid_upgrade"
+description: "Captured contract for POST /subscription/create_hosted_page_for_free_to_paid_upgrade."
+api: "POST /subscription/create_hosted_page_for_free_to_paid_upgrade"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/create_hosted_page_for_free_to_paid_upgrade.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Hosted Page For Free to Paid Subscription
+
+Endpoint:
+
+POST: api/subscription/create_hosted_page_for_free_to_paid_upgrade
+
+
+Payload:
+
+{
+    "plan": "broadcast_business_plan",
+    "addons": [
+        {
+            "addon": "numbers",
+            "quantity": 10
+        },
+        {
+            "addon": "license_3",
+            "quantity": 2
+        },
+        {
+            "addon": "credits",
+            "quantity": 5000000
+        }
+    ],
+    "duration": "3_year"
+}
+
+
+Note :
+plan : in hippa_basic_plan, hippa_plus_plan, hippa_pro_plan, hippa_enterprise_plan, basic_plan, plus_plan, pro_plan, enterprise_plan, broadcast_business_plan, broadcast_healthcare_plan, api_business_plan, api_healthcare_plan,broadcast_free_plan, api_free_plan
+
+addon : in license_1,license_2,license_3,license_4,credits,numbers,api,broadcast,whitelabel,premier_support,custom_domain,labs_ai,unlimited_cloud_storage,document_splitting,numbers_1,numbers_2,numbers_3,numbers_4,numbers_5
+
+
+duration : in monthly, annual, 2_year, 3_year
+
+Response:
+
+{
+    "data": {
+        "hosted_page_url": "https://amplifylabs-test.chargebee.com/pages/v4/PT8BHvqyz9b8FGPHcdmNqXSHMvnSDnzDk/?signature=8cdl6WPhmcu3PmWE0X3OeFAkdwy6GtAHBQ",
+        "hosted_page_id": "PT8BHvqyz9b8FGPHcdmNqXSHMvnSDnzDk"
+    },
+    "meta": {
+        "request_id": "27f8889f-9003-4ca6-aba7-878b08ff90fb"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

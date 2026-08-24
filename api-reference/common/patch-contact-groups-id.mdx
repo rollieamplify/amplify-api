@@ -1,0 +1,82 @@
+---
+title: "PATCH /contact_groups/{id}"
+description: "Captured contract for PATCH /contact_groups/{id}."
+api: "PATCH /contact_groups/{id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /contact_groups/{id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint
+PATCH api/contact_groups/{id}
+
+
+
+
+Request Body
+
+Field
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+name
+
+	
+
+String
+
+	
+
+Yes
+
+	
+
+Updated contact group name
+
+
+
+
+Sample Request
+{
+    "name": "VIP Customers"
+}
+
+
+
+
+Success Response
+{
+    "data": {
+        "id": 152,
+        "name": "VIP Customers",
+        "created_by": 53,
+        "contacts": 12,
+        "created_at": "2026-02-23T05:25:53.000000Z",
+        "updated_at": "2026-02-23T06:15:18.000000Z"
+    },
+    "meta": {
+        "request_id": "2241b803-eabd-4c3f-b450-2ca5cc81c6ce"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

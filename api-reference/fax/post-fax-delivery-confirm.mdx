@@ -1,0 +1,53 @@
+---
+title: "POST /fax/delivery/confirm"
+description: "Captured contract for POST /fax/delivery/confirm."
+api: "POST /fax/delivery/confirm"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/delivery/confirm.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Fax Delivery Confirmation : 
+
+**Endpoint**
+POST : /api/fax/delivery/confirm
+
+**Description**
+Mark a fax as delivered/received and (depending on user notification settings) send a delivery confirmation email and/or push notification to the fax sender.
+
+**Request Body**
+{
+  "token": "",
+}
+
+**Success Response**
+- When confirmed by receiver:
+{
+  "data": {
+    "message": "Success",
+    "description": "We'll let John Doe know that you have received their fax"
+  },
+  "meta": {
+    "request_id": "2187a415-a7c5-4e1f-b4a6-3b339539b5ee"
+  }
+}
+
+- When confirmed by sender:
+{  
+  "data": {
+    "message": "Success",
+    "description": "Thank you for confirming!"
+  },
+  "meta": {
+    "request_id": "2187a415-a7c5-4e1f-b4a6-3b339539b5ee"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

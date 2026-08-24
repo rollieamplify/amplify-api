@@ -1,0 +1,35 @@
+---
+title: "POST /shared_fax/{fax_uuid}/download"
+description: "Captured contract for POST /shared_fax/{fax_uuid}/download."
+api: "POST /shared_fax/{fax_uuid}/download"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /shared_fax/{fax_uuid}/download.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Download Shared Fax
+Endpoint:
+POST: api/shared_fax/{fax_uuid}/download
+Body:
+{
+    "token": "mg9yTrX9GFUgQgHl5KJmH+EQL8rCYNTGfMDHUkvB0Iv1o6wrxRLMvz+HO3GjdYPrzIq2iZ10eE2t+C/c62/DKcuE8oUHXoJmNXNSLXnBJ5A="
+}
+
+Response:
+{
+    "data": {
+        "presigned_url": "https://example.com/signed-url
+    },
+    "meta": {
+        "request_id": "e5d8960c-579e-4b0a-9af2-0dcc128573f6"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

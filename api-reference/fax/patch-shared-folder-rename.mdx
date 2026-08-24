@@ -1,0 +1,57 @@
+---
+title: "PATCH /shared_folder/rename"
+description: "Captured contract for PATCH /shared_folder/rename."
+api: "PATCH /shared_folder/rename"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /shared_folder/rename.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Rename permissioned folders
+Endpoint:
+PATCH: /shared_folder/rename
+
+Request:
+{
+    "folder_id" : 892,
+    "folder_name" : "Renamed"
+}
+
+Response:
+{
+    "data": {
+        "message": "Folder renamed successfully"
+    },
+    "meta": {
+        "request_id": "313307bc-d1fc-4a5d-95bc-fe7281c7c08b"
+    }
+}
+
+
+
+Rename permissioned folders (If folder is not shared with user)
+Endpoint:
+PATCH: /shared_folder
+
+Request:
+{
+    "folder_id" : 891,
+    "folder_name" : "test"
+}
+
+Response:
+{
+    "error": {
+        "code": "UNAUTHORIZED",
+        "message": "You do not have access to this folder"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

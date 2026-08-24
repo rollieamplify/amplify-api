@@ -1,0 +1,58 @@
+---
+title: "GET /billing/cards"
+description: "Captured contract for GET /billing/cards."
+api: "GET /billing/cards"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /billing/cards.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Customer card details
+
+EndPoint:
+
+GET: api/billing/cards
+
+
+
+
+Response:
+
+{
+    "data": [
+        {
+            "payment_source_id": "SGpyNmVrYmFVWDRFWHZSdmpDbGt0bUx6N2xZMDhLRkJMWmV4akNIUTFvbz0=",
+            "brand": "mastercard",
+            "last_4_digits": "1546",
+            "expiry_month": "07",
+            "expiry_year": 2026,
+            "first_name": "chris",
+            "last_name": "rauschl",
+            "status": "valid",
+            "is_default": false
+        },
+        {
+            "payment_source_id": "ZDRUZnUrNFNiblFuUzNxTWdOMUw2dmdKOWlaTjlSYW5LTS90Zy9pZjVZUT0=",
+            "brand": "mastercard",
+            "last_4_digits": "3917",
+            "expiry_month": "12",
+            "expiry_year": 2029,
+            "first_name": "Jil",
+            "last_name": "R",
+            "status": "valid",
+            "is_default": false
+        }
+    ],
+    "meta": {
+        "request_id": "8781a33f-a9f6-438c-add0-da8cbdc0bab8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

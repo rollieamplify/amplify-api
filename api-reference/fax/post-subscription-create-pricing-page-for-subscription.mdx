@@ -1,0 +1,39 @@
+---
+title: "POST /subscription/create_pricing_page_for_subscription"
+description: "Captured contract for POST /subscription/create_pricing_page_for_subscription."
+api: "POST /subscription/create_pricing_page_for_subscription"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/create_pricing_page_for_subscription.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Pricing Page For Subscription
+
+Endpoint:
+POST : api/subscription/create_pricing_page_for_subscription
+
+Payload:
+{
+    "family_name" : "healthcare",
+    "redirect_url" : "www.abc.com"
+}
+
+Response:
+{
+    "data": {
+        "pricing_page_session_url": "https://hosted.atomicpricing.com/sites/01KKZY6XHHAPVWHEZQEFDPQ7G8/pricing-session/dfd4e67fc2b64b7eb33dae0467f31e40",
+        "pricing_page_session_id": "dfd4e67fc2b64b7eb33dae0467f31e40"
+    },
+    "meta": {
+        "request_id": "0410563b-7cfc-4dbb-9df8-1fd1426e3c31"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

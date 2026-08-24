@@ -1,0 +1,60 @@
+---
+title: "GET /reseller/client/{client_id}/fax-numbers"
+description: "Captured contract for GET /reseller/client/{client_id}/fax-numbers."
+api: "GET /reseller/client/{client_id}/fax-numbers"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/client/{client_id}/fax-numbers.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Retrieves the list of fax numbers assigned to a specific reseller client. The API returns fax number details, current status, and the total number of pages received for each number.
+
+
+
+
+Path Parameter: client_id — Unique ID of the reseller client.
+
+
+
+
+Query Parameters: cursor — Cursor value used for pagination. limit — Maximum number of fax numbers to return per request.
+
+
+
+
+Endpoint:
+
+GET: api/reseller/client/27968/fax-numbers?cursor=2&limit=1
+
+
+
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 2236,
+            "phone_number": "19382530703",
+            "status": "active",
+            "total_received_pages": 1,
+            "total_sent_pages": 13
+        }
+    ],
+    "meta": {
+        "total": 2,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 1,
+        "request_id": "7cbe5af4-429a-451d-8bb8-c57c0e0f56f8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,63 @@
+---
+title: "DELETE /:"
+description: "Captured contract for DELETE /:."
+api: "DELETE /:"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /:.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+DELETE : api/esign_templates/{esign_template_id}/variables/{template_variable_id}
+
+
+
+
+Description :
+
+
+
+
+Permanently deletes a single field from the template.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,37 @@
+---
+title: "GET /esign_documents/{document_id}/collaborators/request_access"
+description: "Captured contract for GET /esign_documents/{document_id}/collaborators/request_access."
+api: "GET /esign_documents/{document_id}/collaborators/request_access"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_documents/{document_id}/collaborators/request_access.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint: 
+GET : api/esign_documents/{document_id}/collaborators/request_access
+
+
+Response:
+{
+    "data": {
+        "message": "Access request sent successfully.",
+        "document_id": 4066,
+        "requested_by": "developer@example.com",
+        "requested_to": "developer@example.com"
+    },
+    "meta": {
+        "request_id": "9c75f654-3b9e-473b-ae08-270dc086c45f"
+    }
+}
+
+Note : -
+- This API will send the mail to the account's primary or main user asking for the permission .
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

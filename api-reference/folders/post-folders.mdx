@@ -1,0 +1,46 @@
+---
+title: "POST /folders"
+description: "Captured contract for POST /folders."
+api: "POST /folders"
+public: true
+---
+
+This internal review page records the behavior captured for POST /folders.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Folder
+Endpoint: POST /folders
+Description: Create a new folder under the current account.
+Request:
+{
+  "name": "Invoices",
+  "parent_id": null,
+  "sort_order": 0,
+  "is_shared": false
+}
+Response:
+{
+  "data": {
+    "id": 25,
+    "parent_id": null,
+    "name": "Invoices",
+    "slug": "invoices",
+    "sort_order": 0,
+    "is_shared": false,
+    "shared_with_me": false,
+    "shared": [],
+    "created_at": 1710002000,
+    "has_child": false
+  },
+  "meta": {
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

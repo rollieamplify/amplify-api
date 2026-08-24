@@ -1,0 +1,70 @@
+---
+title: "POST /fax/download"
+description: "Captured contract for POST /fax/download."
+api: "POST /fax/download"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/download.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+POST: api/fax/download
+
+
+Body:
+
+{
+    "fax_uuid": "01KT6811HB532M6GRWX800YW8Z", // single fax
+    "fax_uuids": ["01KT3NJ60DBMKHS97JMB89CY7H","01KT6811HB532M6GRWX800YW8Z"], // for multiple
+    "format": "pdf", // pdf,tiff,tif,jpg,jpeg,txt,json
+    "is_broadcast": false,
+    "page_selection": "custom", // all,first,custom,none | only if format is pdf,tiff,tif,jpg or jpeg
+    "start_page": 5, // only if page_selection = custom
+    "end_page": 5, // only if page_selection = custom
+    "ocr": true, // only if format = pdf
+    "is_include_receipt": false // only if format = pdf
+    "is_merge_pdfs": false, // only if format = pdf & is_include_receipt=true 
+}
+
+
+
+
+Response: Single Fax
+
+{
+    "data": {
+        "format": "pdf",
+        "presigned_url": "",
+        "with_ocr": true,
+        "is_searchable_pdf": false,
+        "file_name": "06-03-2026 01-31-34 PM-1 (659) 216-1615"
+    },
+    "meta": {
+        "request_id": "a4f93bf1-8712-45a4-bdc7-cfc41324a6bf"
+    }
+}
+
+
+
+
+Response: Multiple Fax
+
+{
+    "data": {
+        "export_id": 3671,
+        "message": "Zip export has been queued. Check export history or use export_id to get the download link when processing is complete."
+    },
+    "meta": {
+        "request_id": "4ab0f1d8-8763-4976-bb12-f685bd01da2a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

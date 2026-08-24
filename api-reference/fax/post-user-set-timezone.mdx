@@ -1,0 +1,34 @@
+---
+title: "POST /user/set-timezone"
+description: "Captured contract for POST /user/set-timezone."
+api: "POST /user/set-timezone"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /user/set-timezone.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint :
+POST - api/user/set-timezone
+
+
+Body:
+{
+    "time_zone": "Pacific/Niue"
+}
+
+Response:
+{
+    "data": "Timezone updated successfully",
+    "meta": {
+        "request_id": "bb963cca-0d64-42cd-8434-4d7e4df7ef4a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

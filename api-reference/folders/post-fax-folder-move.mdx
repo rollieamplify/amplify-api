@@ -1,0 +1,40 @@
+---
+title: "POST /fax/folder/move"
+description: "Captured contract for POST /fax/folder/move."
+api: "POST /fax/folder/move"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /fax/folder/move.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Move Fax To Folder
+
+Endpoint
+POST : api/fax/folder/move
+
+Request
+{
+    "folder_id" : 588,
+    "fax_uuids" : ["01KEH58QNNQM47SH64C1172AB7","01KEEWG4A9WNW8BF3YJ0ZB0R9S","01KEEWFH1DFTDJ48X3NT3BWTJ7"]
+}
+
+Request
+
+
+{
+    "data": {
+        "message": "Document moved successfully."
+    },
+    "meta": {
+        "request_id": "21b65821-e7ca-4d64-a433-4b828496faca"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

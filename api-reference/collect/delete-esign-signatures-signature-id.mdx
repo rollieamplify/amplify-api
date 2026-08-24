@@ -1,0 +1,63 @@
+---
+title: "DELETE /esign_signatures/{signature_id}"
+description: "Captured contract for DELETE /esign_signatures/{signature_id}."
+api: "DELETE /esign_signatures/{signature_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /esign_signatures/{signature_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+DELETE : api/esign_signatures/{signature_id}
+
+
+
+
+Description :
+
+
+
+
+-> Deletes a saved signature from the user's library and removes the associated file from S3.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

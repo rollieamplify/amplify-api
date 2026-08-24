@@ -1,0 +1,45 @@
+---
+title: "POST /new_fax/annotate_attachment"
+description: "Captured contract for POST /new_fax/annotate_attachment."
+api: "POST /new_fax/annotate_attachment"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /new_fax/annotate_attachment.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+To Annotate the Attachment via New Fax screen
+
+Endpoint:
+POST: api/new_fax/annotate_attachment
+
+Body:
+{
+    "local_fax_uuid": "01KDN2896YTGM3MXAV2RAN7VGY",
+    "pages": 2,
+    "file": "binary file data"
+}
+
+
+Response:
+{
+    "data": {
+        "local_fax_uuid": "01KDN2896YTGM3MXAV2RAN7VGY",
+        "attachment_uuid": "XXXXXX.pdf",
+        "presigned_url": "XXXXXXXXXXXXXXXXXX",
+        "pages": 2,
+        "file_size": 6565,
+        "attachment_id": 12121
+    },
+    "meta": {
+        "request_id": "5e34a980-4669-441e-8abb-6f7227782cc3"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

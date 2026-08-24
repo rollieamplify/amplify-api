@@ -1,0 +1,51 @@
+---
+title: "POST /billing/invoice/download"
+description: "Captured contract for POST /billing/invoice/download."
+api: "POST /billing/invoice/download"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing/invoice/download.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Download the invoice as PDF
+
+
+
+
+EndPoint:
+
+POST: api/billing/invoice/download
+
+
+
+
+Payload:
+
+{
+    "invoice_id":"38632"
+}
+
+invoice_id: required
+
+
+
+
+Response:
+
+{
+    "data": {
+        "download_url": "https://example.com/signed-url
+    },
+    "meta": {
+        "request_id": "5acdd76e-e889-431f-8a6f-1ffca9357298"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

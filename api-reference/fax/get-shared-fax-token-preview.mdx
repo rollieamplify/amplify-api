@@ -1,0 +1,33 @@
+---
+title: "GET /shared_fax/{token}/preview"
+description: "Captured contract for GET /shared_fax/{token}/preview."
+api: "GET /shared_fax/{token}/preview"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /shared_fax/{token}/preview.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+View Shared Fax
+Endpoint:
+GET: api/shared_fax/MDFLRFc4MzRTSlc5SkRaQ1JWU0QxNTBRNlE6OndlYjM1K293bmVyQG1vb250ZWNobm9sYWJzLmNvbTo6MWZheHtzPSVXczFDUnQsdnRHd3I5Yzg%3D/preview
+Response:
+{
+    "data": {
+        "permission": "viewer",
+        "viewer_type": "all",
+        "start_page": 1,
+        "fax_uuid": "01KDW834SJW9JDZCRVSD150Q6Q"
+    },
+    "meta": {
+        "request_id": "463dbc5d-1d2e-4195-8468-4f5a975eb1b8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

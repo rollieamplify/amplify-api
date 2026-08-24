@@ -1,0 +1,35 @@
+---
+title: "POST /billing_contact/delete"
+description: "Captured contract for POST /billing_contact/delete."
+api: "POST /billing_contact/delete"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing_contact/delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+NOTE: Delete Billing Contact
+
+Endpoint:
+POST : api/billing_contact/delete
+
+Request:
+{
+    "contact_id" : "contact_AzyofvVE1QhEPGcR"
+}
+
+Response:
+{
+    "data": "Contact deleted successfully.",
+    "meta": {
+        "request_id": "ae125d9a-de69-44f0-a304-3b8a01330d50"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

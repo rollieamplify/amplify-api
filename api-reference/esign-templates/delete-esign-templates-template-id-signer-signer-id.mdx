@@ -1,0 +1,57 @@
+---
+title: "DELETE /esign_templates/{template_id}/signer/{signer_id}"
+description: "Captured contract for DELETE /esign_templates/{template_id}/signer/{signer_id}."
+api: "DELETE /esign_templates/{template_id}/signer/{signer_id}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /esign_templates/{template_id}/signer/{signer_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+DELETE : api/esign_templates/{template_id}/signer/{signer_id}
+
+
+Description :
+
+
+
+
+Deletes a signer role from an eSign template. Used when removing a recipient role from a template before sending documents from it.
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Query Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

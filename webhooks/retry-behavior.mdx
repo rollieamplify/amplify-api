@@ -1,0 +1,17 @@
+---
+title: "Webhook retry behavior"
+description: "Design webhook consumers for reliable event processing."
+---
+
+The public v1 contract does not yet define webhook retry timing, retry limits, or timeout behavior.
+
+Build your consumer defensively:
+
+- Return a `2xx` response as soon as the event is durably accepted.
+- Move longer work to an asynchronous queue.
+- Make event processing idempotent.
+- Store processed `event_id` values so duplicate deliveries are safe.
+- Do not rely on events arriving in order.
+- Reconcile important resource state through the API.
+
+This page will be updated when the delivery and retry policy is finalized.

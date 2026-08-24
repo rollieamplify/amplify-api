@@ -1,0 +1,67 @@
+---
+title: "POST /messages/search/results"
+description: "Captured contract for POST /messages/search/results."
+api: "POST /messages/search/results"
+public: true
+---
+
+This page documents the behavior captured for POST /messages/search/results in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/messages/search/results
+    
+    
+    
+    
+    Body:
+    
+    {
+        "conversation_id": 5086,
+        "reference_id": 1500,
+        "type": "call",
+        "limit": 30
+    }
+    
+    
+    Validation Error:
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The reference id field is required."
+        }
+    }
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The selected type is invalid."
+        }
+    }
+    
+    
+    Response:
+    
+    {
+        "data": {
+            "conversation_id": 5086,
+            "type": "message",
+            "reference_id": 30029,
+            "cursor": 2,
+            "limit": 30,
+            "position": 45,
+            "index_in_page": 14
+        },
+        "meta": {
+            "request_id": "b5624e84-42e1-4cd1-8b62-4c21196a9357"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

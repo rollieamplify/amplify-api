@@ -1,0 +1,22 @@
+---
+title: "GET /team-user/request_permission"
+description: "Captured contract for GET /team-user/request_permission."
+api: "GET /team-user/request_permission"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /team-user/request_permission.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Grant Permission
+
+EndPoint
+GET: api/team-user/request_permission?permission_key=email_to_fax&permission_text=Email+to+Fax
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

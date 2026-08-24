@@ -1,0 +1,37 @@
+---
+title: "POST /faxes/merge_document"
+description: "Captured contract for POST /faxes/merge_document."
+api: "POST /faxes/merge_document"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/merge_document.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Merge documents API.
+
+Endpoint:
+POST: /api/faxes/merge_document
+
+Body:
+{
+    "fax_uuids": ["01KF597WVHPEE79B9SNWE0SZY9","01KF58ETWAAD164BVQBEN8SJ6G"]
+}
+
+Response:
+{
+    "data": {
+        "url": "https://convert.ifaxapp.com/convert/output/final_merged_2d30322d-421c-497d-98b8-87b07a4df057.pdf/"
+    },
+    "meta": {
+        "request_id": "6bd014a8-7b8b-47da-9589-4b3b6e98f6dc"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

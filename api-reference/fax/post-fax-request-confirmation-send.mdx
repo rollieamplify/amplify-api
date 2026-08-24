@@ -1,0 +1,42 @@
+---
+title: "POST /fax/request_confirmation/send"
+description: "Captured contract for POST /fax/request_confirmation/send."
+api: "POST /fax/request_confirmation/send"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/request_confirmation/send.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Send Request Confirmation of fax.
+Endpoint:
+POST: fax/request_confirmation/send
+
+Request:
+{
+    "emails" : [
+        "developer@example.com"
+    ],
+    "fax_uuid" : "01KFA9J4P41QC0CCMK8D2DAYN9",
+    "fax_status" : "Failed",
+    "include_fax_link" : 3
+}
+
+Response:
+{
+    "data": {
+        "message": "Success",
+        "description": "Email sent successfully."
+    },
+    "meta": {
+        "request_id": "05bf756c-f76a-4b1c-8486-fb625b45942d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

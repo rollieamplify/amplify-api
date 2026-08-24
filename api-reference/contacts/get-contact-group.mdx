@@ -1,0 +1,12 @@
+---
+title: "Get a contact group"
+description: "Retrieve one contact group by ID."
+api: "GET /contact_groups/{contact_group_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_group_id" type="integer" required>Contact group ID.</ParamField>
+
+Returns the group name, creator, contact count, and timestamps. Returns `404` when the group does not exist.
+

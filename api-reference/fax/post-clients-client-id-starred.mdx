@@ -1,0 +1,79 @@
+---
+title: "POST /clients/{client_id}/starred"
+description: "Captured contract for POST /clients/{client_id}/starred."
+api: "POST /clients/{client_id}/starred"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /clients/{client_id}/starred.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Toggle Starred Client API
+
+Endpoint
+POST: api/clients/{client_id}/starred
+
+
+
+
+Request Body
+
+This endpoint does not require a request body.
+
+
+
+
+Path Parameters
+
+Parameter
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+client_id
+
+	
+
+integer
+
+	
+
+Yes
+
+	
+
+The unique ID of the client to mark as starred.
+
+
+
+
+Success Response:
+{
+    "data": {
+        "client_id": 123,
+        "is_starred": true
+    },
+    "meta": {
+        "request_id": "75a5e94c-fecc-4cef-b6ff-b63e1c02997b"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

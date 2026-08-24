@@ -1,0 +1,58 @@
+---
+title: "GET /folders/starred"
+description: "Captured contract for GET /folders/starred."
+api: "GET /folders/starred"
+public: true
+---
+
+This internal review page records the behavior captured for GET /folders/starred.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Descriptions:
+This API is used to get the list of starred folders from the user's account.
+
+Endpoint:
+GET: /api/folders/starred?cursor=4&limit=20
+
+Response:
+{
+    "data": [
+        {
+            "id": 989,
+            "parent_id": null,
+            "name": "Sub user folder",
+            "slug": "sub-user-folder",
+            "sort_order": 0,
+            "is_shared": false,
+            "shared": [
+                {
+                    "id": 53,
+                    "first_name": "web",
+                    "last_name": "twentynew",
+                    "email": "developer@example.com"
+                }
+            ]
+            "created_at": 1770020365,
+            "has_child": false,
+            "count": 0,
+            "owner_name": "Taylor Swift",
+            "file_size": "",
+            "updated_at": 1770020365
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "5697f774-f494-449c-9594-57469db78626"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

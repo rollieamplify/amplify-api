@@ -1,0 +1,37 @@
+---
+title: "POST /socket/connect"
+description: "Captured contract for POST /socket/connect."
+api: "POST /socket/connect"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /socket/connect.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Note: This api is used to connect the socket for the users.
+
+EndPoint:
+POST: api/socket/connect
+
+Body:
+{
+    "socket_id" : "LKJHKL65466456"
+}
+
+Response:
+{
+    "data": {
+        "message": "Socket connected"
+    },
+    "meta": {
+        "request_id": "390d89d1-883b-49dd-a81b-a557a0661441"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

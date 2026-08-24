@@ -1,0 +1,44 @@
+---
+title: "POST /subscription/action-status"
+description: "Captured contract for POST /subscription/action-status."
+api: "POST /subscription/action-status"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/action-status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Check Subscription Last Action Status
+
+Endpoint:
+POST : api/subscription/action-status
+
+Payload:
+{
+   "subscription_id": "AzyjngVDkIFtf5NrX",
+}
+
+
+
+Response:
+{
+    "data": {
+        "last_action": "create_request",
+        "action_status": "completed",
+        "user_email": "developer@example.com",
+        "token": "OGc0RUxlM09qT3BwQ0NLd3lWUVBRQm94V1MzMFZHOHJCalpqSDZPemtWTjFMRkNzUTU%3D"
+    },
+    "meta": {
+        "request_id": "5e103e7f-965f-4dc3-bd0f-ed71dd9ae352"
+    }
+}
+
+Note : token will be there in response only if user is unauthenticated, which need to use to reset password.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

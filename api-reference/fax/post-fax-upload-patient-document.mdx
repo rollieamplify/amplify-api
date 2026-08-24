@@ -1,0 +1,52 @@
+---
+title: "POST /fax/upload/patient_document"
+description: "Captured contract for POST /fax/upload/patient_document."
+api: "POST /fax/upload/patient_document"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/upload/patient_document.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/fax/upload/patient_document
+
+Request:
+{
+    "fax_uuid" : "01KKBKKRNSEKYWB5Z6V7BDABM3",
+    "contact_id" : "5042",
+    "is_broadcast" : true, // default: false
+    "document_date" : "2026-03-19", // nullable
+    "document_type" : "medical_records", 
+    "document_notes" : "test note" // nullable
+}
+
+Document Type: 
+     'insurance_card_front',
+     'insurance_card_back',
+     'photo_id',
+     'referral',
+     'prior_authorization',
+     'medical_records',
+     'lab_results',
+     'consent_forms',
+     'other'
+
+
+
+
+Response:
+{
+    "data": "Fax attached to contact successfully",
+    "meta": {
+        "request_id": "26a575ff-5796-43ad-812a-641f011e78e4"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

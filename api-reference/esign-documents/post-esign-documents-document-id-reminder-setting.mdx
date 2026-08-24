@@ -1,0 +1,61 @@
+---
+title: "POST /esign_documents/{document_id}/reminder_setting"
+description: "Captured contract for POST /esign_documents/{document_id}/reminder_setting."
+api: "POST /esign_documents/{document_id}/reminder_setting"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_documents/{document_id}/reminder_setting.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/esign_documents/{document_id}/reminder_setting
+
+
+
+
+Description :
+
+-> Creates automatic reminder settings for a document. 
+-> Settings control when the first reminder is sent and whether repeating reminders are enabled.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

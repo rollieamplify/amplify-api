@@ -1,0 +1,77 @@
+---
+title: "POST /fax/pending-approvals"
+description: "Captured contract for POST /fax/pending-approvals."
+api: "POST /fax/pending-approvals"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/pending-approvals.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Get Pending Approval Faxes API
+
+
+Endpoint :
+POST: /api/fax/pending-approvals
+Filters and pagination are sent in the **request body** (not query string) so that array parameters like `sent_by_user_ids` can be sent correctly.
+
+
+Request :
+{
+    "cursor": 1,
+    "limit": 20,
+    "start_date": "2024-01-01 00:00:00",
+    "end_date": "2024-12-31 23:59:59",
+    "sort_by": "latest",
+    "sent_by_user_ids": [1, 2, 3]
+}
+
+
+Response :
+{
+    "data": [
+        {
+            "id": 123,
+            "fax_uuid": "01HZ1234567890ABCDEFGHIJK",
+            "local_fax_uuid": "local-uuid-123",
+            "from_number": "+19073131400",
+            "fax_number": "19073131401",
+            "formatted_fax_number": "+19073131401",
+            "fax_pages": "5",
+            "fax_id": "local-uuid-123",
+            "fax_time_stamp": "1704067200",
+            "subject": "Test Fax Subject",
+            "is_broadcast": 0,
+            "contact_from_first_name": "John",
+            "contact_from_last_name": "Doe",
+            "contact_first_name": "Jane",
+            "contact_last_name": "Smith",
+            "full_name": "Jane Smith",
+            "email": "jane@example.com",
+            "contact_names": [],
+            "from_email": "john@example.com",
+            "from_full_name": "John Doe",
+            "from_company_name": "",
+            "title": "Fax 19073131401",
+            "thumbnail_image": "https://example.com/thumbnail.jpg",
+            "created_at": "2024-01-01 12:00:00",
+            "created_by": 1,
+            "created_by_email": "user@example.com"
+        }
+    ],
+    "meta": {
+       "total": 5,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

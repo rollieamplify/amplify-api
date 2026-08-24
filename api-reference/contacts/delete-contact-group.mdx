@@ -1,0 +1,12 @@
+---
+title: "Delete a contact group"
+description: "Permanently delete a contact group."
+api: "DELETE /contact_groups/{contact_group_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_group_id" type="integer" required>Contact group ID.</ParamField>
+
+Returns `204 No Content` after successful deletion.
+

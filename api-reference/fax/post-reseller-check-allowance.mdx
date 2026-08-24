@@ -1,0 +1,240 @@
+---
+title: "POST /reseller/check-allowance"
+description: "Captured contract for POST /reseller/check-allowance."
+api: "POST /reseller/check-allowance"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/check-allowance.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Check Client Allowance API
+Endpoint
+
+
+
+
+POST /api/reseller/check-allowance
+
+
+
+
+Description
+
+
+
+
+Checks whether the reseller has sufficient allowance to assign a specific resource to a client.
+
+
+
+
+The API supports checking credit and license-based resources.
+
+
+
+
+Request Body
+{
+    "client_id": 123,
+    "resource_type": "basic_license",
+    "resource_assign": 1
+}
+Request Parameters
+
+Parameter
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+client_id
+
+	
+
+Integer
+
+	
+
+No
+
+	
+
+The ID of the client. If provided, the existing client allowance is considered when calculating the required allowance.
+
+
+
+
+resource_type
+
+	
+
+String
+
+	
+
+Yes
+
+	
+
+The type of resource to assign.
+
+
+
+
+resource_assign
+
+	
+
+Integer / Boolean
+
+	
+
+Yes
+
+	
+
+The amount or value to assign. Integers must be greater than or equal to 0.
+
+Supported Resource Types
+credit_allowed
+fax_number
+basic_license
+plus_license
+pro_license
+custom_email_domain
+lab_ai_license
+api_license
+broadcast_fax
+document_splitting
+Resource Assign Examples
+
+
+
+
+For numeric resources:
+
+
+
+
+{
+    "client_id": 123,
+    "resource_type": "basic_license",
+    "resource_assign": 2
+}
+
+
+
+
+For boolean resources:
+
+
+
+
+{
+    "client_id": 123,
+    "resource_type": "custom_email_domain",
+    "resource_assign": true
+}
+Success Response
+
+
+
+
+HTTP Status: 200 OK
+
+
+
+
+{
+    "data": {
+        "success": true,
+        "message": "basic license is available."
+    },
+    "meta": {
+        "request_id": "2cfb4c85-8836-4d41-8c03-be17204aa49a"
+    }
+}
+Error Response — Invalid Resource Type
+
+
+
+
+HTTP Status: 400 Bad Request
+
+
+
+
+{
+    "data": {
+        "success": false,
+        "message": "Invalid resource type."
+    }
+}
+Error Response — Client Not Found
+
+
+
+
+HTTP Status: 404 Not Found
+
+
+
+
+{
+    "data": {
+        "success": false,
+        "message": "Client not found."
+    }
+}
+Error Response — Insufficient Allowance
+
+
+
+
+HTTP Status: 400 Bad Request
+
+
+
+
+{
+    "data": {
+        "success": false,
+        "message": "You don't have enough allowance to allocate to the client."
+    }
+}
+Validation Error
+
+
+
+
+HTTP Status: 422 Unprocessable Entity
+
+
+
+
+{
+    "data": {
+        "success": false,
+        "message": "The resource_assign field must be an integer greater than or equal to 0 or boolean."
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

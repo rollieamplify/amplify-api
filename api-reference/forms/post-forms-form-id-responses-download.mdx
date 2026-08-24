@@ -1,0 +1,64 @@
+---
+title: "POST /forms/{form_id}/responses/download"
+description: "Captured contract for POST /forms/{form_id}/responses/download."
+api: "POST /forms/{form_id}/responses/download"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{form_id}/responses/download.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{form_id}/responses/download
+
+
+
+
+Description :
+
+-> Downloads one or more completed form response PDFs as base64-encoded content. 
+-> When a single response ID is passed, returns one PDF file.  
+-> When multiple IDs are passed, returns a ZIP archive containing each completed response PDF. 
+-> Requires sub-user permission DOWNLOAD_FORM_RESPONSES. 
+-> Only the form owner/collaborator with access to the form can download.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

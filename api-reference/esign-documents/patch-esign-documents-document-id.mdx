@@ -1,0 +1,58 @@
+---
+title: "PATCH /esign_documents/{document_id}"
+description: "Captured contract for PATCH /esign_documents/{document_id}."
+api: "PATCH /esign_documents/{document_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /esign_documents/{document_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+PATCH : api/esign_documents/{document_id}
+
+
+
+
+Description :
+
+-> Updates document name, status, page count, config options (due date, expiry, message, notify emails, download/attach settings), signing order flag, and fields-placed flag. 
+-> Supports reverting a sent document to draft.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

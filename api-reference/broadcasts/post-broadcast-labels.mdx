@@ -1,0 +1,146 @@
+---
+title: "POST /broadcast_labels"
+description: "Captured contract for POST /broadcast_labels."
+api: "POST /broadcast_labels"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast_labels.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Broadcast Label
+
+
+
+
+Endpoint:
+POST /api/broadcast_labels
+
+
+
+
+Description:
+Creates a new broadcast label in the authenticated account.
+
+
+
+
+Body (JSON):
+
+
+
+
+Field
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+name
+
+	
+
+string
+
+	
+
+Yes
+
+	
+
+Label name (max 50)
+
+
+
+
+text_color
+
+	
+
+string
+
+	
+
+No
+
+	
+
+Hex color (#RGB, #RRGGBB, or #RRGGBBAA)
+
+
+
+
+background_color
+
+	
+
+string
+
+	
+
+No
+
+	
+
+Hex color (#RGB, #RRGGBB, or #RRGGBBAA)
+
+
+
+
+Request Example:
+
+
+
+
+{
+  "name": "VIP Clinics",
+  "text_color": "#FFFFFF",
+  "background_color": "#9432FD"
+}
+
+
+
+
+Response Example (201):
+
+
+
+
+{
+    "data": {
+    "id": 5,
+    "name": "VIP Clinics",
+    "text_color": "#FFFFFF",
+    "background_color": "#9432FD",
+    "created_by": 45,
+    "created_at": "2026-07-28T10:00:00.000000Z",
+    "updated_at": "2026-07-28T10:00:00.000000Z"
+  }
+}
+
+
+
+
+Notes:
+
+Duplicate name in same account → 409 BROADCAST_LABEL_EXISTS
+created_by is set to the authenticated user id
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

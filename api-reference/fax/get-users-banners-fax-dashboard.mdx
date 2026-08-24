@@ -1,0 +1,64 @@
+---
+title: "GET /users/banners/fax/dashboard"
+description: "Captured contract for GET /users/banners/fax/dashboard."
+api: "GET /users/banners/fax/dashboard"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /users/banners/fax/dashboard.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Banners API
+
+Endpoint :
+POST: api/users/banners/fax/dashboard
+
+Response:
+{
+    "data": [
+        {
+            "id": 4033,
+            "product": "fax",
+            "type": "dashboard",
+            "status": "new",
+            "is_visible": true,
+            "icon": null,
+            "content": "Purchase or port fax numbers to start receiving faxes.",
+            "button_label": "Setup Fax Numbers",
+            "button_action": "/fax/setup"
+        },
+        {
+            "id": 4225,
+            "product": "fax",
+            "type": "dashboard",
+            "status": "new",
+            "is_visible": true,
+            "icon": null,
+            "content": "Invite team members, assign numbers and permissions.",
+            "button_label": "Invite Your Team",
+            "button_action": "/team/invite"
+        },
+        {
+            "id": 4417,
+            "product": "fax",
+            "type": "dashboard",
+            "status": "new",
+            "is_visible": true,
+            "icon": null,
+            "content": "Book a training session to customize your account and setup workflows.",
+            "button_label": "Schedule Training",
+            "button_action": "/training/schedule"
+        }
+    ],
+    "meta": {
+        "request_id": "0cdc56e0-6fa7-402a-9a4b-b370bac520dd"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

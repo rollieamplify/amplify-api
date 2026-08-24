@@ -1,0 +1,31 @@
+---
+title: "GET /email_to_fax/custom_domain/1/check_verification"
+description: "Captured contract for GET /email_to_fax/custom_domain/1/check_verification."
+api: "GET /email_to_fax/custom_domain/1/check_verification"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /email_to_fax/custom_domain/1/check_verification.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+-  Check Custom Domain Verification
+
+Endpoint:
+GET:  /api/email_to_fax/custom_domain/1/check_verification
+Response:
+{
+  "data": {
+    "is_verified": false
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440000"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

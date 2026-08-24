@@ -1,0 +1,35 @@
+---
+title: "POST /faxes/view/status"
+description: "Captured contract for POST /faxes/view/status."
+api: "POST /faxes/view/status"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/view/status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Mark fax as read or unread
+Endpoint:
+POST: /faxes/view/status
+
+Request:
+{
+    "fax_uuid" : "01KDMK3JENK5GW53DSGSFHH2B7",
+    "read_status" : "read"
+}
+
+Response:
+{
+    "data": "Marked as read",
+    "meta": {
+        "request_id": "0fa48c9d-0f30-4927-a784-d29aa541e9e5"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

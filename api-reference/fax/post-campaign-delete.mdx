@@ -1,0 +1,47 @@
+---
+title: "POST /campaign/delete"
+description: "Captured contract for POST /campaign/delete."
+api: "POST /campaign/delete"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /campaign/delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Delete Campaign(s) API
+
+
+Description :
+**Soft-deletes one or more campaigns and their related faxes/broadcast faxes.**
+
+
+Endpoint : 
+POST: api/campaign/delete
+
+
+Request Body :
+{
+  "campaign_ids": [21, 22, 23]
+}
+
+
+- **campaign_ids** (array\<int> required): Campaign IDs to delete.
+
+
+Success Response (200) : 
+{
+  "data": {
+    "message": "Campaign(s) deleted successfully"
+  },
+  "meta": {
+    "request_id": "c4b8b3c2-915f-4ce7-a5d3-6dbb86d1f6c1"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

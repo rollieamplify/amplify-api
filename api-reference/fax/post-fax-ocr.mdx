@@ -1,0 +1,38 @@
+---
+title: "POST /fax/ocr"
+description: "Captured contract for POST /fax/ocr."
+api: "POST /fax/ocr"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/ocr.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Store NLP Request Data.
+
+EndPoint
+POST : api/fax/ocr
+
+Request
+{
+    "uuid" : "01KDWM7PP6BNM5W387F6RXDZH7",
+    "is_broadcast" : false,
+    "request_from" : 1,
+    "auto_OCR_pages" : 1
+}
+
+Response
+{
+    "data": "Fax OCR request submitted successfully.",
+    "meta": {
+        "request_id": "4eceb0ca-7915-4f8f-9e7e-2fd88ca0486b"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

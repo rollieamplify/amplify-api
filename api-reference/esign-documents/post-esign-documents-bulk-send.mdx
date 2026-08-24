@@ -1,0 +1,65 @@
+---
+title: "POST /esign_documents/bulk_send"
+description: "Captured contract for POST /esign_documents/bulk_send."
+api: "POST /esign_documents/bulk_send"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_documents/bulk_send.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/esign_documents/bulk_send
+
+
+
+
+Description :
+
+
+
+
+-> Creates and sends multiple documents from a single template in one request. 
+-> Each item in bulk_requests becomes a separate document with its own recipients. 
+-> Deducts credits per document, applies a bulk label/folder, copies template fields, theme, variables, and sends emails.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

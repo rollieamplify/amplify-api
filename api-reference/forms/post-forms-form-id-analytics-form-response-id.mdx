@@ -1,0 +1,63 @@
+---
+title: "POST /forms/{form_id}/analytics/{form_response_id}"
+description: "Captured contract for POST /forms/{form_id}/analytics/{form_response_id}."
+api: "POST /forms/{form_id}/analytics/{form_response_id}"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{form_id}/analytics/{form_response_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{form_id}/analytics/{form_response_id}
+
+
+
+
+Description :
+
+-> Records per-page time spent by a form respondent while filling out the form.  
+-> Called from the public form fill experience.
+-> On the first call for a response, clones the form's base fields into response-specific field records. 
+-> Time is accumulated (added) on repeated calls for the same page.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,56 @@
+---
+title: "POST /esign_templates/{template_id}/collaborators/invite"
+description: "Captured contract for POST /esign_templates/{template_id}/collaborators/invite."
+api: "POST /esign_templates/{template_id}/collaborators/invite"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_templates/{template_id}/collaborators/invite.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint: 
+POST: api/esign_templates/{template_id}/collaborators/invite
+
+Body :
+{
+   "emails": [
+        "developer@example.com"
+    ], (Required)
+    "access_type":"viewer" (Optional)
+}
+
+
+
+Response:
+{
+    "data": [
+        {
+            "id": 3,
+            "template_id": 2298,
+            "user_id": 1167,
+            "email": "developer@example.com",
+            "name": "",
+            "access_type": "viewer",
+            "created_by": 55,
+            "created_at": "2026-03-18T12:11:37.000000Z",
+            "updated_at": "2026-03-18T12:11:37.000000Z"
+        }
+    ],
+    "meta": {
+        "request_id": "asdf125113-56f2-4276-ac15-sd132132"
+    }
+}
+
+Note : -
+- `emails` must be a non-empty array
+- each email must be valid
+- `access_type` accepts `viewer` or `editor`
+- maximum collaborators per document is `5`
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

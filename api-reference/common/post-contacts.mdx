@@ -1,0 +1,81 @@
+---
+title: "POST /contacts"
+description: "Captured contract for POST /contacts."
+api: "POST /contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create contact API:
+Endpoint:
+POST: api/contacts
+
+Body:
+{
+    "first_name": "",
+    "last_name": "",
+    "is_organization": false,
+    "organization_name": "",
+    "position": "",
+    "email": "callweb+245@test.com",
+    "phone_number": "dsffg",
+    "work_number": "",
+    "fax_number": "",
+    "address": "",
+    "is_favorite": false,
+    "is_blocked": false,
+    "fields": []
+}
+
+Validation error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": [
+        "The email must be a valid email address.",
+        "The phone_number is invalid.",
+        "The first name field is required when is organization is false."
+    ]
+}
+Response:
+{
+    "data": {
+        "id": 765,
+        "is_organization": false,
+        "first_name": "dsfgfdgdg",
+        "last_name": "",
+        "organization_name": "",
+        "job_title": "",
+        "direct_message": "",
+        "position": "",
+        "email": "callweb+245@test.com",
+        "phone_number": "19382530055",
+        "work_number": "",
+        "fax_number": "",
+        "address": "",
+        "is_favorite": false,
+        "is_blocked": false,
+        "is_accesible_to_others": false,
+        "id_hash": "a67063986e67b7ddd107229ba9d480ee3a02f9d59732d4bc03b2d97d27a1310d",
+        "created_by": 48,
+        "created_at": "2026-01-20T07:06:26.000000Z",
+        "updated_at": "2026-01-20T07:06:26.000000Z",
+        "fields": [],
+        "groups": []
+    },
+    "meta": {
+        "request_id": "f2e1139d-57d6-4777-8fc8-fce32d18e296"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

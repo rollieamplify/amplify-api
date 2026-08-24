@@ -1,0 +1,62 @@
+---
+title: "POST /forms/{form_id}/responses"
+description: "Captured contract for POST /forms/{form_id}/responses."
+api: "POST /forms/{form_id}/responses"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{form_id}/responses.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{form_id}/responses
+
+
+
+
+Description :
+
+-> Creates or updates a respondent's form response when they open or interact with a public form. 
+-> Handles status transitions (sent, view/viewed, completed/complete), copies base form fields to the response on first access, saves form variables, sends OTP when required, and triggers view/completion notification emails. 
+-> Protected by blocked-contact middleware.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

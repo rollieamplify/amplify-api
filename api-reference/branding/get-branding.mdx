@@ -1,0 +1,42 @@
+---
+title: "GET /branding"
+description: "Captured contract for GET /branding."
+api: "GET /branding"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /branding.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+-> This API is used to get the custom branding for an account .
+
+Endpoint: 
+GET: api/branding
+
+
+Response:
+{
+    "data": {
+        "logo_light_background": "https://dev-api.amplify.xyz/images/email_logo_light.png",
+        "logo_dark_background": "https://dev-api.amplify.xyz/images/email_logo_grey.png",
+        "primary_color": "#9432fd",
+        "accent_color": "#9432fd",
+        "sender_email_address": "no-reply@amplify.xyz",
+        "sender_email_verified": false,
+        "enable_portal_access": true,
+        "is_sender_email_enabled": true,
+        "email_footer_text": "Use Fill to simplify the process of agreement management and obtaining eSignatures. It's effortless, HIPAA-compliant, and available at unbeatable prices.",
+        "remove_amplify_branding_in_subject": false
+    },
+    "meta": {
+        "request_id": "280f8a02-9ad1-4e34-80f9-8ab7b3a46ef9"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

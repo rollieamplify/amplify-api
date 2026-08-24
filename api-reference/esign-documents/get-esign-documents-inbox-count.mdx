@@ -1,0 +1,62 @@
+---
+title: "GET /esign_documents/inbox_count"
+description: "Captured contract for GET /esign_documents/inbox_count."
+api: "GET /esign_documents/inbox_count"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_documents/inbox_count.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/esign_documents/inbox_count
+
+
+
+
+Description :
+
+
+
+
+Returns the count of documents in the user's inbox — documents requiring action (pending signature or view) that are not in folders, not expired, and not completed.
+
+ 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

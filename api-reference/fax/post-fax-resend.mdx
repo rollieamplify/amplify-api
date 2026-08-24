@@ -1,0 +1,96 @@
+---
+title: "POST /fax/resend"
+description: "Captured contract for POST /fax/resend."
+api: "POST /fax/resend"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/resend.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Resend Fax API
+
+**Endpoint:**
+
+POST api/fax/resend
+
+
+### Description :
+
+Resend cancelled/failed outbound fax(es) or individual broadcast recipient row(s). Do not mix normal fax UUIDs with broadcast recipient UUIDs in one request. Subusers need send-fax permission. Broadcast-recipient resend also requires a broadcast license.
+
+
+**Rules:**
+
+- Only **cancelled** or **failed** faxes can be resent (statuses: `cancelled`, `manually_cancelled`, `failed`, `failed_chargeable`)
+
+- Provide either `fax_uuid`(s) OR `broadcast_fax_uuid`(s), **never both** in the same request
+
+- Supports single or multiple faxes in one request
+
+### Request Body :
+
+#### Option 1: Resend Normal Fax (Single)
+
+{
+  "fax_uuid": "550e8400-e29b-41d4-a716-446655440000"
+}
+
+#### Option 2: Resend Multiple Normal Faxes :
+
+{
+  "fax_uuids": [
+    "550e8400-e29b-41d4-a716-446655440000",
+    "660e8400-e29b-41d4-a716-446655440001"
+  ]
+}
+
+#### Option 3: Resend Individual Broadcast Recipient (Single) :
+
+{
+  "broadcast_fax_uuid": "770e8400-e29b-41d4-a716-446655440002"
+}
+
+#### Option 4: Resend Multiple Broadcast Recipients 
+
+{
+  "broadcast_fax_uuids": [
+    "770e8400-e29b-41d4-a716-446655440002",
+    "880e8400-e29b-41d4-a716-446655440003"
+  ]
+}
+
+### Response Format
+
+#### Success Response (Single/Multiple – Partial or Full Success) :
+
+Failed items are skipped silently. Response includes only successfully resent faxes.
+
+{
+  "data": {
+    "success": [
+      {
+        "fax_uuid": "550e8400-e29b-41d4-a716-446655440000",
+        "retry_attempt": 1,
+        "message": "Fax resent successfully"
+      },
+      {
+        "fax_uuid": "770e8400-e29b-41d4-a716-446655440002",
+        "broadcast_fax_uuid": "770e8400-e29b-41d4-a716-446655440002",
+        "retry_attempt": 1,
+        "message": "Broadcast fax recipient resent successfully"
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440000"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

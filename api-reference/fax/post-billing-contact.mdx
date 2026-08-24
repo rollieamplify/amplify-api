@@ -1,0 +1,49 @@
+---
+title: "POST /billing_contact"
+description: "Captured contract for POST /billing_contact."
+api: "POST /billing_contact"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing_contact.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+NOTE: Add Billing Contact
+
+Endpoint:
+POST : api/billing_contact
+
+Request:
+{
+    "email" : "subuser345@gmail.com",
+    "first_name" : "test",
+    "last_name" : "contact",
+    "account" : false,
+    "billing" : true
+}
+
+
+Response:
+{
+    "data": {
+        "id": "contact_AzyofvVE1QhEPGcR",
+        "first_name": "test",
+        "last_name": "contact",
+        "email": "subuser345@gmail.com",
+        "enabled": true,
+        "send_account_email": false,
+        "send_billing_email": true,
+        "object": "contact"
+    },
+    "meta": {
+        "request_id": "5ddf6749-1195-407e-afcb-a651c886171e"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

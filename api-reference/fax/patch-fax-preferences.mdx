@@ -1,0 +1,45 @@
+---
+title: "PATCH /fax/preferences"
+description: "Captured contract for PATCH /fax/preferences."
+api: "PATCH /fax/preferences"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /fax/preferences.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+- Update Fax Preference
+Endpoint:
+PATCH: api/fax/preferences
+Body:
+{
+    "preference" : "suggest_recipients_when_composing_fax",
+    "value" : true
+}
+
+Allowed preference values:
+ fax_paper_size, broadcast_fax_speed, suggest_recipients_when_composing_fax, save_unknown_recipients_as_contact, warn_about_duplicate_faxes, show_document_assignment_prompt, include_transmission_report_with_fax, display_fireworks_after_fax_sent, open_faxes_in_new_tab, delete_sent_or_received_faxes_automatically, opt_out_broadcast_list, inbound_header_footer.
+
+Allowed values by preference:
+fax_paper_size: Letter, Legal, A4
+broadcast_fax_speed: Normal, Priority
+All other preferences: true, false
+inbound_header_footer:
+{
+    "header": true,
+    "date_header": true,
+    "date_header_format": "DD-MMM-YYYY h:mm",
+    "page_header":"", // default: p1
+    "footer": true,
+    "date_footer": true,
+    "date_footer_format": "DD-MMM-YYYY h:mm",
+    "page_footer": "" // default: p1
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

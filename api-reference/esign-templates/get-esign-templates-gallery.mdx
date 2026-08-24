@@ -1,0 +1,50 @@
+---
+title: "GET /esign_templates/gallery"
+description: "Captured contract for GET /esign_templates/gallery."
+api: "GET /esign_templates/gallery"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_templates/gallery.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+
+GET: api/esign_templates/gallery
+
+
+Description :
+
+Paginated list of published admin template-gallery templates (template_gallery, is_active = 1) for end users. Not user-owned templates and not the admin API.
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Query Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Default
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

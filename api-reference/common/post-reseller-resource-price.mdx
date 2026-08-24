@@ -1,0 +1,104 @@
+---
+title: "POST /reseller/resource/price"
+description: "Captured contract for POST /reseller/resource/price."
+api: "POST /reseller/resource/price"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/resource/price.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Save Reseller Resource Prices
+
+Endpoint:
+
+POST : api/reseller/resource/price
+
+
+Payload:
+
+ {
+    "resources" : [
+        {
+            "resource_type": "credits",
+            "variable_pricing": true,
+            "price_breakdown": [
+                {
+                    "min_quantity": 1,
+                    "max_quantity": 199,
+                    "unit_price": 0.05
+                },
+                {
+                    "min_quantity": 200,
+                    "max_quantity": 499,
+                    "unit_price": 0.04
+                },
+                {
+                    "min_quantity": 500,
+                    "max_quantity": null,
+                    "unit_price": 0.01
+                }
+            ]
+        },
+        {
+            "resource_type": "broadcast",
+            "variable_pricing": false,
+            "unit_price": 9.99
+        }
+    ]
+}
+
+Note : 
+
+resource_type in : license_1,license_2,license_3,license_4,credits,numbers,api,broadcast,10dlc,custom_domain,labs_ai,unlimited_cloud_storage
+variable_pricing in : true, false
+max_quantity should be null for & Above
+
+
+
+
+Response:
+
+{
+    "data": {
+        "resources": [
+            {
+                "resource_type": "broadcast",
+                "variable_pricing": false,
+                "unit_price": 9.99
+            },
+            {
+                "resource_type": "credits",
+                "variable_pricing": true,
+                "price_breakdown": [
+                    {
+                        "min_quantity": 1,
+                        "max_quantity": 199,
+                        "unit_price": 0.05
+                    },
+                    {
+                        "min_quantity": 200,
+                        "max_quantity": 499,
+                        "unit_price": 0.04
+                    },
+                    {
+                        "min_quantity": 500,
+                        "max_quantity": null,
+                        "unit_price": 0.01
+                    }
+                ]
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "126b97c9-bfe1-4426-a4e4-970af9c4ce82"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

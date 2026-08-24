@@ -1,0 +1,51 @@
+---
+title: "DELETE /shared_folder"
+description: "Captured contract for DELETE /shared_folder."
+api: "DELETE /shared_folder"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /shared_folder.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Delete permissioned folders
+
+Endpoint:
+DELETE: /shared_folder
+
+Request:
+{
+    "folder_id" : [1020,1021]
+}
+
+Response:
+
+
+  
+image.png
+
+
+Delete permissioned folders (If user do not have permission)
+Endpoint:
+DELETE: /shared_folder
+
+Request:
+{
+    "folder_id" : [1022]
+}
+
+Response:
+{
+    "error": {
+        "code": "UNAUTHORIZED",
+        "message": "You do not have access to one or more folder"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,43 @@
+---
+title: "POST /plans/update-request"
+description: "Captured contract for POST /plans/update-request."
+api: "POST /plans/update-request"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plans/update-request.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+POST: api/plans/update-request
+
+
+
+
+This endpoint allows sub-users to send an email notification to the account owner requesting additional credits, user licenses, or number licenses when the current account resources are insufficient to continue using the service.
+
+
+Body:
+
+{
+    "type": "numbers_license" // numbers_license,basic_license,plus_license,pro_license,credits
+}
+
+
+Response:
+
+{
+    "data": "Plan update request sent successfully",
+    "meta": {
+        "request_id": "641b756f-1c35-4da6-9aa4-fa020bd8d62d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

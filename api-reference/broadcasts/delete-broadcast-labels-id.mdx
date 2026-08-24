@@ -1,0 +1,89 @@
+---
+title: "DELETE /broadcast_labels/{id}"
+description: "Captured contract for DELETE /broadcast_labels/{id}."
+api: "DELETE /broadcast_labels/{id}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /broadcast_labels/{id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Delete Broadcast Label
+
+
+
+
+Endpoint:
+DELETE /api/broadcast_labels/{id}
+
+
+
+
+Description:
+Soft-deletes the broadcast label.
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+id
+
+	
+
+integer
+
+	
+
+Yes
+
+	
+
+Broadcast label ID
+
+
+
+
+Request Example:
+
+DELETE /api/broadcast_labels/5
+
+
+
+
+Response Example (204):
+
+HTTP/1.1 204 No Content
+
+
+
+
+Note: Not found → 404 BROADCAST_LABEL_NOT_FOUND. Controller returns empty 204 body (no JSON wrapper).
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

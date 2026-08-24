@@ -1,0 +1,37 @@
+---
+title: "GET /billing/create_payment_intent"
+description: "Captured contract for GET /billing/create_payment_intent."
+api: "GET /billing/create_payment_intent"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /billing/create_payment_intent.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+create Payment intent to save card details.
+
+EndPoint:
+
+GET: api/billing/create_payment_intent
+
+
+
+
+Response:
+
+{
+    "data": {
+        "payment_intent_id": "AzqB4VVS3u6nnX0j7BkZ60kmBv97v13L8zQocuYhceiIn09qM"
+    },
+    "meta": {
+        "request_id": "6cd0b796-fa89-4124-98d9-17b8e90f4ae4"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

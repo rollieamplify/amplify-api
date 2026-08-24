@@ -1,0 +1,123 @@
+---
+title: "GET /conversations/{conversation_id}/messages"
+description: "Captured contract for GET /conversations/{conversation_id}/messages."
+api: "GET /conversations/{conversation_id}/messages"
+public: true
+---
+
+This page documents the behavior captured for GET /conversations/{conversation_id}/messages in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Conversation logs API:
+    
+    Endpoint:
+    GET: api/conversations/{conversation_id}/messages
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 4041,
+                "conversation_id": 793,
+                "from_number": "+19382530055",
+                "to_number": "+13345103356",
+                "direction": "inbound",
+                "call_status": "missed",
+                "call_duration": "",
+                "archived": false,
+                "is_read": false,
+                "initiate_time": "2026-01-28T05:58:05Z",
+                "start_time": "2026-01-28T05:58:05Z",
+                "end_time": "",
+                "created_by": 53,
+                "created_at": "2026-01-28T05:58:05Z",
+                "has_voicemail": true,
+                "voicemail_url": "https://example.com/signed-upload-url
+                "voicemail_duration": 8,
+                "has_recording": false,
+                "recording_url": "",
+                "recording_duration": 0,
+                "is_blocked": false,
+                "is_pinned": false,
+                "is_anonymous": false,
+                "contact_details": {},
+                "log_type": "call"
+            },
+            {
+                "id": 4043,
+                "conversation_id": 793,
+                "from_number": "+19382530055",
+                "to_number": "+13345103356",
+                "direction": "inbound",
+                "call_status": "ended",
+                "call_duration": 14,
+                "archived": false,
+                "is_read": false,
+                "initiate_time": "2026-01-28T05:59:49Z",
+                "start_time": "2026-01-28T05:59:49Z",
+                "end_time": "2026-01-28T06:00:02Z",
+                "created_by": 53,
+                "created_at": "2026-01-28T05:59:45Z",
+                "has_voicemail": false,
+                "voicemail_url": "",
+                "voicemail_duration": 0,
+                "has_recording": true,
+                "recording_url": "https://example.com/signed-upload-url
+                "recording_duration": 13,
+                "is_blocked": false,
+                "is_pinned": false,
+                "is_anonymous": false,
+                "contact_details": {},
+                "log_type": "call"
+            },
+            {
+                "id": 2046,
+                "created_by": 53,
+                "from_number": "+13345103356",
+                "to_number": "+19382530055",
+                "conversation_id": 793,
+                "content": "Hello user",
+                "direction": "outbound",
+                "type": "sms",
+                "status": "delivered",
+                "is_read": true,
+                "delete_type": "",
+                "created_at": "2026-01-28T06:01:21Z",
+                "reactions": [],
+                "is_internal": true,
+                "log_type": "message"
+            },
+            {
+                "id": 2049,
+                "created_by": 53,
+                "from_number": "+13345103356",
+                "to_number": "+19382530055",
+                "conversation_id": 793,
+                "content": "Hey user!!!!",
+                "direction": "inbound",
+                "type": "sms",
+                "status": "delivered",
+                "is_read": false,
+                "delete_type": "",
+                "created_at": "2026-01-28T06:01:37Z",
+                "reactions": [],
+                "is_internal": true,
+                "log_type": "message"
+            }
+        ],
+        "meta": {
+            "total": 4,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 50,
+            "request_id": "5edf4aac-095a-4a60-9a56-cb082c27948e"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

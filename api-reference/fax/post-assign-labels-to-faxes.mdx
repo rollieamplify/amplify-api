@@ -1,0 +1,33 @@
+---
+title: "POST /assign_labels_to_faxes"
+description: "Captured contract for POST /assign_labels_to_faxes."
+api: "POST /assign_labels_to_faxes"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /assign_labels_to_faxes.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Assign Multiple Labels To Multiple Faxes
+
+Endpoint:
+POST: api/assign_labels_to_faxes
+
+Body:
+{
+    "fax_uuids" : [
+        "01KDSS8KHH1JM23D537S4XPTHY",
+        "01KDSJWE1S2T4N2TN8T5AWVM1D"
+    ],
+    "label_ids" : [
+        25,49
+    ]
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

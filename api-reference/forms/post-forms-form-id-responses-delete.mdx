@@ -1,0 +1,63 @@
+---
+title: "POST /forms/{form_id}/responses/delete"
+description: "Captured contract for POST /forms/{form_id}/responses/delete."
+api: "POST /forms/{form_id}/responses/delete"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{form_id}/responses/delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{form_id}/responses/delete
+
+
+
+
+Description :
+
+
+
+
+Force-deletes multiple form responses and their logs for a form. Only accessible to users who can see the form via visibleTo.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,112 @@
+---
+title: "GET /billing_contact"
+description: "Captured contract for GET /billing_contact."
+api: "GET /billing_contact"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /billing_contact.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+NOTE: Get Billing Contact list
+
+Endpoint:
+GET : api/billing_contact
+
+
+Response:
+{
+    "data": [
+        {
+            "id": "contact_AzqfbJVDirbr44OCo",
+            "first_name": "Hetvi",
+            "last_name": "K",
+            "email": "developer@example.com",
+            "enabled": true,
+            "send_account_email": false,
+            "send_billing_email": false,
+            "object": "contact"
+        },
+        {
+            "id": "contact_AzqfbJVDjVzJT4mgx",
+            "first_name": "test",
+            "last_name": "contact",
+            "email": "subuser@gmail.com",
+            "enabled": true,
+            "send_account_email": false,
+            "send_billing_email": true,
+            "object": "contact"
+        },
+        {
+            "id": "contact_AzZf0VVDjb9pn4pcM",
+            "first_name": "test",
+            "last_name": "contact",
+            "email": "subuser1@gmail.com",
+            "enabled": true,
+            "send_account_email": false,
+            "send_billing_email": true,
+            "object": "contact"
+        },
+        {
+            "id": "contact_AzyjngVDkMQAL5QVR",
+            "first_name": "fsdffsf",
+            "last_name": "fsdffsd",
+            "email": "subuser2@gmail.com",
+            "enabled": true,
+            "send_account_email": true,
+            "send_billing_email": true,
+            "object": "contact"
+        },
+        {
+            "id": "contact_Azz0HOVDkMSr05QQl",
+            "first_name": "dfdsfsdfd",
+            "last_name": "dfd",
+            "email": "subuser3@gmail.com",
+            "enabled": true,
+            "send_account_email": true,
+            "send_billing_email": true,
+            "object": "contact"
+        },
+        {
+            "id": "contact_Azz0HOVDkMWBh5QSl",
+            "first_name": "'",
+            "last_name": "'",
+            "email": "subuser4@gmail.com",
+            "enabled": true,
+            "send_account_email": true,
+            "send_billing_email": true,
+            "object": "contact"
+        },
+        {
+            "id": "contact_AzZf0VVDkMZNr5QWQ",
+            "first_name": "fghf",
+            "last_name": "fgh",
+            "email": "subuser5@gmail.com",
+            "enabled": true,
+            "send_account_email": true,
+            "send_billing_email": true,
+            "object": "contact"
+        },
+        {
+            "id": "contact_AzqfbJVDkMd7S5QQH",
+            "first_name": "update",
+            "last_name": "contact1",
+            "email": "testbillingcontact@gmail.com",
+            "enabled": true,
+            "send_account_email": true,
+            "send_billing_email": false,
+            "object": "contact"
+        }
+    ],
+    "meta": {
+        "request_id": "5ced56db-d5de-4da3-9a37-25286a8d61d4"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

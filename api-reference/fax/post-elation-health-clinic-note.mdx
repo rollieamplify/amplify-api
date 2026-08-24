@@ -1,0 +1,64 @@
+---
+title: "POST /elation_health/clinic_note"
+description: "Captured contract for POST /elation_health/clinic_note."
+api: "POST /elation_health/clinic_note"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /elation_health/clinic_note.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Save Clinic Note API:
+
+Endpoint:
+GET: api/elation_health/clinic_note
+
+Body:
+{
+    "patient_id": 142296490246145,
+    "report_type": "Lab",
+    "physician": 140750846885890,
+    "practice": 142295834099716,
+    "fax_uuid": "",
+    "broadcast_fax_uuid": "01KH1610X8MCBN53KZXBCTT4FP"
+}
+
+Response:
+{
+    "data": {
+        "id": 144397104250920,
+        "patient": 142296490246145,
+        "custom_title": null,
+        "report_type": "Lab",
+        "requisition_number": null,
+        "tags": [],
+        "reported_date": null,
+        "grids": [],
+        "images": [],
+        "files": [],
+        "practice": 142295834099716,
+        "physician": 140750846885890,
+        "document_date": 1771927642,
+        "chart_date": 1771927642,
+        "signed_date": null,
+        "signed_by": null,
+        "created_date": 1771927642,
+        "deleted_date": null,
+        "printable_view": "https://sandbox.elationemr.com/api/2.0/reports/144397104250920/printable",
+        "vendor": null,
+        "order_status": null,
+        "is_urgent": false,
+        "routed_document_delegates": []
+    },
+    "meta": {
+        "request_id": "e7fa6393-5522-45b3-a83f-2542176cc606"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,141 @@
+---
+title: "GET /guest_message/{conversation_id}/messages"
+description: "Captured contract for GET /guest_message/{conversation_id}/messages."
+api: "GET /guest_message/{conversation_id}/messages"
+public: true
+---
+
+This page documents the behavior captured for GET /guest_message/{conversation_id}/messages in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/guest_message/{conversation_id}/messages
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 9139,
+                "created_by": 53,
+                "from_number": "+12024280033",
+                "to_number": "+13345103356",
+                "conversation_id": 2212,
+                "content": "",
+                "direction": "outbound",
+                "type": "mms",
+                "status": "delivered",
+                "is_read": true,
+                "delete_type": "",
+                "created_at": "2026-03-26T06:54:38Z",
+                "reactions": [],
+                "file": {
+                    "name": "fff.png",
+                    "url": "https://example.com/signed-upload-url
+                    "type": "png",
+                    "data": ""
+                },
+                "is_internal": false
+            },
+            {
+                "id": 9137,
+                "created_by": 53,
+                "from_number": "+12024280033",
+                "to_number": "+13345103356",
+                "conversation_id": 2212,
+                "content": "Received as guest",
+                "direction": "outbound",
+                "type": "sms",
+                "status": "delivered",
+                "is_read": true,
+                "delete_type": "",
+                "created_at": "2026-03-26T06:52:18Z",
+                "reactions": [],
+                "is_internal": false
+            },
+            {
+                "id": 9136,
+                "created_by": 53,
+                "from_number": "+12024280033",
+                "to_number": "+13345103356",
+                "conversation_id": 2212,
+                "content": "",
+                "direction": "inbound",
+                "type": "mms",
+                "status": "delivered",
+                "is_read": false,
+                "delete_type": "",
+                "created_at": "2026-03-26T06:52:07Z",
+                "reactions": [],
+                "file": {
+                    "name": "image (3).png",
+                    "url": "https://example.com/signed-upload-url
+                    "type": "png",
+                    "data": ""
+                },
+                "is_internal": false
+            },
+            {
+                "id": 9133,
+                "created_by": 53,
+                "from_number": "+12024280033",
+                "to_number": "+13345103356",
+                "conversation_id": 2212,
+                "content": "Sending again to guest",
+                "direction": "inbound",
+                "type": "sms",
+                "status": "delivered",
+                "is_read": false,
+                "delete_type": "",
+                "created_at": "2026-03-26T06:51:26Z",
+                "reactions": [],
+                "is_internal": false
+            },
+            {
+                "id": 9130,
+                "created_by": 53,
+                "from_number": "+12024280033",
+                "to_number": "+13345103356",
+                "conversation_id": 2212,
+                "content": "Received as guest",
+                "direction": "outbound",
+                "type": "sms",
+                "status": "delivered",
+                "is_read": true,
+                "delete_type": "",
+                "created_at": "2026-03-26T06:51:05Z",
+                "reactions": [],
+                "is_internal": false
+            },
+            {
+                "id": 9129,
+                "created_by": 53,
+                "from_number": "+12024280033",
+                "to_number": "+13345103356",
+                "conversation_id": 2212,
+                "content": "Hello Guest",
+                "direction": "inbound",
+                "type": "sms",
+                "status": "delivered",
+                "is_read": false,
+                "delete_type": "",
+                "created_at": "2026-03-26T06:50:41Z",
+                "reactions": [],
+                "is_internal": false
+            }
+        ],
+        "meta": {
+            "total": 6,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 50,
+            "request_id": "8c273591-2587-4d24-ae21-486e8aac68e5"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

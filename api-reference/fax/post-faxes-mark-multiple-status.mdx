@@ -1,0 +1,41 @@
+---
+title: "POST /faxes/mark_multiple/status"
+description: "Captured contract for POST /faxes/mark_multiple/status."
+api: "POST /faxes/mark_multiple/status"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/mark_multiple/status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Mark as Done/Undone multiple faxes
+Endpoint:
+POST: faxes/mark_multiple/status
+
+Request:
+{
+    "fax_uuids" : [
+        "01KFAD8HV4WM923DHJQKYT1TBN",
+        "01KFAD9G2MWSCXNVMEQJJGSAT0",
+        "01KFAD9MKQ9AJHKA3QMW2ZYJYP",
+        "01KFADA8QQMSZ86237WBZRT4B9",
+        "01KFA9JZKP685RXV4M263J4S8M"
+    ],
+    "mark_status" : "done"
+}
+
+Response:
+{
+    "data": "MARKED_AS_DONE",
+    "meta": {
+        "request_id": "0b3eb6bf-452e-4b74-8e3f-ec8bc663819a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

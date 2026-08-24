@@ -1,0 +1,47 @@
+---
+title: "GET /white_list"
+description: "Captured contract for GET /white_list."
+api: "GET /white_list"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /white_list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/white_list
+
+Query params:
+GET: api/white_list?search_string=Lable
+Response:
+{
+    "data": [
+        {
+            "id": 2,
+            "ip_address": "192.168.1.2",
+            "label": "Lable 2",
+            "created_at": 1772789594
+        },
+        {
+            "id": 1,
+            "ip_address": "192.168.1.1",
+            "label": "Lable 1",
+            "created_at": 1772789513
+        }
+    ],
+    "meta": {
+        "total": 2,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "17bb43ef-226d-4225-84aa-14df42804ada"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

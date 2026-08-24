@@ -1,0 +1,44 @@
+---
+title: "POST /fax/notes"
+description: "Captured contract for POST /fax/notes."
+api: "POST /fax/notes"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/notes.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+This API is used to add fax notes.
+API URL: /api/fax/notes
+Method: POST
+
+
+Request:
+
+{
+    "fax_uuid": "01KESPB0ZD968Q08T5CD5NBATW",
+    "is_broadcast": true,
+    "fax_note": "Test Fax Note"
+}
+
+
+Response:
+
+{
+    "data": {
+        "fax_uuid": "01KESPB0ZD968Q08T5CD5NBATW",
+        "broadcast_fax_uuid": null,
+        "fax_note": "Test Fax Note"
+    },
+    "meta": {
+        "request_id": "6ddba0c4-2d70-4d97-b252-1edd8dd23b38"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

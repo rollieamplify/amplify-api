@@ -1,0 +1,71 @@
+---
+title: "GET /automations"
+description: "Captured contract for GET /automations."
+api: "GET /automations"
+public: true
+---
+
+This internal review page records the behavior captured for GET /automations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/automations
+
+Query params:
+GET: api/automations?search_string=abc
+Response:
+{
+    "data": [
+         {
+            "id": 17,
+            "account_id": 54,
+            "name": "test annotation One",
+            "first_name": "web",
+            "last_name": "twentynew",
+            "email": "developer@example.com",
+            "created_by": 53,
+            "updated_by": 53,
+            "last_run_at": "",
+            "is_active": true,
+            "trigger": "fax_received",
+            "conditions_logic": "all",
+            "execution_priority": 1,
+            "skip_other_automation": false,
+            "created_at": 1767606680,
+            "updated_at": 1767678683
+        },
+        {
+            "id": 19,
+            "account_id": 54,
+            "name": "test annotation Two",
+            "first_name": "web",
+            "last_name": "twentynew",
+            "email": "developer@example.com",
+            "created_by": 53,
+            "updated_by": "",
+            "last_run_at": "",
+            "is_active": true,
+            "trigger": "fax_received",
+            "conditions_logic": "all",
+            "execution_priority": 2,
+            "skip_other_automation": false,
+            "created_at": 1767679878,
+            "updated_at": 1767679878
+        }
+    ],
+    "meta": {
+        "total": 2,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "ea47eae4-e8fd-42f2-acf6-e802859bcf52"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

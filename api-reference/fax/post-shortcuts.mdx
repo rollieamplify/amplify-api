@@ -1,0 +1,90 @@
+---
+title: "POST /shortcuts"
+description: "Captured contract for POST /shortcuts."
+api: "POST /shortcuts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /shortcuts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Shortcut create API.
+
+Endpoint:
+POST: api/shortcuts
+
+Body:
+{
+    "created_from": "test tab",
+    "title": "Title 1",
+    "filter_data": {
+        "date": "Time",
+        "emails": "developer@example.com",
+        "status": "Confirmed",
+        "columns": [
+            {
+                "name": "To",
+                "is_show": true,
+                "checked": true,
+                "disable": false
+            }
+        ],
+        "grid_view": false,
+        "label_ids": "24625",
+        "direction": "Outgoing",
+        "active_sort": null,
+        "fax_numbers": "12056852492,12058901305,19387779605",
+        "environment": "APP,API,EMAIL_TO_FAX,FCL_TO_FAX,BROADCAST",
+        "columns_width": "",
+        "assigned_emails": "",
+        "retry_attempt_count": "1,2,3,4,5,6,7,8,9,10"
+    }
+}
+
+Response:
+{
+    "data": {
+        "user_id": 53,
+        "account_id": 54,
+        "created_from": "test tab",
+        "title": "Lable 3",
+        "filter_data": {
+            "date": "Time",
+            "emails": "developer@example.com",
+            "status": "Confirmed",
+            "columns": [
+                {
+                    "name": "To",
+                    "is_show": true,
+                    "checked": true,
+                    "disable": false
+                }
+            ],
+            "grid_view": false,
+            "label_ids": "24625",
+            "direction": "Outgoing",
+            "active_sort": null,
+            "fax_numbers": "12056852492,12058901305,19387779605",
+            "environment": "APP,API,EMAIL_TO_FAX,FCL_TO_FAX,BROADCAST",
+            "columns_width": null,
+            "assigned_emails": null,
+            "retry_attempt_count": "1,2,3,4,5,6,7,8,9,10"
+        },
+        "unique_id": "YJV9YVX4KX",
+        "priority": 1,
+        "updated_at": "2026-01-03T07:11:23.000000Z",
+        "created_at": "2026-01-03T07:11:23.000000Z",
+        "id": 1
+    },
+    "meta": {
+        "request_id": "61a1748c-74d6-4306-9020-17f1e6c8b1e1"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

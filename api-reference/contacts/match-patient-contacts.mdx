@@ -1,0 +1,16 @@
+---
+title: "Match patient contacts"
+description: "Find patient contacts that may match data extracted from a fax."
+api: "POST /patient_contacts/matches"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField body="fax_uuid" type="string" required>UUID of the fax containing the patient data.</ParamField>
+
+```json
+{"fax_uuid":"f2f4c4f6-9d31-4b68-a901-c0f5f1d06dbe"}
+```
+
+Matching considers first and last name, date of birth, email, phone, physician name, medical record number, and gender. Gender contributes to the match only when the first name also matches.
+

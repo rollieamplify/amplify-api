@@ -1,0 +1,103 @@
+---
+title: "POST /fax/send"
+description: "Captured contract for POST /fax/send."
+api: "POST /fax/send"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/send.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/fax/send
+
+Body:
+{
+    "local_fax_uuid": "01KDN2896YTGM3MXAV2RAN7VGY",
+    "fax_uuid": "",
+    "from_number": "19073131400",
+    "to_number": "15876065252",
+    "fax_quality": "standard", //1 = low, 2 = standard, 3 = hd, 4 = hd_plus
+    "country_id": 119,
+    "recipient_name": "Vishal Rojasara",
+    "recipient_email": "developer@example.com",
+    "sender_name": "Manoj",
+    "to_name" : "Test",
+    "subject": "Test Subject",
+    "secure_fax": false,
+    "location": "UTC",
+    "fax_category": "Test",
+    "fax_priority": "high", // regular OR high
+    "cc_emails": [
+        "developer@example.com",
+        "developer@example.com"
+    ],
+    "scheduled_time": "",
+    "required_approval": false,
+    "num_attachment": 3,
+    "pages": 7,
+    "smart_document_id": "",
+    "fax_format": "letter",
+    "validate_duplicate_fax" : true,
+    "disabled_check_duplicate_fax" : true
+}
+
+
+validate_duplicate_fax
+- If the user wants to enable duplicate fax validation for a specific fax, they must pass the value as true.
+When true, the system will check for duplicate faxes.
+When false, duplicate fax validation will be bypassed for the current fax.
+disabled_check_duplicate_fax
+-  If the user wants to permanently disable duplicate fax validation, they must set this value to "true"
+-  When set to true, the system will disable duplicate fax validation for all future fax requests. 
+
+
+Duplicate fax error response (same fax within 24 hours):
+{
+    "error": {
+        "code": "150001",
+        "message": "Duplicate fax detected."
+    }
+}
+
+If outbound number was added in a blocklist then response retrun like below:
+{
+    "error": {
+        "code": "150002",
+        "message": "A recipient fax number is listed in your outbound blocked list.",
+        "data": {
+            "numbers": [
+                "12052938854"
+            ]
+        }
+    }
+}
+
+
+Response:
+{
+    "data": {
+        "fax_uuid": "01KDNG2DVCC84VWDJ7GK2P8XW8",
+        "local_fax_uuid": "01KDN2896YTGM3MXAV2RAN7VGY",
+        "cancelable": true,
+        "show_confetti": false,
+        "is_first_fax": false,
+        "is_scheduled": false,
+        "show_rating_popup": false,
+        "secure_code": null,
+        "show_enjoying": false,
+        "is_required_approval": false,
+        "show_video_testimonial": false
+    },
+    "meta": {
+        "request_id": "5e34a980-4669-441e-8abb-6f7227782cc3"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

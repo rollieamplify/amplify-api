@@ -1,0 +1,84 @@
+---
+title: "POST /reseller/contact-sales"
+description: "Captured contract for POST /reseller/contact-sales."
+api: "POST /reseller/contact-sales"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/contact-sales.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Submits a sales inquiry for a reseller product and notifies the assigned sales representative via email.
+
+
+
+
+USE: Submit a contact sales inquiry.
+
+
+
+
+Request Parameters:
+
+
+
+
+first_name — Customer's first name.
+last_name — Customer's last name.
+company_name — Customer's company name.
+phone_number — Customer's contact number.
+work_email — Customer's work email address.
+fax_page_per_month — Estimated monthly fax pages.
+product_name — Product/domain for which the inquiry is submitted.
+
+
+
+
+Response: Returns a success message confirming that the sales inquiry has been submitted.
+
+
+
+
+The meta object contains the request_id, which can be used for request tracking and troubleshooting.
+
+
+
+
+Endpoint:
+
+POST: api/reseller/contact-sales
+
+
+
+
+Request:
+
+{
+    "first_name" : "test",
+    "last_name" : "dummy",
+    "company_name" : "demo",
+    "phone_number" : "7806763778",
+    "work_email" : "test@gmail.com",
+    "fax_page_per_month" : 20,
+    "product_name" : "Amplify"
+}
+
+
+
+
+Response:
+
+{
+    "data": "Details have been sent to the admin. will contact you soon.",
+    "meta": {
+        "request_id": "145cc8e7-36ce-4953-a83e-8802c2217fa4"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,29 @@
+---
+title: "Pagination"
+description: "Navigate large collections with opaque cursors."
+---
+
+List endpoints use cursor-based pagination.
+
+| Parameter | Description |
+| --- | --- |
+| `limit` | Number of records to return. The default is `50`; the maximum is `1000`. |
+| `cursor` | Opaque cursor returned by a previous response. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers?limit=50&cursor=CURSOR" \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+```
+
+Pagination state appears in the response `meta` object:
+
+```json
+{
+  "next_cursor": "opaque_next_cursor",
+  "previous_cursor": null,
+  "has_more": true,
+  "limit": 50
+}
+```
+
+Treat cursor values as opaque. Do not parse, modify, or construct them. Use `next_cursor` to continue forward and `previous_cursor` when backward navigation is available.

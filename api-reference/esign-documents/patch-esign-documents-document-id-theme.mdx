@@ -1,0 +1,105 @@
+---
+title: "PATCH /esign_documents/{document_id}/theme"
+description: "Captured contract for PATCH /esign_documents/{document_id}/theme."
+api: "PATCH /esign_documents/{document_id}/theme"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /esign_documents/{document_id}/theme.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+PATCH : api/esign_documents/{document_id}/theme
+
+Description :
+This method updates the document theme .
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+Request Body (JSON)
+Field | Type | Description
+----------------------------------------------------------------
+| `text` | `object` | Font, size, style, capitalization, line spacing, color. |
+| `background` | `object` | `color`, `opacity`. |
+| `background_image` | `object` | `url` (file name for S3 theme uploads, or external URL), `size`, `position`, `is_repeating`, `opacity`. |
+| `applied_to_page` | `string` | Which pages the theme applies to. |
+
+
+Request :
+{
+    "text": {
+        "font": "Caveat",
+        "size": "84px",
+        "style": [
+            "bold",
+            "italic"
+        ],
+        "color": "#50e3c2",
+        "capitalization": "uppercase",
+        "line_spacing": 2
+    },
+    "background": {
+        "color": "#000000",
+        "opacity": 100
+    },
+    "background_image": {
+        "url": "",
+        "size": "cover",
+        "position": "left_top",
+        "is_repeating": false,
+        "opacity": 100
+    },
+    "applied_to_page": "all_pages"
+}
+
+
+Response :
+{
+    "data": {
+        "id": 8344,
+        "text": {
+            "font": "Caveat",
+            "size": "84px",
+            "style": [
+                "bold",
+                "italic"
+            ],
+            "capitalization": "uppercase",
+            "line_spacing": "2.00",
+            "color": "#50e3c2"
+        },
+        "background": {
+            "color": "#000000",
+            "opacity": 100
+        },
+        "background_image": {
+            "url": "",
+            "size": "cover",
+            "position": "left_top",
+            "is_repeating": false,
+            "opacity": 100
+        },
+        "applied_to_page": "all_pages"
+    },
+    "meta": {
+        "request_id": "cbbbf58b-d1b3-4840-a22c-888c76496ba8"
+    }
+}
+
+Permissions :
+- User must be authenticated with Sanctum and have the e-sign feature enabled.
+
+Errors:
+422 VALIDATION_ERROR : Missing `file_name` or `folder`, or invalid payload.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

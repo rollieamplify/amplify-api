@@ -1,0 +1,56 @@
+---
+title: "GET /team_chats"
+description: "Captured contract for GET /team_chats."
+api: "GET /team_chats"
+public: true
+---
+
+This page documents the behavior captured for GET /team_chats in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/team_chats
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 53,
+                "user_type": "primary",
+                "first_name": "web",
+                "last_name": "twentynew",
+                "email": "developer@example.com",
+                "status": "Active"
+            },
+            {
+                "id": 322,
+                "user_type": "user",
+                "first_name": "Taylor",
+                "last_name": "Swift",
+                "email": "developer@example.com",
+                "status": "Active"
+            },
+            {
+                "id": 1481,
+                "user_type": "user",
+                "first_name": "Sub",
+                "last_name": "User",
+                "email": "developer@example.com",
+                "status": "Active"
+            }
+        ],
+        "meta": {
+            "total": 3,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 20
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

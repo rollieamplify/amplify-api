@@ -1,0 +1,83 @@
+---
+title: "POST /reseller/multiple_clients"
+description: "Captured contract for POST /reseller/multiple_clients."
+api: "POST /reseller/multiple_clients"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/multiple_clients.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Add Multiple Clients API.
+
+Endpoint :
+
+POST - api/reseller/multiple_clients
+
+
+Body:
+
+{
+    "clients": [
+        {
+            "first_name": "Web41",
+            "last_name": "Client 23",
+            "email": "developer@example.com",
+            "phonenumber": "15551234567",
+            "organization": "Acme Corporation",
+            "family_type": 1, //1: Healthcare, 2: Business, 3: Broadcast, 4: API, 5: Reseller
+            "license_type": 1,
+            "credit_allowed": 10,
+            "credit_price": 0,
+            "numbers": 0, 
+	    "number_price": 0,    
+	    "numbers_1": 0, 
+	    "numbers_1_price": 0,     
+	    "numbers_2": 0, 
+	    "numbers_2_price": 0,     
+	    "numbers_3": 0, 
+	    "numbers_3_price": 0,    
+	    "numbers_4": 0, 
+	    "numbers_4_price": 0, 
+	    "numbers_5": 0, 
+	    "numbers_5_price": 0,
+	    "basic_license": 5,
+            "basic_license_price": 2.500,
+            "plus_license": 10,
+            "plus_license_price": 5.000,
+            "pro_license": 10,
+            "pro_license_price": 10.000,
+            "custom_email_domain": true,
+            "custom_email_domain_price": 15.000,
+            "lab_ai_license": true,
+            "lab_ai_license_price": 25.000,
+            "api_license": true,
+            "api_license_price": 50.000,
+            "broadcast_fax": true,
+            "broadcast_fax_price": 0.000,
+            "auto_topup_credit": 3,
+            "document_splitting": true,
+            "document_splitting_price": 3,
+            "monthly_upgrade_limit": 300,
+            "allow_social_login": 1
+        }
+       
+    ]
+}
+
+Response:
+
+{
+    "data": "The client import process has started. You will receive an email once it has been completed.",
+    "meta": {
+        "request_id": "f5fed6cd-de84-415e-81c1-053bae640176"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

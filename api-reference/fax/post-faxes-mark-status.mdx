@@ -1,0 +1,36 @@
+---
+title: "POST /faxes/mark/status"
+description: "Captured contract for POST /faxes/mark/status."
+api: "POST /faxes/mark/status"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/mark/status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Change status of faxes(Done or Undone)
+
+Endpoint:
+POST: /faxes/mark/status
+
+Request:
+{
+    "fax_uuid" : "01KDMQCMGC3RZGH4GSVRBCN9RR",
+    "mark_status" : "done"
+}
+
+Response:
+{
+    "data": "MARKED_AS_DONE",
+    "meta": {
+        "request_id": "4f949496-f3a3-49a8-8448-a503c91f7a9b"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

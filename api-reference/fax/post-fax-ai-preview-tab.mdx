@@ -1,0 +1,61 @@
+---
+title: "POST /fax/ai_preview/tab"
+description: "Captured contract for POST /fax/ai_preview/tab."
+api: "POST /fax/ai_preview/tab"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/ai_preview/tab.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Save AI Preview Tab API
+
+
+## Overview :
+This API endpoint saves the selected AI preview tab for the current user in the fax module.  
+The value is stored in the `user_configuration` table under the key `fax_ai_tab`, scoped by `user_id` and `account_id`.  
+Valid tab values are **1**, **2**, or **3**.  
+
+
+The current value of `fax_ai_tab` is returned as part of the `POST /api/fax/ocr/details` API response, so no separate GET API is required.
+
+
+## Endpoint :
+POST /api/fax/ai_preview/tab
+
+
+## Request
+### Request Body :
+{
+  "tab": 3
+}
+
+
+### Request Parameters :
+
+
+| Parameter | Type    | Required | Description                                                  |
+|----------|---------|----------|--------------------------------------------------------------|
+| `tab`    | integer | Yes    | Selected AI preview tab. Allowed values: `1`, `2`, or `3`.   |
+
+
+
+
+## Response
+### Success Response (200 OK) :
+{
+  "data": {
+    "fax_ai_tab": 3
+  },
+  "meta": {
+    "request_id": "123e4567-e89b-12d3-a456-426614174000"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

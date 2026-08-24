@@ -1,0 +1,51 @@
+---
+title: "POST /subscription/create_free_subscription"
+description: "Captured contract for POST /subscription/create_free_subscription."
+api: "POST /subscription/create_free_subscription"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/create_free_subscription.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Purchase Free Subscriptions
+
+EndPoint:
+
+POST: api/subscription/create_free_subscription
+
+
+Payload:
+
+{
+    "plan": "broadcast_free_plan",
+    "currency": "usd"
+}
+
+Note :
+plan : in broadcast_free_plan, api_free_plan (for web app)
+plan : in hippa_free_plan, free_plan, broadcast_free_plan, api_free_plan, reseller_free_plan (for admin)
+
+currency : in usd, gbp
+
+
+
+
+Response:
+
+{
+    "data": {
+        "subscription_id": "Azz5QaVQ4hPZ78nc"
+    },
+    "meta": {
+        "request_id": "341c0718-30ca-4c52-b8e3-9f4d6f278115"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

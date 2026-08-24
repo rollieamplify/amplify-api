@@ -1,0 +1,43 @@
+---
+title: "POST /bulk-delete"
+description: "Captured contract for POST /bulk-delete."
+api: "POST /bulk-delete"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /bulk-delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+POST: api/bulk-delete
+
+
+Body:
+
+{
+   "type": "dashboard"
+    // add filters according to list
+}
+
+types: dashboard,inbox,my_assignments,pending_approval,all_faxes,done_faxes,draft_faxes,sent_faxes,scheduled_faxes,label_faxes
+
+
+
+
+Response:
+
+{
+    "data": "Fax deletion process started successfully.",
+    "meta": {
+        "request_id": "7b34bd0c-8591-4096-8603-8ded7e327569"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,36 @@
+---
+title: "POST /plan/auto_topup"
+description: "Captured contract for POST /plan/auto_topup."
+api: "POST /plan/auto_topup"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plan/auto_topup.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint :
+POST - api/plan/auto_topup
+
+
+Body:
+{
+    "is_auto_topup_enable": false,
+    "topup_trigger_percentage": 75, // default: 95, between 50-100  
+    "topup_percentage": 25 // default: 20, between 20-100  
+}
+
+Response:
+{
+    "data": "Auto topup updated successfully",
+    "meta": {
+        "request_id": "57a9fee7-5b3c-4a1a-98ac-f9fdfa4c835a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

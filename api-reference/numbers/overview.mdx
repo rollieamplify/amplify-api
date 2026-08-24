@@ -1,0 +1,41 @@
+---
+title: "Numbers"
+description: "Purchase, configure, verify, and release phone numbers."
+---
+
+Use the Numbers API to manage phone numbers and their fax, voice, messaging, recording, and regulatory settings.
+
+## Endpoint sections
+
+- Number inventory and details
+- Number availability, countries, and areas
+- Purchasing and releasing numbers
+- DID verification documents and addresses
+- Number configuration and user access
+
+<Card title="List numbers" icon="list" href="/api-reference/numbers/list-numbers">
+  View the available numbers for the authenticated account.
+</Card>
+
+## Number management
+
+<CardGroup cols={2}>
+  <Card title="Create a number" href="/api-reference/numbers/create-number">Purchase and provision a number.</Card>
+  <Card title="Get number details" href="/api-reference/numbers/get-number-details">Retrieve one number and its configuration.</Card>
+  <Card title="Delete a number" href="/api-reference/numbers/delete-number">Release one number.</Card>
+  <Card title="Bulk delete numbers" href="/api-reference/numbers/bulk-delete-numbers">Request release of multiple numbers.</Card>
+</CardGroup>
+
+## Number availability
+
+<CardGroup cols={2}>
+  <Card title="Search available numbers" href="/api-reference/numbers/search-available-numbers">Find purchasable numbers by country and area.</Card>
+  <Card title="List available areas" href="/api-reference/numbers/list-available-areas">List supported geographic areas.</Card>
+  <Card title="List available countries" href="/api-reference/numbers/list-available-countries">List countries where number selection is available.</Card>
+</CardGroup>
+
+## Verification and configuration
+
+<CardGroup cols={2}>
+  <Card title="Update configuration" href="/api-reference/numbers/update-number-configuration">Partially update number settings.</Card>
+</CardGroup>

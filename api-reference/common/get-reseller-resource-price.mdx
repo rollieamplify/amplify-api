@@ -1,0 +1,67 @@
+---
+title: "GET /reseller/resource/price"
+description: "Captured contract for GET /reseller/resource/price."
+api: "GET /reseller/resource/price"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/resource/price.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Reseller Resource Prices
+
+
+
+
+Endpoint:
+
+GET : api/reseller/resource/price
+
+
+
+
+Response:
+
+{
+    "data": {
+        "resources": [
+            {
+                "resource_type": "broadcast",
+                "variable_pricing": false,
+                "unit_price": 9.99
+            },
+            {
+                "resource_type": "credits",
+                "variable_pricing": true,
+                "price_breakdown": [
+                    {
+                        "min_quantity": 1,
+                        "max_quantity": 199,
+                        "unit_price": 0.05
+                    },
+                    {
+                        "min_quantity": 200,
+                        "max_quantity": 499,
+                        "unit_price": 0.04
+                    },
+                    {
+                        "min_quantity": 500,
+                        "max_quantity": null,
+                        "unit_price": 0.01
+                    }
+                ]
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "5e9f6229-fe81-4d8d-a61b-dab1c2c091de"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

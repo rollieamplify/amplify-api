@@ -1,0 +1,64 @@
+---
+title: "POST /broadcast_lists/get_fax_number_costs"
+description: "Captured contract for POST /broadcast_lists/get_fax_number_costs."
+api: "POST /broadcast_lists/get_fax_number_costs"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast_lists/get_fax_number_costs.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Fax Number Costs API :
+
+
+Endpoint :
+POST: api/broadcast_lists/get_fax_number_costs
+
+
+Body :
+{
+    "fax_number_list": [
+        "1234567890",
+        "0987654321",
+        "+11234567890",
+        "(123) 456-7890"
+    ]
+}
+
+Response :
+{
+    "data": {
+        "fax_number_costs": [
+            {
+                "fax_number": "1234567890",
+                "region": "US",
+                "cost": 1.0,
+                "price_per_page": "$0.06",
+                "unit_price": 0.11,
+                "international_number": true,
+                "is_valid_number": true
+            },
+            {
+                "fax_number": "0987654321",
+                "region": "US",
+                "cost": 1.0,
+                "price_per_page": "$0.06",
+                "unit_price": 0.11,
+                "international_number": true,
+                "is_valid_number": true
+            }
+        ],
+        "total_cost": 2.0
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

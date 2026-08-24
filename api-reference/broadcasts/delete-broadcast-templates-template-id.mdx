@@ -1,0 +1,86 @@
+---
+title: "DELETE /broadcast_templates/{template_id}"
+description: "Captured contract for DELETE /broadcast_templates/{template_id}."
+api: "DELETE /broadcast_templates/{template_id}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /broadcast_templates/{template_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Delete Broadcast Template
+
+
+
+
+DELETE /broadcast_templates/{template_id}
+
+
+
+
+Soft deletes the broadcast template and removes its broadcast mappings.
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+template_id
+
+	
+
+integer
+
+	
+
+Yes
+
+	
+
+Broadcast template ID
+
+
+
+
+Response (204):
+
+
+
+
+{
+  "status": 204,
+  "data": []
+}
+
+
+
+
+Note: If the template is not found in the current account scope, the API currently returns 200 with empty data.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

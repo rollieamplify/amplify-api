@@ -1,0 +1,11 @@
+---
+title: "Update a contact group"
+description: "Rename an existing contact group."
+api: "PATCH /contact_groups/{contact_group_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_group_id" type="integer" required>Contact group ID.</ParamField>
+<ParamField body="name" type="string" required>New group name, up to 100 characters.</ParamField>
+

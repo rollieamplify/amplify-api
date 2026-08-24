@@ -1,0 +1,61 @@
+---
+title: "POST /faxes/nlp/manual"
+description: "Captured contract for POST /faxes/nlp/manual."
+api: "POST /faxes/nlp/manual"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/nlp/manual.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/faxes/nlp/manual
+
+
+
+
+Body:
+
+{
+    "uuid": "01KZDV1P0RYQJ2DN74J00AKMQ9",
+    "is_broadcast": false,
+    "type": "lab_ai"
+}
+
+Accepted values:
+type: fax_ai,lab_ai,both
+
+
+Validation Response:
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The selected type is invalid."
+    },
+    "errors": {
+        "type": [
+            "The selected type is invalid."
+        ]
+    }
+}
+
+Response:
+
+{
+    "data": {
+        "status": "draft",
+        "message": "This may take a few seconds. Accelerate this process in the future by setting up automatic OCR for all incoming faxes."
+    },
+    "meta": {
+        "request_id": "ac532477-7aa2-42a9-b6f1-62e88adc29a9"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

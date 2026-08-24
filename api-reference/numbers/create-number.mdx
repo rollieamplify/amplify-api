@@ -1,0 +1,47 @@
+---
+title: "Create a number"
+description: "Purchase and provision an available phone number."
+api: "POST /numbers"
+public: true
+---
+
+`POST /numbers` purchases and provisions an available number.
+
+## Request body
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `number` | string | Number to purchase in E.164 format. |
+| `type` | string | Number type. Supported captured values are `fax` and `voice`. |
+| `auto_upgrade` | boolean | Whether Amplify may upgrade the account plan when required. |
+| `tier` | integer | Number-purchase tier. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers" \
+  --request POST \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "number": "+13349218294",
+    "type": "fax",
+    "auto_upgrade": false,
+    "tier": 0
+  }'
+```
+
+## Response
+
+A successful request returns the created number under `data` and `meta.request_id`. The number resource uses the same shape documented in [List numbers](/api-reference/numbers/list-numbers).
+
+## Plan-limit error
+
+```json
+{
+  "error": {
+    "code": "LIMIT_EXCEED",
+    "message": "You have exceeded the number purchase limit for your current plan"
+  }
+}
+```
+
+<Note>Provisioning depends on number availability and the external carrier.</Note>

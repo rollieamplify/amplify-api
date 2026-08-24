@@ -1,0 +1,84 @@
+---
+title: "POST /export_data"
+description: "Captured contract for POST /export_data."
+api: "POST /export_data"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /export_data.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Export Broadcast Data API.
+
+Endpoint :
+POST - api/export_data
+
+For Broadcast:
+
+
+Body:
+{
+    "type": "broadcast",
+    "request_data": {
+        "fax_uuid": "01KFZ49RSXYWXJ4T1D1TZDVY8C",
+        "fax_status" : ["delivered"]
+    },
+}
+
+For  Schedule Report
+{
+    "type": "schedule_report",
+    "schedule_report_id" : 19
+}
+
+For Fax History
+{
+    "method": [],
+    "source": [],
+    "sort_by": "latest",
+    "end_date": "",
+    "direction": [],
+    "label_ids": [],
+    "fax_status": [],
+    "start_date": "",
+    "fax_numbers": [],
+    "request_from": "dashboard",
+    "retry_attempt": [],
+    "sent_by_user_ids": [],
+    "assigned_to_user_ids": []
+}
+*Must pass request_from in every Export History.
+
+
+"fax_status" field is optional.
+"type":
+- fax_history
+- broadcast
+- schedule_report
+- broadcast_transmission_receipt
+- campaign
+- campaign_transmission_receipt
+- contact
+- usage_reports
+- data_by_folder
+- user_activity
+- data_by_user
+
+
+Response:
+{
+    "data": {
+        "message": "Export request created successfully"
+    },
+    "meta": {
+        "request_id": "a3a4a06b-3bb0-459c-9735-161a7d60e00e"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

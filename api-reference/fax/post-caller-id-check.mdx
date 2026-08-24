@@ -1,0 +1,81 @@
+---
+title: "POST /caller_id/check"
+description: "Captured contract for POST /caller_id/check."
+api: "POST /caller_id/check"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /caller_id/check.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Check if caller id exist for this user or not.
+
+Endpoint:
+/caller_id/check
+
+Request:
+{
+    "caller_id" : "1223566"
+}
+
+Response:
+{
+    "data": {
+        "is_exist": false
+    },
+    "meta": {
+        "request_id": "04f0b7a0-0575-4136-b504-d4333eea86f3"
+    }
+}
+
+
+for existed caller Id
+Endpoint:
+/caller_id/check
+
+Request:
+{
+    "caller_id" : "12562572120"
+}
+
+Response:
+{
+    "data": {
+        "caller_id": "12562572120",
+        "is_exist": true
+    },
+    "meta": {
+        "request_id": "9e8d5ffa-a1fb-4744-9a8d-7cc4726a18cf"
+    }
+}
+
+
+Validation for caller Id
+Endpoint:
+/caller_id/check
+
+Request:
+{
+    "caller_id" : "1223 5667"
+}
+
+Response:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "caller_id": [
+            "Caller ID must contain only numeric characters and no spaces."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

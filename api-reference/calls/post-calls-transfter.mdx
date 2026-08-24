@@ -1,0 +1,52 @@
+---
+title: "POST /calls/transfter"
+description: "Captured contract for POST /calls/transfter."
+api: "POST /calls/transfter"
+public: true
+---
+
+This page documents the behavior captured for POST /calls/transfter in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    
+    POST: api/calls/transfter
+    
+    
+    Body:
+    
+    {
+        "from_number": "+15873160348",
+        "to_number": "+19382530055",
+        "direction": "outbound"
+    }
+    
+    
+    Response:
+    
+    {
+        "data": {
+            "is_transfered": true
+        },
+        "meta": {
+            "request_id": "62b7d355-c083-46f1-a333-1c30fe75a3a8"
+        }
+    }
+    
+    
+    Error Response:
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "Cannot transfer the call because the user is busy on another call."
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,29 @@
+---
+title: "POST /email_to_fax/comment_render_configuration"
+description: "Captured contract for POST /email_to_fax/comment_render_configuration."
+api: "POST /email_to_fax/comment_render_configuration"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /email_to_fax/comment_render_configuration.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+- Update Comment Render Configuration Of Email To Fax
+
+Endpoint:
+POST:  /api/email_to_fax/comment_render_configuration
+Body:
+{
+    "type" : "format",
+    "value" : "html"
+}
+type : in page,format
+value : if page in 1,0 else if format in html,plain_text
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

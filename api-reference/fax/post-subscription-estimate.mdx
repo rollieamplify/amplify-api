@@ -1,0 +1,162 @@
+---
+title: "POST /subscription/estimate"
+description: "Captured contract for POST /subscription/estimate."
+api: "POST /subscription/estimate"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/estimate.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Estimate For Subscription Changes
+
+
+
+
+EndPoint:
+
+POST: api/subscription/estimate
+
+
+Payload:
+
+{
+    "plan": "hippa_pro_plan",
+    "addons": [
+        {
+            "addon": "credits",
+            "quantity": 1000
+        }
+    ],
+    "duration": "annual",
+    "account_id" : 51,
+    "request_from" : "admin"
+ }
+
+account_id is required when request_from is admin
+
+duration in : monthly, annual, 2_year, 3_year
+plan in : hippa_basic_plan,hippa_plus_plan,hippa_pro_plan,hippa_enterprise_plan,basic_plan,plus_plan,pro_plan,enterprise_plan,broadcast_business_plan,broadcast_healthcare_plan,api_business_plan,api_healthcare_plan
+
+
+Response (For Create):
+
+{
+    "data": {
+        "estimates": [
+            {
+                "estimated_monthly_total": 38.99,
+                "invoice_estimate_total": 38.99,
+                "save": 0,
+                "discount_pct": 0,
+                "months": 1,
+                "plan_price": 37.99,
+                "effective_credit_rate": 0.06
+            },
+            {
+                "estimated_monthly_total": 37.04,
+                "invoice_estimate_total": 444.49,
+                "save": 23.39,
+                "discount_pct": 5,
+                "months": 12,
+                "plan_price": 455.88,
+                "effective_credit_rate": 0.057
+            },
+            {
+                "estimated_monthly_total": 35.09,
+                "invoice_estimate_total": 842.18,
+                "save": 93.58,
+                "discount_pct": 10,
+                "months": 24,
+                "plan_price": 911.76,
+                "effective_credit_rate": 0.054
+            },
+            {
+                "estimated_monthly_total": 33.14,
+                "invoice_estimate_total": 1193.09,
+                "save": 210.55,
+                "discount_pct": 15,
+                "months": 36,
+                "plan_price": 1367.64,
+                "effective_credit_rate": 0.051
+            }
+        ],
+        "addons": [
+            {
+                "name": "credits",
+                "price": 0.06
+            }
+        ],
+        "plan_price": "455.88"
+    },
+    "meta": {
+        "request_id": "66e2640d-dc11-47fd-8eb8-98ac766a9983"
+    }
+}
+
+
+
+
+Response (For Update):
+
+{
+    "data": {
+        "estimates": [
+            {
+                "estimated_monthly_total": 38.99,
+                "invoice_estimate_total": 38.99,
+                "save": 0,
+                "discount_pct": 0,
+                "months": 1,
+                "plan_price": 37.99,
+                "effective_credit_rate": 0.06
+            },
+            {
+                "estimated_monthly_total": 37.04,
+                "invoice_estimate_total": 444.49,
+                "save": 23.39,
+                "discount_pct": 5,
+                "months": 12,
+                "plan_price": 455.88,
+                "effective_credit_rate": 0.057
+            },
+            {
+                "estimated_monthly_total": 35.09,
+                "invoice_estimate_total": 842.18,
+                "save": 93.58,
+                "discount_pct": 10,
+                "months": 24,
+                "plan_price": 911.76,
+                "effective_credit_rate": 0.054
+            },
+            {
+                "estimated_monthly_total": 33.14,
+                "invoice_estimate_total": 1193.09,
+                "save": 210.55,
+                "discount_pct": 15,
+                "months": 36,
+                "plan_price": 1367.64,
+                "effective_credit_rate": 0.051
+            }
+        ],
+        "addons": [
+            {
+                "name": "credits",
+                "price": 0.06
+            }
+        ],
+        "plan_price": "455.88",
+        "has_scheduled_changes" : false,
+    },
+    "meta": {
+        "request_id": "66e2640d-dc11-47fd-8eb8-98ac766a9983"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

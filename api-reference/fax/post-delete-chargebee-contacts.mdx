@@ -1,0 +1,60 @@
+---
+title: "POST /delete_chargebee_contacts"
+description: "Captured contract for POST /delete_chargebee_contacts."
+api: "POST /delete_chargebee_contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /delete_chargebee_contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Delete Chargebee Contacts API
+
+
+**Endpoint:**  
+POST: api/delete_chargebee_contacts
+
+
+# Description :
+Removes a billing contact from the Chargebee customer for the given user. Used when the frontend needs to delete a contact by Chargebee contact ID; optionally updates sub-user billing permissions when `email` is provided.  
+Expects `userID`, `id` (Chargebee contact ID), and `is_sandbox`; optional `email`.
+
+
+# Request Body :
+{
+  "userID": "123",
+  "id": "contact_chargebee_id",
+  "email": "contact@example.com",
+  "is_sandbox": 0
+}
+
+
+| Field     | Type   | Required | Description                                      |
+|-----------|--------|----------|--------------------------------------------------|
+| userID    | string | Yes      | User identifier (No).                            |
+| id        | string | Yes      | Chargebee contact ID.                            |
+| email     | string | No       | Contact email (for updating sub-user permissions).|
+| is_sandbox| integer| Yes      | 0 = live, 1 = sandbox.                           |
+
+
+# Response Format :
+
+
+## Success Response (HTTP 200) :
+{
+  "data": "Contact deleted successfully."
+}
+
+
+Or when an email is provided and a sub-user exists:
+{
+  "data": "Contact deleted and permissions updated successfully."
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

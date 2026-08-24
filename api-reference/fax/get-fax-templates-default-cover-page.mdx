@@ -1,0 +1,149 @@
+---
+title: "GET /fax_templates/default_cover_page"
+description: "Captured contract for GET /fax_templates/default_cover_page."
+api: "GET /fax_templates/default_cover_page"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /fax_templates/default_cover_page.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Default Cover Page
+
+Endpoint:
+
+GET: api/fax_templates/default_cover_page
+
+
+Response:
+
+{
+    "data": {
+        "id": 4076,
+        "created_by": 27527,
+        "is_default": false,
+        "name": "final",
+        "caller_id": "None",
+        "recipients": [],
+        "broadcast_recipients": [],
+        "broadcast_ids": [],
+        "quality": "low",
+        "speed": "regular",
+        "approval_required": false,
+        "default_content_type": "smart_template",
+        "include_cover_page": 0,
+        "cover_page_id": 0,
+        "country_id": "138",
+        "cover_page_url": "https://example.com/signed-url
+        "cover_page_metadata": {
+            "show_logo": false,
+            "show_badge": false,
+            "show_disclaimer": false,
+            "subject": "",
+            "comment": "",
+            "disclaimer_text": "<p>This transmission is intended for the exclusive use of the individual or entity to whom it is addressed and may contain information that is proprietary, privileged, confidential and/or exempt from disclosure under applicable law.</p>",
+            "from_name": "",
+            "to_name": "",
+            "logo_filename": "",
+            "logo_url": "",
+            "badge_filename": "",
+            "badge_url": ""
+        },
+        "include_smart_template": true,
+        "smart_template_metadata": {
+            "name": "Smart",
+            "page_count": 1,
+            "storage_id": "d9940cfe1b7943f2a4534b346ae952f1",
+            "annotations": [
+                {
+                    "page": 1,
+                    "fields": [
+                        {
+                            "key": "Fax Logo",
+                            "top": "4.757281553398058%",
+                            "left": "41.959798994974875%",
+                            "type": "img",
+                            "value": "c3454450-8fa2-4ad3-a84e-1972dc545a3f.png",
+                            "width": 100,
+                            "base64": "",
+                            "height": 100,
+                            "isHTML": true,
+                            "source": "",
+                            "urlType": null,
+                            "fontSize": "14",
+                            "rotation": 0,
+                            "dateFormat": "",
+                            "isNlpField": false,
+                            "isRequired": true,
+                            "textFormat": "",
+                            "timeZoneId": "",
+                            "validation": "fax_logo",
+                            "x_position": 334,
+                            "y_position": 49,
+                            "originalType": "img",
+                            "presignedUrl": "https://example.com/signed-url
+                            "reference_id": "1e663fb1d22c47fc895c20eedfa1790d",
+                            "timeZoneName": "",
+                            "isNotEditable": false,
+                            "isStaticField": true,
+                            "mapEmailToFax": "",
+                            "original_name": "Fax Logo",
+                            "textAlignment": "left",
+                            "textSubFormat": "",
+                            "characterLimit": null,
+                            "timeZoneFormat": "",
+                            "fieldValidation": "fax_logo",
+                            "isHideBackground": false,
+                            "faxRecipientsData": [],
+                            "isContactCustomField": false
+                        }
+                    ]
+                }
+            ],
+            "is_show_tooltip": true
+        },
+        "smart_template_id": 2056,
+        "attachments": [],
+        "attachments_count": 0,
+        "header_settings": {
+            "show_sender_name": false,
+            "sender_name_type": "",
+            "show_caller_id": false,
+            "show_delivery_time": false,
+            "delivery_time_format": "",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": ""
+        },
+        "footer_settings": {
+            "show_sender_name": true,
+            "sender_name_type": "user",
+            "show_caller_id": false,
+            "show_delivery_time": 0,
+            "delivery_time_format": "",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": ""
+        },
+        "tags": [],
+        "created_at": "2026-08-12T07:47:12.000000Z",
+        "updated_at": "2026-08-12T07:47:12.000000Z",
+        "paper_size": "Letter",
+        "include_transmission_report": false,
+        "display_fireworks": false,
+        "used_by": [
+            "developer@example.com"
+        ]
+    },
+    "meta": {
+        "request_id": "9b450d39-a545-47dd-85f5-30d468da5e8e"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

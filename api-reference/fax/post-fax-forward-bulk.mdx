@@ -1,0 +1,53 @@
+---
+title: "POST /fax/forward/bulk"
+description: "Captured contract for POST /fax/forward/bulk."
+api: "POST /fax/forward/bulk"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/forward/bulk.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Bulk Fax Forward
+Endpoint:
+
+POST: api/fax/forward/bulk
+
+
+Body:
+
+{    
+    "fax_uuids" : ["01KT1H89BENPECZ6XGGH0YHT92","01KSJ0M7PXPE9PRHZKVEQRTQ7G","01KT3V2TXSZPY7BWJZ13C5B1H6"],
+    "recipients" : [
+        {
+            "to_number" : "12199008015",
+            "contact_id" : 0
+        },
+        {
+            "to_number" : "15876065252",
+            "contact_id" : 0
+        }
+    ]
+}
+
+
+Response:
+
+{
+    "data": {
+        "drafts_created": 6,
+        "failed_faxes": [],
+        "message": "Successfully queued 6 fax(es) for sending"
+    },
+    "meta": {
+        "request_id": "c9f5b468-c1c5-44bc-b6de-eff61cb87d6f"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

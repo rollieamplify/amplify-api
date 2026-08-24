@@ -1,0 +1,16 @@
+---
+title: "Create a contact group"
+description: "Create a group for organizing contacts."
+api: "POST /contact_groups"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField body="name" type="string" required>Group name, up to 100 characters.</ParamField>
+
+```json
+{"name":"Priority customers"}
+```
+
+Returns `201 Created` with the new contact group.
+

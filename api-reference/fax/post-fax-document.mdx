@@ -1,0 +1,54 @@
+---
+title: "POST /fax/document"
+description: "Captured contract for POST /fax/document."
+api: "POST /fax/document"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/document.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Updated Create Fax Document API:
+
+Endpoint:
+
+POST: api/fax/document
+
+
+Body:
+
+{
+  "file": file,   // or
+  "files[]": files, // or
+  "url": "", // or
+  "urls": ["", ""],
+  "folder_id": "234" // use this to create and move to folder
+  "label_ids": [1, 2], // use this to assign lables
+  "assign_ids": [101, 102], // use this to assign user
+}
+
+
+Response:
+
+{
+    "data": {
+        "presigned_url": {
+            "code": 1,
+            "url": "https://example.com/signed-url
+        },
+        "id": 2789,
+        "fax_uuid": "01KGF939GW1NHD1JBWX273M1TQ",
+        "document_name": "Untitled"
+    },
+    "meta": {
+        "request_id": "a5245b85-116b-47a1-9526-631d3b592f3e"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

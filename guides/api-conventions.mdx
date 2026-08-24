@@ -1,0 +1,33 @@
+---
+title: "API conventions"
+description: "Understand Amplify API naming, versioning, and resource behavior."
+---
+
+## Base URL and versioning
+
+All v1 endpoints begin with:
+
+```text
+https://api.amplify.xyz/v1
+```
+
+The major version is part of the URL. Breaking changes require a new major version.
+
+## Naming
+
+- Paths use lowercase plural nouns, such as `/numbers`.
+- Fields, query parameters, and enum values use `snake_case`.
+- Path parameters use resource-specific names, such as `{number_id}`.
+- Resource identifiers are numeric values represented as strings.
+
+## Resource operations
+
+- Create operations return `201 Created` when work finishes synchronously.
+- Long-running operations return `202 Accepted`. Track progress on the returned resource.
+- Updates use `PATCH`.
+- `DELETE` permanently deletes a resource.
+- Resources that support a trash lifecycle use `POST /{resource}/{resource_id}/trash` and `/restore`.
+
+## Unsupported v1 conventions
+
+The v1 contract does not support idempotency keys, ETag-based optimistic concurrency, sparse fieldsets, embedded-resource expansion, client-supplied correlation IDs, or webhook signatures.

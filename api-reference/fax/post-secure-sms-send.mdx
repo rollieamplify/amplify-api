@@ -1,0 +1,40 @@
+---
+title: "POST /secure_sms/send"
+description: "Captured contract for POST /secure_sms/send."
+api: "POST /secure_sms/send"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /secure_sms/send.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Send With Secure SMS
+Endpoint:
+POST: api/secure_sms/send
+
+Body:
+{
+    "local_fax_uuid": "01KERRC0QPZEYSQTE17T9QKSVZ",
+    "from_number" : "+12059471642",
+    "recipients" : [
+        "+919106804607",
+        "+917046841851"
+    ],
+    "accessible_for" : "1_time",
+    "is_shareable" : false,
+    "sign_required" : false,
+    "is_secure" : true
+}
+
+accessible_for : 1_time || 30_days || 60_days 
+is_shareable :  true | false
+sign_required : true | false
+is_secure : true | false
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

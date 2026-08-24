@@ -1,0 +1,159 @@
+---
+title: "GET /esign_templates/{esign_template_id}/variables"
+description: "Captured contract for GET /esign_templates/{esign_template_id}/variables."
+api: "GET /esign_templates/{esign_template_id}/variables"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_templates/{esign_template_id}/variables.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/esign_templates/{esign_template_id}/variables
+
+
+
+
+Description :
+
+
+
+
+Returns all variables for a template.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Response :
+
+
+
+
+{
+    "data": [
+        {
+            "id": 12,
+            "template_id": 101,
+            "name": "client_name",
+            "value": "John Doe",
+            "page": 1,
+            "x_position": 100,
+            "y_position": 200,
+            "height": 30,
+            "width": 150,
+            "created_by": 55
+        }
+    ],
+    "meta": {
+        "request_id": "e995e164-7d95-4c28-a3b5-bfb47906d113"
+    }
+}
+
+
+
+
+
+Error :
+
+
+Field
+
+	
+
+Type
+
+	
+
+Reason
+
+	
+
+Description
+
+
+
+
+401
+
+	
+
+UNAUTHORIZED
+
+	
+
+Unauthorized
+
+	
+
+Request missing or has invalid Bearer token.
+
+
+
+
+400
+
+	
+
+ID_REQUIRED
+
+	
+
+Template id required
+
+	
+
+esign_template_id is missing or empty.
+
+
+
+
+400
+
+	
+
+TEMPLATE_DOES_NOT_EXISTS
+
+	
+
+Template not found
+
+	
+
+Template not found or not accessible.
+
+
+
+
+
+
+
+Note :
+
+
+
+
+Returns empty array when no variables exist.
+Non-editors only see variables they created (created_by filter).
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,33 @@
+---
+title: "Create a contact"
+description: "Create an individual, organization, or patient contact."
+api: "POST /contacts"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField body="type" type="integer" required>`0` individual, `1` organization, or `2` patient.</ParamField>
+<ParamField body="first_name" type="string">Contact first name.</ParamField>
+<ParamField body="last_name" type="string">Contact last name.</ParamField>
+<ParamField body="organization_name" type="string">Required by your workflow for organization contacts.</ParamField>
+<ParamField body="email" type="string">Email address.</ParamField>
+<ParamField body="phone_number" type="string">Primary phone number.</ParamField>
+<ParamField body="fax_number" type="string">Fax number.</ParamField>
+<ParamField body="fields" type="object[]">Custom-field values.</ParamField>
+<ParamField body="groups" type="integer[]">Contact group IDs.</ParamField>
+<ParamField body="duplicate_fax_number" type="boolean" default="false">Allow the duplicate fax-number workflow when applicable.</ParamField>
+
+```json
+{
+  "type": 0,
+  "first_name": "Avery",
+  "last_name": "Morgan",
+  "email": "avery.morgan@example.com",
+  "phone_number": "+14155550101",
+  "fax_number": "+14155550102",
+  "groups": [42]
+}
+```
+
+Returns `201 Created`. A duplicate fax number can return `409` with code `DUPLICATE_FAX_NUMBER`.
+

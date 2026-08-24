@@ -1,0 +1,119 @@
+---
+title: "POST /integrations"
+description: "Captured contract for POST /integrations."
+api: "POST /integrations"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /integrations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Connect/start sync
+Endpoint: POST /integrations
+Description: Authenticate a provider (or start SFTP folder/fax sync). Creates the remote root folder when needed (name = rule above). Dispatches background folder/fax sync.
+Request:
+{
+  "app": "google_drive",
+  "metadata": {}
+}
+
+Field
+
+	
+
+Rules
+
+
+
+
+app
+
+	
+
+required: google_drive, dropbox, one_drive, sharepoint, box, sftp, hubspot
+
+
+
+
+metadata
+
+	
+
+required unless app is sftp
+
+
+
+
+Google — auth URL only
+{
+  "app": "google_drive",
+  "metadata": {
+    "action": "get_auth_url",
+    "state": "optional-state",
+    "redirect_uri": "optional-override"
+  }
+}
+Response:
+{
+  "auth_url": "https://accounts.google.com/o/oauth2/..."
+}
+
+
+
+
+Google / Dropbox / OneDrive / SharePoint / Box — complete OAuth
+
+
+
+
+Metadata is provider-specific (e.g. code, state, redirect_uri, SharePoint selected_drive / multi-site payloads).
+
+
+
+
+Success response (simple):
+{
+  "status": "ok"
+}
+
+
+
+
+SharePoint (or multi-drive) flows may return extra selection fields:
+
+
+
+
+{
+  "requires_drive_selection": true,
+  "multiple_sites": true,
+  "drives": [
+    { "id": "...", "name": "Site", "driveType": "sharepoint" }
+  ],
+  "access_token": "...",
+  "refresh_token": "..."
+}
+
+
+
+
+SFTP — enable sync for current user
+{
+  "app": "sftp"
+}
+Requires account SFTP credentials (GET /sftp_configurations non-empty).
+Success:
+{
+  "status": "ok"
+}
+Errors:
+422 SFTP_NOT_CONFIGURED — save SFTP config first (owner).
+409 / SYNC_ALREADY_IN_PROGRESS — prior sync still running for this user/provider.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,46 @@
+---
+title: "POST /document/name"
+description: "Captured contract for POST /document/name."
+api: "POST /document/name"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /document/name.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Description:
+This API is used to update the name of an existing document. It accepts the document identifier and the new name, validates the input, and updates the document name accordingly. 
+
+Endpoint :
+POST - api/document/name
+
+Body :
+{
+  "document_name": "Invoice_January_2026",
+  "fax_uuid": "JKHUIYUI6598626565JGU"
+}
+
+
+Body :
+{
+  "document_name": "Monthly_Report",
+  "broadcast_fax_uuid": "JKHUIYUI6598626565JGU"
+}
+
+Response :
+{
+    "data": {
+        "message": "Document name updated successfully."
+    },
+    "meta": {
+        "request_id": "c99c9709-49be-4a90-9c82-d8ccbc320375"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

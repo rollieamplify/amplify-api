@@ -1,0 +1,238 @@
+---
+title: "POST /campaign/list"
+description: "Captured contract for POST /campaign/list."
+api: "POST /campaign/list"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /campaign/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# # Campaign & Broadcast List API
+
+
+## Description
+Retrieves a paginated list of **campaigns and standalone broadcasts** with filtering, search, and sorting. Returns detailed information including status, recipient counts, delivery statistics, and more.
+
+**Note**: This API now returns both campaigns AND standalone broadcasts (broadcasts not part of a campaign).
+
+
+## Endpoint :
+POST: api/campaign/list
+
+## Request Parameters : 
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `page` | integer | No | 1 | Page number for pagination |
+| `cursor` | integer | No | 1 | Alias for `page` (cursor-based pagination) |
+| `limit` | integer | No | 20 | Items per page (max: 200) |
+| `per_page` | integer | No | 20 | Alias for `limit` |
+| `search` | string | No | - | Search term to filter by campaign name or broadcast subject |
+| `search_string` | string | No | - | Alias for `search` |
+| `q` | string | No | - | Alias for `search` |
+| `sort_by` | string | No | `newest` | Sort order: `newest`, `oldest`, `a_z`, `z_a` |
+| `status` | string | No | - | Filter by fax status (see Status Values below) |
+| `start_date` | string | No | - | Filter from this date (YYYY-MM-DD or ISO 8601) |
+| `end_date` | string | No | - | Filter until this date (YYYY-MM-DD or ISO 8601) |
+
+
+
+## Status Values :
+The `status` parameter filters by `faxes.fax_status` for both campaigns and broadcasts:
+| Status Value | Filters By | Description |
+|-------------|-----------|-------------|
+| `draft` | `fax_status = 'draft'` | Draft items |
+| `pending` | `fax_status = 'pending'` | Queued/pending items |
+| `active` | `fax_status = 'sending'` | Currently sending |
+| `sending` | `fax_status = 'sending'` | Currently sending |
+| `completed` | `fax_status = 'delivered'` | Successfully delivered |
+| `delivered` | `fax_status = 'delivered'` | Successfully delivered |
+| `failed` | `fax_status IN ('failed', 'failed_chargeable')` | Failed (both types) |
+| `cancelled` | `fax_status IN ('cancelled', 'partially_cancelled')` | Cancelled (includes partial) |
+
+
+## Sorting Options :
+| Sort Value | Description |
+|-----------|-------------|
+| `newest` | Sort by creation date (newest first) - **Default** |
+| `oldest` | Sort by creation date (oldest first) |
+| `a_z` | Sort by name alphabetically (A to Z) |
+| `z_a` | Sort by name reverse alphabetically (Z to A) |
+
+
+## Success Response (200) :
+{
+    "data": [
+        {
+            "campaign_id": 123,
+            "name": "My Campaign",
+            "type": "campaign",
+            "broadcast_ids": "1,2,3",
+            "local_fax_uuid": "01KFCXY9YVDS58W5REZBK909W8",
+            "fax_uuid": "01KFCXY9YVDS58W5REZBK909W9",
+            "broadcast_fax_uuid": "01KFCXY9YVDS58W5REZBK909X0",
+            "total_recipients": 150,
+            "pending": 10,
+            "delivered": 120,
+            "sent": 125,
+            "failed": 5,
+            "draft": 0,
+            "sending": 8,
+            "failed_chargeable": 2,
+            "manually_cancelled": 0,
+            "blocked": 0,
+            "is_opted_out": 0,
+            "is_converted_via_qr": 0,
+            "location": "US",
+            "restart_type": null,
+            "status": 1,
+            "is_canceled": 0,
+            "canceled_by": null,
+            "canceled_date": null,
+            "start_date": "2025-01-20 10:00:00",
+            "complete_date": null,
+            "delivery_rate": 95.5,
+            "conversion_rate": 2.3,
+            "created_at": "2025-01-20 09:00:00",
+            "updated_at": "2025-01-20 12:00:00"
+        },
+        {
+            "campaign_id": null,
+            "broadcast_id": 242,
+            "name": "Standalone Broadcast",
+            "type": "broadcast",
+            "local_fax_uuid": "01KGSH1GDQHSFXK3CES8SDK7Z4",
+            "fax_uuid": "01KGSH3R7MEB59W01NWR0FAV1R",
+            "broadcast_fax_uuid": "01KGSH3R7Z2YY5TBVQ7XQFT8S2",
+            "total_recipients": 100,
+            "pending": 100,
+            "delivered": 0,
+            "sent": 0,
+            "failed": 0,
+            "draft": 0,
+            "sending": 0,
+            "failed_chargeable": 0,
+            "manually_cancelled": 0,
+            "blocked": 0,
+            "is_opted_out": 0,
+            "is_converted_via_qr": 0,
+            "location": null,
+            "restart_type": null,
+            "status": 1,
+            "is_canceled": 0,
+            "canceled_by": null,
+            "canceled_date": null,
+            "start_date": "2026-02-06T13:08:55.000000Z",
+            "complete_date": null,
+            "delivery_rate": 0,
+            "conversion_rate": 0,
+            "created_at": "2026-02-06T13:08:55.000000Z",
+            "updated_at": "2026-02-09T08:50:06.000000Z"
+        }
+    ],
+    "meta": {
+        "total": 137,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "f7f75148-53b4-4de5-a505-6042aecf9825"
+    }
+}
+
+
+## Example Requests
+
+
+### 1. Get All Items (Campaigns + Broadcasts) :
+{
+    "page": 1,
+    "limit": 20,
+    "sort_by": "newest"
+}
+**Returns**: All campaigns and standalone broadcasts, sorted by newest first
+
+
+
+
+### 2. Search by Name : 
+{
+    "search": "Marketing",
+    "page": 1,
+    "limit": 20
+}
+**Returns**: Campaigns with "Marketing" in name OR broadcasts with "Marketing" in subject
+
+
+### 3. Filter Active Items (Currently Sending) :
+{
+    "status": "active",
+    "page": 1,
+    "limit": 20
+}
+**Returns**: Both campaigns and broadcasts with `fax_status = 'sending'`
+
+
+### 4. Filter Completed Items "
+{
+    "status": "completed",
+    "sort_by": "newest",
+    "page": 1,
+    "limit": 20
+}
+**Returns**: Both campaigns and broadcasts with `fax_status = 'delivered'`
+
+
+### 5. Filter Failed Items :
+{
+    "status": "failed",
+    "page": 1,
+    "limit": 20
+}
+**Returns**: Both campaigns and broadcasts with `fax_status IN ('failed', 'failed_chargeable')`
+
+
+### 6. Filter by Date Range 
+{
+    "start_date": "2026-02-01",
+    "end_date": "2026-02-28",
+    "page": 1,
+    "limit": 20
+}
+**Returns**: Items created between Feb 1-28, 2026
+
+
+### 7. Sort Alphabetically : 
+{
+    "sort_by": "a_z",
+    "page": 1,
+    "limit": 20
+}
+**Returns**: Items sorted by name (A to Z)
+
+
+### 8. Cursor-Based Pagination : 
+{
+    "cursor": 2,
+    "per_page": 20
+}
+**Returns**: Page 2 with 20 items (same as `page: 2, limit: 20`)
+
+
+### 9. Combined Filters :
+{
+    "status": "completed",
+    "search": "Campaign",
+    "start_date": "2026-01-01",
+    "end_date": "2026-02-28",
+    "sort_by": "newest",
+    "page": 1,
+    "limit": 20
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

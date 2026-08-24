@@ -1,0 +1,41 @@
+---
+title: "PATCH /call_recordings/{call_session_id}/change_state"
+description: "Captured contract for PATCH /call_recordings/{call_session_id}/change_state."
+api: "PATCH /call_recordings/{call_session_id}/change_state"
+public: true
+---
+
+This page documents the behavior captured for PATCH /call_recordings/{call_session_id}/change_state in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    [PATCH] api/call_recordings/{call_session_id}/change_state
+    
+    Body:
+    {
+        "recording_state": "stop",
+        "direction": "outbound",
+        "inbound_call_notification": "voice",
+        "outbound_call_notification": "voice"
+    }
+    
+    recording_state: start,stop,resume
+    direction: inbound/outbound
+    
+    Response:
+    {
+        "data": {
+            "recording_state": "stop"
+        },
+        "meta": {
+            "request_id": "ea3a520c-4af1-4262-a3f1-d5581e07675f"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

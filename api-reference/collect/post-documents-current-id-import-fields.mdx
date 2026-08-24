@@ -1,0 +1,62 @@
+---
+title: "POST /documents/{current_id}/import_fields"
+description: "Captured contract for POST /documents/{current_id}/import_fields."
+api: "POST /documents/{current_id}/import_fields"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /documents/{current_id}/import_fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/documents/{current_id}/import_fields
+
+
+
+
+Description :
+
+-> Copies all fields from a source document or template into the target document. 
+-> Fields are duplicated with a reference to the source. 
+-> Import is allowed only once per source/target pair per user.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

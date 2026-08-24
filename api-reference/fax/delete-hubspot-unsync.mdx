@@ -1,0 +1,30 @@
+---
+title: "DELETE /hubspot/unsync"
+description: "Captured contract for DELETE /hubspot/unsync."
+api: "DELETE /hubspot/unsync"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /hubspot/unsync.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Unsync hubspot
+
+Endpoint:
+DELETE: api/hubspot/unsync
+
+Response:
+{
+    "data": "Hubspot unsynced successfully.",
+    "meta": {
+        "request_id": "f173995a-c375-4c17-b6f8-1ca723cf30c7"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

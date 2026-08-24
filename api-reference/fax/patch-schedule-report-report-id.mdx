@@ -1,0 +1,61 @@
+---
+title: "PATCH /schedule/report/{report_id}"
+description: "Captured contract for PATCH /schedule/report/{report_id}."
+api: "PATCH /schedule/report/{report_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /schedule/report/{report_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+PATCH: api/schedule/report/1
+
+Body:
+{
+    "type": "usage_report",
+    "frequency": "daily",
+    "fax_numbers": ["9879879870", "3213213210"],
+    "direction": "both",
+    "send_email_to": ["developer@example.com", "developer@example.com"]
+}
+
+
+type: Allowed: usage_report
+frequency: daily, weekly, monthly
+fax_numbers: Fax number ID(s). Single or Multiple ID Array
+direction: both, outbound, inbound
+send_email_to: Recipient email(s). Single or multiple Array
+
+Response:
+{
+    "data": {
+        "id": 1,
+        "type": "usage_report",
+        "file_name": "Usage Report",
+        "frequency": "daily",
+        "fax_numbers": [
+            "9879879870",
+            "3213213210"
+        ],
+        "direction": "both",
+        "send_email_to": [
+            "developer@example.com",
+            "developer@example.com"
+        ],
+        "created_at": "2026-01-29T11:29:13.000000Z",
+        "updated_by": 49,
+        "updated_at": "2026-01-29T11:31:43.000000Z"
+    },
+    "meta": {
+        "request_id": "dede737b-527a-4a7d-9f52-3f8decff76f8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

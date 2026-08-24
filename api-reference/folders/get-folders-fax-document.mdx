@@ -1,0 +1,241 @@
+---
+title: "GET /folders/fax_document"
+description: "Captured contract for GET /folders/fax_document."
+api: "GET /folders/fax_document"
+public: true
+---
+
+This internal review page records the behavior captured for GET /folders/fax_document.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+Root folder & faxes/documents not in folder
+GET: api/folders/fax_document?cursor=1&limit=15
+
+Sub folder and folder faxes/documents
+GET: api/folders/fax_document?cursor=1&limit=15&folder_id=601
+
+search
+GET: api/folders/fax_document?cursor=1&limit=15&search=Test%20Expired&folder_id=601
+
+Type
+
+folder, faxes, documents, fax_document
+https://dev-api.amplify.xyz/api/folders/fax_document?cursor=1&limit=150&type=folders
+
+Source
+
+fax, esign, secure_fax, secure_email, secure_sms, fhir, upload
+https://dev-api.amplify.xyz/api/folders/fax_document?cursor=1&limit=150&source=folders
+
+fax_status
+
+draft, pending, sending, delivered, receiving, received, failed, failed_chargeable, cancelled, partially_cancelled
+https://dev-api.amplify.xyz/api/folders/fax_document?cursor=1&limit=150&fax_status[]=delivered
+
+Direction
+inbound, outbound
+https://dev-api.amplify.xyz/api/folders/fax_document?cursor=1&limit=150&direction[]=inbound
+
+Response:
+{
+    "data": [
+        {
+            "id": 600,
+            "name": "Testasdad",
+            "type": "folder",
+            "labels": [],
+            "updated_at": "2026-01-13T07:31:22.000000Z",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [
+                {
+                    "first_name": "web",
+                    "last_name": "one",
+                    "email": "developer@example.com"
+                    "id": 322
+                },
+                {
+                    "first_name": "Signer",
+                    "last_name": "A",
+                    "email": "developer@example.com",
+                    "id": 321
+                }
+            ],
+            "assigned_emails": [  // when folder Id is available
+                "developer@example.com",
+                "test@example.com"
+            ],
+            "folder_contents": 0,
+            "file_size": 0,
+            "fax_uuid": "",
+            "fax_status": "",
+            "from_number": 0,
+            "to_number": 0,
+            "thumbnail_image": ""
+        },
+        {
+            "id": 601,
+            "name": "ABC",
+            "type": "folder",
+            "labels": [],
+            "updated_at": "2026-01-13T07:59:45.000000Z",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "folder_contents": 5,
+            "file_size": 0,
+            "fax_uuid": "",
+            "fax_status": "",
+            "from_number": 0,
+            "to_number": 0,
+            "thumbnail_image": ""
+        },
+        {
+            "id": 2912,
+            "name": "Doc 1",
+            "type": "esign",
+            "labels": [],
+            "updated_at": "2026-01-13 11:49:47",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "folder_contents": 0,
+            "file_size": 0,
+            "fax_uuid": "",
+            "fax_status": "0",
+            "from_number": 0,
+            "to_number": 0,
+            "thumbnail_image": ""
+        },
+        {
+            "id": 2913,
+            "name": "Doc 2",
+            "type": "esign",
+            "labels": [],
+            "updated_at": "2026-01-13 11:54:01",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "folder_contents": 0,
+            "file_size": 0,
+            "fax_uuid": "",
+            "fax_status": "0",
+            "from_number": 0,
+            "to_number": 0,
+            "thumbnail_image": ""
+        },
+        {
+            "id": 3226,
+            "name": "Owner As Signer",
+            "type": "esign",
+            "labels": [],
+            "updated_at": "2026-01-16 12:20:42",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "assigned_emails": [
+                "developer@example.com",
+                "test@example.com"
+            ],
+            "folder_contents": 0,
+            "file_size": 0,
+            "fax_uuid": "",
+            "fax_status": "0",
+            "from_number": 0,
+            "to_number": 0,
+            "thumbnail_image": ""
+        },
+        {
+            "id": 3414,
+            "name": "Owner Complete",
+            "type": "esign",
+            "labels": [],
+            "updated_at": "2026-01-19 04:56:59",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "folder_contents": 0,
+            "file_size": 0,
+            "fax_uuid": "",
+            "fax_status": "0",
+            "from_number": 0,
+            "to_number": 0,
+            "thumbnail_image": ""
+        },
+        {
+            "id": 805,
+            "name": "Fax 12052938021",
+            "type": "outbound",
+            "labels": [],
+            "updated_at": "2026-01-21 09:05:16",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "folder_contents": 0,
+            "file_size": 0,
+            "fax_uuid": "01KFFWT3EM5BJZESQB71E7RDA5",
+            "fax_status": "draft",
+            "from_number": 19073131400,
+            "to_number": 12052938021,
+            "thumbnail_image": ""
+        },
+        {
+            "id": 1066,
+            "name": "Fax 12052938021",
+            "type": "outbound",
+            "labels": [],
+            "updated_at": "2026-01-22 08:30:26",
+            "owner": {
+                "first_name": "Web",
+                "last_name": "TwentyNine",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "folder_contents": 0,
+            "file_size": 0,
+            "fax_uuid": "01KFJD5TPH4C3PDHS10FD0FD0H",
+            "fax_status": "delivered",
+            "from_number": 19073131400,
+            "to_number": 12052938021,
+            "thumbnail_image": "https://example.com/signed-url
+        }
+    ],
+    "meta": {
+        "total": 8,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 15,
+        "request_id": "36f03394-9ec6-4642-956e-21467f1fafee"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

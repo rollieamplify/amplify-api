@@ -1,0 +1,98 @@
+---
+title: "POST /save_user_data"
+description: "Captured contract for POST /save_user_data."
+api: "POST /save_user_data"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /save_user_data.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: /api/save_user_data
+
+Body:
+{
+    "why_do_you_fax": "Work",
+    "hear_from": "Advertisement",
+    
+    "company_name": "dfgdgg",
+    "company_type": "Insurance",
+    "company_size": "10001+",
+    "job_title_id": 170,
+    
+    "department": "",
+    "onboarding_use_case": "Sending audit or compliance packets to regulators",
+    "onboarding_workflow": "dfgdfdfdfgdf",
+    "current_fax_setup": "Switching from other digital fax software",
+    "software": "Etherfax",
+    "current_ehr_emr": "athenahealth",
+    
+    "estimated_fax_pages": "20,000 - 49,999 pages",
+    "user_count": "51-100",
+    "planned_start": "<1 Month",
+    "usage_duration": "<1 Year",
+
+    "estimated_clients": "1-5", // Reseller  
+
+    "feature_send_faxes": true,
+    "feature_receive_faxes": false,
+    "feature_fax_ocr": false,
+    "feature_broadcast_fax": false,
+    "feature_hippa_cloud_storage": false,
+    "feature_api": true,
+    "feature_ai_data_extraction": false,
+    
+    "hipaa_sms_messages": false,
+    "hipaa_voice_calls": true,
+    "hipaa_video_meetings": false,
+    "hipaa_forms_intake": false,
+    "hipaa_esign_documents": false
+}
+
+Response:
+{
+    "data": {
+        "id": 1,
+        "created_by": 49,
+        "why_do_you_fax": "Work",
+        "hear_from": "Advertisement",
+        "company_name": "dfgdgg",
+        "company_type": "Insurance",
+        "company_size": "10001+",
+        "job_title": "Adult Day Services Life Enrichment Director",
+        "onboarding_use_case": "Sending audit or compliance packets to regulators",
+        "onboarding_workflow": "dfgdfdfdfgdf",
+        "current_fax_setup": "Switching from other digital fax software",
+        "software": "Etherfax",
+        "current_ehr_emr": "athenahealth",
+        "estimated_fax_pages": "20,000 - 49,999 pages",
+        "user_count": "51-100",
+        "planned_start": "<1 Month",
+        "usage_duration": "<1 Year",
+        "estimated_clients": "1-5",
+        "feature_send_faxes": true,
+        "feature_receive_faxes": false,
+        "feature_fax_ocr": false,
+        "feature_broadcast_fax": false,
+        "feature_hippa_cloud_storage": false,
+        "feature_api": true,
+        "feature_ai_data_extraction": false,
+        "hipaa_sms_messages": false,
+        "hipaa_voice_calls": true,
+        "hipaa_video_meetings": false,
+        "hipaa_forms_intake": false,
+        "hipaa_esign_documents": false
+    },
+    "meta": {
+        "request_id": "376897e5-c26e-4cd1-b768-38a183012a7a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

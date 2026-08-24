@@ -1,0 +1,59 @@
+---
+title: "PUT /esign_documents/{esign_document_id}/recipients"
+description: "Captured contract for PUT /esign_documents/{esign_document_id}/recipients."
+api: "PUT /esign_documents/{esign_document_id}/recipients"
+public: true
+---
+
+This internal review page records the behavior captured for PUT /esign_documents/{esign_document_id}/recipients.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+PUT : api/esign_documents/{esign_document_id}/recipients
+
+
+
+
+Description :
+
+-> Replaces/syncs the full recipient list. 
+-> Creates new recipients, updates existing ones, and removes recipients not in the payload. 
+-> Supports toggling has_sign_order and updating sign order for all recipients.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

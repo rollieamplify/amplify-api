@@ -1,0 +1,85 @@
+---
+title: "GET /engage/search_contact"
+description: "Captured contract for GET /engage/search_contact."
+api: "GET /engage/search_contact"
+public: true
+---
+
+This page documents the behavior captured for GET /engage/search_contact in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/engage/search_contact
+    
+    Filter params:
+    GET: api/engage/search_contact?search_string=web
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 6861,
+                "first_name": "Web",
+                "last_name": "sixty five",
+                "email": "",
+                "phone_number": "19517831166",
+                "fax_number": "",
+                "type": 0,
+                "is_internal": true
+            },
+            {
+                "id": 6140,
+                "first_name": "Web Twenty",
+                "last_name": "Fax",
+                "email": "",
+                "phone_number": "",
+                "fax_number": "19382530896",
+                "type": 0,
+                "is_internal": false
+            },
+            {
+                "id": 4318,
+                "first_name": "Call",
+                "last_name": "Web",
+                "email": "",
+                "phone_number": "12058809064",
+                "fax_number": "",
+                "type": 0,
+                "is_internal": false
+            },
+            {
+                "id": 4315,
+                "first_name": "Web Call",
+                "last_name": "Other",
+                "email": "",
+                "phone_number": "19382530055",
+                "fax_number": "",
+                "type": 0,
+                "is_internal": true
+            },
+            {
+                "id": 4308,
+                "first_name": "Web",
+                "last_name": "Other",
+                "email": "",
+                "phone_number": "",
+                "fax_number": "12563679055",
+                "type": 0,
+                "is_internal": false
+            }
+        ],
+        "meta": {
+            "total": 5,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 20
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

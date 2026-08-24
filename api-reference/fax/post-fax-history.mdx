@@ -1,0 +1,265 @@
+---
+title: "POST /fax_history"
+description: "Captured contract for POST /fax_history."
+api: "POST /fax_history"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /fax_history.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Fax history
+
+Endpoint:
+
+POST: api/fax_history?limit=20&cursor=1
+
+
+Body:
+
+{
+ "fax_number": "12052938854",
+ "assigned_to_user_ids": [1, 5, 10],
+ "sent_by_user_ids": [2, 8],
+ "method": ["app", "api", "email_to_fax"],
+ "label_ids": [3, 7, 12],
+ "direction": ["outbound", "inbound"],
+ "fax_status": ["completed"],
+ "start_date": "2024-01-01 00:00:00",
+ "end_date": "2024-12-31 23:59:59",
+ "retry_attempt": [0, 1, 2],
+ "sort_by": "latest",
+ "source": ["fax", "secure_email", "upload"],
+ "patient_full_name" : "test"
+}
+
+method in: app,api,email_to_fax,fcl_to_fax, broadcast
+direction in: outbound, inbound
+source in : fax,secure_fax,secure_email,secure_sms,fhir,upload
+
+Response:
+
+{
+     "data": {
+        "fax_history": [
+            {
+                "fax_uuid": "01KGF76XBXGQ588ZAKQ4W9RNCT",
+                "is_read": false,
+                "fax_type": "outbound",
+                "created_by": 57,
+                "created_by_email": "developer@example.com",
+                "is_broadcast": false,
+                "broadcast_id": "",
+                "broadcast_name": "",
+                "campaign_id": "",
+                "campaign_name": "",
+                "to_number": 12052938854,
+                "from_number": 12052938854,
+                "document_name": "Fax 12052938854",
+                "sender_name": "Test Name",
+                "sender_email": "",
+                "recipient_name": "",
+                "recipient_email": "",
+                "subject": "Hello Subject",
+                "pages": 1,
+                "labels": [],
+                "retry_attempt": 0,
+                "fax_status": "Delivered",
+                "assigned_emails": [],
+                "assigned_names": [],
+                "created_at": 1770037409,
+                "updated_at": 1770037438,
+                "to_contact_details": {
+                    "first_name": "",
+                    "last_name": "",
+                    "email": "",
+                    "organization_name": "",
+                    "full_name": "",
+                    "is_organization": false,
+                    "id": 0
+                },
+                "from_contact_details": {
+                    "first_name": "",
+                    "last_name": "",
+                    "email": "",
+                    "organization_name": "",
+                    "full_name": "",
+                    "is_organization": false,
+                    "id": 0
+                },
+                "start_time": 1770037412,
+                "end_time": 1770037435,
+                "duration": "00:23",
+                "fax_error": "0",
+                "thumbnail_image": "https://example.com/signed-url
+                "is_cancelled": false,
+                "method": "app",
+                "ocr_status": "",
+                "nlp_status": "",
+                "source": "fax",
+                "local_fax_uuid": "01KGF76RE8W8TFGX6RARV6TFT4",
+                "is_blocked": false,
+                "nlp_fields": {
+                    "receiver_number": null,
+                    "fax_text": null,
+                    "fax_subject": null,
+                    "fax_number": null,
+                    "sender_name": null,
+                    "document_type": null,
+                    "address": null,
+                    "subscriber_id": null,
+                    "subscriber_name": null,
+                    "subscriber_dob": null,
+                    "subscriber_address": null,
+                    "subscriber_phone": null,
+                    "subscriber_group_number": null,
+                    "social_security_number": null,
+                    "health_card_number": null,
+                    "facility": null,
+                    "physician_name": null,
+                    "bill_type": null,
+                    "billing_number": null,
+                    "dob": null,
+                    "degree": null,
+                    "diagnosis": null,
+                    "email": null,
+                    "gender": null,
+                    "phone": null,
+                    "work_phone": null,
+                    "cell_phone": null,
+                    "home_phone": null,
+                    "group_number": null,
+                    "insurance_name": null,
+                    "insurance_plan": null,
+                    "medical_record_number": null,
+                    "npi": null,
+                    "patient_id": null,
+                    "patient_name": null,
+                    "provider_id": null,
+                    "speciality": null
+                }
+            },
+            {
+                "fax_uuid": "01KGF42JBNXVQE8BSKABFZY58Q",
+                "is_read": false,
+                "fax_type": "inbound",
+                "created_by": 57,
+                "created_by_email": "developer@example.com",
+                "is_broadcast": false,
+                "broadcast_id": "",
+                "broadcast_name": "",
+                "campaign_id": "",
+                "campaign_name": "",
+                "to_number": 12052938854,
+                "from_number": 12052938854,
+                "document_name": "Fax 12052938854",
+                "sender_name": "",
+                "sender_email": "",
+                "recipient_name": "",
+                "recipient_email": "",
+                "subject": null,
+                "pages": 1,
+                "labels": [],
+                "retry_attempt": 0,
+                "fax_status": "Unassigned",
+                "assigned_emails": [],
+                "assigned_names": [],
+                "created_at": 1770034121,
+                "updated_at": 1770034121,
+                "to_contact_details": {
+                    "first_name": "",
+                    "last_name": "",
+                    "email": "",
+                    "organization_name": "",
+                    "full_name": "",
+                    "is_organization": false,
+                    "id": 0
+                },
+                "from_contact_details": {
+                    "first_name": "",
+                    "last_name": "",
+                    "email": "",
+                    "organization_name": "",
+                    "full_name": "",
+                    "is_organization": false,
+                    "id": 0
+                },
+                "start_time": 1770034099,
+                "end_time": 1770034120,
+                "duration": "00:21",
+                "fax_error": "",
+                "thumbnail_image": "",
+                "is_cancelled": false,
+                "method": "app",
+                "ocr_status": "",
+                "nlp_status": "",
+                "source": "fax",
+                "local_fax_uuid": "",
+                "is_blocked": true,
+                "nlp_fields": {
+                    "receiver_number": null,
+                    "fax_text": null,
+                    "fax_subject": null,
+                    "fax_number": null,
+                    "sender_name": null,
+                    "document_type": null,
+                    "address": null,
+                    "subscriber_id": null,
+                    "subscriber_name": null,
+                    "subscriber_dob": null,
+                    "subscriber_address": null,
+                    "subscriber_phone": null,
+                    "subscriber_group_number": null,
+                    "social_security_number": null,
+                    "health_card_number": null,
+                    "facility": null,
+                    "physician_name": null,
+                    "bill_type": null,
+                    "billing_number": null,
+                    "dob": null,
+                    "degree": null,
+                    "diagnosis": null,
+                    "email": null,
+                    "gender": null,
+                    "phone": null,
+                    "work_phone": null,
+                    "cell_phone": null,
+                    "home_phone": null,
+                    "group_number": null,
+                    "insurance_name": null,
+                    "insurance_plan": null,
+                    "medical_record_number": null,
+                    "npi": null,
+                    "patient_id": null,
+                    "patient_name": null,
+                    "provider_id": null,
+                    "speciality": null
+                }
+            }
+        ],
+        "contact_details": {
+            "first_name": "My Number",
+            "last_name": "Test",
+            "email": "my@gmail.com",
+            "organization_name": "",
+            "full_name": "My Number Test",
+            "is_organization": false,
+            "id": 963
+        }
+    },
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "c98c245e-a37e-4f04-babc-1524a0eaff82"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,146 @@
+---
+title: "POST /fax/dashboard/list"
+description: "Captured contract for POST /fax/dashboard/list."
+api: "POST /fax/dashboard/list"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/dashboard/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Dashboard Fax List
+
+Endpoint:
+
+POST: api/fax/dashboard/list?limit=20&cursor=1
+
+
+Body:
+
+{
+ "assigned_to_user_ids": [1, 5, 10],
+ "sent_by_user_ids": [2, 8],
+ "fax_numbers": ["+1234567890", "+0987654321", "+1122334455"],
+ "method": ["app", "api", "email_to_fax"],
+ "label_ids": [3, 7, 12],
+ "direction": ["outbound", "inbound"],
+ "fax_status": ["completed", "failed", "pending"],
+ "start_date": "2024-01-01 00:00:00",
+ "end_date": "2024-12-31 23:59:59",
+ "retry_attempt": [0, 1, 2],
+ "sort_by": "latest",
+ "source": ["fax", "secure_email", "upload"],
+ "priority": ["yes","no","unknown"],
+ "document_type": ["Admin Note"],
+ "is_pinned" : "true"
+}
+
+method in : app,api,email_to_fax,fcl_to_fax,broadcast
+direction in : outbound,inbound
+source in : fax,secure_fax,secure_email,secure_sms,fhir,upload
+priority in : yes,no,unknown
+document_type in : Admin Note,Consult Note,Cover Page,Imaging Note,Insurance Authorization,Intake Forms,Lab Test,Other,Patient Profile,Prescriptions,Referral Letter,Requisition Form,Insurance Authorization Request Form,Consent Form
+
+
+Response:
+
+{
+    "data": [
+        {
+            "fax_uuid": "01KXGAZQHXD4GVGM3K7PW9QGMW",
+            "is_read": true,
+            "fax_type": "inbound",
+            "created_by": 25999,
+            "created_by_email": "developer@example.com",
+            "is_broadcast": false,
+            "broadcast_id": "",
+            "broadcast_name": "",
+            "broadcast_recipients_count": 0,
+            "campaign_id": "",
+            "campaign_name": "",
+            "to_number": 12054169571,
+            "from_number": 12054169571,
+            "document_name": "Fax 12054169571",
+            "sender_name": "",
+            "sender_email": "",
+            "recipient_name": "",
+            "recipient_email": "",
+            "subject": null,
+            "pages": 2,
+            "file_size": 261765,
+            "labels": [],
+            "retry_attempt": 0,
+            "fax_status": "Action Required",
+            "assigned_emails": [
+                "developer@example.com"
+            ],
+            "assigned_names": [
+                "hetviowner k"
+            ],
+            "created_at": 1784033566,
+            "updated_at": 1784102118,
+            "to_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false,
+                "id": 0
+            },
+            "from_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false,
+                "id": 0
+            },
+            "start_time": 1784033519,
+            "end_time": 1784033567,
+            "duration": "00:48",
+            "fax_error": "",
+            "thumbnail_image": "https://dev-api.amplify.xyz/uploads/default_document_thumbnail.png",
+            "is_cancelled": false,
+            "method": "app",
+            "ocr_status": "",
+            "nlp_status": "",
+            "source": "fax",
+            "local_fax_uuid": "",
+            "is_blocked": false,
+            "nlp_data": [],
+            "transmission_end_estimate": "",
+            "notes_count": 0,
+            "faster_delivered_percentage": 0,
+            "delivered_fax_pages": 2,
+            "fax_cancel_timestamp": "",
+            "is_right_time_delivered": false,
+            "cancel_by_user": "",
+            "marked_by_user": "",
+            "pending_request_confirmation": true,
+            "request_fax_confirmed_datetime": "",
+            "required_nlp_credits": 4,
+            "required_ocr_credits": 1,
+            "estimate_credit_required": 2,
+            "credit_refunded": 0,
+            "actual_credit_deducted": 2,
+            "is_pinned": "true"
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "f8b8b39d-4e18-4444-8e50-c0fc0d3c39a7"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

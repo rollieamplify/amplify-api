@@ -1,0 +1,41 @@
+---
+title: "GET /agents/{id}/clone"
+description: "Captured contract for GET /agents/{id}/clone."
+api: "GET /agents/{id}/clone"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /agents/{id}/clone.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Clone Agent Details.
+
+Endpoint
+GET : api/agents/{id}/clone
+
+Response
+{
+    "data": {
+        "id": 3,
+        "name": "Sarah 1",
+        "avatar": "Sarah",
+        "voicetype": "male",
+        "voicetypestyle": "friendly",
+        "empathy": 10,
+        "patience": 5,
+        "retell_agentid": "agent_id_from_retell_agent",
+        "created_at": "2026-02-11T06:36:43.000000Z",
+        "updated_at": "2026-02-11T06:36:43.000000Z"
+    },
+    "meta": {
+        "request_id": "55610a47-3877-4cfd-b7dc-ef775eafc9e2"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

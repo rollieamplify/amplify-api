@@ -1,0 +1,60 @@
+---
+title: "GET /folders/shared_me"
+description: "Captured contract for GET /folders/shared_me."
+api: "GET /folders/shared_me"
+public: true
+---
+
+This internal review page records the behavior captured for GET /folders/shared_me.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+Get the shared folders list
+GET: api/folders/shared_me
+
+Sub folder and folder faxes/documents
+GET: api/folders/shared_me?cursor=1&limit=15&folder_id=601
+
+Response:
+{
+    "data": [
+        {
+            "id": 790,
+            "name": "shared folders",
+            "type": "folder",
+            "labels": [],
+            "updated_at": "2026-01-27T06:10:10.000000Z",
+            "owner": {
+                "first_name": "asdasd",
+                "last_name": "asdasd",
+                "email": "developer@example.com"
+            },
+            "shared": [],
+            "folder_contents": 2,
+            "file_size": 0,
+            "fax_uuid": "",
+            "fax_status": "",
+            "from_number": 0,
+            "to_number": 0,
+            "thumbnail_image": "",
+            "direct_count": 1, // only in root folder
+            "subfolder_count": 1 // only in root folder
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 50,
+        "request_id": "9ffc66b1-8ff3-4580-b34f-90bc2bfaffba"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

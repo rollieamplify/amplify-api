@@ -1,0 +1,51 @@
+---
+title: "GET /fax/preferences"
+description: "Captured contract for GET /fax/preferences."
+api: "GET /fax/preferences"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/preferences.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+- Get Fax Preferences
+Endpoint:
+GET: api/fax/preferences
+Response:
+{
+    "data": {
+        "paper_size": "A4",
+        "broadcast_fax_speed": "Priority",
+        "suggest_recipients_when_composing_fax": true,
+        "save_unknown_recipients_as_contact": false,
+        "warn_about_duplicate_faxes": false,
+        "show_document_assignment_prompt": false,
+        "opt_out_broadcast_list": false,
+        "include_transmission_report_with_fax": false,
+        "display_fireworks_after_fax_sent": false,
+        "open_faxes_in_new_tab": false,
+        "delete_sent_or_received_faxes_automatically": false,
+        "inbound_header_footer": true,
+        "inbound_header_footer_data": {
+            "header": true,
+            "date_header": true,
+            "date_header_format": "DD-MMM-YYYY h:mm",
+            "page_header": "",
+            "footer": true,
+            "date_footer": true,
+            "date_footer_format": "DD-MMM-YYYY h:mm",
+            "page_footer": ""
+        }
+    },
+    "meta": {
+        "request_id": "cb441ad4-98b9-4ef7-b9d3-dfe88ddc8bc8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

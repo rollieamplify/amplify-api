@@ -1,0 +1,38 @@
+---
+title: "GET /calls/{call_id}/check_credits"
+description: "Captured contract for GET /calls/{call_id}/check_credits."
+api: "GET /calls/{call_id}/check_credits"
+groups: ["internal"]
+---
+
+This page documents the behavior captured for GET /calls/{call_id}/check_credits in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/calls/{call_id}/check_credits
+    
+    Success response:
+    {
+        "data": {
+            "status": true
+        },
+        "meta": {
+            "request_id": "6c9361dc-7dcf-488c-9cf3-681dd294c7d2"
+        }
+    }
+    
+    Error response:
+    {
+        "error": {
+            "code": "NO_ENOUGH_CREDIT",
+            "message": "Insufficient Credits"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

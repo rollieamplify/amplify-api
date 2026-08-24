@@ -1,0 +1,80 @@
+---
+title: "POST /fax/ai_ocr_settings/check_automations"
+description: "Captured contract for POST /fax/ai_ocr_settings/check_automations."
+api: "POST /fax/ai_ocr_settings/check_automations"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/ai_ocr_settings/check_automations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/fax/ai_ocr_settings/check_automations
+
+
+
+
+Request:
+
+{
+    "type": "ocr"
+}
+
+
+Accept values:
+type: ocr/nlp
+
+
+
+
+Validation errors:
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The type field is required."
+    },
+    "errors": {
+        "type": [
+            "The type field is required."
+        ]
+    }
+}
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The selected type is invalid."
+    },
+    "errors": {
+        "type": [
+            "The selected type is invalid."
+        ]
+    }
+}
+
+
+Response:
+
+{
+    "error": {
+        "code": "UNPROCESSABLE_ENTITY",
+        "message": "Disabling this setting will stop any automations that depend on OCR data from working."
+    }
+}
+{
+    "data": {
+        "status": true
+    },
+    "meta": {
+        "request_id": "730c68c3-6ba5-4cf6-9a5c-6158a06bf3b3"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,32 @@
+---
+title: "Save a patient contact"
+description: "Create or update a patient contact from extracted document data."
+api: "POST /patient_contacts/save"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField body="nlp_data_id" type="integer" required>Extracted-data record ID.</ParamField>
+<ParamField body="columns" type="object[]" required>Extracted patient values. Each item contains `key`, `value`, and `key_slug`.</ParamField>
+<ParamField body="contact_id" type="integer">Existing patient contact ID. Omit to create a contact.</ParamField>
+<ParamField body="first_name" type="string">Patient first name.</ParamField>
+<ParamField body="last_name" type="string">Patient last name.</ParamField>
+<ParamField body="duplicate_fax_number" type="boolean">Allow the duplicate fax-number workflow when applicable.</ParamField>
+<ParamField body="lab_data" type="object[]">Extracted lab results.</ParamField>
+
+Lab entries can include `nlp_lab_data_id`, `test_name`, `value`, `unit`, `ref_low`, `ref_high`, `status`, and `result`.
+
+```json
+{
+  "nlp_data_id": 891,
+  "columns": [
+    {"key":"Date of birth","key_slug":"dob","value":"1984-06-15"},
+    {"key":"Medical record number","key_slug":"medical_record_number","value":"MRN-1042"}
+  ],
+  "first_name": "Jordan",
+  "last_name": "Lee"
+}
+```
+
+Patient values are saved to their dedicated contact properties. Submitted lab data replaces the stored lab rows associated with this processing record.
+

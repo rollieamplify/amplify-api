@@ -1,0 +1,28 @@
+---
+title: "Get number details"
+description: "Retrieve one number and its associated settings."
+api: "POST /numbers/detail"
+public: true
+---
+
+`POST /numbers/detail` retrieves one number by its internal identifier.
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `number_id` | integer | Yes | Internal number identifier. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/detail" \
+  --request POST \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{"number_id": 688}'
+```
+
+## Response
+
+The response returns a complete number under `data`, including its features, DID verification state, requirements, permissions, schedule, and configuration. Request metadata appears under `meta`.
+
+<Warning>Provider credential fields may be present in the current response. Treat them as secrets and never log or expose them.</Warning>

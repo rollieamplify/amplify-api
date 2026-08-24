@@ -1,0 +1,62 @@
+---
+title: "POST /fax/{fax_uuid}/download-file"
+description: "Captured contract for POST /fax/{fax_uuid}/download-file."
+api: "POST /fax/{fax_uuid}/download-file"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/{fax_uuid}/download-file.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Download Fax File API
+
+Endpoint : 
+
+POST: api/fax/{fax_uuid}/download-file
+
+### Description
+
+Downloads a fax file in the requested format. This API supports multiple file formats:
+
+- PDF (default format)
+
+- TIFF/TIF (if available in S3)
+
+- JPG/JPEG (converts PDF to JPG and returns a ZIP of pages)
+
+- TXT (OCR text – requires OCR processing to be completed)
+
+- JSON (NLP data – requires NLP processing to be completed)
+
+The API returns a presigned URL for downloading the file in the requested format.
+
+This endpoint works for:
+
+- Normal faxes (`fax_uuid` from standard fax list)
+
+- Broadcast recipients (`broadcast_fax_uuid` from broadcast thread)
+
+- Campaign recipients (`broadcast_fax_uuid` from campaign thread)
+
+An optional `type` parameter controls behaviour.
+
+
+Body:
+
+Field
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

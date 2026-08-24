@@ -1,0 +1,80 @@
+---
+title: "POST /folders/transfer_ownership"
+description: "Captured contract for POST /folders/transfer_ownership."
+api: "POST /folders/transfer_ownership"
+public: true
+---
+
+This internal review page records the behavior captured for POST /folders/transfer_ownership.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Description:
+Transfer folder ownership to another user on the same account.
+
+API Endpoint:
+
+POST /api/folders/transfer_ownership
+Request:{
+  "folder_id": 12345,
+  "user_id": 123
+}
+"folder_id" parameter should contain the ID of the folder you want to share. 
+"users" parameter should contain an array of selected user IDs with whom the folder will be shared. 
+
+
+Response:
+
+{
+    "data": {
+        "message": "Folder ownership changed successfully"
+    },
+    "meta": {
+        "request_id": "86d5a1fb-d5c2-48b4-b052-31ec6a93dffd"
+    }
+}
+
+
+Validations:
+
+{
+  "folder_id": 12345,
+  "user_id": 
+}
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "folder_id": [
+            "The folder id field is required."
+        ]
+    }
+}
+
+
+If you pass wrong or invalid user id the you will get this validations error.
+
+{
+    "folder_id": 610,
+    "user_id" : 6565656565
+}
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "user_id": [
+            "The selected user id is invalid."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

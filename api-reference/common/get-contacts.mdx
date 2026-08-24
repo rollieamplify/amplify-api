@@ -1,0 +1,178 @@
+---
+title: "GET /contacts"
+description: "Captured contract for GET /contacts."
+api: "GET /contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/contacts
+
+Response:
+{
+    "data": [
+        {
+            "id": 6000,
+            "is_organization": false,
+            "first_name": "Sub user",
+            "last_name": "fifty five contact",
+            "organization_name": "",
+            "middle_name": "",
+            "suffix": "",
+            "previous_last_name": "",
+            "gender": "",
+            "dob": "",
+            "type": 0,
+            "job_title": "",
+            "direct_message": "",
+            "position": "",
+            "email": "",
+            "phone_number": "12057894568",
+            "work_number": "",
+            "fax_number": "",
+            "address": "",
+            "address_line_2": "",
+            "city": "",
+            "state": "",
+            "zip": "",
+            "country": "",
+            "organization": null,
+            "role_title": "",
+            "organization_type": "",
+            "website": null,
+            "primary_contact_name": "",
+            "npi": "",
+            "tax_id": "",
+            "preferred_language": "",
+            "interpreter_needed": "",
+            "races": "",
+            "ethnicity": "",
+            "medical_record_number": "",
+            "patient_status": "",
+            "external_patient_id": "",
+            "pcp_internal_contact": "",
+            "pcp_external_name": "",
+            "emergency_contact_name": "",
+            "emergency_contact_relationship": "",
+            "emergency_contact_phone": "",
+            "preferred_contact_methods": "",
+            "sms_opt_in": "",
+            "email_opt_in": "",
+            "do_not_contact": "",
+            "coverage_type": "",
+            "insurance_provider": "",
+            "plan_name": "",
+            "member_id": "",
+            "group_number": "",
+            "payer_phone": "",
+            "subscriber_name": "",
+            "subscriber_dob": "",
+            "subscriber_relationship": "",
+            "notes": "",
+            "is_favorite": true,
+            "is_blocked": false,
+            "is_accesible_to_others": false,
+            "id_hash": "8d284220975da66c6cba4a32aaedfa0b897187d86ed9f7a2419c9bd10a103505",
+            "is_shared": false,
+            "created_by": 322,
+            "created_at": "2026-03-31T05:40:56.000000Z",
+            "updated_at": "2026-03-31T08:55:57.000000Z",
+            "contact_documents": [],
+            "fields": [],
+            "groups": []
+        },
+        {
+            "id": 5021,
+            "is_organization": false,
+            "first_name": "Customer",
+            "last_name": "Contact",
+            "organization_name": "sdfdsfds",
+            "middle_name": "User",
+            "suffix": "Sr",
+            "previous_last_name": "",
+            "gender": "",
+            "dob": "",
+            "type": 0,
+            "job_title": "",
+            "direct_message": "",
+            "position": "dsfdsf",
+            "email": "developer@example.com",
+            "phone_number": "12057894563",
+            "work_number": "12057418526",
+            "fax_number": "12058976451",
+            "address": "Address One",
+            "address_line_2": "Address two",
+            "city": "Test city",
+            "state": "CA",
+            "zip": "898989",
+            "country": "US",
+            "organization": null,
+            "role_title": "dsfdsf",
+            "organization_type": "",
+            "website": null,
+            "primary_contact_name": "",
+            "npi": "",
+            "tax_id": "",
+            "preferred_language": "",
+            "interpreter_needed": "",
+            "races": "",
+            "ethnicity": "",
+            "medical_record_number": "",
+            "patient_status": "",
+            "external_patient_id": "",
+            "pcp_internal_contact": "",
+            "pcp_external_name": "",
+            "emergency_contact_name": "",
+            "emergency_contact_relationship": "",
+            "emergency_contact_phone": "",
+            "preferred_contact_methods": "",
+            "sms_opt_in": "",
+            "email_opt_in": "",
+            "do_not_contact": "",
+            "coverage_type": "",
+            "insurance_provider": "",
+            "plan_name": "",
+            "member_id": "",
+            "group_number": "",
+            "payer_phone": "",
+            "subscriber_name": "",
+            "subscriber_dob": "",
+            "subscriber_relationship": "",
+            "notes": "dsfsdfdsfdffdsfsdfdf",
+            "is_favorite": false,
+            "is_blocked": false,
+            "is_accesible_to_others": true,
+            "id_hash": "1210e6c2e909ec7ce4bf820e4de833f49af8070d34e39010fb552b95b3a0935f",
+            "is_shared": true,
+            "created_by": 53,
+            "created_at": "2026-03-19T06:37:57.000000Z",
+            "updated_at": "2026-03-31T08:56:14.000000Z",
+            "contact_documents": [],
+            "fields": [],
+            "groups": [
+                {
+                    "id": 153,
+                    "name": "Group two"
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "total": 2,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "2b9ecf36-7852-498b-a5be-b626959c24b2"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

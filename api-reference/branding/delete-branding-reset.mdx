@@ -1,0 +1,32 @@
+---
+title: "DELETE /branding/reset"
+description: "Captured contract for DELETE /branding/reset."
+api: "DELETE /branding/reset"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /branding/reset.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+-> This API is used to reset the branding data of the account .
+
+Endpoint: 
+DELETE: api/branding/reset
+
+
+
+Response : 
+image.png
+
+Behaviour :-
+
+-> This API will reset the branding for its account to default of Amplify .
+-> This will also replace the sender email set by the accounts sub user to default of Amplify .
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

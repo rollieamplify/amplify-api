@@ -1,0 +1,65 @@
+---
+title: "GET /forms/{form_id}/responses"
+description: "Captured contract for GET /forms/{form_id}/responses."
+api: "GET /forms/{form_id}/responses"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/{form_id}/responses.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/forms/{form_id}/responses
+
+
+
+
+Description :
+
+
+
+
+-> Returns paginated list of all responses for a form visible to the authenticated owner/collaborator. 
+-> Includes field data with presigned URLs for signature/stamp fields. 
+-> Requires sub-user permission VIEW_FORM_RESPONSES.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,178 @@
+---
+title: "POST /fax_templates/save_as_fax_default"
+description: "Captured contract for POST /fax_templates/save_as_fax_default."
+api: "POST /fax_templates/save_as_fax_default"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /fax_templates/save_as_fax_default.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Save As Fax Default API
+
+
+## Overview
+This API endpoint allows you to save documents as fax defaults by providing URLs. The system will download the files from the provided URLs, upload them to S3, generate thumbnails, and return the document information.
+
+
+## Endpoint :
+POST /api/fax_templates/save_as_fax_default
+
+
+## Request
+### Request Body :
+{
+  "url": [
+    {
+      "url": "https://example.com/document.pdf",
+      "file_name": "document.pdf",
+      "is_smart_document": 0
+    }
+  ]
+}
+
+
+### Request Parameters :
+
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `url` | array | Yes | Array of URL objects containing document information |
+| `url[].url` | string (URL) | Yes | The URL of the document to download |
+| `url[].file_name` | string | No | Optional filename for the document. If not provided, it will be extracted from the URL |
+| `url[].is_smart_document` | integer | No | Flag to indicate if this is a smart document (0 or 1). Default: 0 |
+
+
+### Example Request :
+
+
+#### Single Document :
+{
+  "url": [
+    {
+      "url": "https://example.com/sample-document.pdf",
+      "file_name": "sample-document.pdf",
+      "is_smart_document": 0
+    }
+  ]
+}
+
+
+#### Multiple Documents : 
+{
+  "url": [
+    {
+      "url": "https://example.com/document1.pdf",
+      "file_name": "document1.pdf",
+      "is_smart_document": 0
+    },
+    {
+      "url": "https://example.com/document2.pdf",
+      "file_name": "document2.pdf",
+      "is_smart_document": 1
+    }
+  ]
+}
+
+
+#### Without File Name (Auto-extracted) : 
+{
+  "url": [
+    {
+      "url": "https://example.com/files/my-document.pdf",
+      "is_smart_document": 0
+    }
+  ]
+}
+
+## Response
+### Success Response (200 OK) :
+{
+  "data": [
+    {
+      "file_name": "sample-document.pdf",
+      "uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "url": "https://beta-api.amplify.xyz/thumbnail/document/550e8400-e29b-41d4-a716-446655440000",
+      "s3_url": "https://example.com/signed-download-url",
+      "is_smart_document": 0
+    }
+  ],
+  "meta": {
+    "request_id": "123e4567-e89b-12d3-a456-426614174000"
+  }
+}
+
+
+## Example Use Cases
+
+
+### Use Case 1: Save Single Document :
+Save a single PDF document as a fax default.
+{
+  "url": [
+    {
+      "url": "https://example.com/contract.pdf",
+      "file_name": "contract.pdf"
+    }
+  ]
+}
+
+
+**Response:**
+{
+  "data": [
+    {
+      "file_name": "contract.pdf",
+      "uuid": "abc123-def456-ghi789",
+      "url": "https://beta-api.amplify.xyz/thumbnail/document/abc123-def456-ghi789",
+      "s3_url": "https://ifax-2-0-beta.s3.amazonaws.com/...",
+      "is_smart_document": 0
+    }
+  ],
+  "meta": {
+    "request_id": "123e4567-e89b-12d3-a456-426614174000"
+  }
+}
+
+
+### Use Case 2: Save Multiple Documents :
+Save multiple documents in a single request.
+
+
+**Request:**
+{
+  "url": [
+    {
+      "url": "https://example.com/doc1.pdf",
+      "file_name": "document1.pdf"
+    },
+    {
+      "url": "https://example.com/doc2.pdf",
+      "file_name": "document2.pdf"
+    }
+  ]
+}
+
+
+### Use Case 3: Smart Document :
+Save a smart document with the flag set.
+
+
+**Request:**
+{
+  "url": [
+    {
+      "url": "https://example.com/smart-doc.pdf",
+      "file_name": "smart-doc.pdf",
+      "is_smart_document": 1
+    }
+  ]
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

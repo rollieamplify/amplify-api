@@ -1,0 +1,96 @@
+---
+title: "POST /organization"
+description: "Captured contract for POST /organization."
+api: "POST /organization"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /organization.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/organization
+
+Body:
+{
+    "organization_name": "web35",
+    "industry": "Haealthcare",
+    "organization_size": "1-10",
+    "street1": "ABC st.",
+    "street2": "Ahmedabad",
+    "city": "Ahmedabad",
+    "state": "GJ",
+    "zip_code": "636363",
+    "country_id": 1,
+
+    "onboarding_use_case": "Patient referrals and insurance claims",
+    "onboarding_workflow": "EHR → Fax → Cloud storage",
+    "estimated_fax_pages": "300 per month",
+    "usage_duration": "3-6 months",
+    "current_ehr_emr": "Athenahealth",
+
+    "hear_from": "Advertisement",
+
+    "feature_send_faxes": true,
+    "feature_receive_faxes": true,
+    "feature_fax_ocr": true,
+    "feature_broadcast_fax": false,
+    "feature_hippa_cloud_storage": false,
+    "feature_api": false,
+    "feature_ai_data_extraction": true,
+
+    "hipaa_sms_messages": true,
+    "hipaa_voice_calls": true,
+    "hipaa_video_meetings": false,
+    "hipaa_forms_intake": true,
+    "hipaa_esign_documents": true
+}
+
+Response:
+{
+    "data": {
+        "organization_name": "web35",
+        "industry": "Haealthcare",
+        "organization_size": "1-10",
+        "onboarding_use_case": "Patient referrals and insurance claims",
+        "onboarding_workflow": "EHR → Fax → Cloud storage",
+        "estimated_fax_pages": "300 per month",
+        "usage_duration": "3-6 months",
+        "current_ehr_emr": "Athenahealth",
+        "software": "",
+        "hear_from": "Advertisement",
+        "feature_send_faxes": true,
+        "feature_receive_faxes": true,
+        "feature_fax_ocr": true,
+        "feature_broadcast_fax": false,
+        "feature_hippa_cloud_storage": false,
+        "feature_api": false,
+        "feature_ai_data_extraction": true,
+        "hipaa_sms_messages": true,
+        "hipaa_voice_calls": true,
+        "hipaa_video_meetings": false,
+        "hipaa_forms_intake": true,
+        "hipaa_esign_documents": true,
+        "time_zone": 324,
+        "street1": "ABC st.",
+        "street2": "Ahmedabad",
+        "city": "Ahmedabad",
+        "state": "GJ",
+        "zip_code": "636363",
+        "country_id": 1,
+        "organization_logo": "default_company_logo.png",
+        "organization_logo_url": "https://dev-api.amplify.xyz/images/default_company_logo.png",
+        "organization_logo_uuid": ""
+    },
+    "meta": {
+        "request_id": "c06393a6-8599-4266-8341-7d41be19778f"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

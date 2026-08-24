@@ -1,0 +1,181 @@
+---
+title: "GET /yellow_banners"
+description: "Captured contract for GET /yellow_banners."
+api: "GET /yellow_banners"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /yellow_banners.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Yellow Banner API.
+
+Endpoint :
+GET - api/yellow_banners
+
+
+Response:
+Emergency issue
+{
+    "data": {
+        "message": "Payment processing may be delayed due to server maintenance."
+    },
+    "meta": {
+        "request_id": "165fbe8a-6f94-4846-96e6-3558af84a47a"
+    }
+}
+
+
+Email not verified
+{
+  "data": {
+    "message": "user@example.com email is not verified yet.",
+    "button": "email_verify",
+    "button_text": "Verify"
+  },
+  "meta": {
+    "request_id": "165fbe8a-6f94-4846-96e6-3558af84a47a"
+  }
+}
+
+
+Plan Not Purchased
+{
+    "data": {
+        "message": "Select a plan to unlock full access.",
+        "button": "start_paid",
+        "button_text": "Start Now"
+    },
+    "meta": {
+        "request_id": "7f04bb70-b0c7-4799-a7d4-36bbee3f73ce"
+    }
+}
+
+
+Proposal Plan
+{
+  "data": {
+    "message": "Ready to activate your custom plan?",
+    "button": "view_proposal",
+    "button_text": "View Proposal",
+    "extra_details": {
+      "quote_url": ""
+    }
+  },
+  "meta": {
+    "request_id": "165fbe8a-6f94-4846-96e6-3558af84a47a"
+  }
+}
+
+
+Trial Mode
+{
+    "data": {
+        "message": "3 days remaining of limited trial - unlock for full access.",
+        "button": "trial_to_paid",
+        "button_text": "Start Now",
+        "toot_tip": "Activate your plan anytime to unlock all features and remove any limitations."
+    },
+    "meta": {
+        "request_id": "7f04bb70-b0c7-4799-a7d4-36bbee3f73ce"
+    }
+}
+
+
+Canceled Plan
+{
+    "data": {
+        "message": "Amplify Plan was canceled.",
+        "button": "activate",
+        "button_text": "Activate"
+    },
+    "meta": {
+        "request_id": "7f04bb70-b0c7-4799-a7d4-36bbee3f73ce"
+    }
+}
+
+
+Payment Due
+{
+    "data": {
+        "message": "Payment is due. Please process immediately to avoid service interruptions.",
+        "button": "pay_now",
+        "button_text": "Pay Now"
+    },
+    "meta": {
+        "request_id": "7f04bb70-b0c7-4799-a7d4-36bbee3f73ce"
+    }
+}
+
+
+Port out
+{
+  "data": {
+    "message": "+1 (408) 357-2042 was ported out of your iFax account.",
+    "button": "close_port_warning",
+    "button_text": "Okay",
+    "extra_details": {
+      "number_id": 124
+    }
+  },
+  "meta": {
+    "request_id": "165fbe8a-6f94-4846-96e6-3558af84a47a"
+  }
+}
+
+
+Pending Fax Count
+{
+  "data": {
+    "message": "<b>Page allowance exceeded!</b> 1 missed fax",
+    "button": "more_pages",
+    "button_text": "Resolve"
+  },
+  "meta": {
+    "request_id": "165fbe8a-6f94-4846-96e6-3558af84a47a"
+  }
+}
+
+
+No Active Banner
+{
+    "data": [],
+    "meta": {}
+}
+
+Completed Banners:
+Emergency settings
+Email not verified
+Proposal Plan
+Trial Start Plan
+Canceled Plan
+Payment Due
+Port out
+Pending Fax Count
+Start Plan
+
+Pending Banners:
+po plan
+freemium upgrade
+
+
+Keys:
+message
+button
+button_text
+button_2
+button_text_2
+toot_tip
+h1
+p
+img
+hide_warning_icon
+extra_details
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

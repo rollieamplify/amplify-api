@@ -1,0 +1,35 @@
+---
+title: "POST /billing/card/set_default"
+description: "Captured contract for POST /billing/card/set_default."
+api: "POST /billing/card/set_default"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing/card/set_default.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+To set the card as a default
+
+
+
+
+EndPoint:
+
+POST: api/billing/card/set_default
+
+
+
+
+Payload:
+
+{
+    "payment_source_id":"ZDRUZnUrNFNiblFuUzNxTWdOMUw2dmdKOWlaTjlSYW5LTS90Zy9pZjVZUT0"
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

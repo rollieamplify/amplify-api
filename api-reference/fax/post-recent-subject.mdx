@@ -1,0 +1,60 @@
+---
+title: "POST /recent/subject"
+description: "Captured contract for POST /recent/subject."
+api: "POST /recent/subject"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /recent/subject.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/recent/subject
+
+Body:
+{
+  "subject": "test"
+}
+
+Response:
+{
+    "data": [
+        {
+            "type": "Recent",
+            "names": [
+                "Test Subject",
+                "Test"
+            ]
+        },
+        {
+            "type": "Medical",
+            "names": [
+                "Blood Test Report",
+                "Histopathology Laboratory Test Report",
+                "Immunohematology Laboratory Test Report",
+                "Laboratory Test Report",
+                "Mammography Laboratory Test Report",
+                "Medical Test Results",
+                "Pathology Laboratory Test Report",
+                "Specialized Laboratory Test Report"
+            ]
+        },
+        {
+            "type": "Legal",
+            "names": [
+                "Last Will and Testament"
+            ]
+        }
+    ],
+    "meta": {
+        "request_id": "2187a415-a7c5-4e1f-b4a6-3b339539b5ee"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,36 @@
+---
+title: "POST /storage/upload_url"
+description: "Captured contract for POST /storage/upload_url."
+api: "POST /storage/upload_url"
+public: true
+---
+
+This page documents the behavior captured for POST /storage/upload_url in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/storage/upload_url
+    
+    Body:
+    {
+        "file_name": "4000file.pdf",
+        "folder": "mms"
+    }
+    
+    Response:
+    {
+        "data": {
+            "upload_url": "https://example.com/signed-upload-url
+        },
+        "meta": {
+            "request_id": "8ad5f37a-c3fb-414f-a919-d18bc38f894c"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

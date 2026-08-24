@@ -1,0 +1,91 @@
+---
+title: "POST /subscription/update_plan"
+description: "Captured contract for POST /subscription/update_plan."
+api: "POST /subscription/update_plan"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/update_plan.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Upgrade Subscription To Pro Plan
+
+Endpoint:
+
+POST : api/subscription/update_plan
+
+
+Body:
+
+ {
+    "plan" : "hippa_plus_plan",
+    "duration" : "monthly",
+    "addons" : [
+        {
+            "addon" : "credits",
+            "quantity" : 2000
+        },
+        {
+            "addon" : "license_2",
+            "quantity" : 0
+        },
+        {
+            "addon" : "license_1",
+            "quantity" : 40
+        },
+        {
+            "addon" : "broadcast",
+            "quantity" : 1
+        },
+        {
+            "addon" : "numbers",
+            "quantity" : 20
+        }
+    ],
+    "account_id" : 51,
+    "action_from" : 'admin'
+}
+
+Note : 
+
+addon in : license_1,license_2,license_3,license_4,credits,numbers,api,broadcast,whitelabel,premier_support,10dlc,custom_domain,overage_credits,labs_ai,unlimited_cloud_storage,document_splitting ( overage_credits only allowed via admin),numbers_1,numbers_2,numbers_3,numbers_4,numbers_5
+plan in : hippa_basic_plan,hippa_plus_plan,hippa_pro_plan,hippa_enterprise_plan,basic_plan,plus_plan,pro_plan,enterprise_plan,broadcast_business_plan,broadcast_healthcare_plan,api_business_plan,api_healthcare_plan
+duration in : monthly, annual, 2_year, 3_year
+account_id is optinal parameter for web app but needs to be there when action_from is admin
+action_from is optinal parameter for web app but needs to be there when action_from is admin
+in case to remove addon please pass with quantity set to 0
+
+
+
+
+(Success):
+
+{
+    "data": {
+        "subscription_id": "16BgOlVG0uNJ7QOq",
+        "has_scheduled_changes" : true
+    },
+    "meta": {
+        "request_id": "eab62c65-7db0-4cba-8836-b95b0657102a"
+    }
+}
+
+
+(Failed):
+
+{
+    "error": {
+        "code": "LICENSE_1_LIMIT_REACHED",
+        "message": "You should remove unused basic user before changing the plan."
+    }
+}
+
+available codes in case updated quantity is less then the used allowance = LICENSE_1_LIMIT_REACHED, LICENSE_2_LIMIT_REACHED, LICENSE_3_LIMIT_REACHED, LICENSE_4_LIMIT_REACHED, NUMBERS_LIMIT_REACHED, NUMBERS_1_LIMIT_REACHED, NUMBERS_2_LIMIT_REACHED, NUMBERS_3_LIMIT_REACHED, NUMBERS_4_LIMIT_REACHED, NUMBERS_5_LIMIT_REACHED
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,80 @@
+---
+title: "POST /analytics/export"
+description: "Captured contract for POST /analytics/export."
+api: "POST /analytics/export"
+public: true
+---
+
+This page documents the behavior captured for POST /analytics/export in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/analytics/export
+    
+    Body:
+    {
+        "start_date": "2026-03-31",
+        "end_date": "2026-03-31",
+        "number_ids": [928,25]
+    }
+    
+    Response:
+    {
+        "data": [
+            {
+                "from_number": "+19382530055",
+                "to_number": "+13345103356",
+                "direction": "incoming",
+                "answered_at": "2026-03-31 10:22:42.0",
+                "status": "completed",
+                "created_at": "2026-03-31T10:22:31.000000Z",
+                "updated_at": "2026-03-31T10:22:57.000000Z",
+                "type": "call",
+                "user_name": "web twentynew"
+            },
+            {
+                "from_number": "+13345103356",
+                "to_number": "+19382530055",
+                "direction": "receive",
+                "answered_at": "",
+                "status": "delivered",
+                "created_at": "2026-03-31T10:31:25.000000Z",
+                "updated_at": "2026-03-31T10:31:25.000000Z",
+                "type": "message",
+                "user_name": "web twentynew"
+            },
+            {
+                "from_number": "+13345103356",
+                "to_number": "+19382530055",
+                "direction": "receive",
+                "answered_at": "",
+                "status": "delivered",
+                "created_at": "2026-03-31T10:41:34.000000Z",
+                "updated_at": "2026-03-31T10:41:34.000000Z",
+                "type": "message",
+                "user_name": "web twentynew"
+            },
+            {
+                "from_number": "+12512549832",
+                "to_number": "+19382530055",
+                "direction": "receive",
+                "answered_at": "",
+                "status": "delivered",
+                "created_at": "2026-03-31T10:42:38.000000Z",
+                "updated_at": "2026-03-31T10:42:38.000000Z",
+                "type": "message",
+                "user_name": "web twentynew"
+            }
+        ],
+        "meta": {
+            "request_id": "fba2a575-9776-49a1-af8b-c8d0bce0c8ff"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

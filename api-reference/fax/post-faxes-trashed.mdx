@@ -1,0 +1,210 @@
+---
+title: "POST /faxes/trashed"
+description: "Captured contract for POST /faxes/trashed."
+api: "POST /faxes/trashed"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/trashed.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+List trashed Faxes (Deleted from dashboard)
+
+Endpoint:
+POST: faxes/trashed?limit=20&cursor=1
+
+Request:
+{
+    "start_date": "2024-01-01 00:00:00",
+    "end_date": "2024-12-31 23:59:59",
+    "sort_by": "latest"
+}
+
+Response:
+{
+    "data": [
+        {
+            "fax_uuid": "01KEC0CYH5BYXERSE7X33XY617",
+            "is_read": false,
+            "fax_type": "outbound",
+            "created_by": 50,
+            "created_by_email": "developer@example.com",
+            "is_broadcast": false,
+            "broadcast_id": "",
+            "broadcast_name": "",
+            "campaign_id": "",
+            "to_number": 12566708163,
+            "from_number": 12566708163,
+            "document_name": "Fax 12566708163",
+            "subject": null,
+            "pages": 1,
+            "labels": [],
+            "retry_attempt": 0,
+            "fax_status": "Sent",
+            "created_at": 1767782119,
+            "updated_at": 1767865773,
+            "to_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "from_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "thumbnail_image": "https://example.com/signed-url
+            "method": "app",
+            "ocr_status": "",
+            "nlp_status": "",
+            "source": "fax"
+        },
+        {
+            "fax_uuid": "01KEBD70ZYTBWV5RVG0J62HPSV",
+            "is_read": false,
+            "fax_type": "broadcast",
+            "created_by": 50,
+            "created_by_email": "developer@example.com",
+            "is_broadcast": true,
+            "broadcast_id": 133,
+            "broadcast_name": "Broadcast 1",
+            "campaign_id": "",
+            "to_number": null,
+            "from_number": 19073131400,
+            "document_name": "Fax ",
+            "subject": "",
+            "pages": 1,
+            "labels": [],
+            "retry_attempt": 0,
+            "fax_status": "Pending",
+            "created_at": 1767762002,
+            "updated_at": 1767865776,
+            "to_contact_details": [],
+            "from_contact_details": [],
+            "thumbnail_image": "",
+            "method": "broadcast",
+            "ocr_status": "",
+            "nlp_status": "",
+            "source": "fax"
+        },
+        {
+            "fax_uuid": "01KEBC145N5GK2X9S55KAV6VSP",
+            "is_read": false,
+            "fax_type": "document",
+            "created_by": 50,
+            "created_by_email": "developer@example.com",
+            "is_broadcast": false,
+            "broadcast_id": "",
+            "broadcast_name": "",
+            "campaign_id": "",
+            "to_number": null,
+            "from_number": null,
+            "document_name": "Untitled.pdf",
+            "subject": null,
+            "pages": 13,
+            "labels": [
+                {
+                    "id": 49,
+                    "name": "Test",
+                    "text_color": "",
+                    "bg_color": "#973DE4"
+                }
+            ],
+            "retry_attempt": 0,
+            "fax_status": "Unassigned",
+            "created_at": 1767760761,
+            "updated_at": 1767865779,
+            "to_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "from_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "thumbnail_image": "https://example.com/signed-url
+            "method": "app",
+            "ocr_status": "",
+            "nlp_status": "",
+            "source": "secure_email"
+        },
+        {
+            "fax_uuid": "01KEBBRRDFSF5RX31APZPGDBK6",
+            "is_read": true,
+            "fax_type": "inbound",
+            "created_by": 50,
+            "created_by_email": "developer@example.com",
+            "is_broadcast": false,
+            "broadcast_id": "",
+            "broadcast_name": "",
+            "campaign_id": "",
+            "to_number": 12566708163,
+            "from_number": 12057566913,
+            "document_name": "Fax 12566708163",
+            "subject": null,
+            "pages": 1,
+            "labels": [
+                {
+                    "id": 25,
+                    "name": "Test Faxes",
+                    "text_color": "#ffffff",
+                    "bg_color": "#ff0000"
+                }
+            ],
+            "retry_attempt": 0,
+            "fax_status": "Action Required",
+            "created_at": 1767760486,
+            "updated_at": 1767865782,
+            "to_contact_details": {
+                "first_name": "Web",
+                "last_name": "35 New",
+                "email": "developer@example.com",
+                "organization_name": "",
+                "full_name": "Web 35 New",
+                "is_organization": false
+            },
+            "from_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "thumbnail_image": "",
+            "method": "app",
+            "ocr_status": "",
+            "nlp_status": "",
+            "source": "fax"
+        }
+    ],
+    "meta": {
+        "total": 4,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "b24c6c04-b237-4800-a440-8496672b1214"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

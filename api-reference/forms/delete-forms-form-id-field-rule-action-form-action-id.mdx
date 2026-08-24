@@ -1,0 +1,63 @@
+---
+title: "DELETE /forms/{form_id}/field_rule/action/{form_action_id}"
+description: "Captured contract for DELETE /forms/{form_id}/field_rule/action/{form_action_id}."
+api: "DELETE /forms/{form_id}/field_rule/action/{form_action_id}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /forms/{form_id}/field_rule/action/{form_action_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+DELETE : api/forms/{form_id}/field_rule/action/{form_action_id}
+
+
+
+
+Description :
+
+
+
+
+Deletes a single action from a conditional field rule. Form rule actions are stored as a JSON array on the rule record (form_field_rules.actions), not in a separate table.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

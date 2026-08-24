@@ -1,0 +1,66 @@
+---
+title: "GET /hotjar/tracking/detail"
+description: "Captured contract for GET /hotjar/tracking/detail."
+api: "GET /hotjar/tracking/detail"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /hotjar/tracking/detail.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Hotjar Tracking Details API
+
+
+## Overview
+The Hotjar Tracking Details API returns a normalised snapshot of the authenticated user's
+account, organisation, and feature-usage metadata so that the frontend can send these
+properties directly to Hotjar (or other analytics tools).
+
+
+## Endpoint :
+GET /api/hotjar/tracking/detail
+
+
+## Query Parameters:
+This API does not accept any query parameters.  
+User and account context are resolved from the authenticated request.
+
+
+## Response Format :
+{
+    "data": {
+        "email": "developer@example.com",
+        "user_id": 58,
+        "plan": "",
+        "industry": "Accounting & Financial Services",
+        "organization_size": "11-50",
+        "use_of_amplify": "",
+        "total_user_account": 5,
+        "total_contacts": 1,
+        "reseller_white_label": false,
+        "owner": true,
+        "free_trial": false,
+        "total_fax_numbers": 5,
+        "total_fax_pages": 99885,
+        "plan_credit": null,
+        "remaining_credit": 99885,
+        "ai_user": false,
+        "api_user": false,
+        "automation_user": false,
+        "broadcast_user": true,
+        "email_to_fax_user": false,
+        "reseller_user": false,
+        "team_licenses_user": false
+    },
+    "meta": {
+        "request_id": "b0fbd050-b91e-4f70-8f1a-9554cfe8cd87"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

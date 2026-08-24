@@ -1,0 +1,41 @@
+---
+title: "POST /profile/phone_number_by_email"
+description: "Captured contract for POST /profile/phone_number_by_email."
+api: "POST /profile/phone_number_by_email"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /profile/phone_number_by_email.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Update Phone Number By Email API
+
+Description:
+ Internal API to update a user's phone number using email when the phone number is empty.
+
+
+### Endpoint :
+POST: api/profile/phone_number_by_email
+
+
+### Request Body :
+{
+    "email": "user@example.com",
+    "number": "14155550123"
+}
+
+
+### Response :
+{
+    "status": true,
+    "message": "Success",
+    "data": []
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

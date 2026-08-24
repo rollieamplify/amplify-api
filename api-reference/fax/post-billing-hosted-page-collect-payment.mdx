@@ -1,0 +1,52 @@
+---
+title: "POST /billing/hosted_page/collect_payment"
+description: "Captured contract for POST /billing/hosted_page/collect_payment."
+api: "POST /billing/hosted_page/collect_payment"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing/hosted_page/collect_payment.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+To create a hosted page to collect the Pending Payment from customer
+
+
+
+
+EndPoint:
+
+POST: api/billing/hosted_page/collect_payment
+
+
+
+
+Payload:
+
+{
+    "redirect_url":"https://dev.amplify.xyz/fax/dashboard"
+}
+
+redirect_url: required
+
+
+
+
+Response:
+
+{
+    "data": {
+        "hosted_page_url": "https://amplifylabs-test.chargebee.com/pages/v3/x1mNXXSg9rC1YItKFvH7sPjAMxdpKuZS/collect_now",
+        "hosted_page_id": "x1mNXXSg9rC1YItKFvH7sPjAMxdpKuZS"
+    },
+    "meta": {
+        "request_id": "1df94c60-c0fe-4105-a7f9-7606094c939a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

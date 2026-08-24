@@ -1,0 +1,78 @@
+---
+title: "POST /sftp_configurations"
+description: "Captured contract for POST /sftp_configurations."
+api: "POST /sftp_configurations"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /sftp_configurations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create SFTP Configurations API.
+
+Endpoint :
+POST - api/sftp_configurations
+
+
+PASSWORD
+Body:
+{
+  "host": "sftp.example.com",
+  "port": 22,
+  "username": "sftp_user",
+  "authentication_method": 0,
+  "password": "example_password",
+  "path": "/incoming/faxes"
+}
+
+Response:
+{
+    "data": {
+        "host": "sftp.example.com",
+        "port": 22,
+        "username": "sftp_user",
+        "authentication_method": false,
+        "path": "/incoming/faxes",
+        "password": "example_password",
+        "ssh_key": "YOUR_PRIVATE_KEY"
+    },
+    "meta": {
+        "request_id": "a0958db0-91b2-4e12-8866-ae73f294561b"
+    }
+}
+
+
+SSH KEY
+Body:
+{
+  "host": "sftp.example.com",
+  "port": 22,
+  "username": "sftp_user",
+  "authentication_method": 1,
+  "ssh_key": "YOUR_PRIVATE_KEY",
+  "path": "/incoming/faxes"
+}
+
+Response:
+{
+    "data": {
+        "host": "sftp.example.com",
+        "port": 22,
+        "username": "sftp_user",
+        "authentication_method": true,
+        "path": "/incoming/faxes",
+        "password": "",
+        "ssh_key": "YOUR_PRIVATE_KEY"
+    },
+    "meta": {
+        "request_id": "b44ece29-c6bf-489e-b7fe-34e485947abf"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

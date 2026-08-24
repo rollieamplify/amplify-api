@@ -1,0 +1,41 @@
+---
+title: "API documentation review log"
+description: "Open questions and source inconsistencies found while documenting the Amplify API."
+groups: ["internal"]
+---
+
+# API documentation review log
+
+This internal page records unresolved differences in the Basecamp endpoint materials. It is not part of the public API navigation.
+
+## Engage API
+
+| Endpoint or area | Issue | Documentation treatment | Follow-up |
+| --- | --- | --- | --- |
+| Engage group inventory | The Basecamp group is named “Connect API,” while the current product name is Engage. | Public navigation uses **Engage API**. | Rename the Basecamp group when convenient. |
+| Engage group inventory | The group contains Numbers endpoints, cron jobs, callbacks, and OpenSearch implementation tickets. | These are not automatically published as Engage endpoints. | Confirm whether any internal jobs need separate internal documentation. |
+| `POST /guest_message/send` | The example JSON omits a comma after `content`; a later comment adds `is_secure` without defining its type or behavior. | The malformed example will be corrected; `is_secure` will be documented only after its contract is confirmed. | Confirm `is_secure` type, default, and effect. |
+| `POST /guest_message/conversation/delete` | Response is supplied only as an image. | Method, path, and request can be documented; response remains unspecified until the image is reviewed. | Confirm the response status and schema. |
+| Engage timestamps | Some examples use SQL-style timestamps while others use ISO 8601. | Public documentation follows the project convention of ISO 8601 UTC. | Confirm implementation normalization. |
+
+## Collect API
+
+| Endpoint or area | Issue | Documentation treatment | Follow-up |
+| --- | --- | --- | --- |
+| Collect group inventory | The Basecamp group is named “eSign API,” while the current product name is Collect. | Public navigation uses **Collect API**. | Rename the Basecamp group when convenient. |
+
+## Cross-section inventory review
+
+| Section | Conflicting or missing information | Sources involved | Documentation treatment | Follow-up |
+| --- | --- | --- | --- | --- |
+| Engage API | Basecamp provides 63 tickets but does not consistently identify public versus internal routes. The group also contains Numbers routes, cron jobs, callbacks, and OpenSearch tasks. | Basecamp “Connect API” group and existing Engage navigation plan. | Customer-facing Engage paths were published after user approval; misplaced and non-request routes remain internal. | Confirm individual visibility if an endpoint needs to differ from the approved family-level rule. |
+| Collect API | Basecamp provides 182 tickets without a reliable public/internal designation. Some routes are UI-specific integrations, AI credit operations, or account-branding operations. | Basecamp “eSign API” group and existing Collect navigation plan. | Customer-facing Collect paths were published; AI credit, branding, and unrelated routes remain internal. | Confirm any additional Collect subresources that should be public. |
+| Fax API | The 458-ticket group mixes core fax operations with account management, admin operations, OAuth callbacks, provider services, reports, and routes owned by other sections. | Basecamp “Fax Module” group and existing Fax/Numbers/Common navigation. | Genuine Fax, Folder, Label, Broadcast, and Automation paths were published; cross-section and infrastructure routes remain internal. | Confirm ownership of any overlapping route that should move sections. |
+| Common APIs | The 52-ticket group includes Contacts, reseller administration, reports, roles, users, and utility routes. | Basecamp “Common Module APIs” group and existing standalone Contacts/Numbers sections. | 50 method-bearing contracts are staged internally; public Contacts pages remain the established source for duplicated contact operations. | Confirm whether reseller and client-administration APIs are public product APIs. |
+| Background services | Cron, AI Session, and FreeSWITCH groups contain 70 additional tickets, primarily scheduled or service-to-service behavior. | Basecamp “Crons,” “Ai session,” and “Freeswitch” groups. | Reviewed as implementation material but not converted into public endpoint pages. | Create separate internal service documentation if engineering needs it. |
+
+## Publication gate
+
+The user approved publication of planned customer-facing Engage, Fax, Collect, Users, Webhooks, Integrations, and Reports endpoints. Publication is restricted by actual endpoint path rather than Basecamp group placement. Routes clearly associated with admin, callbacks, cron jobs, carriers, resellers, internal services, infrastructure, account plans, profiles, or unrelated product families remain marked `groups: ["internal"]` and are excluded from public navigation.
+
+The current public set contains 355 captured endpoint pages. Additional placeholder resource overviews remain visible where Basecamp did not contain a supported method-bearing contract for that resource.

@@ -1,0 +1,65 @@
+---
+title: "GET /folders/exclude_subuser_owned_shared"
+description: "Captured contract for GET /folders/exclude_subuser_owned_shared."
+api: "GET /folders/exclude_subuser_owned_shared"
+public: true
+---
+
+This internal review page records the behavior captured for GET /folders/exclude_subuser_owned_shared.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Folders Excluding Subuser-Owned Shared API
+
+Description :
+Get the list, excluding subuser-owned shared folders, for the owner root-folder view.
+
+
+Endpoint :
+GET: api/folders/exclude_subuser_owned_shared
+
+Query Parameters :
+- parent_id (optional): Parent folder id (use 0 for root folders)
+- exclude_shared_folder (optional): true = only own folders, false = include shared folders
+- cursor (optional): Page number (default: 1)
+- limit (optional): Items per page (default: 20, max: 200)
+- sort_by (optional): created_at | name | updated_at
+- sort_order (optional): asc | desc
+
+Response :
+{
+    "data": [
+        {
+            "id": 101,
+            "parent_id": null,
+            "name": "Main Folder",
+            "slug": "main-folder",
+            "sort_order": 1,
+            "is_shared": false,
+            "shared_with_me": false,
+            "shared": [],
+            "created_at": 1711958400,
+            "has_child": true,
+            "count": 12,
+            "direct_count": 8,
+            "subfolder_count": 4,
+            "owner_name": "John Doe",
+            "file_size": "",
+            "updated_at": 1712044800
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

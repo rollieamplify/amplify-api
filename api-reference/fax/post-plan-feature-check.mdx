@@ -1,0 +1,41 @@
+---
+title: "POST /plan/feature_check"
+description: "Captured contract for POST /plan/feature_check."
+api: "POST /plan/feature_check"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plan/feature_check.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Determine which plans have the specified feature enabled for the given family_name
+
+Endpoint:
+POST: api/plan/feature_check
+
+Request:
+{
+    "feature_slug" : "configurable_retry_logic",
+    "family_name" : "business"
+}
+
+Response:
+{
+    "data": {
+        "basic_plan": false,
+        "plus_plan": true,
+        "pro_plan": true,
+        "enterprise_plan": true
+    },
+    "meta": {
+        "request_id": "048e648a-1c10-4bef-98f8-62c04a3efcfd"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

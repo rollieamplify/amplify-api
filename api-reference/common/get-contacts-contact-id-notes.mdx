@@ -1,0 +1,44 @@
+---
+title: "GET /contacts/{contact_id}/notes"
+description: "Captured contract for GET /contacts/{contact_id}/notes."
+api: "GET /contacts/{contact_id}/notes"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /contacts/{contact_id}/notes.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/contacts/{contact_id}/notes
+
+Response:
+{
+    "data": [
+        {
+            "id": 54,
+            "account_id": 54,
+            "user_id": 53,
+            "contact_id": 6854,
+            "category": "contact",
+            "note": "This is test contact note",
+            "created_at": "2026-04-15T08:39:08.000000Z",
+            "updated_at": "2026-04-15T08:39:08.000000Z",
+            "deleted_at": null
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "6599214c-e461-447f-b398-61d3f92bd579"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,37 @@
+---
+title: "Get number configuration"
+description: "Retrieve forwarding, recording, voicemail, and access settings."
+api: "GET /numbers/{number_id}/configuration"
+groups: ["internal"]
+---
+
+<Warning>This endpoint is for internal Amplify use only.</Warning>
+
+`GET /numbers/{number_id}/configuration` retrieves configuration for one number.
+
+## Path parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `number_id` | integer | Internal number identifier. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/1378/configuration" \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+```
+
+## Configuration sections
+
+| Section | Contents |
+| --- | --- |
+| Root | `label`, `icon`, `access_user_id`, and `assign_permissions` |
+| `fax` | Default template, email forwarding, and number forwarding |
+| `voice` | Email forwarding, number forwarding, caller ID, and call transcripts |
+| `message` | Email-forwarding settings |
+| `call_recording` | Automatic recording and notification settings |
+| `voicemail` | No-answer behavior |
+| User access | `access_users` and `assigned_users` |
+
+User records can contain `team_user_id`, `email`, `first_name`, `last_name`, and `user_type`.
+
+<Warning>User records contain personal information. Avoid logging the complete configuration response.</Warning>

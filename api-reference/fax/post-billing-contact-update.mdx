@@ -1,0 +1,49 @@
+---
+title: "POST /billing_contact/update"
+description: "Captured contract for POST /billing_contact/update."
+api: "POST /billing_contact/update"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing_contact/update.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+NOTE: Update Billing Contact
+
+Endpoint:
+POST : api/billing_contact/update
+
+Request:
+{
+    "contact_id" : "contact_AzqfbJVDkMd7S5QQH",
+    "email" : "testbillingcontact@gmail.com",
+    "first_name" : "update",
+    "last_name" : "contact1",
+    "account" : true,
+    "billing" : false
+}
+
+Response:
+{
+    "data": {
+        "id": "contact_AzqfbJVDkMd7S5QQH",
+        "first_name": "update",
+        "last_name": "contact1",
+        "email": "testbillingcontact@gmail.com",
+        "enabled": true,
+        "send_account_email": true,
+        "send_billing_email": false,
+        "object": "contact"
+    },
+    "meta": {
+        "request_id": "96e75349-1b10-4247-a42e-2abe427f68c8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

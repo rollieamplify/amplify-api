@@ -1,0 +1,138 @@
+---
+title: "POST /reseller/allocate-resources"
+description: "Captured contract for POST /reseller/allocate-resources."
+api: "POST /reseller/allocate-resources"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/allocate-resources.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Allocate Resources API
+
+
+
+
+Endpoint: POST /api/reseller/allocate-resources
+
+
+
+
+Description: Allocate resources to multiple reseller clients.
+
+
+
+
+Request
+{
+    "client_ids": [
+        28498
+    ],
+    "credit_allowed": 10,
+    "credit_price": 1,
+    "numbers": 1,     
+    "numbers_1": 5, 
+    "numbers_1_price": 10,     
+    "numbers_2": 5, 
+    "numbers_2_price": 10,     
+    "numbers_3": 0, 
+    "numbers_3_price": 0,    
+    "numbers_4": 0, 
+    "numbers_4_price": 0, 
+    "numbers_5": 0, 
+    "numbers_5_price": 0,
+    "basic_license": 1,
+    "basic_license_price": 5.99,
+    "plus_license": 0,
+    "plus_license_price": 0,
+    "pro_license": 0,
+    "pro_license_price": 0,
+    "custom_email_domain": false,
+    "custom_email_domain_price": 0,
+    "lab_ai_license": false,
+    "lab_ai_license_price": 0,
+    "api_license": false,
+    "api_license_price": 0,
+    "broadcast_fax": true,
+    "broadcast_fax_price": 0
+}
+
+Field
+
+	
+
+Type
+
+	
+
+Required
+
+
+
+
+client_ids
+
+	
+
+array
+
+	
+
+Yes
+
+
+
+
+client_ids.*
+
+	
+
+integer
+
+	
+
+Yes
+
+Numeric resources are added to the client's existing allowance.
+Boolean resources are not included in the allocation count if it is already enabled for a particular client.
+Resource prices are updated along with the allocated resources; if not provided, the default value is 0.
+Success
+
+
+
+
+200 OK
+
+
+
+
+{
+    "data": "Resources allocated successfully.",
+    "meta": {
+        "request_id": "e7c26719-f13d-4a9a-8d0f-8e436da950bc"
+    }
+}
+Error
+
+
+
+
+400 Bad Request
+
+
+
+
+{
+    "error": {
+        "code": "BAD_REQUEST",
+        "message": "You don't have enough allowance to allocate the requested resources."
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

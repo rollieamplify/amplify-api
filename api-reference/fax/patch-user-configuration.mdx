@@ -1,0 +1,35 @@
+---
+title: "PATCH /user_configuration"
+description: "Captured contract for PATCH /user_configuration."
+api: "PATCH /user_configuration"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /user_configuration.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Add/Update User Configurations API.
+
+EndPoint
+PATCH: https://beta-api.amplify.xyz/api/user_configuration
+
+Request 
+{
+    "domain_restrication": true,
+    "team_auth_type": 0 // 0 = OFF, 1= SMS, 2-GA 
+}
+
+
+Response
+{
+    "data": [],
+    "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

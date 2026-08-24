@@ -1,0 +1,56 @@
+---
+title: "Submit DID requirements"
+description: "Submit regulatory requirements for an existing number."
+api: "POST /numbers/verification/upload_did_requirements"
+groups: ["internal"]
+---
+
+<Warning>This endpoint is for internal Amplify use only.</Warning>
+
+`POST /numbers/verification/upload_did_requirements` submits requirement values for an already-purchased number.
+
+## Request body
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `number_id` | integer | Internal number identifier. |
+| `requirements` | array | Regulatory requirement submissions. |
+
+Each requirement contains `requirement_id`, `type`, and `data`. Supported captured types are `document`, `textual`, and `address`.
+
+```json
+{
+  "number_id": 1378,
+  "requirements": [
+    {
+      "requirement_id": "0ba49bfa-8a0b-4e38-95ba-f1291507fad4",
+      "type": "document",
+      "data": "uploaded-document-reference.pdf"
+    }
+  ]
+}
+```
+
+## Response
+
+```json
+{
+  "data": {
+    "message": "Data are under approval."
+  },
+  "meta": {
+    "request_id": "9b16f7a0-fdb4-457a-8cad-fa158c71cf78"
+  }
+}
+```
+
+The response indicates that asynchronous carrier review has started.
+
+## Validation errors
+
+A non-array `requirements` value returns `VALIDATION_ERROR` with the message `The requirements must be an array.`
+
+## Related operations
+
+- [Upload a verification document](/api-reference/numbers/upload-verification-document)
+- [Create a verification address](/api-reference/numbers/create-verification-address)

@@ -1,0 +1,57 @@
+---
+title: "GET /esign_templates/{esign_template_id}/theme"
+description: "Captured contract for GET /esign_templates/{esign_template_id}/theme."
+api: "GET /esign_templates/{esign_template_id}/theme"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_templates/{esign_template_id}/theme.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+GET : api/esign_templates/{template_id}/theme
+
+Description :
+Fetches the theme configuration for a template.
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+Response :
+{
+    "data": {
+        "id": 6066,
+        "text": {
+            "font": "Arial",
+            "size": "14px",
+            "style": [],
+            "capitalization": "unset",
+            "line_spacing": "1.00",
+            "color": "#000000"
+        },
+        "background": {
+            "color": "#FFFFFF",
+            "opacity": 100
+        },
+        "background_image": {
+            "url": "",
+            "size": "cover",
+            "position": "left_top",
+            "is_repeating": false,
+            "opacity": 100
+        },
+        "applied_to_page": "all_pages"
+    },
+    "meta": {
+        "request_id": "d06f8074-a08f-485b-a50f-7095910fdf78"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

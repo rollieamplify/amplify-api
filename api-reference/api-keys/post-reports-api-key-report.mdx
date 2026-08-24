@@ -1,0 +1,75 @@
+---
+title: "POST /reports/api_key_report"
+description: "Captured contract for POST /reports/api_key_report."
+api: "POST /reports/api_key_report"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reports/api_key_report.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+API Key Report List
+
+EndPoint
+POST : api/reports/api_key_report
+
+Request
+{
+    "start_date": "2025-01-01",
+    "end_date": "2026-02-04",
+    "api_keys" : [72],
+    "group_by" : "by_day"
+}
+
+
+group_by key cotain only : "by_week","by_day","by_year"
+Response
+{
+    "data": [
+        {
+            "fax_time_stamp": 1770163200,
+            "by_time": "2026-02-04",
+            "usage": {
+                "Test": 1
+            }
+        },
+        {
+            "fax_time_stamp": 1771891200,
+            "by_time": "2026-02-24",
+            "usage": {
+                "Test": 1
+            }
+        },
+        {
+            "fax_time_stamp": 1772150400,
+            "by_time": "2026-02-27",
+            "usage": {
+                "Test 2": 4
+            }
+        },
+        {
+            "fax_time_stamp": 1772409600,
+            "by_time": "2026-03-02",
+            "usage": {
+                "Test 1": 4,
+                "Test 2": 39,
+                "Test 3": 11
+            }
+        }
+    ],
+    "meta": {
+        "total": 4,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "9a910882-cf8c-4d0b-895f-6d33bf6e70ea"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

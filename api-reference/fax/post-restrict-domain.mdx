@@ -1,0 +1,37 @@
+---
+title: "POST /restrict_domain"
+description: "Captured contract for POST /restrict_domain."
+api: "POST /restrict_domain"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /restrict_domain.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Restrict given domain
+
+Endpoint:
+POST: api/restrict_domain
+
+Request:
+{
+   "token" : "eyJjdCI6ImI3OGhcL01Ndjl1OUJLaW9VNzVicHhRVTZVRkNMZUxiNEQrNHlNcXlMWDVvPSIsIml2IjoiYWJjZGVmOTg3NjU0MzIxMGFiY2RlZjk4NzY1NDMyMTAiLCJzIjoiNWI5NjA2N2Y1Mjk1MDdjYyJ9"
+}
+
+Response:
+{
+    "data": {
+        "message": "Domain restricted successfully."
+    },
+    "meta": {
+        "request_id": "4ce46166-a639-426c-a3d7-407503330a0c"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

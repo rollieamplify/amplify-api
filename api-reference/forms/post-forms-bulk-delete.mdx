@@ -1,0 +1,64 @@
+---
+title: "POST /forms/bulk_delete"
+description: "Captured contract for POST /forms/bulk_delete."
+api: "POST /forms/bulk_delete"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/bulk_delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/bulk_delete
+
+
+
+
+Description :
+
+
+
+
+-> Soft-deletes a single form.
+-> Also removes linked template form_id reference and deletes associated form responses and logs if they exist.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

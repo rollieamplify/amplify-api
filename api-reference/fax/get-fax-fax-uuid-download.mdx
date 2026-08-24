@@ -1,0 +1,31 @@
+---
+title: "GET /fax/{fax_uuid}/download"
+description: "Captured contract for GET /fax/{fax_uuid}/download."
+api: "GET /fax/{fax_uuid}/download"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/{fax_uuid}/download.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Download Fax
+Endpoint:
+GET: api/fax/{fax_uuid}/download?type=fax
+
+Response:
+{
+    "data": {
+        "presigned_url": "https://example.com/signed-url
+    },
+    "meta": {
+        "request_id": "d79c3ef2-6dc2-4694-b9d0-46ce197e4121"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

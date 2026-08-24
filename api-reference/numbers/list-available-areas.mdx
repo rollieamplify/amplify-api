@@ -1,0 +1,37 @@
+---
+title: "List available areas"
+description: "List supported number-selection areas for a country."
+api: "GET /numbers/available/areas"
+public: true
+---
+
+`GET /numbers/available/areas` lists geographic areas supported for number selection.
+
+## Query parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `country_code` | string | Two-letter country code, such as `FR`. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/available/areas?country_code=FR" \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+```
+
+## Response
+
+```json
+{
+  "data": [
+    {
+      "name": "Paris",
+      "country_code": "FR",
+      "code": "1",
+      "prefix": "1"
+    }
+  ],
+  "meta": {
+    "request_id": "9b16f7a0-fdb4-457a-8cad-fa158c71cf78"
+  }
+}
+```

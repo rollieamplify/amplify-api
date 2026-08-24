@@ -1,0 +1,64 @@
+---
+title: "GET /forms/{form_id}/theme"
+description: "Captured contract for GET /forms/{form_id}/theme."
+api: "GET /forms/{form_id}/theme"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/{form_id}/theme.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/forms/{form_id}/theme
+
+
+
+
+Description :
+
+
+
+
+-> Returns the visual theme settings for a form including text styling, background color/opacity, and background image configuration.
+-> Returns an empty object if no theme has been saved yet.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,168 @@
+---
+title: "List numbers"
+description: "Retrieve the phone numbers available to the authenticated Amplify account."
+api: "GET /numbers"
+public: true
+---
+
+`GET /numbers` returns the phone numbers available to the authenticated account.
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers" \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+  --header "Accept: application/json"
+```
+
+## Query parameters
+
+| Parameter | Type | Required | Options | Description |
+| --- | --- | --- | --- | --- |
+| `type` | string | No | `fax`, `voice` | Filters numbers by type. |
+| `search_string` | string | No | — | Searches both the phone number and its label. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers?type=voice&search_string=12" \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+  --header "Accept: application/json"
+```
+
+## Response
+
+The response contains a `data` array of number resources and a `meta` object with pagination and request information.
+
+```json
+{
+  "data": [
+    {
+      "id": 1378,
+      "number": "+17192048534",
+      "country_code": "US",
+      "country_prefix": 1,
+      "area_code": "CO",
+      "area_prefix": "719",
+      "company_id": null,
+      "company_title": null,
+      "source": "purchase",
+      "port_request_id": "",
+      "label": "Support",
+      "icon": "🎓",
+      "status": "active",
+      "is_deleted": false,
+      "access": [],
+      "features": ["sms", "mms", "voice", "recording"],
+      "created_by": 53,
+      "created_at": "2026-05-25T11:48:10Z",
+      "updated_at": "2026-05-29T06:48:34Z",
+      "ported_out_at": "",
+      "type": "voice",
+      "is_selected": false,
+      "is_did_verified": 1,
+      "is_access": true,
+      "is_blocked": false,
+      "unread_count": 0,
+      "did_requirements": [],
+      "assign_permissions": true,
+      "schedule": [],
+      "configuration": {
+        "label": "Support",
+        "icon": "🎓",
+        "access_user_id": null,
+        "fax": {
+          "default_template": 0,
+          "email_forwarding": [],
+          "number_forwarding": []
+        },
+        "voice": {
+          "enable_email_forwarding": false,
+          "email_forwarding": [],
+          "enable_number_forwarding": false,
+          "number_forwarding": null,
+          "hide_caller_id": false,
+          "enable_call_transcript": true
+        },
+        "message": {
+          "enable_email_forwarding": false,
+          "email_forwarding": []
+        },
+        "call_recording": {
+          "enable_auto_recording": true,
+          "enable_notifications": false,
+          "inbound_call_notification": "none",
+          "outbound_call_notification": "none"
+        },
+        "voicemail": {
+          "enable_no_answer": false
+        },
+        "access_users": [],
+        "assigned_users": [],
+        "assign_permissions": true
+      }
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "next_cursor": "",
+    "previous_cursor": "",
+    "limit": 15,
+    "request_id": "4e42ea65-7e33-4e6f-b4ff-d7f7ad7c5ce8"
+  }
+}
+```
+
+<Note>
+  The example uses sanitized data and omits provider credentials returned by the production response.
+</Note>
+
+## Number fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | integer | Unique number identifier. |
+| `number` | string | Phone number in international format. |
+| `country_code` | string | Two-letter country code. |
+| `country_prefix` | integer | International calling prefix. |
+| `area_code` | string | Geographic area code when available. |
+| `area_prefix` | string | Numeric area prefix when available. |
+| `company_id` | integer or null | Associated company identifier. |
+| `company_title` | string or null | Associated company name. |
+| `source` | string | How the number was added, such as `purchase`. |
+| `port_request_id` | string | Related port request identifier when applicable. |
+| `label` | string | User-defined number label. |
+| `icon` | string | User-selected icon. |
+| `status` | string | Current number status, such as `active`. |
+| `is_deleted` | boolean | Whether the number is deleted. |
+| `access` | array | Access records associated with the number. |
+| `features` | array of strings | Enabled capabilities, such as `sms`, `mms`, `fax`, `voice`, or `recording`. |
+| `created_by` | integer | Identifier of the user who added the number. |
+| `created_at` | string | Creation time in ISO 8601 UTC. |
+| `updated_at` | string | Most recent update time in ISO 8601 UTC. |
+| `ported_out_at` | string | Port-out time when applicable. |
+| `type` | string | Number type, such as `fax` or `voice`. |
+| `telnyx` | object | Provider-specific credentials. Treat this object as sensitive and do not log it. |
+| `is_selected` | boolean | Whether the number is currently selected. |
+| `is_did_verified` | integer | DID verification state. See the mapping below. |
+| `is_access` | boolean | Whether the authenticated user has access. |
+| `is_blocked` | boolean | Whether the number is blocked. |
+| `unread_count` | integer | Number of unread items associated with the number. |
+| `did_requirements` | array | Outstanding DID verification requirements. |
+| `assign_permissions` | boolean | Whether the authenticated user can assign permissions. |
+| `schedule` | array | Schedule configuration associated with the number. |
+| `configuration` | object | Fax, voice, messaging, recording, voicemail, and user-assignment configuration. |
+
+## DID verification states
+
+| Value | Meaning |
+| --- | --- |
+| `0` | Verification pending |
+| `1` | Verification completed |
+| `2` | Verification in progress |
+
+## Metadata fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `total` | integer | Total number of matching records. |
+| `next_cursor` | string | Cursor for the next page. An empty string indicates that no cursor is available. |
+| `previous_cursor` | string | Cursor for the previous page. An empty string indicates that no cursor is available. |
+| `limit` | integer | Page size applied to the response. |
+| `request_id` | string | Request identifier for troubleshooting. |

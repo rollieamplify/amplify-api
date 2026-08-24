@@ -1,0 +1,41 @@
+---
+title: "GET /nlp/custom_fields"
+description: "Captured contract for GET /nlp/custom_fields."
+api: "GET /nlp/custom_fields"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /nlp/custom_fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get the NLP custom fields API.
+
+Endpoint
+GET : api/nlp/custom_fields
+
+Response
+{
+    "data": [
+        {
+            "id": 5,
+            "data_key": "test",
+            "data_type": "Date"
+        },
+        {
+            "id": 6,
+            "data_key": "test1",
+            "data_type": "Dx Name"
+        }
+    ],
+    "meta": {
+        "request_id": "49a385d4-f0a6-47e3-bb34-a121f0e6a279"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,38 @@
+---
+title: "GET /guest_message/secure_chat/{conversation_id}/export"
+description: "Captured contract for GET /guest_message/secure_chat/{conversation_id}/export."
+api: "GET /guest_message/secure_chat/{conversation_id}/export"
+public: true
+---
+
+This page documents the behavior captured for GET /guest_message/secure_chat/{conversation_id}/export in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/guest_message/secure_chat/{conversation_id}/export
+    
+    Response:
+    {
+        "data": [
+            {
+                "from_number": "18148316253",
+                "to_number": "12566618368",
+                "direction": "inbound",
+                "content": "hii",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-04-27T10:07:30.000000Z"
+            }
+        ],
+        "meta": {
+            "request_id": "22e56a82-0b53-477e-b118-86c781df3355"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

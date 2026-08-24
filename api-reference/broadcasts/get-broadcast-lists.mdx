@@ -1,0 +1,71 @@
+---
+title: "GET /broadcast_lists"
+description: "Captured contract for GET /broadcast_lists."
+api: "GET /broadcast_lists"
+public: true
+---
+
+This internal review page records the behavior captured for GET /broadcast_lists.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get All Broadcast Lists API:
+
+Endpoint :
+
+GET: api/broadcast_lists
+
+Query Parameters :
+
+- cursor (optional): Page number (default: 1)
+
+- limit (optional): Items per page (default: 20, max: 200)
+
+Response :
+
+{
+    "data": [
+        {
+            "broadcast_id": 1,
+            "name": "My Broadcast List",
+            "recipients_count": 10,
+            "recipients_optout_count": 0,
+            "updated_at": "2024-01-15T10:30:00.000000Z",
+            "last_faxed": "2024-01-14T15:20:00.000000Z",
+            "is_favorite": false,
+            "invalid_nums_count": 0,
+            "last_fax_time": 1705242000,
+            "last_fax_uuid": "01KX3AFS2QGVWVKDFD39KGGQ8G",
+            "total_percentage": 85.5,
+            "total_broadcast": 10,
+            "total_broadcast_sent": 8,
+            "fax_id": 123,
+            "total_cost": 0.60,
+            "custom_fields": [
+                {
+                    "key": "firstName",
+                    "cover_page_field": "to"
+                },
+                {
+                    "key": "lastName",
+                    "cover_page_field": null
+                }
+            ],
+            "created_at": "2024-01-10T08:00:00.000000Z"
+        }
+    ],
+    "meta": {
+        "total": 5,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

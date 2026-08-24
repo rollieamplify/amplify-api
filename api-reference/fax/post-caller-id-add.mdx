@@ -1,0 +1,75 @@
+---
+title: "POST /caller_id/add"
+description: "Captured contract for POST /caller_id/add."
+api: "POST /caller_id/add"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /caller_id/add.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Add Caller Id
+
+Endpoint:
+POST: /caller_id/add
+
+Request:
+{
+    "caller_id" : "12562571126"
+}
+
+Response:
+{
+    "data": {
+        "message": "Caller ID added successfully."
+    },
+    "meta": {
+        "request_id": "79a79410-c90d-4c5f-8839-6149ad1ff9b4"
+    }
+}
+
+
+Validation for caller Id
+Endpoint:
+/caller_id/add
+
+Request:
+{
+    "caller_id" : "1223 5667"
+}
+
+Response:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "caller_id": [
+            "Caller ID must contain only numeric characters and no spaces."
+        ]
+    }
+}
+
+
+
+Request:
+{
+    "caller_id" : "12235667"
+}
+
+Response:
+{
+    "error": {
+        "code": "BAD_REQUEST",
+        "message": "Invalid Caller ID."
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

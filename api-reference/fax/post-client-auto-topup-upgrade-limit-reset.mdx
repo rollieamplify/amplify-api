@@ -1,0 +1,50 @@
+---
+title: "POST /client/auto-topup/upgrade-limit/reset"
+description: "Captured contract for POST /client/auto-topup/upgrade-limit/reset."
+api: "POST /client/auto-topup/upgrade-limit/reset"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /client/auto-topup/upgrade-limit/reset.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Reset client auto top-up limit API.
+
+Endpoint:
+POST - /api/client/auto-topup/upgrade-limit/reset
+
+Body:
+{
+    "client_id": 284
+}
+
+Response:
+{
+    "data": {
+        "message": "The Auto top-up limit has been reset successfully."
+    },
+    "meta": {
+        "request_id": "9cb0d85c-a7a8-462f-b566-00068edc9c29"
+    }
+}
+
+Validation:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "client_id": [
+            "The client id field is required."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

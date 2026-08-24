@@ -1,0 +1,76 @@
+---
+title: "GET /reseller/client/{client_id}/faxes"
+description: "Captured contract for GET /reseller/client/{client_id}/faxes."
+api: "GET /reseller/client/{client_id}/faxes"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/client/{client_id}/faxes.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+USE: Get list of faxes of client.
+
+
+
+
+Endpoint:
+
+GET: api/reseller/client/27968/faxes?cursor=1&limit=2
+
+
+
+
+Response:
+
+{
+    "data": {
+        "faxes": [
+            {
+                "fax_uuid": "01KYPPC52QV0CKH7C9WHXHMDH6",
+                "from_number": 19382530703,
+                "to_number": 19382530703,
+                "status": 1,
+                "platform": "web",
+                "ip": "103.205.216.7",
+                "pages": 1,
+                "location": "Asia/Kolkata",
+                "created_at": 1785320578,
+                "ocr_status_label": "",
+                "nlp_status_label": ""
+            },
+            {
+                "fax_uuid": "01KYPPCSTA9QZHP0PD0XB25C4W",
+                "from_number": 19382530703,
+                "to_number": 19382530703,
+                "status": 1,
+                "platform": "web",
+                "ip": null,
+                "pages": 1,
+                "location": null,
+                "created_at": 1785320597,
+                "ocr_status_label": "",
+                "nlp_status_label": ""
+            }
+        ],
+        "totalReceivedPages": 1,
+        "totalSentPages": 13,
+        "totalReceivedThisMonth": 1,
+        "totalSentThisMonth": 13,
+        "allowance_used": 0.08
+    },
+    "meta": {
+        "total": 3,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 2,
+        "request_id": "362fb85c-ccba-4b52-833a-bbed70424aef"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

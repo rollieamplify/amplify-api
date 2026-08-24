@@ -1,0 +1,138 @@
+---
+title: "POST /broadcast_labels/recipients"
+description: "Captured contract for POST /broadcast_labels/recipients."
+api: "POST /broadcast_labels/recipients"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast_labels/recipients.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Get Broadcast Label Recipients API
+
+
+## Description
+Retrieves all recipients associated with a specific broadcast label, including their custom fields and label information.
+
+
+## Endpoint
+POST: api/broadcast_labels/recipients
+
+
+## Request Body
+{
+    "broadcast_label_id": 12
+}
+
+
+## Response
+
+
+### Success Response (200)
+{
+    "data": {
+        "recipients": [
+            {
+                "id": 478862,
+                "fax_number": "12059313619",
+                "broadcast_label_id": 12,
+                "formatted_fax_number": "+1 (205) 931-3619",
+                "region": "US",
+                "international_number": false,
+                "cost": 1,
+                "custom_fields": {
+                    "First Name": "Rahul",
+                    "Last Name": "Patel",
+                    "fax_number": "+1 (205) 850-9126",
+                    "Company": "nnnn"
+                }
+            },
+            {
+                "id": 478861,
+                "fax_number": "12199008015",
+                "broadcast_label_id": 12,
+                "formatted_fax_number": "+1 (219) 900-8015",
+                "region": "US",
+                "international_number": false,
+                "cost": 1,
+                "custom_fields": {
+                    "First Name": "Jil",
+                    "Last Name": "Patel",
+                    "fax_number": "+1 (205) 850-9126",
+                    "Company": "zzzz"
+                }
+            },
+            {
+                "id": 478859,
+                "fax_number": "12292220134",
+                "broadcast_label_id": 12,
+                "formatted_fax_number": "+1 (229) 222-0134",
+                "region": "US",
+                "international_number": false,
+                "cost": 1,
+                "custom_fields": {
+                    "First Name": "Dhruvil",
+                    "Last Name": "Patel",
+                    "fax_number": "+1 (205) 850-9126",
+                    "Company": "aaa"
+                }
+            },
+            {
+                "id": 478860,
+                "fax_number": "15876065252",
+                "broadcast_label_id": 12,
+                "formatted_fax_number": "+1 (587) 606-5252",
+                "region": "CA",
+                "international_number": false,
+                "cost": 1,
+                "custom_fields": {
+                    "First Name": "Vishal",
+                    "Last Name": "Rojasara",
+                    "fax_number": "+1 (205) 850-9126",
+                    "Company": "bbb"
+                }
+            }
+        ],
+        "common_custom_fields": [
+            "First Name",
+            "Last Name",
+            "fax_number",
+            "Company"
+        ],
+        "custom_fields": [
+            {
+                "title": "First Name",
+                "use_on_cover": ""
+            },
+            {
+                "title": "Last Name",
+                "use_on_cover": ""
+            },
+            {
+                "title": "fax_number",
+                "use_on_cover": ""
+            },
+            {
+                "title": "Company",
+                "use_on_cover": ""
+            }
+        ],
+        "label": {
+            "id": 12,
+            "name": "Label 2",
+            "text_color": "",
+            "bg_color": "#973DE4"
+        }
+    },
+    "meta": {
+        "request_id": "8cfe25a8-2a71-426a-aa04-fb8e309a2168"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

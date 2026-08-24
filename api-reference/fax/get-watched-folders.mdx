@@ -1,0 +1,42 @@
+---
+title: "GET /watched_folders"
+description: "Captured contract for GET /watched_folders."
+api: "GET /watched_folders"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /watched_folders.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+GET: api/watched_folders
+
+
+Response:
+
+{
+    "data": {
+        "id": 2,
+        "host": "52.36.169.228",
+        "port": 22,
+        "username": "ubuntu",
+        "password": "",
+        "path": "/home/ubuntu/test1",
+        "method": "fixed",
+        "fax_number": "18334286878",
+        "ssh_key": "YOUR_PRIVATE_KEY",
+        "authentication_method": 1
+    },
+    "meta": {
+        "request_id": "d44952ec-5bda-4f2a-8100-c9b53e50d0c6"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

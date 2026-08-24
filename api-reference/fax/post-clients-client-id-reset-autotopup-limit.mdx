@@ -1,0 +1,79 @@
+---
+title: "POST /clients/{client_id}/reset-autotopup-limit"
+description: "Captured contract for POST /clients/{client_id}/reset-autotopup-limit."
+api: "POST /clients/{client_id}/reset-autotopup-limit"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /clients/{client_id}/reset-autotopup-limit.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Reset used Auto top-up limit
+
+Resets the client's used auto top-up limit to 0
+
+
+Endpoint
+POST: api/clients/{client_id}/reset-autotopup-limit
+
+
+
+
+Request Body
+
+This endpoint does not require a request body.
+
+
+
+
+Path Parameters
+
+Parameter
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+client_id
+
+	
+
+integer
+
+	
+
+Yes
+
+	
+
+The unique ID of the client to mark as starred.
+
+
+
+
+Success Response:
+{
+    "data": "The auto top-up limit has been reset successfully.",
+    "meta": {
+        "request_id": "b80ace2f-a0d9-4508-abb6-66869d2d32a0"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

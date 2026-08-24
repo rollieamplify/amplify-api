@@ -1,0 +1,45 @@
+---
+title: "POST /nlp/contact/status"
+description: "Captured contract for POST /nlp/contact/status."
+api: "POST /nlp/contact/status"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /nlp/contact/status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+POST: api/nlp/contact/status
+
+
+
+
+This endpoint allows users to mark an NLP contact associated with a fax as read or unread.
+
+
+Body:
+
+{
+    "id": 7371,
+    "fax_uuid": "01KX2WP9H7B8BY75B93035XYS8",
+    "is_read": true
+}
+
+
+Response:
+
+{
+    "data": "Read status updated successfully.",
+    "meta": {
+        "request_id": "92c8d476-9361-4345-8925-b7e0820b80b9"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

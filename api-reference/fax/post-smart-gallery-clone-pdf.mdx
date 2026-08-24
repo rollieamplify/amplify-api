@@ -1,0 +1,34 @@
+---
+title: "POST /smart-gallery/clone/pdf"
+description: "Captured contract for POST /smart-gallery/clone/pdf."
+api: "POST /smart-gallery/clone/pdf"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /smart-gallery/clone/pdf.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+POST : api/smart-gallery/clone/pdf
+
+Payload:
+{
+    "template_uuid": "15030a5d6b554f229c859a258918fa0sa"
+} 
+
+Response:
+{
+    "data": {
+        "uuid": "1d8d28e1765040b5a03c75ee3f264ee4"
+    },
+    "meta": {
+        "request_id": "83ba36a2-b507-470d-81ba-d8299aee67dc"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

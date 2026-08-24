@@ -1,0 +1,75 @@
+---
+title: "PATCH /team-user/bulk_permissions_update"
+description: "Captured contract for PATCH /team-user/bulk_permissions_update."
+api: "PATCH /team-user/bulk_permissions_update"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /team-user/bulk_permissions_update.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Bulk Permission Update API
+
+
+**Endpoint:**  
+PATCH: api/team-user/bulk_permissions_update
+
+
+# Description :
+Updates permissions for multiple sub-users at once. Provide either `role_id` OR `user_permissions`, but not both.
+- **role_id:** Fetches permissions from the role and applies them to all selected users; also updates each user's `role_id`.
+- **user_permissions:** Applies the given custom permissions to all selected users (only those with a `role_id` set are updated).
+
+
+# Request Body :
+
+
+## Option 1: Apply Role to Selected Users :
+{
+  "ids": "103,104,105",
+  "role_id": 3
+}
+
+
+## Option 2: Apply Custom Permissions to Selected Users :
+{
+  "ids": "103,104,105",
+  "user_permissions": {
+    "access_ifax": true,
+    "view_documents": true,
+    "view_documents_value": "all_documents",
+    "send_faxes": true
+  }
+}
+
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| ids | string | Yes | Comma-separated sub-user IDs. |
+| role_id | int | Conditional | Either `role_id` or `user_permissions` required, not both. |
+| user_permissions | object | Conditional | Custom permissions; same format as Create. |
+
+
+# Response Format :
+
+
+## Success Response (When role_id Provided) :
+{
+  "data": {
+    "message": "Permissions updated successfully from role",
+    "users_updated": 3,
+    "role_id": 3,
+    "updated_user_ids": [103, 104, 105]
+  },
+  "meta": {
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

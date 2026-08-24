@@ -1,0 +1,328 @@
+---
+title: "POST /reseller/branding"
+description: "Captured contract for POST /reseller/branding."
+api: "POST /reseller/branding"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/branding.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Save Reseller Branding API
+
+Endpoint:
+POST /api/reseller/branding
+
+
+Description:
+Partial update. Send only sections/fields to change. Omitted fields are left unchanged. Invalid config fields are skipped silently. Nested top-level branding is ignored.
+
+
+
+
+Success data always matches GET shape (configuration + custom_branding).
+
+
+
+
+Case A — Configuration only
+
+Request
+
+POST /api/reseller/branding
+Authorization: Bearer {token}
+Content-Type: application/json
+{
+  "configuration": {
+    "is_active_reseller": true,
+    "reseller_mode": true,
+    "product_name": "Amplify",
+    "sales_inquiries": "asa@d.com",
+    "support_email": "asa@d.com",
+    "support_number": "12056325632",
+    "support_message": "vsxvdfc",
+    "provisioning_mode": "client",
+    "is_client_auto_topup_enabled": true,
+    "topup_amount": 20,
+    "balance_trigger": 50
+  }
+}
+
+
+
+
+Response 200
+
+{
+  "data": {
+    "configuration": {
+      "is_active_reseller": true,
+      "sales_inquiries": "asa@d.com",
+      "support_email": "asa@d.com",
+      "support_number": "12056325632",
+      "support_message": "vsxvdfc",
+      "default_domain": "amplify.fax.cc",
+      "domain_verification": false,
+      "provisioning_mode": "client",
+      "is_client_auto_topup_enabled": true,
+      "topup_amount": 20,
+      "balance_trigger": 50,
+      "reseller_mode": true,
+      "product_name": "Amplify"
+    },
+    "custom_branding": {
+      "logo_light_background": "https://...",
+      "logo_dark_background": "https://...",
+      "primary_color": "#FFFFFF",
+      "accent_color": "#9432fd",
+      "sender_email_address": "no-reply@amplify.xyz",
+      "sender_email_verified": true,
+      "company_name": "Amplify",
+      "is_sender_email_enabled": true,
+      "enable_portal_access": true,
+      "email_footer_text": "Use Amplify to simplify the process of agreement management and obtaining eSignatures.",
+      "remove_amplify_branding_in_subject": false
+    }
+  },
+  "meta": {
+    "request_id": "..."
+  }
+}
+
+
+
+
+Case B — Custom branding only (JSON)
+
+Request
+
+POST /api/reseller/branding
+Authorization: Bearer {token}
+Content-Type: application/json
+{
+  "custom_branding": {
+    "company_name": "Amplify",
+    "primary_color": "#f1ad71",
+    "accent_color": "#197700",
+    "sender_email_address": "no-reply@amplify.xyz",
+    "is_sender_email_enabled": false,
+    "enable_portal_access": false,
+    "email_footer_text": "",
+    "remove_amplify_branding_in_subject": false
+  }
+}
+
+
+
+
+Response 200
+
+{
+  "data": {
+    "configuration": {
+      "is_active_reseller": true,
+      "sales_inquiries": "asa@d.com",
+      "support_email": "asa@d.com",
+      "support_number": "12056325632",
+      "support_message": "vsxvdfc",
+      "default_domain": "amplify.fax.cc",
+      "domain_verification": false,
+      "provisioning_mode": "client",
+      "is_client_auto_topup_enabled": true,
+      "topup_amount": 20,
+      "balance_trigger": 50,
+      "reseller_mode": true,
+      "product_name": "Amplify"
+    },
+    "custom_branding": {
+      "logo_light_background": "https://...",
+      "logo_dark_background": "https://...",
+      "primary_color": "#f1ad71",
+      "accent_color": "#197700",
+      "sender_email_address": "no-reply@amplify.xyz",
+      "sender_email_verified": true,
+      "company_name": "Amplify",
+      "is_sender_email_enabled": false,
+      "enable_portal_access": false,
+      "email_footer_text": "",
+      "remove_amplify_branding_in_subject": false
+    }
+  },
+  "meta": {
+    "request_id": "..."
+  }
+}
+
+
+
+
+Case C — Configuration + custom branding together
+
+
+
+
+Request
+
+POST /api/reseller/branding
+Authorization: Bearer {token}
+Content-Type: application/json
+{
+  "configuration": {
+    "product_name": "Acme",
+    "provisioning_mode": "shared",
+    "default_domain": "acme.com",
+    "domain_verification": true
+  },
+  "custom_branding": {
+    "company_name": "Acme",
+    "primary_color": "#111111",
+    "accent_color": "#00AAFF",
+    "sender_email_address": "noreply@acme.com",
+    "is_sender_email_enabled": true,
+    "enable_portal_access": true,
+    "email_footer_text": "Sent via Acme",
+    "remove_amplify_branding_in_subject": true
+  }
+}
+
+
+
+
+Response 200
+
+{
+  "data": {
+    "configuration": {
+      "is_active_reseller": true,
+      "sales_inquiries": "...",
+      "support_email": "...",
+      "support_number": "...",
+      "support_message": "...",
+      "default_domain": "acme.com",
+      "domain_verification": true,
+      "provisioning_mode": "shared",
+      "is_client_auto_topup_enabled": true,
+      "topup_amount": 20,
+      "balance_trigger": 50,
+      "reseller_mode": true,
+      "product_name": "Acme"
+    },
+    "custom_branding": {
+      "logo_light_background": "https://...",
+      "logo_dark_background": "https://...",
+      "primary_color": "#111111",
+      "accent_color": "#00AAFF",
+      "sender_email_address": "noreply@acme.com",
+      "sender_email_verified": false,
+      "company_name": "Acme",
+      "is_sender_email_enabled": true,
+      "enable_portal_access": true,
+      "email_footer_text": "Sent via Acme",
+      "remove_amplify_branding_in_subject": true
+    }
+  },
+  "meta": {
+    "request_id": "..."
+  }
+}
+
+
+
+
+Case D — Logo upload (multipart)
+
+Request
+
+POST /api/reseller/branding
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+configuration[product_name]=Amplify
+configuration[provisioning_mode]=client
+custom_branding[company_name]=Amplify
+custom_branding[accent_color]=#197700
+logo=<file>
+logo_dark=<file>
+Multipart fields logo / logo_dark are top-level (cannot nest files).
+Require custom_branding section present so logos attach to that save path.
+
+
+
+
+Response 200 — same GET shape; logo_light_background / logo_dark_background are new presigned URLs.
+
+{
+  "data": {
+    "configuration": { "...": "..." },
+    "custom_branding": {
+      "logo_light_background": "https://.../branding/{uuid}.png?...",
+      "logo_dark_background": "https://.../branding/{uuid}.png?...",
+      "primary_color": "#FFFFFF",
+      "accent_color": "#197700",
+      "sender_email_address": "no-reply@amplify.xyz",
+      "sender_email_verified": true,
+      "company_name": "Amplify",
+      "is_sender_email_enabled": true,
+      "enable_portal_access": true,
+      "email_footer_text": "...",
+      "remove_amplify_branding_in_subject": false
+    }
+  },
+  "meta": {
+    "request_id": "..."
+  }
+}
+
+
+
+
+Case E — Sub-user (sender email only)
+
+Sub-user with permission may send only custom_branding.sender_email_address (mapped to subuser_branding).
+
+
+
+
+Request
+
+{
+  "custom_branding": {
+    "sender_email_address": "user@company.com"
+  }
+}
+
+
+
+
+Response 200 — full GET shape; custom_branding.sender_email_address reflects sub-user override; sender_email_verified may be false until verified.
+
+
+Case F — Empty body / no writable sections
+
+
+
+
+Request
+
+{}
+
+
+
+
+Response 422
+
+{
+  "data": {
+    "error": {
+      "code": "VALIDATION_ERROR",
+      "message": "No branding fields provided."
+    }
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

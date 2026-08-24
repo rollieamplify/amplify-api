@@ -1,0 +1,108 @@
+---
+title: "POST /import_contacts/store_multiple_contacts"
+description: "Captured contract for POST /import_contacts/store_multiple_contacts."
+api: "POST /import_contacts/store_multiple_contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /import_contacts/store_multiple_contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+{
+    "contact_data": [
+        {
+            "unique_id": "",
+            "fax_number": "12055098105",
+            "first_name": "dsf",
+            "last_name": "asdf",
+            "company_name": "asd",
+            "suffix": "Jr",
+            "previous_last_name": "",
+            "dob": "1985-06-15",
+            "gender": "male", // 'male', 'female', 'other', 'unknown', 'not_to_say
+            "contact_groups": "xyz",
+            "job_title": "rewrewr",
+            "role_title": "",
+            "organization_type": "clinic", // 'hospital', 'clinic', 'lab', 'pharmacy', 'insurance', 'other'
+            "website": "https://abchealthcare.com",
+            "patient_first_name": "dsf",
+            "patient_middle_name": "Aasdf",
+            "patient_last_name": "asdf",
+            "primary_contact_name": "Dr. Smith",
+            "address": "123 Main Street",
+            "address_line_2": "Suite 201",
+            "city": "Pune",
+            "state": "MH",
+            "zip": "411001",
+            "country": "India",
+            "npi": "1234567890",
+            "tax_id": "TAX998877",
+            "medical_record_number": "MRN001245",
+            "external_patient_id": "EXT9988",
+            "patient_status": "active", // 'active', 'inactive', 'deceased'
+            "preferred_language": "english", // 'english', 'spanish', 'french', 'german', 'other'
+            "interpreter_needed": 0,
+            "races": "[\"American Indian or Alaska Native\",\"Native Hawaiian or Other Pacific Islander\"]",
+            "ethnicity": "hispanic_or_latino", // 'hispanic_or_latino', 'not_hispanic_or_latino', 'unknown'
+            "pcp_internal_contact": "Dr. Internal",
+            "pcp_external_name": "Dr. External",
+            "emergency_contact_name": "Jane Doe",
+            "emergency_contact_relationship": "spouse", //'self','spouse','parent','child','sibling','relative','friend','caregiver','other'
+            "emergency_contact_phone": "9876500000",
+            "preferred_contact_methods": "[\"SMS\",\"Email\",\"Phone\"]",
+            "sms_opt_in": true,
+            "email_opt_in": false,
+            "do_not_contact": true,
+            "coverage_type": "primary", // 'primary', 'secondary', 'tertiary'
+            "insurance_provider": "Health Insurance Co",
+            "plan_name": "Gold Plan",
+            "member_id": "MEM123456",
+            "group_number": "GRP789",
+            "payer_phone": "1800123456",
+            "subscriber_name": "John Doe",
+            "subscriber_dob": "1985-06-15",
+            "subscriber_relationship": "self", // 'self', 'spouse', 'child', 'other
+            "notes": "Diabetic patient",
+            "email": "developer@example.com",
+            "phone_number": "2293373314",
+            "work_number": "5876065252",
+            "direct_message": "",
+            "is_accessible_to_others": true,
+            "type": 2,
+            "custom_fields": [
+                {
+                    "key": "Zip code",
+                    "value": "zip_code"
+                }
+            ]
+        }
+    ]
+}
+
+Validation:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed.",
+        "errors": {
+            "0": [
+                "Patient last name is required.",
+                "Date of Birth is required.",
+                "Gender is required."
+            ],
+            "1": [
+                "Patient last name is required.",
+                "Date of Birth is required.",
+                "Gender is required."
+            ]
+        }
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

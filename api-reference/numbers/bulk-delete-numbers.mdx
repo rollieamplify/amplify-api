@@ -1,0 +1,40 @@
+---
+title: "Bulk delete numbers"
+description: "Request release of multiple phone numbers."
+api: "POST /numbers/bulk_delete"
+public: true
+---
+
+`POST /numbers/bulk_delete` requests asynchronous deletion of multiple numbers.
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `number_ids` | array of integers | Yes | Internal identifiers of the numbers to release. |
+
+```json
+{
+  "number_ids": [1377, 1379]
+}
+```
+
+## Response
+
+```json
+{
+  "data": {
+    "status": 1,
+    "message": "Request accepted to delete the number. We will update you shortly."
+  },
+  "meta": {
+    "request_id": "9b16f7a0-fdb4-457a-8cad-fa158c71cf78"
+  }
+}
+```
+
+## Validation errors
+
+The API returns `VALIDATION_ERROR` when `number_ids` is missing or is not an array.
+
+<Note>The operation is processed asynchronously. The current response does not return a job identifier.</Note>

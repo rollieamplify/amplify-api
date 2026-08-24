@@ -1,0 +1,71 @@
+---
+title: "POST /save/company_page/fax/details"
+description: "Captured contract for POST /save/company_page/fax/details."
+api: "POST /save/company_page/fax/details"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /save/company_page/fax/details.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Store API:
+Endpoint:
+POST: api/save/company_page/fax/details
+
+Body:
+{    
+    "company_page_id": "cUFoRGsxWFZEcWdMNldvQ3o4UWtrZz09",
+    "from_number": "XXXXXXXXXXX",
+    "broadcast_ids": "",
+    "campaign_ids" : "",
+    "recipients" : [
+        {
+            "to_number" : "XXXXXXXXXXX",
+            "contact_id" : 302
+        }
+    ],
+    "from_name": "Jil",
+    "to_name" : "Vishal",
+    "from_email": "developer@example.com",
+    "subject": "Test",
+    "comments": "Test Fax",
+    "fax_type" : "comment",
+    "cover_page_id": "1",
+    "template_id": "",
+    "smart_document_id": "",
+    "pages": "1",
+    "country_id": "119",
+    "fax_logo": "",
+    "is_secure": false,
+    "hippa_badge_logo": "",
+    "disclaimer_text": "",
+    "fax_priority": "high",
+    "fax_quality" : "standard"
+}
+
+Response:
+{
+    "data": {
+        "local_fax_uuid": "01KDMJX282Y7742NKT5V0FE6B1",
+        "pages": 0,
+        "to_number": "18198036094",
+        "to_name": "Vishal",
+        "from_number": "19073131400",
+        "subject": "Test",
+        "comments": "Test Fax",
+        "cover_page_id": "1",
+        "template_id": null,
+        "smart_document_id": null
+    },
+    "meta": {
+        "request_id": "81298a1a-c224-4868-b90d-d3ac5fe45bc2"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,60 @@
+---
+title: "GET /forms/{form_id}/analytics"
+description: "Captured contract for GET /forms/{form_id}/analytics."
+api: "GET /forms/{form_id}/analytics"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/{form_id}/analytics.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/forms/{form_id}/analytics
+
+
+
+
+Description :
+
+
+
+
+Returns form-level conversion analytics for the authenticated form owner: summary stats, funnel metrics, and per-page average time analytics aggregated across all form responses. 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

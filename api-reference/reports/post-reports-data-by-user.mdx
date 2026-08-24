@@ -1,0 +1,93 @@
+---
+title: "POST /reports/data_by_user"
+description: "Captured contract for POST /reports/data_by_user."
+api: "POST /reports/data_by_user"
+public: true
+---
+
+This internal review page records the behavior captured for POST /reports/data_by_user.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint:
+POST: api/reports/data_by_user?limit=10&cursor=1
+
+Body:
+{
+    "start_date": "2026-01-25",
+    "end_date": "2026-02-15",
+    "direction": "any"
+}
+
+direction: any, inbound, outbound
+
+Note: validation added for date format
+
+Validation Error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "direction": [
+            "The selected direction is invalid."
+        ],
+        "start_date": [
+            "The start date does not match the format Y-m-d."
+        ],
+        "end_date": [
+            "The end date does not match the format Y-m-d."
+        ]
+    }
+}
+
+Response:
+{
+    "data": {
+        "users": [
+            "developer@example.com",
+            "developer@example.com"
+        ],
+        "data": {
+            "01 2026": {
+                "developer@example.com": {
+                    "email": "developer@example.com",
+                    "by_time": "01 2026",
+                    "total_fax": 5,
+                    "total_pages": "7"
+                },
+                "developer@example.com": {
+                    "email": "developer@example.com",
+                    "by_time": "01 2026",
+                    "total_fax": 0,
+                    "total_pages": 0
+                }
+            },
+            "02 2026": {
+                "developer@example.com": {
+                    "email": "developer@example.com",
+                    "by_time": "02 2026",
+                    "total_fax": 4,
+                    "total_pages": "9"
+                },
+                "developer@example.com": {
+                    "email": "developer@example.com",
+                    "by_time": "02 2026",
+                    "total_fax": 0,
+                    "total_pages": 0
+                }
+            }
+        }
+    },
+    "meta": {
+        "request_id": "bba96d18-e5b9-4e9c-9836-1e56c93cf636"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

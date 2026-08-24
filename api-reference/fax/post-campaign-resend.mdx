@@ -1,0 +1,70 @@
+---
+title: "POST /campaign/resend"
+description: "Captured contract for POST /campaign/resend."
+api: "POST /campaign/resend"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /campaign/resend.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+### Resend Campaign API
+
+
+**Endpoint:**  
+POST api/campaign/resend
+
+
+## Description
+Resends a campaign either by retrying only cancelled faxes or by creating a new campaign and resending to all recipients.
+
+
+## Request Body
+{
+  "campaign_id": 123,
+  "restart_type": 0
+}
+
+
+- **campaign_id**: Numeric ID of the campaign to restart.
+- **restart_type**:
+  - `0` – Resend only cancelled faxes within the same campaign.
+  - `1` – Restart the entire campaign as a new campaign and resend to all recipients.
+
+
+## Response Format
+
+
+### Success (Cancelled Faxes Only) :
+{
+  "data": {
+    "message": "Campaign restarted successfully (cancelled faxes only)",
+    "campaign_id": 123,
+    "restarted_faxes": 5
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440000"
+  }
+}
+
+
+### Success (Full Campaign Restart) :
+{
+  "data": {
+    "message": "Campaign restarted successfully (new campaign created)",
+    "campaign_id": 456,
+    "fax_uuid": "2b1a2c80-1234-4b9c-8a3f-112233445566",
+    "local_fax_uuid": "a1b2c3d4-5678-4f90-aaaa-bbccddeeff00"
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440001"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,28 @@
+---
+title: "Submit a reseller sales inquiry"
+description: "Send a reseller product inquiry to the Amplify sales team."
+api: "POST /sales_inquiries"
+public: true
+---
+
+<Info>This endpoint does not require an API access token.</Info>
+
+<ParamField body="first_name" type="string" required>Contact first name.</ParamField>
+<ParamField body="last_name" type="string" required>Contact last name.</ParamField>
+<ParamField body="company_name" type="string" required>Company name.</ParamField>
+<ParamField body="phone_number" type="string" required>Phone number.</ParamField>
+<ParamField body="work_email" type="string" required>Work email address.</ParamField>
+<ParamField body="fax_page_per_month" type="integer" required>Expected monthly fax pages. Must be zero or greater.</ParamField>
+<ParamField body="product_name" type="string" required>Product of interest.</ParamField>
+
+```json
+{
+  "first_name": "Taylor",
+  "last_name": "Reyes",
+  "company_name": "Example Health",
+  "phone_number": "+14155550101",
+  "work_email": "taylor.reyes@example.com",
+  "fax_page_per_month": 5000,
+  "product_name": "Amplify Reseller"
+}
+```

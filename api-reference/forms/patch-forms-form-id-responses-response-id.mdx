@@ -1,0 +1,62 @@
+---
+title: "PATCH /forms/{form_id}/responses/{response_id}"
+description: "Captured contract for PATCH /forms/{form_id}/responses/{response_id}."
+api: "PATCH /forms/{form_id}/responses/{response_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /forms/{form_id}/responses/{response_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+PATCH : api/forms/{form_id}/responses/{response_id}
+
+
+
+
+Description :
+
+
+
+
+-> Updates a form response by the form owner or the respondent (email must match logged-in user).
+-> Returns updated response with fields. 
+-> On completion, triggers owner notifications, Google Sheets sync, and completion emails.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

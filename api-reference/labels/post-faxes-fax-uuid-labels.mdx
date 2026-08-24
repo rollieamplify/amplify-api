@@ -1,0 +1,27 @@
+---
+title: "POST /faxes/{fax_uuid}/labels"
+description: "Captured contract for POST /faxes/{fax_uuid}/labels."
+api: "POST /faxes/{fax_uuid}/labels"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /faxes/{fax_uuid}/labels.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Add Labels to fax
+
+Endpoint:
+POST: api/faxes/01KDSF33N1C71NWJXM5H3KHWX5/labels
+
+Body:
+{
+    "label_ids": [25, 49]
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

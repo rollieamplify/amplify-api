@@ -1,0 +1,71 @@
+---
+title: "POST /secure_chat/validate_otp"
+description: "Captured contract for POST /secure_chat/validate_otp."
+api: "POST /secure_chat/validate_otp"
+public: true
+---
+
+This page documents the behavior captured for POST /secure_chat/validate_otp in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/secure_chat/validate_otp
+    
+    Body:
+    {
+        "conversation_id": 2613,
+        "user_id": 53,
+        "otp":"123456",
+        "accessed_from": "Chrome/ iOS"
+    }
+    
+    Error Resposne:
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The conversation id field is required.|The user id field is required.|The otp field is required."
+        }
+    }
+    
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The otp must be a number."
+        }
+    }
+    
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "Invalid Link!"
+        }
+    }
+    
+    
+    {
+        "error": {
+            "code": "INVALID_OTP",
+            "message": "Invalid otp!"
+        }
+    }
+    
+    Response:
+    {
+        "data": {
+            "is_valid": true,
+            "conversation_id": 2624
+        },
+        "meta": {
+            "request_id": "7c465901-cf5e-4d6d-8e52-ba50a890be1e"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

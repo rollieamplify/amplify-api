@@ -1,0 +1,62 @@
+---
+title: "DELETE /forms/{form_id}/responses/{response_id}"
+description: "Captured contract for DELETE /forms/{form_id}/responses/{response_id}."
+api: "DELETE /forms/{form_id}/responses/{response_id}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /forms/{form_id}/responses/{response_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+DELETE : api/forms/{form_id}/responses/{response_id}
+
+
+
+
+Description :
+
+-> Deletes a single form response. 
+-> Form owner force-deletes response and logs.
+-> Respondent can soft-delete their own response when they are not the form owner.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

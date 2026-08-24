@@ -1,0 +1,94 @@
+---
+title: "GET /import_contacts/get_contact_custom_fields"
+description: "Captured contract for GET /import_contacts/get_contact_custom_fields."
+api: "GET /import_contacts/get_contact_custom_fields"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /import_contacts/get_contact_custom_fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get contact custom fields API.
+
+EndPoint:
+GET: api/import_contacts/get_contact_custom_fields
+
+Response:
+{
+    "data": {
+        "unique_id": "System Id",
+        "fax_number": "Fax Number",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "organization_name": "Organization Name",
+        "contact_group": "Contact Groups",
+        "job_title": "Job Title",
+        "email": "Email",
+        "direct_message": "Direct Message",
+        "phone": "Phone",
+        "work_number": "Work Number",
+        "type": "Type",
+        "patient_first_name": "Patient First Name",
+        "patient_middle_name": "Patient Middle Name",
+        "patient_last_name": "Patient Last Name",
+        "suffix": "Suffix",
+        "previous_last_name": "Previous Last Name",
+        "dob": "DOB",
+        "gender": "Gender",
+        "address": "Address",
+        "address_line_2": "Address Line 2",
+        "city": "City",
+        "state": "State",
+        "zip": "Zip",
+        "country": "Country",
+        "role_title": "Role_title",
+        "organization_type": "Organization Type",
+        "website": "Website",
+        "primary_contact_name": "Primary Contact Name",
+        "npi": "NPI",
+        "tax_id": "Tax Id",
+        "preferred_language": "Preferred Language",
+        "interpreter_needed": "Interpreter Needed",
+        "races": "Races",
+        "ethnicity": "Ethnicity",
+        "medical_record_number": "Medical Record Number",
+        "patient_status": "Patient Status",
+        "external_patient_id": "External Patient Id",
+        "pcp_internal_contact": "PCP Internal Contact",
+        "pcp_external_name": "PCP External Name",
+        "emergency_contact_name": "Emergency Contact Name",
+        "emergency_contact_relationship": "Emergency Contact Relationship",
+        "emergency_contact_phone": "Emergency Contact Phone",
+        "preferred_contact_methods": "Preferred Contact Methods",
+        "sms_opt_in": "SMS Opt In",
+        "email_opt_in": "Email Opt In",
+        "do_not_contact": "Do Not Contact",
+        "coverage_type": "Coverage Type",
+        "insurance_provider": "Insurance Provider",
+        "plan_name": "Plan Name",
+        "member_id": "Member Id",
+        "group_number": "Group Number",
+        "payer_phone": "Payer Phone",
+        "subscriber_name": "Subscriber Name",
+        "subscriber_dob": "Subscriber DOB",
+        "subscriber_relationship": "Subscriber Relationship",
+        "notes": "Notes",
+        "custom_fields": [
+            {
+                "key": "zip_code",
+                "label": "Zip code"
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "601bda53-fd29-4911-9cd7-aca6fcda2b63"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

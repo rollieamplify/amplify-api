@@ -1,0 +1,91 @@
+---
+title: "GET /esign/collaborators/users"
+description: "Captured contract for GET /esign/collaborators/users."
+api: "GET /esign/collaborators/users"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /esign/collaborators/users.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint: 
+GET: api/esign/collaborators/users
+
+
+Response:
+{
+    "data": {
+        "users": [
+            {
+                "id": 1165,
+                "email": "developer@example.com",
+                "name": "",
+                "first_name": "",
+                "last_name": "",
+                "status": "active"
+            },
+            {
+                "id": 1166,
+                "email": "developer@example.com",
+                "name": "",
+                "first_name": "",
+                "last_name": "",
+                "status": "active"
+            },
+            {
+                "id": 1167,
+                "email": "developer@example.com",
+                "name": "",
+                "first_name": "",
+                "last_name": "",
+                "status": "active"
+            },
+            {
+                "id": 422,
+                "email": "developer@example.com",
+                "name": "1st sub43",
+                "first_name": "1st",
+                "last_name": "sub43",
+                "status": "active"
+            },
+            {
+                "id": 429,
+                "email": "admin@mail.com",
+                "name": "asd asd",
+                "first_name": "asd",
+                "last_name": "asd",
+                "status": "active"
+            },
+            {
+                "id": 512,
+                "email": "developer@example.com",
+                "name": "asdas qqw",
+                "first_name": "asdas",
+                "last_name": "qqw",
+                "status": "active"
+            },
+            {
+                "id": 1075,
+                "email": "developer@example.com",
+                "name": "asdfasdf sdfv dfbbntfger123",
+                "first_name": "asdfasdf",
+                "last_name": "sdfv dfbbntfger123",
+                "status": "active"
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "1fc7f4cc-4e6a-4035-b95f-7d945d94722b"
+    }
+}
+
+Note : -
+- This API returns all the sub user associated with an account .
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

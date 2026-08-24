@@ -1,0 +1,82 @@
+---
+title: "POST /plan/detail"
+description: "Captured contract for POST /plan/detail."
+api: "POST /plan/detail"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plan/detail.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Plan Details
+
+
+
+
+EndPoint:
+
+POST: api/plan/detail
+
+
+Payload:
+
+{
+    "plan_id" : 1
+}
+
+
+Response:
+
+{
+    "data": {
+        "id": 1,
+        "name": "HIPAA Basic",
+        "family_name": "healthcare",
+        "duration": "monthly",
+        "amount": 14.99,
+        "total_amount": 14.99,
+        "currency": "usd",
+        "trial_days": null,
+        "plan_credits": null,
+        "allowed_numbers": null,
+        "plan_type": "hippa_basic_plan",
+        "is_popular": false,
+        "key_features": [
+            "Secure cloud fax (send & receive)",
+            "Fax numbers (local or toll-free)",
+            "Email to fax & fax to email",
+            "Inbox, folders & search",
+            "PDF upload & download",
+            "Calling (US & Canada)",
+            "Legally-binding eSignatures",
+            "Reports & analytics",
+            "Email support"
+        ],
+        "addon_included": [],
+        "recommended_addons": [
+            {
+                "addon_name": "license_1",
+                "amount": 1.99
+            },
+            {
+                "addon_name": "credits",
+                "amount": 0.08
+            },
+            {
+                "addon_name": "numbers",
+                "amount": 4.99
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "4b0253b8-c794-4ce9-91c2-f6b353904053"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

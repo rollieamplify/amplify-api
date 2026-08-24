@@ -1,0 +1,374 @@
+---
+title: "POST /dashboard/global_search"
+description: "Captured contract for POST /dashboard/global_search."
+api: "POST /dashboard/global_search"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /dashboard/global_search.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Search Globally from dashboard
+
+Endpoint:
+
+POST: /dashboard/global_search
+
+
+Request:
+
+{
+    "search_key": "test",
+    "from": "",
+    "from_contact_id": [],
+    "to": "",
+    "to_contact_id": [],
+    "show_more": 1,
+    "cursor": 1,
+    "limit": 20,
+    "start_date": "",
+    "end_date": "",
+    "label_ids": [],
+    "fax_status": [],
+    "retry_attempt": [],
+    "fax_numbers": [],
+    "method": [],
+    "sent_by_user_ids": [],
+    "assigned_to_user_ids": [],
+    "direction": [],
+    "source": [],
+    "type": "fax",
+    "sort_by": "latest",
+    "columns": [
+        "to",
+        "from",
+        "status",
+        "document_name",
+        "subject",
+        "label",
+        "assign_to"
+    ],
+    "nlp_fields": {}
+}
+
+
+Response:
+
+{
+    "data": {
+        "faxes_label": [
+            {
+                "id": 210,
+                "name": "Demo",
+                "text_color": "",
+                "bg_color": "#009FDA",
+                "fax_count": 0,
+                "created_at": 1769664815,
+                "updated_at": 1769676733
+            },
+            {
+                "id": 211,
+                "name": "Demo 1",
+                "text_color": "",
+                "bg_color": "#973DE4",
+                "fax_count": 0,
+                "created_at": 1769664841,
+                "updated_at": 1769676721
+            }
+        ],
+        "contacts": [
+            {
+                "id": 760,
+                "first_name": "web",
+                "last_name": "demo",
+                "organization_name": null,
+                "job_title": null,
+                "fax_number": null,
+                "email": "developer@example.com",
+                "address": null,
+                "created_at": 1768816803,
+                "updated_at": 1768816803
+            },
+            {
+                "id": 908,
+                "first_name": "abc",
+                "last_name": "ab",
+                "organization_name": "demo",
+                "job_title": "demo",
+                "fax_number": "12562571126",
+                "email": "demo@gmail.com",
+                "address": null,
+                "created_at": 1769677346,
+                "updated_at": 1769677346
+            }
+        ],
+        "folders": [
+            {
+                "id": 891,
+                "name": "demo",
+                "created_at": 1769676756,
+                "updated_at": 1769677037
+            },
+            {
+                "id": 892,
+                "name": "demo1",
+                "created_at": 1769677485,
+                "updated_at": 1769677485
+            }
+        ],
+        "faxes": [
+            {
+                    "fax_uuid": "01KQVMR0GDVBMXDD6EZKPYW0EH",
+                    "is_read": true,
+                    "fax_type": "inbound",
+                    "created_by": 293,
+                    "created_by_email": "developer@example.com",
+                    "is_broadcast": false,
+                    "broadcast_id": "",
+                    "broadcast_name": "",
+                    "broadcast_recipients_count": 0,
+                    "campaign_id": "",
+                    "campaign_name": "",
+                    "to_number": 12562571126,
+                    "from_number": 13343902297,
+                    "document_name": "Fax 12562571126",
+                    "sender_name": "",
+                    "sender_email": "",
+                    "recipient_name": "",
+                    "recipient_email": "",
+                    "subject": "Urgent",
+                    "pages": 1,
+                    "file_size": 14926,
+                    "labels": [
+                        {
+                            "id": 1213,
+                            "name": "abcde",
+                            "text_color": "",
+                            "bg_color": "#556080"
+                        }
+                    ],
+                    "retry_attempt": 0,
+                    "fax_status": "Pending Others",
+                    "assigned_emails": [
+                        "developer@example.com"
+                    ],
+                    "assigned_names": [
+                        "Web32 test"
+                    ],
+                    "created_at": 1777970447,
+                    "updated_at": 1777970527,
+                    "to_contact_details": {
+                        "first_name": "sub",
+                        "last_name": "userh",
+                        "email": "",
+                        "organization_name": "",
+                        "full_name": "sub userh",
+                        "is_organization": false,
+                        "id": 4479
+                    },
+                    "from_contact_details": {
+                        "first_name": "sub user",
+                        "last_name": "test",
+                        "email": "",
+                        "organization_name": "",
+                        "full_name": "sub user test",
+                        "is_organization": false,
+                        "id": 7220
+                    },
+                    "start_time": 1777970424,
+                    "end_time": 1777970446,
+                    "duration": "00:22",
+                    "fax_error": "",
+                    "thumbnail_image": "https://example.com/signed-url
+                    "is_cancelled": false,
+                    "method": "app",
+                    "ocr_status": "Complete",
+                    "nlp_status": "Complete",
+                    "source": "fax",
+                    "local_fax_uuid": "",
+                    "is_blocked": false,
+                    "nlp_data": [
+                        {
+                            "key": "Document Type",
+                            "data": [],
+                            "extra": "",
+                            "value": "Other",
+                            "key_slug": "document_type",
+                            "multiple": 0,
+                            "confidence": 0
+                        },
+                        {
+                            "key": "Priority",
+                            "data": [],
+                            "extra": "",
+                            "value": "No",
+                            "key_slug": "priority",
+                            "multiple": 0,
+                            "confidence": 0
+                        },
+                        {
+                            "key": "Provider Fax Number",
+                            "data": [],
+                            "extra": "",
+                            "value": "12562571126",
+                            "key_slug": "provider_fax_number",
+                            "multiple": 0,
+                            "confidence": 0.8697
+                        },
+                        {
+                            "key": "Facility",
+                            "data": [],
+                            "extra": "",
+                            "value": "W32",
+                            "key_slug": "facility",
+                            "multiple": 0,
+                            "confidence": 0.5044
+                        },
+                        {
+                            "key": "Extracted Date(s)",
+                            "data": [],
+                            "extra": "",
+                            "value": "05-05-2026",
+                            "key_slug": "extracted_date_s",
+                            "multiple": 0,
+                            "confidence": 1
+                        }
+                    ],
+                    "transmission_end_estimate": "",
+                    "notes_count": 0,
+                    "faster_delivered_percentage": 0,
+                    "delivered_fax_pages": 1,
+                    "fax_cancel_timestamp": "",
+                    "is_right_time_delivered": false,
+                    "cancel_by_user": "",
+                    "marked_by_user": "",
+                    "pending_request_confirmation": true,
+                    "request_fax_confirmed_datetime": ""
+            },
+            {
+                "fax_uuid": "01KG4499455MP3M9NNACSS62ZG",
+                "is_read": false,
+                "fax_type": "outbound",
+                "created_by": 293,
+                "created_by_email": "",
+                "is_broadcast": false,
+                "broadcast_id": "",
+                "broadcast_name": "",
+                "campaign_id": "",
+                "campaign_name": "",
+                "to_number": 12562571126,
+                "from_number": 19073131400,
+                "document_name": "Fax 12562571126",
+                "sender_name": "",
+                "sender_email": "",
+                "recipient_name": "",
+                "recipient_email": "",
+                "subject": null,
+                "pages": 1,
+                "labels": [],
+                "retry_attempt": 0,
+                "fax_status": "Delivered",
+                "assigned_emails": [],
+                "assigned_names": [],
+                "created_at": 1769665242,
+                "updated_at": 1769688902,
+                "to_contact_details": {
+                    "first_name": "",
+                    "last_name": "",
+                    "email": "",
+                    "organization_name": "",
+                    "full_name": "",
+                    "is_organization": false,
+                    "id": 0
+                },
+                "from_contact_details": {
+                    "first_name": "",
+                    "last_name": "",
+                    "email": "",
+                    "organization_name": "",
+                    "full_name": "",
+                    "is_organization": false,
+                    "id": 0
+                },
+                "start_time": 1769665247,
+                "end_time": 1769665268,
+                "duration": "00:25",
+                "fax_error": "0",
+                "thumbnail_image": "https://example.com/signed-url
+                "is_cancelled": false,
+                "method": "app",
+                "ocr_status": "Complete",
+                "nlp_status": "",
+                "source": "fax",
+                "local_fax_uuid": "01KG448KQXJB8VFJ5VGB791YBV",
+                "is_blocked": false,
+                "nlp_fields": {
+                    "receiver_number": null,
+                    "fax_text": null,
+                    "fax_subject": null,
+                    "fax_number": null,
+                    "sender_name": null,
+                    "document_type": null,
+                    "address": null,
+                    "subscriber_id": null,
+                    "subscriber_name": null,
+                    "subscriber_dob": null,
+                    "subscriber_address": null,
+                    "subscriber_phone": null,
+                    "subscriber_group_number": null,
+                    "social_security_number": null,
+                    "health_card_number": null,
+                    "facility": null,
+                    "physician_name": null,
+                    "bill_type": null,
+                    "billing_number": null,
+                    "dob": null,
+                    "degree": null,
+                    "diagnosis": null,
+                    "email": null,
+                    "gender": null,
+                    "phone": null,
+                    "work_phone": null,
+                    "cell_phone": null,
+                    "home_phone": null,
+                    "group_number": null,
+                    "insurance_name": null,
+                    "insurance_plan": null,
+                    "medical_record_number": null,
+                    "npi": null,
+                    "patient_id": null,
+                    "patient_name": null,
+                    "provider_id": null,
+                    "speciality": null
+                }
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "3f16cf0d-10d6-4d26-ad39-85bd4570b854"
+    }
+}
+
+
+
+
+Search Globally from dashboard show more faxes
+
+Endpoint:
+
+POST: /dashboard/global_search?cursor=2&limit=2
+
+
+Request:
+
+{
+    "search_key" : "demo"
+
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

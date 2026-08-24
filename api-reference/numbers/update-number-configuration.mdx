@@ -1,0 +1,60 @@
+---
+title: "Update number configuration"
+description: "Partially update a number’s settings and user assignments."
+api: "PATCH /numbers/{number_id}/configuration"
+public: true
+---
+
+`PATCH /numbers/{number_id}/configuration` partially updates one number’s configuration.
+
+## Path parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `number_id` | integer | Internal number identifier. |
+
+## Request body
+
+Send only the fields you want to change. Supported captured fields include:
+
+- `label`
+- `icon`
+- `access_user_id`
+- `fax.default_template`
+- `fax.email_forwarding`
+- `fax.number_forwarding`
+- `voice.enable_email_forwarding`
+- `voice.email_forwarding`
+- `voice.enable_number_forwarding`
+- `voice.number_forwarding`
+- `voice.hide_caller_id`
+- `voice.enable_call_transcript`
+- `message.enable_email_forwarding`
+- `message.email_forwarding`
+- `call_recording.enable_auto_recording`
+- `call_recording.enable_notifications`
+- `call_recording.inbound_call_notification`
+- `call_recording.outbound_call_notification`
+- `voicemail.enable_no_answer`
+- `access_team_users`
+- `assigned_team_users`
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/1378/configuration" \
+  --request PATCH \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "label": "Support",
+    "icon": "🎓",
+    "voice": {
+      "enable_call_transcript": true
+    }
+  }'
+```
+
+## Response
+
+The response returns the complete updated configuration under `data` and the request identifier under `meta.request_id`. Team-user identifiers in the request are resolved into `access_users` and `assigned_users` objects in the response.
+
+<Note>Use `access_team_users` and `assigned_team_users` in requests. The response uses `access_users` and `assigned_users`.</Note>

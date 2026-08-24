@@ -1,0 +1,68 @@
+---
+title: "GET /shortcuts"
+description: "Captured contract for GET /shortcuts."
+api: "GET /shortcuts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /shortcuts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+List shortcuts API.
+
+Endpoint:
+GET: api/shortcuts
+
+Response:
+{
+    "data": [
+        {
+            "id": 1,
+            "user_id": 53,
+            "account_id": 54,
+            "created_from": "test tab",
+            "title": "Lable 3",
+            "filter_data": {
+                "date": "Time",
+                "emails": "developer@example.com",
+                "status": "Confirmed",
+                "columns": [
+                    {
+                        "name": "To",
+                        "checked": true,
+                        "disable": false,
+                        "is_show": true
+                    }
+                ],
+                "direction": "Outgoing",
+                "grid_view": false,
+                "label_ids": "24625",
+                "active_sort": null,
+                "environment": "APP,API,EMAIL_TO_FAX,FCL_TO_FAX,BROADCAST",
+                "fax_numbers": "12056852492,12058901305,19387779605",
+                "columns_width": null,
+                "assigned_emails": null,
+                "retry_attempt_count": "1,2,3,4,5,6,7,8,9,10"
+            },
+            "unique_id": "YJV9YVX4KX",
+            "priority": 1,
+            "created_at": "2026-01-03T07:11:23.000000Z",
+            "updated_at": "2026-01-03T07:11:23.000000Z"
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "d38be9d8-0216-4e14-bc92-15e10a86ee38"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

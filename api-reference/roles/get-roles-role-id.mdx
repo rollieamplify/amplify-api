@@ -1,0 +1,154 @@
+---
+title: "GET /roles/{role_id}"
+description: "Captured contract for GET /roles/{role_id}."
+api: "GET /roles/{role_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /roles/{role_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Use: get details of particular role.
+
+
+
+
+Endpoint:
+
+POST: api/roles/6090
+
+
+
+
+Response:
+
+{
+            "id": 6090,
+            "account_id": 2592,
+            "name": "Admin",
+            "user_permissions": {
+                "Product": [
+                    {
+                        "id": 1,
+                        "title": "iFax",
+                        "key": "access_ifax",
+                        "enabled": true,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Connect",
+                        "key": "access_connect",
+                        "enabled": true,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 3,
+                        "title": "eSign",
+                        "key": "access_esign",
+                        "enabled": true,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 4,
+                        "title": "Forms",
+                        "key": "access_forms",
+                        "enabled": true,
+                        "value": "",
+                        "category": "product"
+                    }
+                ],
+                "General": [
+                    {
+                        "id": 5,
+                        "title": "Access Numbers",
+                        "key": "access_numbers",
+                        "enabled": true,
+                        "value": "",
+                        "category": "general"
+                    },
+                    {
+                        "id": 6,
+                        "title": "View Numbers",
+                        "key": "view_numbers",
+                        "enabled": true,
+                        "value": "",
+                        "category": "general"
+                    },
+                    {
+                        "id": 7,
+                        "title": "Add Numbers",
+                        "key": "add_numbers",
+                        "enabled": true,
+                        "value": "",
+                        "category": "general"
+                    },
+                    {
+                        "id": 8,
+                        "title": "Port Numbers",
+                        "key": "port_numbers",
+                        "enabled": true,
+                        "value": "",
+                        "category": "general"
+                    },
+                    {
+                        "id": 9,
+                        "title": "Edit Number Configuration",
+                        "key": "edit_number_configuration",
+                        "enabled": true,
+                        "value": "",
+                        "category": "general"
+                    }
+            ],
+            "users": [],
+            "assigned_numbers": "",
+            "role_notifications": [
+                {
+                    "key": "faxes_sent_by_me",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": 3,
+                    "settings": {
+                        "attach_certificate": 0,
+                        "include_audit_trail": 0,
+                        "attach_pdf": 1,
+                        "show_open_link": 0
+                    }
+                },
+                {
+                    "key": "faxes_sent_by_others_accessible_number",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": 0,
+                    "settings": {
+                        "attach_certificate": 0,
+                        "include_audit_trail": 0,
+                        "attach_pdf": 0,
+                        "show_open_link": 0
+                    }
+                },
+                {
+                    "key": "faxes_sent_by_email_to_fax",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": 1,
+                    "settings": {
+                        "attach_certificate": 0,
+                        "include_audit_trail": 0,
+                        "attach_pdf": 0,
+                        "show_open_link": 0
+                    }
+                }
+            ]
+        },
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

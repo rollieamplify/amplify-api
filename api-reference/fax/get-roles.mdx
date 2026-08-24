@@ -1,0 +1,129 @@
+---
+title: "GET /roles"
+description: "Captured contract for GET /roles."
+api: "GET /roles"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /roles.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint:
+
+GET: api/roles
+
+
+
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 244,
+            "account_id": 285,
+            "name": "Manager",
+            "user_permissions": {
+                "Product": [
+                    {
+                        "id": 1,
+                        "title": "iFax",
+                        "key": "access_ifax",
+                        "enabled": false,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Connect",
+                        "key": "access_connect",
+                        "enabled": false,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 3,
+                        "title": "eSign",
+                        "key": "access_esign",
+                        "enabled": false,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 147,
+                        "title": "Download Form Responses",
+                        "key": "download_form_responses",
+                        "enabled": false,
+                        "value": "",
+                        "category": "forms"
+                    }
+                ]
+            },
+            "role_notification": [
+                {
+                    "key": "faxes_sent_by_me",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": "",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                },
+                {
+                    "key": "faxes_sent_by_others_accessible_number",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": "",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                },
+                {
+                    "key": "faxes_sent_by_email_to_fax",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": "",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                },
+                {
+                    "key": "play_notification_sound",
+                    "product": "call",
+                    "category": "call",
+                    "type": "",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "total": 3,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "08b93a75-e577-4a19-b4c4-4414cc1931f2"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

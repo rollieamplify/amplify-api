@@ -1,0 +1,35 @@
+---
+title: "POST /email_to_fax/share_email_to_fax_instruction"
+description: "Captured contract for POST /email_to_fax/share_email_to_fax_instruction."
+api: "POST /email_to_fax/share_email_to_fax_instruction"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /email_to_fax/share_email_to_fax_instruction.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Share Email to Fax Instruction API:
+
+Endpoint:
+POST: api/email_to_fax/share_email_to_fax_instruction
+
+Body:
+{
+    "emails" : [
+        "test@gmail.com"
+    ]
+}
+
+Response:
+{
+    "data": [],
+    "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

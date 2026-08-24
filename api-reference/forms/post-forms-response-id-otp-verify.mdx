@@ -1,0 +1,63 @@
+---
+title: "POST /forms/{response_id}/otp/verify"
+description: "Captured contract for POST /forms/{response_id}/otp/verify."
+api: "POST /forms/{response_id}/otp/verify"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{response_id}/otp/verify.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{response_id}/otp/verify
+
+
+
+
+Description :
+
+
+
+
+-> Verifies the 6-digit OTP entered by the respondent. Sets is_otp_verified=1 on success.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

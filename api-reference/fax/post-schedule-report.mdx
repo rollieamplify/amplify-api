@@ -1,0 +1,94 @@
+---
+title: "POST /schedule/report"
+description: "Captured contract for POST /schedule/report."
+api: "POST /schedule/report"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /schedule/report.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/schedule/report
+
+Body:
+{
+    "type": "usage_report",
+    "frequency": "monthly",
+    "fax_numbers": ["12345", "67890"],
+    "direction": "both",
+    "send_email_to": ["developer@example.com", "developer@example.com"]
+}
+
+
+type: Allowed: usage_report
+frequency: daily, weekly, monthly
+fax_numbers: Fax number ID(s). Single or Multiple ID Array
+direction: both, outbound, inbound
+send_email_to: Recipient email(s). Single or multiple Array
+
+Response:
+{
+    "data": {
+        "id": 3,
+        "type": "usage_report",
+        "file_name": "Usage Report",
+        "frequency": "monthly",
+        "fax_numbers": [
+            "12345",
+            "67890"
+        ],
+        "direction": "both",
+        "send_email_to": [
+            "developer@example.com",
+            "developer@example.com"
+        ],
+        "created_at": "2026-01-29T11:36:46.000000Z",
+        "updated_by": 49,
+        "updated_at": "2026-01-29T11:36:46.000000Z"
+    },
+    "meta": {
+        "request_id": "a6838687-e6c9-4e58-b186-3a138386eac5"
+    }
+}
+
+Validations:
+{
+    "error": {
+        "code": "UNPROCESSABLE_ENTITY",
+        "message": "You can schedule up to 5 reports."
+    }
+}
+
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "type": [
+            "The type field is required."
+        ],
+        "frequency": [
+            "The frequency field is required."
+        ],
+        "fax_numbers": [
+            "The fax numbers field is required."
+        ],
+        "direction": [
+            "The direction field is required."
+        ],
+        "send_email_to": [
+            "The send email to field is required."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

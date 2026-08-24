@@ -1,47 +1,73 @@
 ---
 title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+description: "Authenticate and make your first Amplify API request."
 ---
-
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
 
 ## Prerequisites
 
-Before you begin, you must have:
+Before you begin, you need:
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+- An Amplify account with API access
+- An Amplify access token or bearer token
+- A command-line HTTP client such as `curl`
 
-## Get started
+<Warning>
+  Keep credentials secret. Never expose an access token or bearer token in browser code, public repositories, or client-side applications.
+</Warning>
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Set your credential">
+    Store your access token in an environment variable so it does not appear directly in your command history.
 
     ```bash
-    npm install your-package
+    export AMPLIFY_ACCESS_TOKEN="your_access_token"
     ```
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+
+  <Step title="Make a request">
+    Retrieve a list of phone numbers from the production API.
 
     ```bash
-    your-cli init
+    curl "https://api.amplify.xyz/v1/numbers?limit=10" \
+      --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+      --header "Accept: application/json"
     ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
 
-    ```bash
-    your-cli start
+    You can also authenticate with a bearer token by sending `Authorization: Bearer YOUR_TOKEN` instead of the `access_token` header.
+  </Step>
+
+  <Step title="Inspect the response">
+    A successful list response contains a `data` array and pagination metadata.
+
+    ```json
+    {
+      "data": [],
+      "meta": {
+        "total": 0,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 10,
+        "request_id": "9b16f7a0-fdb4-457a-8cad-fa158c71cf78"
+      }
+    }
     ```
   </Step>
 </Steps>
 
 <Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
-
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
+  Save the `meta.request_id` value when troubleshooting a request.
 </Tip>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="List numbers" icon="phone" href="/api-reference/numbers/list-numbers">
+    Review filters and the complete response schema.
+  </Card>
+  <Card title="Authentication" icon="key" href="/guides/authentication">
+    Choose the right authentication method.
+  </Card>
+  <Card title="Requests and responses" icon="arrows-left-right" href="/guides/requests-and-responses">
+    Learn the shared request and response formats.
+  </Card>
+</CardGroup>

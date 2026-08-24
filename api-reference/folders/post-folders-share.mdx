@@ -1,0 +1,64 @@
+---
+title: "POST /folders/share"
+description: "Captured contract for POST /folders/share."
+api: "POST /folders/share"
+public: true
+---
+
+This internal review page records the behavior captured for POST /folders/share.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Description:
+This api used for share folder to users.
+
+API Endpoint:
+POST /api/folders/share
+
+Request:
+{
+  "folder_id": 12345,
+  "users": [101, 102, 103]
+}
+"folder_id" parameter should contain the ID of the folder you want to share. 
+"users" parameter should contain an array of selected user IDs with whom the folder will be shared. 
+
+Response:
+{
+    "data": {
+        "message": "Folder shared successfully"
+    },
+    "meta": {
+        "request_id": "c85f78ca-6479-42e8-8c00-7c835b4a1fc9"
+    }
+}
+
+
+Validations:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "users.0": [
+            "The selected users.0 is invalid."
+        ],
+        "users.1": [
+            "The selected users.1 is invalid."
+        ],
+        "users.2": [
+            "The selected users.2 is invalid."
+        ],
+        "users.3": [
+            "The selected users.3 is invalid."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

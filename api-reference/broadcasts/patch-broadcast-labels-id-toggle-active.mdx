@@ -1,0 +1,111 @@
+---
+title: "PATCH /broadcast_labels/{id}/toggle_active"
+description: "Captured contract for PATCH /broadcast_labels/{id}/toggle_active."
+api: "PATCH /broadcast_labels/{id}/toggle_active"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /broadcast_labels/{id}/toggle_active.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Toggle Broadcast Label Active Status
+
+
+
+
+Endpoint:
+PATCH /api/broadcast_labels/{id}/toggle_active
+
+
+
+
+Description:
+Toggles label status between 1 and 0.
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+id
+
+	
+
+integer
+
+	
+
+Yes
+
+	
+
+Broadcast label ID
+
+
+
+
+Request Body: None
+
+
+
+
+Request Example:
+
+
+
+
+PATCH /api/broadcast_labels/5/toggle_active
+Authorization: Bearer {token}
+
+
+
+
+Response Example (200):
+
+
+
+
+{
+    "data": {
+    "id": 5,
+    "name": "VIP Clinics",
+    "text_color": "#FFFFFF",
+    "background_color": "#9432FD",
+    "created_by": 45,
+    "created_at": "2026-07-28T10:00:00.000000Z",
+    "updated_at": "2026-07-28T11:20:00.000000Z"
+  }
+}
+
+
+
+
+Note: Not found → 404 BROADCAST_LABEL_NOT_FOUND. Status is stored in DB but is not currently included in the formatted response payload.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

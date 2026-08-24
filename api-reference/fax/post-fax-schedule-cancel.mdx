@@ -1,0 +1,40 @@
+---
+title: "POST /fax/schedule_cancel"
+description: "Captured contract for POST /fax/schedule_cancel."
+api: "POST /fax/schedule_cancel"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/schedule_cancel.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Cancel Scheduled Faxes
+Endpoint:
+POST: /fax/schedule_cancel
+
+Request:
+{
+    "fax_uuid" : [
+        "01KF5CA3TBGJQBY61DSZ7H5T3B",
+        "01KF5CAZQFG3B9T8GZWBCP4PSQ"
+    ],
+    "recurring_schedule_ids" : ["178"] // to delete recurring fax
+}
+
+Response:
+{
+    "data": {
+        "message": "Scheduled fax cancelled successfully"
+    },
+    "meta": {
+        "request_id": "3cc93285-a29f-4973-a299-9f41a30f524d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

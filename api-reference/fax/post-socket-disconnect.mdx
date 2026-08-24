@@ -1,0 +1,37 @@
+---
+title: "POST /socket/disconnect"
+description: "Captured contract for POST /socket/disconnect."
+api: "POST /socket/disconnect"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /socket/disconnect.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Note: This api is used to disconnect the socket for the users.
+
+EndPoint:
+POST: api/socket/disconnect
+
+Body:
+{
+    "socket_id" : "LKJHKL65466456"
+}
+
+Response:
+{
+    "data": {
+        "message": "Socket disconnected"
+    },
+    "meta": {
+        "request_id": "390d89d1-883b-49dd-a81b-a557a0661441"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,45 @@
+---
+title: "PATCH /folders/{folder}"
+description: "Captured contract for PATCH /folders/{folder}."
+api: "PATCH /folders/{folder}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /folders/{folder}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update / Move Folder
+Endpoint: PATCH api/folders/{folder}
+Description: Rename, reorder, or move a folder you own.
+Request:
+{
+  "name": "Invoices 2026",
+  "parent_id": 12,
+  "sort_order": 1
+}
+Response:
+{
+  "data": {
+    "id": 25,
+    "parent_id": 12,
+    "name": "Invoices 2026",
+    "slug": "invoices-2026",
+    "sort_order": 1,
+    "is_shared": false,
+    "shared_with_me": false,
+    "shared": [],
+    "created_at": 1710002000,
+    "has_child": false
+  },
+  "meta": {
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

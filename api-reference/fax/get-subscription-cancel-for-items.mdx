@@ -1,0 +1,35 @@
+---
+title: "GET /subscription/cancel_for_items"
+description: "Captured contract for GET /subscription/cancel_for_items."
+api: "GET /subscription/cancel_for_items"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /subscription/cancel_for_items.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Cancel Subscription For Items
+
+Endpoint:
+GET: api/subscription/cancel_for_items
+
+
+Response:
+{
+    "data": {
+        "last_action": "cancel_request",
+        "action_status": "pending",
+        "subscription_id": "XXXXXXXXXXXXXX"
+    },
+    "meta": {
+        "request_id": "a145f8ba-61ca-4918-9076-8bd75db52ae4"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,22 @@
+---
+title: "Create a contact note"
+description: "Add a categorized note to a contact."
+api: "POST /contact_notes"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField body="contact_id" type="integer" required>Contact ID.</ParamField>
+<ParamField body="category" type="string" required>One of `contact`, `fax`, `engage`, or `esign`.</ParamField>
+<ParamField body="note" type="string" required>Note content.</ParamField>
+
+```json
+{
+  "contact_id": 12345,
+  "category": "contact",
+  "note": "Prefers communication by fax."
+}
+```
+
+Returns `201 Created` with the new note.
+

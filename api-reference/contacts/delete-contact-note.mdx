@@ -1,0 +1,12 @@
+---
+title: "Delete a contact note"
+description: "Permanently delete a contact note."
+api: "DELETE /contact_notes/{contact_note_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_note_id" type="integer" required>Contact note ID.</ParamField>
+
+Returns `204 No Content` after successful deletion.
+

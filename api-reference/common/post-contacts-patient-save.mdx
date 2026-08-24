@@ -1,0 +1,202 @@
+---
+title: "POST /contacts/patient/save"
+description: "Captured contract for POST /contacts/patient/save."
+api: "POST /contacts/patient/save"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /contacts/patient/save.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/contacts/patient/save
+
+Body:
+
+{
+    "nlp_data_id": 5852,
+    "contact_id": 250,
+    "first_name": "Olivia",
+    "last_name": "Carter",
+    "columns": [
+        {
+            "key": "Document Type",
+            "value": "Lab Test",
+            "key_slug": "document_type"
+        },
+        {
+            "key": "Priority",
+            "value": "No",
+            "key_slug": "priority"
+        },
+        {
+            "key": "Patient Full Name",
+            "value": "Olivia Carter",
+            "key_slug": "patient_full_name"
+        },
+        {
+            "key": "Patient First Name",
+            "value": "Olivia",
+            "key_slug": "patient_first_name"
+        },
+        {
+            "key": "Patient Last Name",
+            "value": "Carter",
+            "key_slug": "patient_last_name"
+        },
+        {
+            "key": "Patient Gender",
+            "value": "Female",
+            "key_slug": "patient_gender"
+        },
+        {
+            "key": "Patient Email",
+            "value": "sdfds@fgdfgerrr.com",
+            "key_slug": "patient_email"
+        },
+        {
+            "key": "Patient Phone",
+            "value": "5553128821",
+            "key_slug": "patient_phone"
+        }
+    ]
+}
+
+
+
+
+Validation error response:
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The nlp data id field is required."
+    }
+}
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The columns must be an array."
+    }
+}
+
+
+Response:
+
+{
+    "data": {
+        "id": 215622,
+        "is_organization": false,
+        "first_name": "Olivia",
+        "last_name": "Carter",
+        "organization_name": "",
+        "middle_name": "",
+        "suffix": "",
+        "previous_last_name": "",
+        "gender": "female",
+        "dob": "",
+        "type": 2,
+        "job_title": "",
+        "direct_message": "",
+        "position": "",
+        "email": "sdfds@fgdfgerrr.com",
+        "phone_number": "5553128821",
+        "work_number": "",
+        "fax_number": "",
+        "address": "",
+        "address_line_2": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": "",
+        "organization": "",
+        "role_title": "",
+        "organization_type": "",
+        "website": "",
+        "primary_contact_name": "",
+        "npi": "",
+        "tax_id": "",
+        "preferred_language": "",
+        "interpreter_needed": "",
+        "races": "",
+        "ethnicity": "",
+        "medical_record_number": "",
+        "patient_status": "",
+        "external_patient_id": "",
+        "pcp_internal_contact": "",
+        "pcp_external_name": "",
+        "emergency_contact_name": "",
+        "emergency_contact_relationship": "",
+        "emergency_contact_phone": "",
+        "preferred_contact_methods": "",
+        "sms_opt_in": "",
+        "email_opt_in": "",
+        "do_not_contact": "",
+        "coverage_type": "",
+        "insurance_provider": "",
+        "plan_name": "",
+        "member_id": "",
+        "group_number": "",
+        "payer_phone": "",
+        "subscriber_name": "",
+        "subscriber_dob": "",
+        "subscriber_relationship": "",
+        "notes": "",
+        "is_favorite": false,
+        "is_blocked": false,
+        "is_accesible_to_others": false,
+        "id_hash": "",
+        "is_shared": false,
+        "created_by": 7,
+        "created_at": "2026-06-19T11:15:44.000000Z",
+        "updated_at": "2026-06-19T11:15:44.000000Z",
+        "contact_documents": [],
+        "fields": [
+            {
+                "id": 410,
+                "created_by": 7,
+                "contact_type": "patient",
+                "validation": "none",
+                "label": "Document Type",
+                "value": "Lab Test",
+                "required": false,
+                "group_ids": "",
+                "created_at": "2026-06-19T11:15:44.000000Z"
+            },
+            {
+                "id": 411,
+                "created_by": 7,
+                "contact_type": "patient",
+                "validation": "none",
+                "label": "Priority",
+                "value": "No",
+                "required": false,
+                "group_ids": "",
+                "created_at": "2026-06-19T11:15:44.000000Z"
+            },
+            {
+                "id": 412,
+                "created_by": 7,
+                "contact_type": "patient",
+                "validation": "none",
+                "label": "Patient Full Name",
+                "value": "Olivia Carter",
+                "required": false,
+                "group_ids": "",
+                "created_at": "2026-06-19T11:15:44.000000Z"
+            }
+        ],
+        "groups": []
+    },
+    "meta": {
+        "request_id": "627ab65f-cb0d-41e0-b776-fa44003cf858"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

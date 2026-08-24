@@ -1,0 +1,68 @@
+---
+title: "GET /calls/{call_id}/summary/logs"
+description: "Captured contract for GET /calls/{call_id}/summary/logs."
+api: "GET /calls/{call_id}/summary/logs"
+public: true
+---
+
+This page documents the behavior captured for GET /calls/{call_id}/summary/logs in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/calls/{call_id}/summary/logs
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 4,
+                "conversation_id": 2966,
+                "reference_id": 13263,
+                "event_type": "summary_viewed",
+                "user_email": "developer@example.com",
+                "ip_address": "110.227.199.237",
+                "created_at": "2026-04-24T08:20:33.000000Z"
+            },
+            {
+                "id": 5,
+                "conversation_id": 2966,
+                "reference_id": 13263,
+                "event_type": "recording_played",
+                "user_email": "developer@example.com",
+                "ip_address": "110.227.199.237",
+                "created_at": "2026-04-24T08:33:10.000000Z"
+            },
+            {
+                "id": 6,
+                "conversation_id": 2966,
+                "reference_id": 13263,
+                "event_type": "transcript_viewed",
+                "user_email": "developer@example.com",
+                "ip_address": "110.227.199.237",
+                "created_at": "2026-04-24T08:33:13.000000Z"
+            },
+            {
+                "id": 7,
+                "conversation_id": 2966,
+                "reference_id": 13263,
+                "event_type": "recording_download",
+                "user_email": "developer@example.com",
+                "ip_address": "110.227.199.237",
+                "created_at": "2026-04-24T09:14:00.000000Z"
+            }
+        ],
+        "meta": {
+            "total": 4,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 20
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

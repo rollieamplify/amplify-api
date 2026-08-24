@@ -1,0 +1,44 @@
+---
+title: "POST /automations/change/priority"
+description: "Captured contract for POST /automations/change/priority."
+api: "POST /automations/change/priority"
+public: true
+---
+
+This internal review page records the behavior captured for POST /automations/change/priority.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Change priority of automations API.
+
+Endpoint:
+POST: api/automations/change/priority
+
+Body:
+{
+    "automation_ids": ["11","10"]
+}
+
+Response:
+{
+    "data": [
+        {
+            "id": 11,
+            "execution_priority": 1
+        },
+        {
+            "id": 10,
+            "execution_priority": 2
+        }
+    ],
+    "meta": {
+        "request_id": "25fb8dd2-74ad-4647-a8e0-7d2a1687d2b7"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

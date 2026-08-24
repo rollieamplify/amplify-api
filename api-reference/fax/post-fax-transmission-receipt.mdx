@@ -1,0 +1,61 @@
+---
+title: "POST /fax/transmission/receipt"
+description: "Captured contract for POST /fax/transmission/receipt."
+api: "POST /fax/transmission/receipt"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/transmission/receipt.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Transmission Receipt API.
+
+EndPoint:
+POST: api/fax/transmission/receipt
+
+Body:
+{
+  "fax_uuid": "01KFD10X4YY30Q2CPTD41M5WDW",
+  "include_attachment": true,
+  "pages": "all"
+}
+
+
+{
+  "broadcast_fax_uuid": "01KG6KMHWE6HMZAMYNCFJAAVYH",
+  "include_attachment": true,
+  "pages": "all"
+}
+
+
+NOTE:
+
+fax_uuid → used for fax
+broadcast_fax_uuid → used for broadcast
+
+include_attachment
+true  → include fax attachment pages with receipt
+false → return receipt PDF only
+
+pages
+REQUIRED ONLY when include_attachment = true
+1    → receipt + first attachment page only
+all  → receipt + all attachment pages
+
+Response:
+{
+    "data": {
+        "receipt_url": "https://example.com/signed-url
+    },
+    "meta": {
+        "request_id": "67b294a0-0008-4342-814d-b96164256d0a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

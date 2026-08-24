@@ -1,0 +1,98 @@
+---
+title: "GET /fax_templates/{template_id}/duplicate"
+description: "Captured contract for GET /fax_templates/{template_id}/duplicate."
+api: "GET /fax_templates/{template_id}/duplicate"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /fax_templates/{template_id}/duplicate.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Duplicate fax default
+Endpoint: GET /fax_templates/{template_id}/duplicate
+Permission: create_edit_fax_defaults
+Description: Replicates visible template; new name {base}_copy(n) unique for current user; created_by = current user; assigns subuser use permission; returns new template payload.
+
+Response Example
+{
+    "data": {
+        "id": 4004,
+        "created_by": 25865,
+        "is_default": false,
+        "name": "Test Fax Default_copy(1)",
+        "caller_id": "12566228280",
+        "recipients": [],
+        "broadcast_recipients": [],
+        "broadcast_ids": [],
+        "quality": "low",
+        "speed": "regular",
+        "approval_required": false,
+        "default_content_type": "cover_page",
+        "include_cover_page": 1,
+        "cover_page_id": 2,
+        "country_id": "119",
+        "cover_page_url": "https://example.com/signed-url
+        "cover_page_metadata": {
+            "show_logo": false,
+            "show_badge": false,
+            "show_disclaimer": false,
+            "subject": "",
+            "comment": "",
+            "disclaimer_text": "<p>This transmission is intended for the exclusive use of the individual or entity to whom it is addressed and may contain information that is proprietary, privileged, confidential and/or exempt from disclosure under applicable law.</p>",
+            "from_name": "",
+            "to_name": "",
+            "logo_filename": "65d22d11-3603-4737-9ad6-f03b16c22406.png",
+            "logo_url": "https://example.com/signed-url
+            "badge_filename": "",
+            "badge_url": ""
+        },
+        "include_smart_template": false,
+        "smart_template_metadata": {
+            "name": "",
+            "page_count": 0,
+            "storage_id": "",
+            "annotations": []
+        },
+        "smart_template_id": "",
+        "attachments": [],
+        "attachments_count": 0,
+        "header_settings": {
+            "show_sender_name": false,
+            "sender_name_type": "",
+            "show_caller_id": false,
+            "show_delivery_time": false,
+            "delivery_time_format": "",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": ""
+        },
+        "footer_settings": {
+            "show_sender_name": true,
+            "sender_name_type": "user",
+            "show_caller_id": false,
+            "show_delivery_time": 1,
+            "delivery_time_format": "DD-MMM-YYYY h:mm",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": ""
+        },
+        "tags": [],
+        "created_at": "2026-08-05T05:56:56.000000Z",
+        "updated_at": "2026-08-05T05:56:56.000000Z",
+        "paper_size": "Letter",
+        "include_transmission_report": false,
+        "display_fireworks": false,
+        "used_by": []
+    },
+    "meta": {
+        "request_id": "0e12ec5f-36e3-48e7-bb0d-b5170118669e"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

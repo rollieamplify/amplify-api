@@ -1,0 +1,255 @@
+---
+title: "POST /esign_documents/trash"
+description: "Captured contract for POST /esign_documents/trash."
+api: "POST /esign_documents/trash"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_documents/trash.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+
+POST : /api/esign_documents/trash
+
+
+Description :
+
+ Moves one or more eSign documents to trash (soft delete). Documents are not permanently deleted — they can be restored later via the restore API.
+
+
+
+
+This endpoint supports three scenarios:
+1) Trash specific documents — pass document IDs
+2) Trash all documents — pass trash_all: 1 with no IDs
+3) Bulk trash (async) — processing runs in a background job for large batches
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+Request Body :
+
+Field | Type | Required | Description
+--------------------------------------------------------
+document_id | integer or array | Conditional | Document ID(s) to trash. Required unless `trash_all` is used. Accepts a single ID or an array of IDs.
+trash_all | boolean | Conditional | When `true`, trashes **all** documents visible to the user. Must be used **without** `document_id` . Only supported on this bulk endpoint.
+location | string | No | User location for audit logging.
+ip_address | string | No | User IP address for audit logging.
+device_name | string | No | Device name for audit logging.
+
+
+
+
+Scenarios :
+Scenario 1 — Trash a single document (by ID)
+
+Request:
+
+{
+    "document_id": 9107
+}
+
+Response: 204 No Content (empty body)
+
+Processing is queued asynchronously via BulkDocumentTrashRestoreJob.
+
+Scenario 2 — Trash multiple documents (by IDs)
+
+Request:
+
+{
+    "document_id": [9107, 9108, 9109]
+}
+
+
+
+
+Response: 204 No Content (empty body)
+
+Scenario 3 — Trash all documents (trash_all)
+
+Trashes every document the authenticated user can access, regardless of workflow status (draft, sent, done, pending, inbox, etc.).
+
+Request:
+
+{
+    "trash_all": 1
+}
+
+
+
+
+Response: 204 No Content (empty body)
+
+Even when no documents match, the API still returns 204.
+
+
+
+
+Documents included when trash_all: 1:
+
+Role
+
+	
+
+Included
+
+
+
+
+Owner
+
+	
+
+All active (non-trashed) documents visible to the user (visibleTo scope) — any workflow status
+
+
+
+
+Receiver
+
+	
+
+Documents shared with the user's email that are not already receiver-trashed
+
+
+
+
+Documents excluded:
+
+Already in trash (status = 2)
+Permanently deleted (deleted_at is set)
+Sources: upload, secure_email, secure_sms, media_sharing, fhir
+Scenario 4 — Trash with audit metadata (optional)
+
+Request:
+
+{
+    "document_id": [9107, 9108],
+    "location": "New York, US",
+    "ip_address": "192.168.1.1",
+    "device_name": "Chrome / Windows"
+}
+
+Response: 204 No Content
+
+Audit fields are stored in document_logs for receiver-side trash actions.
+
+
+
+
+Sample Request :
+
+
+Request :
+
+{
+    "type": "trash",
+    "trash_all": true
+}
+
+
+
+
+Response :
+
+image.png
+
+Error  : 
+
+HTTP Status
+
+	
+
+Error Code
+
+	
+
+Reason
+
+	
+
+Description
+
+
+
+
+401
+
+	
+
+UNAUTHORIZED
+
+	
+
+Unauthorized
+
+	
+
+Missing or invalid Bearer token.
+
+
+
+
+403
+
+	
+
+PERMISSION_DENIED
+
+	
+
+Permission denied
+
+	
+
+Sub-user lacks esign_delete_documents permission.
+
+
+
+
+400
+
+	
+
+400
+
+	
+
+No records found
+
+	
+
+Request sent without document_id / fax_id and without trash_all: 1.
+
+
+
+
+400
+
+	
+
+USER_NOT_REGISTERED
+
+	
+
+User not found
+
+	
+
+Authenticated user does not exist in the system.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

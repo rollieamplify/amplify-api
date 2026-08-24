@@ -1,0 +1,28 @@
+---
+title: "DELETE /folders/{folder}"
+description: "Captured contract for DELETE /folders/{folder}."
+api: "DELETE /folders/{folder}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /folders/{folder}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Delete Folder
+Endpoint: DELETE api/folders/{folder}
+Description: Delete a folder you own (and its subfolders).
+Request:
+{}
+Response: 204 No Content
+{
+  "data": [],
+  "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

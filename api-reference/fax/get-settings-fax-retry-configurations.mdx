@@ -1,0 +1,131 @@
+---
+title: "GET /settings/fax/retry_configurations"
+description: "Captured contract for GET /settings/fax/retry_configurations."
+api: "GET /settings/fax/retry_configurations"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /settings/fax/retry_configurations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+USE: get list of retry_configuration value
+
+
+
+
+Endpoint:
+
+GET: api/settings/fax/retry_configurations
+
+
+
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 2283,
+            "type": "busy_line",
+            "retry_attempts": 1,
+            "retry_interval": 120,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 50,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-15T05:14:09.000000Z"
+        },
+        {
+            "id": 2284,
+            "type": "call_rejected",
+            "retry_attempts": 1,
+            "retry_interval": 360,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 25,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-15T05:17:18.000000Z"
+        },
+        {
+            "id": 2285,
+            "type": "no_answer",
+            "retry_attempts": 2,
+            "retry_interval": 120,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 50,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-14T13:38:44.000000Z"
+        },
+        {
+            "id": 2286,
+            "type": "failed",
+            "retry_attempts": 2,
+            "retry_interval": 120,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 50,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-14T13:38:44.000000Z"
+        },
+        {
+            "id": 2287,
+            "type": "voice_line",
+            "retry_attempts": 2,
+            "retry_interval": 120,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 50,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-14T13:38:45.000000Z"
+        },
+        {
+            "id": 2288,
+            "type": "failed_chargeable",
+            "retry_attempts": 2,
+            "retry_interval": 120,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 50,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-14T13:38:45.000000Z"
+        },
+        {
+            "id": 2289,
+            "type": "batch",
+            "retry_attempts": 0,
+            "retry_interval": 180,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 50,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-14T13:38:45.000000Z"
+        },
+        {
+            "id": 2290,
+            "type": "manual",
+            "retry_attempts": 10,
+            "retry_interval": 180,
+            "batch_time_delay": 10,
+            "batch_fax_limit": 50,
+            "created_at": "2026-01-31T10:05:57.000000Z",
+            "created_by": 57,
+            "updated_at": "2026-07-14T13:38:45.000000Z"
+        }
+    ],
+    "meta": {
+        "total": 8,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "d2f1cd6c-310b-491d-a670-03887d34de21"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,12 @@
+---
+title: "Update a contact note"
+description: "Update the content or category of a contact note."
+api: "PATCH /contact_notes/{contact_note_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_note_id" type="integer" required>Contact note ID.</ParamField>
+<ParamField body="note" type="string" required>Updated note content.</ParamField>
+<ParamField body="category" type="string">Updated category: `contact`, `fax`, `engage`, or `esign`.</ParamField>
+

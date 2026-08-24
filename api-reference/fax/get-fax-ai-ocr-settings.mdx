@@ -1,0 +1,41 @@
+---
+title: "GET /fax/ai_ocr_settings"
+description: "Captured contract for GET /fax/ai_ocr_settings."
+api: "GET /fax/ai_ocr_settings"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/ai_ocr_settings.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get AI or OCR Settings.
+
+Endpoint
+GET : api/fax/ai_ocr_settings
+
+Response
+{
+    "data": {
+        "ai_feature_enabled": true,
+        "auto_ocr_faxes": "inbound",
+        "auto_ocr_pages": "all",
+        "minimum_confidence_level_for_ocr": 10,
+        "auto_nlp_faxes": "none",
+        "minimum_confidence_level_for_nlp": 0,
+        "pending_ocr_faxes": 37,
+        "pending_nlp_faxes": 37,
+        "required_credit_for_nlp": 0,
+        "required_credit_for_ocr": 0
+    },
+    "meta": {
+        "request_id": "3cf30cc4-594f-4bbc-b1ff-a805e7f0d541"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,55 @@
+---
+title: "POST /meetings"
+description: "Captured contract for POST /meetings."
+api: "POST /meetings"
+public: true
+---
+
+This page documents the behavior captured for POST /meetings in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/meetings
+    
+    Body:
+    {
+        "room_id": "SwpC-VtK-uNTt",
+        "is_host": true,
+    }
+    
+    validation error:
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The room id field is required.|The is host field is required."
+        }
+    }
+    Response:
+    {
+        "data": {
+            "created_by": 53,
+            "room_id": "SwpC-VtK-uNTt",
+            "host_id": 53,
+            "updated_at": "2026-05-14T10:39:27.000000Z",
+            "created_at": "2026-05-14T10:39:27.000000Z",
+            "id": 144,
+            "host_data": {
+                "id": 53,
+                "first_name": "Web",
+                "last_name": "Twenty",
+                "email": "developer@example.com"
+            }
+        },
+        "meta": {
+            "previous_cursor": "",
+            "request_id": "57024b4f-971e-4507-a165-1b5cdc1a06cc"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,95 @@
+---
+title: "GET /contact_fields"
+description: "Captured contract for GET /contact_fields."
+api: "GET /contact_fields"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /contact_fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint
+GET api/contact_fields
+
+Query Parameters
+
+Parameter
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+page
+
+	
+
+Integer
+
+	
+
+No
+
+	
+
+Page number
+
+
+
+
+limit
+
+	
+
+Integer
+
+	
+
+No
+
+	
+
+Number of records per page
+
+
+Success Response
+{
+    "data": [
+        {
+            "id": 1,
+            "created_by": 53,
+            "contact_type": "individual",
+            "validation": "text",
+            "label": "Department",
+            "value": "",
+            "required": true,
+            "group_ids": [12, 15],
+            "created_at": "2026-02-23T05:25:53.000000Z"
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "2241b803-eabd-4c3f-b450-2ca5cc81c6ce"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

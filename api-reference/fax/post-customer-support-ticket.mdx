@@ -1,0 +1,46 @@
+---
+title: "POST /customer/support/ticket"
+description: "Captured contract for POST /customer/support/ticket."
+api: "POST /customer/support/ticket"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /customer/support/ticket.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create ticket for Customer Support
+Endpoint:
+POST: /customer/support/ticket
+
+Request:
+{
+    "version": "1",
+    "industry": "xyz",
+    "credits": 254,
+    "message": " ",
+    "faxnumber": "12342345644",
+    "current_isd_code": "1",
+    "app_type": 0,  
+    "type": "Bug/Tech Issue",
+    "is_premier_user": 0,
+    "category": "priority_2",
+    "ob_suscr": "FREEMIUM",
+    "file_name" : "123.jpg",
+    "file_data" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
+}
+
+Response:
+{
+    "data": "Thanks! We'll get back to you shortly.",
+    "meta": {
+        "request_id": "76c480ff-ed44-4720-b888-855668ddccf2"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

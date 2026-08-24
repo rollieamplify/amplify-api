@@ -1,0 +1,37 @@
+---
+title: "POST /guest_message/storage/upload_url"
+description: "Captured contract for POST /guest_message/storage/upload_url."
+api: "POST /guest_message/storage/upload_url"
+public: true
+---
+
+This page documents the behavior captured for POST /guest_message/storage/upload_url in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/guest_message/storage/upload_url
+    
+    Body:
+    {
+        "file_name": "image (3).png",
+        "folder": "mms",
+        "conversation_id": 2168
+    }
+    
+    Response:
+    {
+        "data": {
+            "upload_url": "https://example.com/signed-upload-url
+        },
+        "meta": {
+            "request_id": "777f4ef1-8682-48f3-b8cf-fef35050d0b6"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

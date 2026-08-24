@@ -1,0 +1,147 @@
+---
+title: "POST /broadcast/annotations"
+description: "Captured contract for POST /broadcast/annotations."
+api: "POST /broadcast/annotations"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/annotations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Save Annotations API.
+
+EndPoint
+POST: https://beta-api.amplify.xyz/api/broadcast/annotations
+
+Request
+{
+  "annotations": [
+    {
+      "page": 1,
+      "fields": [
+        {
+          "key": "Test 1",
+          "left": "39.8966%",
+          "top": "-0.27076069999999997%",
+          "type": "text",
+          "font_size": 14,
+          "value": "Test 1",
+          "width": 225,
+          "height": 32,
+          "url_type": "",
+          "is_hide_background": ""
+        },
+        {
+          "key": "",
+          "left": "0.9042%",
+          "top": "-0.27076069999999997%",
+          "type": "img",
+          "font_size": 14,
+          "value": "https://ifaxapp.com/live/thumbnail/image/526da70ab552472bbb9114bf4fd71464.png",
+          "width": 193.438,
+          "height": 45.5781,
+          "url_type": "",
+          "is_hide_back_ground": ""
+        },
+        {
+          "key": "",
+          "left": "85.63650000000001%",
+          "top": "-0.35%",
+          "type": "QR",
+          "font_size": 14,
+          "value": "https://www.google.com/",
+          "width": 125,
+          "height": 128.672,
+          "url_type": "OPENURL",
+          "is_hide_back_ground": ""
+        },
+        {
+          "key": "Fax Number",
+          "left": "39.89663677130044%",
+          "top": "15.735578446909669%",
+          "type": "text",
+          "font_size": 14,
+          "value": "",
+          "width": 175,
+          "height": 24,
+          "url_type": "",
+          "is_hide_background": ""
+        }
+      ]
+    }
+  ],
+  "broadcast_id" : 3
+}
+
+
+Response
+{
+    "data": {
+        "annotations": [
+            {
+                "page": 1,
+                "fields": [
+                    {
+                        "key": "Test 1",
+                        "left": "39.8966%",
+                        "top": "-0.27076069999999997%",
+                        "type": "text",
+                        "font_size": 14,
+                        "value": "Test 1",
+                        "width": 225,
+                        "height": 32,
+                        "url_type": null,
+                        "is_hide_background": null
+                    },
+                    {
+                        "key": null,
+                        "left": "0.9042%",
+                        "top": "-0.27076069999999997%",
+                        "type": "img",
+                        "font_size": 14,
+                        "value": "https://ifaxapp.com/live/thumbnail/image/526da70ab552472bbb9114bf4fd71464.png",
+                        "width": 193.438,
+                        "height": 45.5781,
+                        "url_type": null,
+                        "is_hide_back_ground": null
+                    },
+                    {
+                        "key": null,
+                        "left": "85.63650000000001%",
+                        "top": "-0.35%",
+                        "type": "QR",
+                        "font_size": 14,
+                        "value": "https://www.google.com/",
+                        "width": 125,
+                        "height": 128.672,
+                        "url_type": "OPENURL",
+                        "is_hide_back_ground": null
+                    },
+                    {
+                        "key": "Fax Number",
+                        "left": "39.89663677130044%",
+                        "top": "15.735578446909669%",
+                        "type": "text",
+                        "font_size": 14,
+                        "value": "+1 (205) 874-5212",
+                        "width": 175,
+                        "height": 24,
+                        "url_type": null,
+                        "is_hide_background": null
+                    }
+                ]
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "3bfed7b3-6708-4466-b8af-4be3f17f0b65"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

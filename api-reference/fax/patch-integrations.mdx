@@ -1,0 +1,58 @@
+---
+title: "PATCH /integrations"
+description: "Captured contract for PATCH /integrations."
+api: "PATCH /integrations"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /integrations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Unsync / disconnect
+Endpoint: PATCH /integrations
+Description: Disconnect provider for the current user. Clears tokens / folder integration IDs / mapping columns for that user. SFTP runs dedicated unsync (may remove remote SFTP root path for that user’s sync).
+Request:
+{
+  "app": "google_drive",
+  "is_active": false
+}
+
+Field
+
+	
+
+Rules
+
+
+
+
+app
+
+	
+
+required: google_drive, dropbox, one_drive, sharepoint, box, sftp, hubspot
+
+
+
+
+is_active
+
+	
+
+required
+
+Response:
+{
+  "app": "google_drive",
+  "is_active": false
+}
+Errors:
+409 if sync status is still DRAFT / RUNNING for that user+provider (cannot unsync mid-sync).
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,390 @@
+---
+title: "POST /team-user"
+description: "Captured contract for POST /team-user."
+api: "POST /team-user"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /team-user.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Create Sub-User API
+
+**Endpoint:**  
+
+POST: api/team-user
+
+# Description :
+
+Creates a new sub-user (team user) for the authenticated account. You must provide either `role_id` (to assign a role) or `user_permissions` (custom permissions), but not both.
+
+- **need_password = 1:** A password is generated and returned in the response.
+
+- **need_password = 0:** An invitation email is sent; `invitation_link` is included when status is pending.
+
+# Request Body :
+
+## Option 1: Create with Role :
+
+{
+  "first_name": "John",
+  "last_name": "Smith",
+  "email": "john@example.com",
+  "need_password": 0,
+  "job_title": "Support",
+  "role_id": 2,
+  "user_note": "dummy"
+}
+
+## Option 2: Create with Custom Permissions and Notifications :
+
+{
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "email": "jane@example.com",
+  "need_password": 1,
+  "job_title": "Support",
+  "user_permissions": {
+    "access_ifax": true,
+    "access_numbers": true,
+    "access_numbers_value": "1,6,65",
+    "view_documents": true,
+    "view_documents_value": "all_documents",
+    "send_faxes": false,
+    "monthly_page_limit": true,
+    "monthly_page_limit_value": 100
+  },
+    "user_notifications": [
+        {
+            "key": "transmission_started_accessible_number_client",
+            "product": "fax",
+            "category": "inbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": true,
+                "show_open_link": false
+            }
+        }
+    ]
+}
+
+| Field | Type | Required | Description |
+
+|-------|------|----------|-------------|
+
+| first_name | string | Yes | Max 50 characters. |
+
+| last_name | string | No | Optional. |
+
+| email | string | Yes | Valid email, unique across users. |
+
+| need_password | int | Yes | `1` = generate password; `0` = send invitation email. |
+
+| job_title | string | No | Must exist in `job_titles` if provided. |
+
+| role_id | int | Conditional | Either `role_id` or `user_permissions` required, not both. |
+
+| user_permissions | object | Conditional | Custom permissions. Keys = permission keys from PermissionSeeder; values = `true`/`false`, `"all_documents"`/`"assigned_documents"`, or comma-separated IDs. |
+
+# Response Format :
+
+## Success Response (need_password = 1) :
+
+{
+  "data": {
+    "id": 102,
+    "account_id": 1,
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "job_title": "Support",
+    "email": "jane@example.com",
+    "password": "example_password",
+    "phone_number": "",
+    "status": "active",
+    "created_at": "2025-01-27T12:00:00Z",
+    "created_by": 1,
+    "role_id": null,
+    "role_name": "",
+    "type": "user",
+    "invitation_link": "",
+    "user_permissions": {
+      "Product": [],
+      "General": [],
+      "iFax": [],
+      "Call": [],
+      "eSign": [],
+      "Forms": []
+    },
+      "user_notifications": [
+            {
+                "key": "faxes_sent_by_me",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "faxes_sent_by_others_accessible_number",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "faxes_sent_by_email_to_fax",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "fax_send_approval_email",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "cc_email_user",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "fax_received_assigned_to_me",
+                "product": "fax",
+                "category": "inbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "fax_received_accessible_number",
+                "product": "fax",
+                "category": "inbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "fax_reassigned_to_me",
+                "product": "fax",
+                "category": "inbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "number_purchase_status",
+                "product": "fax",
+                "category": "number",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "number_port_request_status",
+                "product": "fax",
+                "category": "number",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "transmission_started_assigned_fax",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "transmission_started_accessible_number",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "ocr_updates",
+                "product": "fax",
+                "category": "ocr",
+                "type": "email",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "ai_data_extraction",
+                "product": "fax",
+                "category": "ai",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "marketing_email",
+                "product": "fax",
+                "category": "marketing",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "payment_reminders",
+                "product": "fax",
+                "category": "billing",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "folder_notification",
+                "product": "fax",
+                "category": "folders",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "document_viewed_first_time",
+                "product": "esign",
+                "category": "document",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "document_viewed_every_time",
+                "product": "esign",
+                "category": "document",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "document_completed_by_signer",
+                "product": "esign",
+                "category": "document",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "document_completed_all_parties",
+                "product": "esign",
+                "category": "document",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "online_form_viewed_by_respondent",
+                "product": "esign",
+                "category": "online_form",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                   
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

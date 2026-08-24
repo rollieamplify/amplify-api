@@ -1,0 +1,39 @@
+---
+title: "POST /guest_message/validate_invite_link"
+description: "Captured contract for POST /guest_message/validate_invite_link."
+api: "POST /guest_message/validate_invite_link"
+public: true
+---
+
+This page documents the behavior captured for POST /guest_message/validate_invite_link in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/guest_message/validate_invite_link
+    
+    Body:
+    {
+        "conversation_id":2167,
+        "from_number":"+13345103356",
+        "to_number":"+12024280033",
+        "from_user_id":53
+    }
+    
+    Response:
+    {
+        "data": {
+            "conversation_id": 2168,
+            "is_valid_link": true
+        },
+        "meta": {
+            "request_id": "505e2ac1-c92a-4f57-9d44-558ae378e741"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

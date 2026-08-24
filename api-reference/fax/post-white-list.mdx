@@ -1,0 +1,85 @@
+---
+title: "POST /white_list"
+description: "Captured contract for POST /white_list."
+api: "POST /white_list"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /white_list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/white_list
+
+Body:
+{
+    "ip_address": "192.168.1.2",
+    "label": "Lable 2"
+}
+
+
+Validation error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The ip address field is required."
+    },
+    "errors": {
+        "ip_address": [
+            "The ip address field is required."
+        ],
+        "label": [
+            "The label field is required."
+        ]
+    }
+}
+
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The ip address must be a valid IP address."
+    },
+    "errors": {
+        "ip_address": [
+            "The ip address must be a valid IP address."
+        ]
+    }
+}
+
+Duplicate errors:
+{
+    "error": {
+        "code": "IP_ALREADY_EXISTS",
+        "message": "IP address already exists with Lable 1"
+    }
+}
+
+
+{
+    "error": {
+        "code": "LABEL_ALREADY_EXISTS",
+        "message": "Label already exists"
+    }
+}
+
+Response:
+{
+    "data": {
+        "id": 2,
+        "ip_address": "192.168.1.2",
+        "label": "Lable 2",
+        "created_at": 1772789594
+    },
+    "meta": {
+        "request_id": "4178db5f-5573-4163-8534-0b1d9e33bd4f"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

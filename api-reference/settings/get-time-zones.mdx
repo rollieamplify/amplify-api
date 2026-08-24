@@ -1,0 +1,81 @@
+---
+title: "GET /time_zones"
+description: "Captured contract for GET /time_zones."
+api: "GET /time_zones"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /time_zones.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+USE: Get list of timezones.
+
+
+
+
+Endpoint:
+
+GET: api/time_zones
+
+
+
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Pacific/Niue",
+            "friendly_name": "UTC-11:00 Niue Time (Niue)",
+            "format": "UTC-11:00",
+            "country": "Niue"
+        },
+        {
+            "id": 2,
+            "name": "Pacific/Midway",
+            "friendly_name": "UTC-11:00 Samoa Time (United States Minor Outlying Islands)",
+            "format": "UTC-11:00",
+            "country": "United States Minor Outlying Islands"
+        },
+        {
+            "id": 3,
+            "name": "Pacific/Pago_Pago",
+            "friendly_name": "UTC-11:00 Samoa Time (American Samoa)",
+            "format": "UTC-11:00",
+            "country": "American Samoa"
+        },
+        {
+            "id": 4,
+            "name": "Pacific/Rarotonga",
+            "friendly_name": "UTC-10:00 Cook Islands Time (Cook Islands)",
+            "format": "UTC-10:00",
+            "country": "Cook Islands"
+        },
+        {
+            "id": 5,
+            "name": "Pacific/Honolulu",
+            "friendly_name": "UTC-10:00 Hawaii-Aleutian Time - Honolulu (United States)",
+            "format": "UTC-10:00",
+            "country": "United States"
+        },
+        {
+            "id": 6,
+            "name": "Pacific/Tahiti",
+            "friendly_name": "UTC-10:00 Tahiti Time (French Polynesia)",
+            "format": "UTC-10:00",
+            "country": "French Polynesia"
+        }
+    ],
+    "meta": {
+        "request_id": "6b820021-413d-4ccb-8e97-509d67c5e0f3"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

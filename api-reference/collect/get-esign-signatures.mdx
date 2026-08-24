@@ -1,0 +1,63 @@
+---
+title: "GET /esign_signatures"
+description: "Captured contract for GET /esign_signatures."
+api: "GET /esign_signatures"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /esign_signatures.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/esign_signatures
+
+
+
+
+Description :
+
+
+
+
+-> Returns all saved signatures for the authenticated user, ordered by sort_order ascending. 
+-> Each signature includes a presigned download URL.
+
+ 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

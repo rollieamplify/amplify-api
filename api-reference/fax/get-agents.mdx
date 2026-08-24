@@ -1,0 +1,55 @@
+---
+title: "GET /agents"
+description: "Captured contract for GET /agents."
+api: "GET /agents"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /agents.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Agent Details.
+
+EndPoint
+GET : api/agents
+
+Respone
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Sarah 1",
+            "avatar": "Sarah",
+            "voicetype": "male",
+            "voicetypestyle": "friendly",
+            "empathy": 10,
+            "patience": 5,
+            "retell_agentid": "agent_id_from_retell_agent",
+            "created_at": "2026-02-11T06:16:23.000000Z",
+            "updated_at": "2026-02-11T06:29:59.000000Z"
+        },
+        {
+            "id": 3,
+            "name": "Sarah 1",
+            "avatar": "Sarah",
+            "voicetype": "male",
+            "voicetypestyle": "friendly",
+            "empathy": 10,
+            "patience": 5,
+            "retell_agentid": "agent_id_from_retell_agent",
+            "created_at": "2026-02-11T06:36:43.000000Z",
+            "updated_at": "2026-02-11T06:36:43.000000Z"
+        }
+    ],
+    "meta": {
+        "request_id": "ada0e41c-6420-4996-ad61-dce470060f3a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

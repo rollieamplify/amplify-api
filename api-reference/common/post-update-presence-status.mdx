@@ -1,0 +1,69 @@
+---
+title: "POST /update_presence_status"
+description: "Captured contract for POST /update_presence_status."
+api: "POST /update_presence_status"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /update_presence_status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/update_presence_status
+
+Body:
+
+{
+    "presence_status":"active"
+}
+
+
+Accept values:
+presence_status: active,away,dnd
+
+
+Error Response:
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The presence status field is required."
+    },
+    "errors": {
+        "presence_status": [
+            "The presence status field is required."
+        ]
+    }
+}
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The selected presence status is invalid."
+    },
+    "errors": {
+        "presence_status": [
+            "The selected presence status is invalid."
+        ]
+    }
+}
+
+
+Response:
+
+{
+    "data": {
+        "presence_status": "active"
+    },
+    "meta": {
+        "request_id": "c268b935-253d-40fc-b121-0dd103b96c59"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

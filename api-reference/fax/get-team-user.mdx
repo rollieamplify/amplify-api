@@ -1,0 +1,240 @@
+---
+title: "GET /team-user"
+description: "Captured contract for GET /team-user."
+api: "GET /team-user"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /team-user.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# List Sub-Users API
+
+**Endpoint:**  
+
+GET: api/team-user
+
+# Description :
+
+Returns a paginated list of sub-users (team users) for the authenticated account. Each sub-user includes profile fields and `user_permissions` grouped by category (Product, General, iFax, Call, eSign, Forms).
+
+# Query Parameters :
+
+| Parameter | Type | Default | Description |
+
+|-----------|------|---------|-------------|
+
+| cursor | int | 1 | Page number (1-based). |
+
+| limit | int | 20 | Items per page (1–200). |
+
+
+
+
+**Example:** 
+
+ `GET api/team-user?cursor=1&limit=20`
+
+# Request Body :
+
+None
+
+# Response Format :
+
+## Success Response :
+
+{
+    "data": [
+        {
+            "id": 293,
+            "account_id": 285,
+            "first_name": "Hetvi",
+            "last_name": "K",
+            "job_title": "88",
+            "email": "developer@example.com",
+            "password": "",
+            "phone_number": "+98 98989898",
+            "status": "Active",
+            "assigned_numbers_count": 2,
+            "created_at": "2026-01-08T11:25:33Z",
+            "created_by": "",
+            "reference_id": "",
+            "referred_by": "",
+            "timezone": {
+                "id": 324,
+                "name": "Asia/Kolkata",
+                "format": "UTC+05:30",
+                "country_code": "IN",
+                "country": "India",
+                "created_at": null,
+                "updated_at": null
+            },
+            "permission_id": "",
+            "role_id": "",
+            "role_name": "",
+            "type": "primary",
+            "timestamp": "2026-06-08T07:02:54Z",
+            "signature_id": "",
+            "invitation_link": "",
+            "show_invitation_popup": false,
+            "is_invitation_pending": false,
+            "user_permissions": {
+                "Product": [
+                    {
+                        "id": 1,
+                        "title": "iFax",
+                        "key": "access_ifax",
+                        "enabled": false,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Connect",
+                        "key": "access_connect",
+                        "enabled": false,
+                        "value": "",
+                        "category": "product"
+                   }
+                ]
+            },
+            "user_notifications": [
+                {
+                    "key": "faxes_sent_by_me",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": "push",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                },
+                {
+                    "key": "faxes_sent_by_others_accessible_number",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": "push",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                }
+                }
+            ],
+            "created_from": "app",
+            "license_type": null,
+            "last_logged_in": 1780902174,
+            "engage_assign_number": {},
+            "last_activity": "Team sub-account details 'bob1@example.com' were updated",
+            "last_activity_time": 1780911195,
+            "user_note": ""
+        },
+        {
+            "id": 831,
+            "account_id": 285,
+            "first_name": "sub",
+            "last_name": "userh3",
+            "job_title": "Administrative Assistant",
+            "email": "subuserh3@gmail.com",
+            "password": "",
+            "phone_number": "+91 70166 27004",
+            "status": "Active",
+            "assigned_numbers_count": 0,
+            "created_at": "2026-03-02T06:07:37Z",
+            "created_by": 293,
+            "reference_id": "",
+            "referred_by": "",
+            "timezone": {
+                "id": 324,
+                "name": "Asia/Kolkata",
+                "format": "UTC+05:30",
+                "country_code": "IN",
+                "country": "India",
+                "created_at": null,
+                "updated_at": null
+            },
+            "permission_id": "",
+            "role_id": "",
+            "role_name": "",
+            "type": "user",
+            "timestamp": "2026-06-04T09:35:44Z",
+            "signature_id": "",
+            "invitation_link": "",
+            "show_invitation_popup": false,
+            "is_invitation_pending": false,
+            "user_permissions": {
+                    "Product": [
+                    {
+                        "id": 1,
+                        "title": "iFax",
+                        "key": "access_ifax",
+                        "enabled": false,
+                        "value": "",
+                        "category": "product"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Connect",
+                        "key": "access_connect",
+                        "enabled": false,
+                        "value": "",
+                        "category": "product"
+                   }
+                ]
+            },
+            "user_notifications": [
+                {
+                    "key": "faxes_sent_by_me",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": "push",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                },
+                {
+                    "key": "faxes_sent_by_others_accessible_number",
+                    "product": "fax",
+                    "category": "outbound_fax",
+                    "type": "push",
+                    "settings": {
+                        "attach_certificate": false,
+                        "include_audit_trail": false,
+                        "attach_pdf": false,
+                        "show_open_link": false
+                    }
+                }
+                }
+            ],
+            "created_from": "app",
+            "license_type": 3,
+            "last_logged_in": false,
+            "engage_assign_number": {},
+            "last_activity": "",
+            "last_activity_time": false,
+            "user_note": "webapp owner note update"
+        }
+    ],
+    "meta": {
+        "total": 2,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "c6a98ba8-e0d8-4a15-b4e2-518da09ce5ff"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

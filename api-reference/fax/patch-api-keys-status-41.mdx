@@ -1,0 +1,46 @@
+---
+title: "PATCH /api_keys/status/41"
+description: "Captured contract for PATCH /api_keys/status/41."
+api: "PATCH /api_keys/status/41"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /api_keys/status/41.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update SPI key status as active or inactive.
+Endpoint:
+PATCH: /api_keys/status/41
+
+Request:
+
+
+  
+image.png
+
+Response:
+{
+    "data": {
+        "message": "API Key deactivated successfully.",
+        "data": {
+            "id": 41,
+            "name": "test2",
+            "api_key": "B24E13A3-62AF4FEC-90E6-878131C61F9C",
+            "type": "production",
+            "is_active": false,
+            "created_at": 1768987204,
+            "last_used_at": null
+        }
+    },
+    "meta": {
+        "request_id": "3a78769b-e7ca-481b-b88b-c7ddfbc1d38d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

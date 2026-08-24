@@ -1,0 +1,30 @@
+---
+title: "DELETE /folders"
+description: "Captured contract for DELETE /folders."
+api: "DELETE /folders"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /folders.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Delete Multiple Folders
+Endpoint: DELETE /folders
+Description: Delete multiple folders you own.
+Request:
+{
+  "folder_ids": [25, 26]
+}
+Response:
+{
+  "data": [],
+  "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

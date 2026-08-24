@@ -1,0 +1,26 @@
+---
+title: "Delete a number"
+description: "Release one phone number."
+api: "DELETE /numbers/{number_id}"
+public: true
+---
+
+`DELETE /numbers/{number_id}` releases a phone number.
+
+## Path parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| `number_id` | integer | Yes | Internal number identifier. |
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/1378" \
+  --request DELETE \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+```
+
+## Response
+
+A successful request returns `204 No Content`.
+
+<Warning>Releasing a number can affect future access to that number. Confirm that it is no longer needed before deleting it.</Warning>

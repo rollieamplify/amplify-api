@@ -1,0 +1,60 @@
+---
+title: "POST /broadcast/fax/remove-failed-recipients"
+description: "Captured contract for POST /broadcast/fax/remove-failed-recipients."
+api: "POST /broadcast/fax/remove-failed-recipients"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/fax/remove-failed-recipients.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Remove Failed Recipients API
+
+
+**Endpoint:** :
+POST api/broadcast/fax/remove-failed-recipients
+
+
+## Description : 
+Removes **failed** broadcast or campaign recipients from the broadcast list. Use this API to clean the list after a send (e.g., remove numbers that failed so they are not included in future sends).
+
+
+## Request Body :
+{
+  "fax_uuid": "550e8400-e29b-41d4-a716-446655440000"
+}
+
+
+## Response Format 
+
+
+### Success Response :
+{
+  "data": {
+    "message": "Failed recipients removed from the list successfully.",
+    "deleted_count": 3
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440000"
+  }
+}
+
+
+### No Failed Recipients
+{
+  "data": {
+    "message": "No failed recipients found to delete.",
+    "deleted_count": 0
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440001"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

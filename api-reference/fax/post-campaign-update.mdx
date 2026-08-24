@@ -1,0 +1,49 @@
+---
+title: "POST /campaign/update"
+description: "Captured contract for POST /campaign/update."
+api: "POST /campaign/update"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /campaign/update.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Update Campaign Name API
+
+
+Description : 
+Updates the name of an existing campaign.
+
+
+Endpoint: 
+POST: api/campaign/update
+
+
+Request Body :
+{
+  "campaign_id": 21,
+  "name": "January Recall Campaign - Updated"
+}
+
+
+- **campaign_id** (int, required): ID of the campaign to update.
+- **name** (string, required): New campaign name (must be unique per user/account among active campaigns).
+
+
+Success Response (200) :
+{
+  "data": {
+    "message": "Campaign name updated successfully"
+  },
+  "meta": {
+    "request_id": "a2450f43-7a5a-4e2a-9b8d-27b9b353f719"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

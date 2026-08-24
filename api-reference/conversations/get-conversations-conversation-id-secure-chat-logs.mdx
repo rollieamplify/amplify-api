@@ -1,0 +1,87 @@
+---
+title: "GET /conversations/{conversation_id}/secure_chat/logs"
+description: "Captured contract for GET /conversations/{conversation_id}/secure_chat/logs."
+api: "GET /conversations/{conversation_id}/secure_chat/logs"
+public: true
+---
+
+This page documents the behavior captured for GET /conversations/{conversation_id}/secure_chat/logs in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/conversations/{conversation_id}/secure_chat/logs
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 7,
+                "title": "web twentynew secure link generated",
+                "description": "Expires: 24 hours",
+                "created_at": "2026-04-13T09:42:45.000000Z"
+            },
+            {
+                "id": 8,
+                "title": "System SMS notification sent",
+                "description": "Sent to +13345103356",
+                "created_at": "2026-04-13T09:42:45.000000Z"
+            },
+            {
+                "id": 9,
+                "title": "Guest (+12024280033) OTP resend",
+                "description": "Sent to +12024280033",
+                "created_at": "2026-04-13T09:58:20.000000Z"
+            },
+            {
+                "id": 10,
+                "title": "Guest (+12024280033) OTP verified",
+                "description": "Chrome/ iOS",
+                "created_at": "2026-04-13T09:58:51.000000Z"
+            },
+            {
+                "id": 15,
+                "title": "System received message",
+                "description": "From: +12024280033",
+                "created_at": "2026-04-13T11:44:41.000000Z"
+            },
+            {
+                "id": 19,
+                "title": "System received message",
+                "description": "From: +12024280033",
+                "created_at": "2026-04-13T11:52:09.000000Z"
+            },
+            {
+                "id": 20,
+                "title": "System delivered message",
+                "description": "To: +12024280033",
+                "created_at": "2026-04-13T11:53:54.000000Z"
+            },
+            {
+                "id": 21,
+                "title": "System received message",
+                "description": "From: +12024280033",
+                "created_at": "2026-04-13T12:08:00.000000Z"
+            },
+            {
+                "id": 22,
+                "title": "Guest (+12024280033) file uploaded",
+                "description": "web20logo.png",
+                "created_at": "2026-04-13T12:08:39.000000Z"
+            }
+        ],
+        "meta": {
+            "total": 9,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 10,
+            "request_id": "059c2bf9-e900-45f5-89ae-c179387a10d9"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

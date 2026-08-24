@@ -1,0 +1,109 @@
+---
+title: "GET /forms/{form_id}/field_rule/{respondent_id}"
+description: "Captured contract for GET /forms/{form_id}/field_rule/{respondent_id}."
+api: "GET /forms/{form_id}/field_rule/{respondent_id}"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/{form_id}/field_rule/{respondent_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+This API is used for get a form field rule based on the respondent.
+
+Endpoint: 
+GET: api/forms/{form_id}/field_rule/{respondent_id}
+
+Guest:
+GET: api/guest/forms/{form_id}/field_rule/{respondent_id}
+
+Response:
+{
+    "data": [
+        {
+            "id": 1,
+            "form_id": 1519,
+            "field_id": 12860,
+            "name": "Test updated",
+            "condition_value": "abc",
+            "actions": [
+                {
+                    "field_type": "signature",
+                    "field_value": "asdf1asf",
+                    "show_fields": [
+                        {
+                            "id": 9863,
+                            "title": "Signature",
+                            "reference_id": "dbba866d1a8e435ea965c3f37c5e1a6e"
+                        },
+                        {
+                            "id": 9864,
+                            "title": "Name",
+                            "reference_id": "2be599205c38429aaac985d343025bea"
+                        }
+                    ]
+                },
+                {
+                    "field_type": "signature",
+                    "field_value": "asdf1asf",
+                    "show_fields": [
+                        {
+                            "id": 9863,
+                            "title": "Signature",
+                            "reference_id": "dbba866d1a8e435ea965c3f37c5e1a6e"
+                        },
+                        {
+                            "id": 9864,
+                            "title": "Name",
+                            "reference_id": "2be599205c38429aaac985d343025bea"
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2026-02-26T13:24:56.000000Z",
+            "updated_at": "2026-02-26T13:27:32.000000Z",
+            "condition_field": {
+                "id": 12860,
+                "form_id": 1519,
+                "form_response_id": null,
+                "linked_field_id": "Name1",
+                "title": "Name",
+                "placeholder": "Name",
+                "value": "",
+                "options": null,
+                "reference_id": "51d0de79a86a49f69609b1d896f77d1b",
+                "type": "name",
+                "user_role_id": "usr",
+                "created_by": 1,
+                "page": 1,
+                "source": "user",
+                "x_position": 56,
+                "y_position": 71,
+                "height": 27,
+                "width": 225,
+                "font_size": 14,
+                "required": true,
+                "background_hidden": false,
+                "masked": null,
+                "validation": "string_only",
+                "date_format": null,
+                "dates_available": null,
+                "file_type": null,
+                "signature_methods": null,
+                "is_multiselect": false,
+                "signature_timestamp": false,
+                "timestamp_value": null
+            }
+        }
+    ],
+    "meta": {
+        "request_id": "52581023-8ee2-4013-98de-4ae704005c20"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

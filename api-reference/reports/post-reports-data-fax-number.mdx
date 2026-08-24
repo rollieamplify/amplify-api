@@ -1,0 +1,82 @@
+---
+title: "POST /reports/data/fax_number"
+description: "Captured contract for POST /reports/data/fax_number."
+api: "POST /reports/data/fax_number"
+public: true
+---
+
+This internal review page records the behavior captured for POST /reports/data/fax_number.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Data By Fax Number Report and Activity.
+
+EndPoint
+POST : api/reports/data_by_fax_numbers?limit=10&cursor=1
+
+Request
+{
+    "start_date": "",
+    "end_date": "",
+    "ids": [],
+    "direction": [],
+    "is_reseller_view": false
+}
+
+
+Validation Error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The selected direction is invalid."
+    },
+    "errors": {
+        "direction": [
+            "The selected direction is invalid."
+        ],
+        "start_date": [
+            "The start date is not a valid date.",
+            "The start date does not match the format Y-m-d."
+        ],
+        "end_date": [
+            "The end date is not a valid date.",
+            "The end date does not match the format Y-m-d."
+        ]
+    }
+}
+
+Respone
+{
+    "data": {
+        "02 2026": {
+            "12512938077": {
+                "fax_number": "12512938077",
+                "total_fax": 15,
+                "total_pages": 7,
+                "by_time": "02 2026"
+            },
+            "12512499468": {
+                "fax_number": "12512499468",
+                "total_fax": 2,
+                "total_pages": 2,
+                "by_time": "02 2026"
+            },
+            "12513254535": {
+                "fax_number": "12513254535",
+                "total_fax": 2,
+                "total_pages": 2,
+                "by_time": "02 2026"
+            }
+        }
+    },
+    "meta": {
+        "request_id": "30c2a240-f66b-4fb3-86fc-0eef6855142a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

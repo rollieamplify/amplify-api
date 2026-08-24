@@ -1,0 +1,68 @@
+---
+title: "POST /secure_chat/validate_link"
+description: "Captured contract for POST /secure_chat/validate_link."
+api: "POST /secure_chat/validate_link"
+public: true
+---
+
+This page documents the behavior captured for POST /secure_chat/validate_link in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/secure_chat/validate_link
+    
+    Body:
+    {
+        "conversation_id": 2613,
+        "user_id": 53,
+        "accessed_from": "Chrome/ iOS"
+    }
+    Note: Use same API to resend otp with below params.
+     
+    {
+        "conversation_id": 2613,
+        "user_id": 53,
+        "resend": true
+    }
+    Error Response:
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The conversation id field is required.|The user id field is required."
+        }
+    }
+    
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "Invalid Link!"
+        }
+    }
+    
+    
+    {
+        "error": {
+            "code": "LINK_EXPIRED",
+            "message": "This secure chat link has expired."
+        }
+    }
+    
+    Response:
+    {
+        "data": {
+            "is_verified": false,
+            "otp": 564578
+        },
+        "meta": {
+            "request_id": "b44c5bc2-a0a3-4a91-9878-8853a757be22"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

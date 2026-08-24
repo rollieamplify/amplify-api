@@ -1,0 +1,64 @@
+---
+title: "GET /broadcast/unsubscribe/{token}"
+description: "Captured contract for GET /broadcast/unsubscribe/{token}."
+api: "GET /broadcast/unsubscribe/{token}"
+public: true
+---
+
+This internal review page records the behavior captured for GET /broadcast/unsubscribe/{token}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Broadcast Unsubscribe API
+
+Description :
+Processes QR unsubscribe/open-url token for broadcast faxes and returns JSON response for frontend handling.
+
+
+Endpoint :
+GET: api/broadcast/unsubscribe/{token}
+
+
+Path Parameters :
+- token (required): URL-safe base64 token from QR link
+
+
+Response (UNSUBSCRIBE success) :
+{
+    "data": {
+        "status": true,
+        "message": "You have been unsubscribed successfully"
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+
+
+Response (OPENURL success) :
+{
+    "data": {
+        "status": true,
+        "url": "https://example.com/landing",
+        "isUrlEmpty": 0
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+
+
+Response (invalid token) :
+{
+    "error": {
+        "code": "INVALID_TOKEN",
+        "message": "Invalid unsubscribe token"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

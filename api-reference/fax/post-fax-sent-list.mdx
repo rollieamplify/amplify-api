@@ -1,0 +1,135 @@
+---
+title: "POST /fax/sent/list"
+description: "Captured contract for POST /fax/sent/list."
+api: "POST /fax/sent/list"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/sent/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Sent Fax List
+
+Endpoint:
+
+POST: api/fax/sent/list?limit=20&cursor=1
+
+
+Body:
+
+{
+    "sent_by_user_ids": [
+        50,
+        119
+    ],
+    "fax_numbers": [
+        "+12057566913",
+        "+12566708163"
+    ],
+    "method": [
+        "app",
+        "broadcast",
+        "email_to_fax"
+    ],
+    "label_ids": [
+        25,
+        49,
+        65
+    ],
+    "fax_status": [
+        "completed",
+        "failed",
+        "pending"
+    ],
+    "start_date": "2024-01-01 00:00:00",
+    "end_date": "2024-12-31 23:59:59",
+    "retry_attempt": [
+        1,
+        2,
+        3
+    ],
+    "sort_by": "latest",
+    "source": [
+        "fax"
+    ],
+    "priority": ["yes","no","unknown"],
+    "document_type": ["Admin Note"],
+    "is_pinned" : "true"
+}
+
+method in : app,api,email_to_fax,fcl_to_fax,broadcast
+source in : fax,secure_fax
+priority in : yes,no,unknown
+document_type in : Admin Note,Consult Note,Cover Page,Imaging Note,Insurance Authorization,Intake Forms,Lab Test,Other,Patient Profile,Prescriptions,Referral Letter,Requisition Form,Insurance Authorization Request Form,Consent Form
+Response:
+
+{
+    "data": [
+        {
+            "fax_uuid": "01KEVHW8ADTKVTTK86F0JSWX6B",
+            "is_read": false,
+            "fax_type": "outbound",
+            "created_by": 50,
+            "created_by_email": "developer@example.com",
+            "is_broadcast": false,
+            "broadcast_id": "",
+            "broadcast_name": "",
+            "campaign_id": "",
+            "to_number": 12566708163,
+            "from_number": 12566708163,
+            "document_name": "Fax 12566708163",
+            "sender_name": "",
+            "sender_email": "",
+            "recipient_name": "Web 35 New",
+            "recipient_email": "developer@example.com",
+            "subject": null,
+            "pages": 1,
+            "labels": [],
+            "retry_attempt": 0,
+            "fax_status": "Delivered",
+            "created_at": 1768303763,
+            "updated_at": 1768303798,
+            "to_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "from_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "start_time": 1768303769,
+            "end_time": 1768303796,
+            "duration": "00:31",
+            "fax_error": "",
+            "thumbnail_image": "https://example.com/signed-url
+            "is_cancelled": false,
+            "method": "app",
+            "ocr_status": "",
+            "nlp_status": "",
+            "source": "fax"
+        }
+    ],
+    "meta": {
+        "total": 10,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 1,
+        "request_id": "53e0ec0a-3662-4240-9b74-9ba55900778a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

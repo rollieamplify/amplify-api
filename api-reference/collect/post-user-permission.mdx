@@ -1,0 +1,43 @@
+---
+title: "POST /user/permission"
+description: "Captured contract for POST /user/permission."
+api: "POST /user/permission"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /user/permission.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+-> This API is used to get the permission check for users.
+
+Endpoint: 
+POST: api/user/permission
+
+Body :
+{
+        "permission": "view_templates"
+}
+
+
+
+Response:
+{
+    "data": {
+        "status": true
+    },
+    "meta": {
+        "request_id": "fb612817-9a5d-4ca8-9774-3b0ddf30363f"
+    }
+}
+
+Note :- 
+
+-> The permission key is required always  . And it should match the exact permission key name for checking the status .
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

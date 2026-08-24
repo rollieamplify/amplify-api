@@ -1,0 +1,79 @@
+---
+title: "GET /calls/{call_id}/transcript"
+description: "Captured contract for GET /calls/{call_id}/transcript."
+api: "GET /calls/{call_id}/transcript"
+public: true
+---
+
+This page documents the behavior captured for GET /calls/{call_id}/transcript in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/calls/{call_id}/transcript
+    
+    Response:
+    {
+        "data": {
+            "call_status": "ended",
+            "call_duration": 53,
+            "call_transcript": [
+                {
+                    "text": "Thank you.",
+                    "number": "12512200962",
+                    "seconds": 4
+                },
+                {
+                    "text": "Hello? Am I what able to you?",
+                    "number": "12512200962",
+                    "seconds": 7
+                },
+                {
+                    "text": "Yes, I have started recording. So have you completed their number configuration with the Unabergone Translate payload?",
+                    "number": "12512200962",
+                    "seconds": 24
+                },
+                {
+                    "text": "Okay, so same thing I will check and do the needful whatever the",
+                    "number": "12512200962",
+                    "seconds": 40
+                },
+                {
+                    "text": "Yes, yes, whatever. Please start recording. Okay. Yeah, yeah, I have completed and I have provided to do as well also. You can check. Sure. Okay. Please let me know if any changes are required from my site.",
+                    "number": "12512200962",
+                    "seconds": 42
+                },
+                {
+                    "text": "No currently don't have any changes and I will let you know once I will complete that.",
+                    "number": "12512200962",
+                    "seconds": 49
+                },
+                {
+                    "text": "Okay, sure.",
+                    "number": "12512200962",
+                    "seconds": 50
+                },
+                {
+                    "text": "Thank you.",
+                    "number": "12512200962",
+                    "seconds": 52
+                },
+                {
+                    "text": "Thank you.",
+                    "number": "12512200962",
+                    "seconds": 53
+                }
+            ],
+            "call_summary": "Call Summary:\n- The party confirmed that they are audible and the call is being recorded.\n- The configuration with the unenablecount transcript payload has been completed and two instances have been provided.\n- The other party will check the provided information and will communicate if any changes are needed.\n\nNext Steps:\n- The recipient will review the configuration provided.\n- The recipient will inform the sender if any changes are required."
+        },
+        "meta": {
+            "request_id": "3db7bde5-318c-46b4-b5cf-d0d120b31400"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,63 @@
+---
+title: "POST /forms/{response_id}/otp/request"
+description: "Captured contract for POST /forms/{response_id}/otp/request."
+api: "POST /forms/{response_id}/otp/request"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{response_id}/otp/request.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{response_id}/otp/request
+
+
+
+
+Description :
+
+
+
+
+-> Generates a new 6-digit OTP, stores it on the form response, resets is_otp_verified to 0, and emails the OTP to the respondent.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,69 @@
+---
+title: "POST /broadcast/cancel"
+description: "Captured contract for POST /broadcast/cancel."
+api: "POST /broadcast/cancel"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/cancel.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Cancel the whole broadcast or campaign
+
+
+**Endpoint:**  
+
+POST: api/broadcast/cancel
+
+
+**Description:**  
+
+Cancels either a whole broadcast or an entire campaign. Send the parent **fax_uuid**; the API figures out from that fax whether it is a broadcast or a campaign and cancels accordingly. Cancellation is requested from the fax provider (Telnyx) for each affected fax; only faxes that are pending or currently sending are cancelled. If any fax has already been sent or delivered, the API returns an error and does not cancel.
+
+
+**Request Body:**
+
+{
+  "fax_uuid": "01KDNHSGK2YXAMQK2NJF8W4TMA"
+}
+
+
+| Field    | Type   | Required | Description                                                                 |
+
+|----------|--------|----------|-----------------------------------------------------------------------------|
+
+| fax_uuid | string | Yes      | Parent fax UUID (same for broadcast and campaign). |
+
+**Success Response (HTTP 200):**
+
+{
+  "data": "Fax cancelled successfully",
+  "meta": {
+    "request_id": "uuid-string"
+  }
+}
+
+
+For campaign cancel, the message may be "Campaign cancelled successfully".
+
+**Error Response (e.g. fax already sent/delivered):**
+
+{
+  "message": "Fax cannot be cancelled. It has already been sent or delivered.",
+  "code": "FAX_ALREADY_SENT"
+}
+
+
+If any fax was already sent or delivered, the error message may contain the provider’s reason.
+
+**Notes:**
+
+- Only faxes in **pending** or **sending** state are cancelled.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

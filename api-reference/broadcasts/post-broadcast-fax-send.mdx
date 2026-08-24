@@ -1,0 +1,82 @@
+---
+title: "POST /broadcast/fax/send"
+description: "Captured contract for POST /broadcast/fax/send."
+api: "POST /broadcast/fax/send"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/fax/send.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Send Broadcast Fax API 
+
+Endpoint :
+
+POST: api/broadcast/fax/send
+
+
+
+
+Description: Send a broadcast using a draft previously saved with broadcast list(s) / recipients (local_fax_uuid from save/fax/details with broadcast_ids / broadcast recipients).
+
+
+Query Parameters :
+
+- local_fax_uuid (required): UUID of the fax document to send
+
+- from_number (optional): Caller ID phone number
+
+- location (optional): Location/timezone identifier (default: "UTC")
+
+- scheduleTime (optional): Scheduled time for sending the fax (ISO format)
+
+- scheduled_time (optional): Alternative parameter name for scheduled time
+
+- timeZone (optional): Timezone for the scheduled time
+
+- fax_quality (optional): Fax quality setting - "standard" | "fine" | "superfine" (default: "standard")
+
+- fax_priority (optional): Fax priority - "regular" | "high" (default: "regular")
+
+Request :
+
+{
+    "local_fax_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "from_number": "15551234567",
+    "location": "America/New_York",
+    "scheduleTime": "2024-01-15T14:30:00Z",
+    "timeZone": "America/New_York",
+    "fax_quality": "fine",
+    "fax_priority": "high",
+    "cc_emails": [
+        "developer@example.com",
+        "developer@example.com"
+     ]
+}
+
+Response :
+
+{
+    "data": {
+        "fax_id": 123,
+        "fax_uuid": "550e8400-e29b-41d4-a716-446655440000",
+        "broadcast_fax_uuid": "660e8400-e29b-41d4-a716-446655440001",
+        "broadcast_ids": "1,2,3",
+        "is_direct_recipients": false,
+        "total_recipients": 10,
+        "pages": 50,
+        "status": "success",
+        "message": "Broadcast fax prepared successfully"
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

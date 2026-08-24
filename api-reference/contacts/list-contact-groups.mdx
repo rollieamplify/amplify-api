@@ -1,0 +1,13 @@
+---
+title: "List contact groups"
+description: "Retrieve contact groups and their contact counts."
+api: "GET /contact_groups"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField query="limit" type="integer">Maximum number of groups to return.</ParamField>
+<ParamField query="cursor" type="string">Pagination cursor.</ParamField>
+
+Each group includes its ID, name, creator, contact count, and ISO 8601 timestamps.
+

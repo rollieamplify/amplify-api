@@ -1,0 +1,38 @@
+---
+title: "POST /faxes/print"
+description: "Captured contract for POST /faxes/print."
+api: "POST /faxes/print"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/print.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Print single/multiple fax API.
+
+Endpoint:
+POST: /api/faxes/print
+
+Body:
+{
+    "fax_uuids": ["01KF597WVHPEE79B9SNWE0SZY9","01KF58ETWAAD164BVQBEN8SJ6G"],
+    "is_broadcast": false
+}
+
+Response:
+{
+    "data": {
+        "url": "https://convert.ifaxapp.com/convert/output/final_merged_65958e9b-a3ba-4507-ac5f-74bcb9a84432.pdf/"
+    },
+    "meta": {
+        "request_id": "75a5e94c-fecc-4cef-b6ff-b63e1c02997b"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

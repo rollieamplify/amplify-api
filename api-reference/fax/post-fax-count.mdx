@@ -1,0 +1,67 @@
+---
+title: "POST /fax/count"
+description: "Captured contract for POST /fax/count."
+api: "POST /fax/count"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/count.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Use : This api use for getting bulk selection count from the fax list page.
+
+Endpoint:
+
+POST: api/fax/count
+
+
+Body:
+
+{
+    "types": [
+        "dashboard",
+        "inbox",
+        "my_assignments",
+        "pending_approval",
+        "draft_faxes",
+        "done_faxes",
+        "sent_faxes",
+        "all_faxes",
+        "scheduled_faxes",
+        "label_faxes"
+    ],
+    // add filters according to list
+}
+
+Add whichever count types you want to the "types" array.
+
+
+
+
+Response:
+
+{
+    "data": {
+        "dashboard": 1355,
+        "inbox": 527,
+        "my_assignments": 453,
+        "pending_approval": 5,
+        "draft_faxes": 94,
+        "done_faxes": 10,
+        "sent_faxes": 658,
+        "all_faxes": 1345,
+        "scheduled_faxes": 2,
+        "label_faxes": 0
+    },
+    "meta": {
+        "request_id": "2509b2b1-b85e-4306-bec1-5915b3ef54b8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,59 @@
+---
+title: "GET /fax/{fax_uuid}"
+description: "Captured contract for GET /fax/{fax_uuid}."
+api: "GET /fax/{fax_uuid}"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/{fax_uuid}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Fax Details
+Endpoint:
+GET: api/fax/{fax_uuid}
+
+Response:
+{
+    "data": {
+        "fax_uuid": "01KDWD3BMA8DDD5A67HEM40WS3",
+        "fax_type": "inbound",
+        "document_name": "Fax 12566708163",
+        "to_number": 12566708163,
+        "from_number": 12057566913,
+        "to_contact_details": {
+            "first_name": "Web",
+            "last_name": "35 New",
+            "email": "developer@example.com",
+            "organization_name": "",
+            "full_name": "Web 35 New",
+            "is_organization": false
+        },
+        "from_contact_details": {
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "organization_name": "",
+            "full_name": "",
+            "is_organization": false
+        },
+        "fax_status": "Unassigned",
+        "folder_id": 0,
+        "folder_name": "",
+        "labels": [],
+        "updated_at": 1767258566,
+        "ocr_status": "Pending",
+        "nlp_status": "Pending",
+        "timestamp": 1767258566
+    },
+    "meta": {
+        "request_id": "376fa0f8-a21b-40df-9a3f-c298399baa78"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

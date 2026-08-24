@@ -1,0 +1,102 @@
+---
+title: "POST /plans"
+description: "Captured contract for POST /plans."
+api: "POST /plans"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plans.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Plan List
+
+EndPoint:
+
+POST: api/plans
+
+
+Payload:
+
+{
+    "family_name": "api",
+    "currency": "usd",
+    "duration": "2_year"
+}
+
+family_name in : healthcare, business, api, broadcast
+duration in : monthly, annual,2_year,3_year
+currency in : usd, gbp
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "HIPAA Basic",
+            "type": "Basic",
+            "family_name": "healthcare",
+            "duration": "monthly",
+            "amount": 24.99,
+            "total_amount": 24.99,
+            "currency": "usd",
+            "trial_days": null,
+            "plan_credits": null,
+            "allowed_numbers": null,
+            "plan_type": "hippa_basic_plan",
+            "is_popular": false,
+            "key_features": [
+                "Secure cloud fax (send & receive)",
+                "Fax numbers (local or toll-free)",
+                "Email to fax & fax to email",
+                "Inbox, folders & search",
+                "PDF upload & download",
+                "Calling (US & Canada)",
+                "Legally-binding eSignatures",
+                "Reports & analytics",
+                "Email support"
+            ],
+            "addon_included": [],
+            "recommended_addons": [
+                {
+                    "addon_name": "license_1",
+                    "amount": 4.99
+                },
+                {
+                    "addon_name": "credits",
+                    "amount": 0.06
+                },
+                {
+                    "addon_name": "numbers",
+                    "amount": 4.99
+                },
+                {
+                    "addon_name": "labs_ai",
+                    "amount": "9.99"
+                },
+                {
+                    "addon_name": "unlimited_cloud_storage",
+                    "amount": "9.99"
+                },
+                {
+                    "addon_name": "document_splitting",
+                    "amount": "9.99"
+                }
+            ],
+            "entitlements": {
+                "credits": 500
+            }
+        }
+    ],
+    "meta": {
+        "request_id": "2663af02-266a-433d-b189-02f7350a5139"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

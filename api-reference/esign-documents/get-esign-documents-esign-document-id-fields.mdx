@@ -1,0 +1,62 @@
+---
+title: "GET /esign_documents/{esign_document_id}/fields"
+description: "Captured contract for GET /esign_documents/{esign_document_id}/fields."
+api: "GET /esign_documents/{esign_document_id}/fields"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_documents/{esign_document_id}/fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/esign_documents/{esign_document_id}/fields
+
+
+
+
+Description :
+
+-> Lists all fields on a document.
+-> Senders and recipients (signers) can list fields.
+-> Signature, initial, stamp, and file types include presigned_url when a value exists.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

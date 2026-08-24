@@ -1,0 +1,48 @@
+---
+title: "POST /broadcast_lists/{broadcast_list_id}/favorite"
+description: "Captured contract for POST /broadcast_lists/{broadcast_list_id}/favorite."
+api: "POST /broadcast_lists/{broadcast_list_id}/favorite"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast_lists/{broadcast_list_id}/favorite.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Broadcast List Favorite API
+
+
+Endpoint:
+POST: /api/broadcast_lists/{broadcast_list_id}/favorite
+
+
+# Description:
+Toggle the favorite status of a broadcast list. This API adds the broadcast list to favorites if it's not already favorited, or removes it from favorites if it is already favorited.
+
+
+# Path Parameters:
+- **broadcast_list_id** (required, integer): The ID of the broadcast list to toggle favorite status
+
+
+# Body:
+No body required. The API automatically toggles the favorite status based on the current state.
+
+
+# Response:
+{
+    "data": {
+        "broadcast_id": 123,
+        "is_favorite": true,
+        "message": "Added to your favorite list"
+    },
+    "meta": {
+        "request_id": "b196e1ee-bc95-4279-adac-7a3fb82d9d46"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

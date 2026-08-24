@@ -1,0 +1,74 @@
+---
+title: "POST /tel_dlc/brands/create"
+description: "Captured contract for POST /tel_dlc/brands/create."
+api: "POST /tel_dlc/brands/create"
+public: true
+---
+
+This page documents the behavior captured for POST /tel_dlc/brands/create in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    
+    POST: api/tel_dlc/brands/create
+    
+    
+    Body:
+    
+    {
+        "brand_id": 15
+    }
+    
+    
+    Response:
+    
+    {
+        "data": {
+            "id": 15,
+            "user_id": 53,
+            "business_registration_id_type": "USA: Employer Identification Number (EIN)",
+            "employer_identification_number": "019-125478",
+            "business_type": "partnership",
+            "company_type": "privately_held",
+            "industry": "education",
+            "business_name_one": "",
+            "business_name_two": "",
+            "business_address_one": "dsdffsd",
+            "business_address_two": "",
+            "country": "119",
+            "state": "AL",
+            "city": "dsfdsdsfsdf",
+            "postal_code": "382424",
+            "website_url": "https://www.google.com/",
+            "regions_of_operation": "Africa",
+            "employee_count": 5,
+            "estimated_daily_call": 15,
+            "first_name": "test",
+            "last_name": "user",
+            "email": "test@mail.com",
+            "job_title": "Developer",
+            "job_position": "other",
+            "phone_number": "+12059874563",
+            "brand_status": "REGISTRATION_PENDING",
+            "use_case": "MIXED",
+            "description": "We send order confirmations, shipping updates, and delivery notifications to customers who purchase from our website.",
+            "message_flow": "Customers opt in by checking a box during checkout on our website agreeing to receive SMS order updates. The checkbox is not pre-checked.",
+            "sample_message_one": "Acme Corp: Your order #12345 has been confirmed. Track at https://acme.com/track/12345. Reply STOP to opt out.",
+            "sample_message_two": "Acme Corp: Your order #12345 has been confirmed. Track at https://acme.com/track/12345. Reply STOP to opt out.",
+            "help_message": "Acme Corp Support: Reply STOP to opt out. For help, email support@acmecorp.com or call +15551234567.",
+            "campaign_status": "",
+            "brand_is_payment_done": false,
+            "campaign_is_payment_done": false
+        },
+        "meta": {
+            "request_id": "3fe9a23f-5de0-4a2e-bb86-1e18ffb85b9c"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

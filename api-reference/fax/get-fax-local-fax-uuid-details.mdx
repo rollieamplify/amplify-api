@@ -1,0 +1,143 @@
+---
+title: "GET /fax/{local_fax_uuid}/details"
+description: "Captured contract for GET /fax/{local_fax_uuid}/details."
+api: "GET /fax/{local_fax_uuid}/details"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/{local_fax_uuid}/details.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Details of Draft Fax
+Endpoint:
+POST: api/fax/{local_fax_uuid}/details
+
+Response:
+{
+    "data": {
+        "template_id": 195,
+        "caller_id": "12566708163",
+        "recipients": [],
+        "broadcast_recipients": [
+            {
+                "id": 302,
+                "name": "Web 35",
+                "fax_number": "12199008015"
+            }
+        ],
+        "broadcast_ids": [],
+        "quality": "standard",
+        "speed": "regular",
+        "approval_required": false,
+        "default_content_type": "cover_page",
+        "include_cover_page": true,
+        "cover_page_id": 5,
+        "cover_page_metadata": {
+            "show_logo": true,
+            "show_badge": true,
+            "show_disclaimer": true,
+            "subject": "sasasas",
+            "comment": "<p>sasasasasasasasasasasasasas</p>",
+            "disclaimer_text": "<p><strong> This transmission is intended for the exclusive use of the individual or entity to whom it is addressed and may contain information that is proprietary, privileged, confidential and/or exempt from disclosure under applicable law.</strong></p>",
+            "from_name": "asasas",
+            "to_name": "",
+            "logo_filename": "5951c295-961e-4d23-b7c6-5dc7bb16e61a.png",
+            "logo_url": "https://example.com/signed-url
+            "badge_filename": "c1601262-8f59-43f3-9ef4-4705bb5655be.png",
+            "badge_url": "https://example.com/signed-url
+        },
+        "include_smart_template": false,
+        "smart_template_metadata": {
+            "name": "",
+            "page_count": 0,
+            "storage_id": "",
+            "annotations": []
+        },
+        "smart_template_id": 0,
+        "attachments": [
+            {
+                "s3_url": "https://example.com/signed-url
+                "uuid": "b280e5b7-fc77-4433-85c5-dfcf07ba8a41.pdf",
+                "attachment_id": 2340
+            }
+        ],
+        "attachments_count": 1,
+        "header_settings": {
+            "show_sender_name": true,
+            "sender_name_type": "user",
+            "show_caller_id": true,
+            "show_delivery_time": true,
+            "delivery_time_format": "MM/DD/YYYY",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": "Test"
+        },
+        "footer_settings": {
+            "show_sender_name": true,
+            "sender_name_type": "user",
+            "show_caller_id": true,
+            "show_delivery_time": 1,
+            "delivery_time_format": "MM/DD/YYYY",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": "Test"
+        },
+        "created_at": 1768287649,
+        "updated_at": 1768287705,
+        "fax_paper_size": "letter",
+        "broadcast_template_id" : 41,
+        "broadcast_template_metadata": {
+            "name": "Test",
+            "page_count": 1,
+            "storage_id": "63fd8d2027d84978a368ff5cc9e967af",
+            "annotations": [
+                {
+                    "page": 1,
+                    "fields": [
+                        {
+                            "key": "Fax Number",
+                            "reference_id": "f75bc41f6d944250a54f70c759f001bd",
+                            "original_name": "Fax Number",
+                            "left": "36.71071953010279%",
+                            "top": "5.164835164835164%",
+                            "type": "text",
+                            "original_type": "text",
+                            "additional_type": "text",
+                            "field_validation": "fax_number",
+                            "font_size": "14",
+                            "value": "",
+                            "width": 225,
+                            "height": 27,
+                            "is_static_field": true,
+                            "is_nlp_field": false,
+                            "is_contact_custom_field": false,
+                            "is_not_editable": false,
+                            "source": "",
+                            "map_email_to_fax": "",
+                            "is_required": true,
+                            "is_hide_background": false,
+                            "text_format": "",
+                            "text_sub_format": "",
+                            "fax_recipients_data": [],
+                            "is_html": true,
+                            "x_position": 250,
+                            "y_position": 47,
+                            "s3_url": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "meta": {
+        "request_id": "fee2223e-407d-481d-80db-6b9bc940bcc5"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

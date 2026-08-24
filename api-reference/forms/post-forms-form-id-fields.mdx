@@ -1,0 +1,63 @@
+---
+title: "POST /forms/{form_id}/fields"
+description: "Captured contract for POST /forms/{form_id}/fields."
+api: "POST /forms/{form_id}/fields"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{form_id}/fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/{form_id}/analytics/{form_response_id}
+
+
+
+
+Description :
+
+-> Creates one or more fields on a form. 
+-> Fields must be passed as an array in the fields key. 
+-> Supports field types including signature, initial, text, name, email, company, date, date_signed, checkbox, dropdown, radio, file, and stamp. 
+-> Sender-only: form must be editable by the authenticated user.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

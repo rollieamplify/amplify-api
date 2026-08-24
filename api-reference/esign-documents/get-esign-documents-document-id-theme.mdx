@@ -1,0 +1,61 @@
+---
+title: "GET /esign_documents/{document_id}/theme"
+description: "Captured contract for GET /esign_documents/{document_id}/theme."
+api: "GET /esign_documents/{document_id}/theme"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_documents/{document_id}/theme.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+GET : api/esign_documents/{document_id}/theme
+
+Description :
+Returns the theme object for the document.
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+Response :
+{
+    "data": {
+        "id": 8336,
+        "text": {
+            "font": "Arial",
+            "size": "14px",
+            "style": [],
+            "capitalization": "unset",
+            "line_spacing": "1.00",
+            "color": "#000000"
+        },
+        "background": {
+            "color": "#FFFFFF",
+            "opacity": 100
+        },
+        "background_image": {
+            "url": "",
+            "size": "cover",
+            "position": "left_top",
+            "is_repeating": false,
+            "opacity": 100
+        },
+        "applied_to_page": "all_pages"
+    },
+    "meta": {
+        "request_id": "3969a5bf-9a0d-4eab-9850-125de3779bd9"
+    }
+}
+
+Permissions :
+- User must be authenticated with Sanctum and have the e-sign feature enabled.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

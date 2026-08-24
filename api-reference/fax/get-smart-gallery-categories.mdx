@@ -1,0 +1,55 @@
+---
+title: "GET /smart_gallery/categories"
+description: "Captured contract for GET /smart_gallery/categories."
+api: "GET /smart_gallery/categories"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /smart_gallery/categories.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get list of Smart Template Categories
+Endpoint:
+GET: /smart_gallery/categories
+
+
+Response:
+{
+    "data": [
+        {
+            "id": 1,
+            "company_type_id": 1,
+            "name": "Specialist Referrals & Consult Requests",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "company_type_id": 1,
+            "name": "Prior Authorization Requests",
+            "status": 1
+        },
+        {
+            "id": 3,
+            "company_type_id": 1,
+            "name": "Medical Records Requests (ROI)",
+            "status": 1
+        },
+        {
+            "id": 4,
+            "company_type_id": 1,
+            "name": "Lab & Imaging Orders / Results",
+            "status": 1
+        },
+    ],
+    "meta": {
+        "request_id": "c26276eb-4061-474e-a95e-1cd00d341960"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

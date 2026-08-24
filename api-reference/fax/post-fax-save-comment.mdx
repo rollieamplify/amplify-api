@@ -1,0 +1,44 @@
+---
+title: "POST /fax/save/comment"
+description: "Captured contract for POST /fax/save/comment."
+api: "POST /fax/save/comment"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/save/comment.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Save comment API.
+
+EndPoint:
+POST: api/fax/save/comment
+
+Body:
+{
+    "local_fax_uuid": "01KEE4RK4B6R1AXD21ZYSCT392"
+    "cover_page_id": 1,
+    "comment": "This is a sample comment."
+}
+
+Response:
+{
+    "data": {
+        "attachment_id": 2408,
+        "file_uuid": "e426a854-55e0-46f6-80d9-9ef763d3b4ec.pdf",
+        "orgFileName": "e426a854-55e0-46f6-80d9-9ef763d3b4ec.pdf",
+        "presigned_url": "https://example.com/signed-url
+        "pages": 1,
+        "file_size": 16410
+    },
+    "meta": {
+        "request_id": "264ffe8f-2960-4465-87c2-1e7964b39e48"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

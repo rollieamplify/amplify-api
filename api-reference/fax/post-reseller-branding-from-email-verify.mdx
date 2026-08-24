@@ -1,0 +1,90 @@
+---
+title: "POST /reseller/branding/from-email/verify"
+description: "Captured contract for POST /reseller/branding/from-email/verify."
+api: "POST /reseller/branding/from-email/verify"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/branding/from-email/verify.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Verify Reseller From Email API
+
+
+
+
+Endpoint:
+POST: api/reseller/branding/from-email/verify
+
+
+
+
+Description:
+Verifies reseller branding.from_email via SES. Email must match stored from_email. Blocked for client / client_user.
+
+
+
+
+Request Body:
+
+{
+    "email": "noreply@mycompany.com"
+}
+
+
+
+
+Request Example:
+
+POST /api/reseller/branding/from-email/verify
+Authorization: Bearer {token}
+Content-Type: application/json
+
+
+
+
+Response Example (200 — verification initiated):
+
+{
+    "data": {
+        "email": "noreply@mycompany.com"
+    },
+    "meta": {
+        "request_id": "b8c9d0e1-f2a3-4567-1234-678901234567"
+    }
+}
+
+
+
+
+Response Example (200 — already verified):
+
+{
+    "data": {
+        "email": "noreply@mycompany.com",
+        "from_email_verification": true
+    },
+    "meta": {
+        "request_id": "c9d0e1f2-a3b4-5678-2345-789012345678"
+    }
+}
+
+
+
+
+Error Example (client blocked):
+
+{
+    "error": {
+        "code": "RESELLER_BRANDING_NOT_ALLOWED",
+        "message": "You are not allowed to verify reseller from email."
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

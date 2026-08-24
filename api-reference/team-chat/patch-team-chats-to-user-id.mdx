@@ -1,0 +1,58 @@
+---
+title: "PATCH /team_chats/{to_user_id}"
+description: "Captured contract for PATCH /team_chats/{to_user_id}."
+api: "PATCH /team_chats/{to_user_id}"
+public: true
+---
+
+This page documents the behavior captured for PATCH /team_chats/{to_user_id} in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    PATCH: api/team_chats/{to_user_id}
+    
+    
+    
+    
+    Body:
+    
+    {
+        "is_read": true,
+    }
+    
+    
+    Error Response:
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The is read field is required."
+        }
+    }
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The is read field must be true or false."
+        }
+    }
+    
+    
+    Response:
+    
+    {
+        "data": {
+            "is_read": true
+        },
+        "meta": {
+            "request_id": "e44197ce-4042-4ea9-9cb7-996ff77bab67"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

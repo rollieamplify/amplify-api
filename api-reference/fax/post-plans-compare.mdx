@@ -1,0 +1,344 @@
+---
+title: "POST /plans/compare"
+description: "Captured contract for POST /plans/compare."
+api: "POST /plans/compare"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plans/compare.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Plan Compare With Features
+ 
+
+EndPoint:
+
+POST: api/plans/compare 
+
+
+Payload:
+
+{
+    "family_name" : "healthcare",
+    "duration" : "monthly",
+    "currency" : "usd"
+} 
+
+family_name in : healthcare, business, api, broadcast
+duration in : monthly, annual, 2_year, 3_year
+currency in : usd, gbp
+
+
+Response:
+
+ 
+{
+    "data": {
+        "family_name": "healthcare",
+        "plans": {
+            "hippa_basic_plan": {
+                "name": "HIPAA Basic",
+                "duration": "monthly",
+                "price": 14.99,
+                "currency": "usd",
+                "is_popular": false
+            },
+            "hippa_plus_plan": {
+                "name": "HIPAA Plus",
+                "duration": "monthly",
+                "price": 29.99,
+                "currency": "usd",
+                "is_popular": false
+            },
+            "hippa_pro_plan": {
+                "name": "HIPAA Pro",
+                "duration": "monthly",
+                "price": 39.99,
+                "currency": "usd",
+                "is_popular": true
+            },
+            "hippa_enterprise_plan": {
+                "name": "HIPAA Enterprise",
+                "duration": "monthly",
+                "price": 49.99,
+                "currency": "usd",
+                "is_popular": false
+            }
+        },
+        "features": {
+            "Fax & Doc Exchange": [
+                {
+                    "feature": "Secure cloud fax (send & receive)",
+                    "feature_slug": "secure_cloud_fax_send_receive",
+                    "credit": true,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Email to Fax",
+                    "feature_slug": "email_to_fax",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Advanced Email to Fax (domain etc)",
+                    "feature_slug": "advanced_email_to_fax_domain_etc",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": false,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Scheduled Faxes",
+                    "feature_slug": "scheduled_faxes",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Broadcast Fax",
+                    "feature_slug": "broadcast_fax",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": false,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Team Inbox & Assignments",
+                    "feature_slug": "team_inbox_assignments",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Mobile Fax Scanner",
+                    "feature_slug": "mobile_fax_scanner",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Cover Pages & Templates",
+                    "feature_slug": "cover_pages_templates",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Smart Templates",
+                    "feature_slug": "smart_templates",
+                    "credit": true,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Fax Approval Workflow",
+                    "feature_slug": "fax_approval_workflow",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": false,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Fax Transmission Receipts",
+                    "feature_slug": "fax_transmission_receipts",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Configurable Retry Logic",
+                    "feature_slug": "configurable_retry_logic",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "WebFax Portal",
+                    "feature_slug": "webfax_portal",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Fax Forwarding",
+                    "feature_slug": "fax_forwarding",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Auto Document Splitting",
+                    "feature_slug": "auto_document_splitting",
+                    "credit": true,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Print-to-Fax Software",
+                    "feature_slug": "print_to_fax_software",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Secure SMS, Secure Email",
+                    "feature_slug": "secure_sms_secure_email",
+                    "credit": true,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "FHIR",
+                    "feature_slug": "fhir",
+                    "credit": true,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": false,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Mark as Done",
+                    "feature_slug": "mark_as_done",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": false,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Shortcuts",
+                    "feature_slug": "shortcuts",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": false,
+                        "hippa_plus_plan": false,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "My Assignments",
+                    "feature_slug": "my_assignments",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "All Faxes",
+                    "feature_slug": "all_faxes",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Folders",
+                    "feature_slug": "folders",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Request eSign",
+                    "feature_slug": "request_esign",
+                    "credit": false,
+                    "plans": {
+                        "hippa_basic_plan": true,
+                        "hippa_plus_plan": true,
+                        "hippa_pro_plan": true,
+                        "hippa_enterprise_plan": true
+                    }
+                },
+                {
+                    "feature": "Port Number",
+                    "feature_slug": "port_number"
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,24 @@
+---
+title: "Create a contact custom field"
+description: "Define a custom field for one or more contact types."
+api: "POST /contact_fields"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField body="contact_type" type="string" required>One of `individual`, `organization`, `patient`, or `all`.</ParamField>
+<ParamField body="validation" type="string" required>Validation type applied to the field value.</ParamField>
+<ParamField body="label" type="string" required>Label shown for the field.</ParamField>
+<ParamField body="required" type="boolean" default="false">Whether a value is required.</ParamField>
+<ParamField body="group_ids" type="integer[]">Contact groups that use this field.</ParamField>
+
+```json
+{
+  "contact_type": "patient",
+  "validation": "text",
+  "label": "Medical record number",
+  "required": false,
+  "group_ids": [42]
+}
+```
+

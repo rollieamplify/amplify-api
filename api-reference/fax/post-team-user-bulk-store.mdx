@@ -1,0 +1,106 @@
+---
+title: "POST /team-user/bulk_store"
+description: "Captured contract for POST /team-user/bulk_store."
+api: "POST /team-user/bulk_store"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /team-user/bulk_store.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Bulk Create Sub-Users API
+
+**Endpoint:**  
+
+POST: api/team-user/bulk_store
+
+# Description :
+
+Creates multiple sub-users in one request. `first_name`, `last_name`, and `email` are comma-separated lists; the number of values in each must match. The same `user_permissions` (and optional `role_id`) are applied to all created users. Invitation emails are sent when `need_password` is 0.
+
+# Request Body :
+
+ {
+  "first_name": "John, Jane, Bob",
+  "last_name": "Smith, Doe, Wilson",
+  "email": "john@example.com,jane@example.com,bob@example.com",
+  "need_password": 0,
+  "role_id": "2",
+  "user_note": "user1, user3",
+  "license_type": 1,
+  "user_permissions": {
+    "access_ifax": true,
+    "send_faxes": true
+  },
+    "user_notifications": [
+        {
+            "key": "transmission_started_accessible_number_client",
+            "product": "fax",
+            "category": "inbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": true,
+                "show_open_link": false
+            }
+        }
+    ]
+}
+
+| Field | Type | Required | Description |
+
+|-------|------|----------|-------------|
+
+| first_name | string | Yes | Comma-separated names; count must match email count. |
+
+| last_name | string | Yes | Comma-separated; count must match. |
+
+| email | string | Yes | Comma-separated emails; each must be unique. |
+
+| need_password | int | Yes | `0` or `1`. |
+
+| role_id | int | No | Optional. |
+
+| user_permissions | object | Yes | Same format as Create; applied to all users. |
+
+# Response Format :
+
+## Success Response :
+
+{
+  "data": [
+    {
+      "id": 103,
+      "first_name": "John",
+      "last_name": "Smith",
+      "email": "john@example.com",
+      "user_permissions": { "Product": [], "General": [], "iFax": [], "Call": [], "eSign": [], "Forms": [] }
+    },
+    {
+      "id": 104,
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "jane@example.com",
+      "user_permissions": { "Product": [], "General": [], "iFax": [], "Call": [], "eSign": [], "Forms": [] }
+    },
+    {
+      "id": 105,
+      "first_name": "Bob",
+      "last_name": "Wilson",
+      "email": "bob@example.com",
+      "user_permissions": { "Product": [], "General": [], "iFax": [], "Call": [], "eSign": [], "Forms": [] }
+    }
+  ],
+  "meta": {
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

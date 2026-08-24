@@ -1,0 +1,37 @@
+---
+title: "POST /broadcast/labels/unassign_recipient"
+description: "Captured contract for POST /broadcast/labels/unassign_recipient."
+api: "POST /broadcast/labels/unassign_recipient"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /broadcast/labels/unassign_recipient.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Unassign Recipient Broadcast Label.
+
+Endpoint:
+POST: api/broadcast/labels/unassign_recipient
+
+Body:
+{
+  "recipient_ids": [9, 11]
+}
+
+Response:
+{
+    "data": {
+        "message": "Label removed successfully."
+    },
+    "meta": {
+        "request_id": "03476222-053d-4f24-b80c-b56601b65e00"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

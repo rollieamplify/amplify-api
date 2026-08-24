@@ -1,0 +1,35 @@
+---
+title: "PATCH /conversations/secure_toggle/{conversation_id}"
+description: "Captured contract for PATCH /conversations/secure_toggle/{conversation_id}."
+api: "PATCH /conversations/secure_toggle/{conversation_id}"
+public: true
+---
+
+This page documents the behavior captured for PATCH /conversations/secure_toggle/{conversation_id} in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    PATCH: api/conversations/secure_toggle/{conversation_id}
+    
+    Body:
+    {
+        "is_secure": true
+    }
+    
+    Response:
+    {
+        "data": {
+            "is_secure": true
+        },
+        "meta": {
+            "request_id": "3d6428d3-458c-4068-9d22-aa60a72fd761"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

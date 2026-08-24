@@ -1,0 +1,56 @@
+---
+title: "POST /fhir/send"
+description: "Captured contract for POST /fhir/send."
+api: "POST /fhir/send"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /fhir/send.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Send To FHIR
+
+Endpoint:
+POST: api/fhir/send
+
+
+Body:
+EPIC
+{
+    "local_fax_uuid": "01KH0VF2X5BMHG652K0SYPFTBC",
+    "attach_fax" : true,
+    "patient_id" : "egqBHVfQlt4Bw3XGXoxVxHg3",
+    "encounter_id" : "emhwuharfnf8VhCQg97qP7Q3",
+    "message" : "test fhir",
+    "doc_code" : "11488-4",
+    "doc_text" : "Consult Note"
+}
+
+
+ELATION HEALTH
+{
+    "local_fax_uuid": "01KH13Q0YS55A3BXHV1B4QJQJ6",
+    "patient_id" : 142383148367873,
+    "report_type" : "Lab",
+    "physician" : 142295838425090,
+    "practice" : 142295834099716
+}
+
+
+Response:
+{
+    "data": {
+        "fax_uuid": "01KH0Y24AWN8915RM3QPX0997H"
+    },
+    "meta": {
+        "request_id": "d66d6791-be6a-4e3e-b8cc-fe5672e0f63d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

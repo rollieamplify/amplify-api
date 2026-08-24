@@ -1,0 +1,34 @@
+---
+title: "Errors"
+description: "Handle Amplify API errors consistently."
+---
+
+Errors contain a stable machine-readable `code` and a human-readable `message`.
+
+```json
+{
+  "error": {
+    "code": "validation_error",
+    "message": "The request contains invalid values."
+  },
+  "meta": {
+    "request_id": "req_abc123xyz789"
+  }
+}
+```
+
+| Status | Code | Meaning |
+| --- | --- | --- |
+| `400` | `bad_request` | The syntax or parameters are invalid. |
+| `401` | `unauthorized` | Authentication is missing or invalid. |
+| `403` | `forbidden` | The authenticated principal lacks permission. |
+| `404` | `not_found` | The requested resource does not exist. |
+| `409` | `conflict` | The request conflicts with the current resource state. |
+| `422` | `validation_error` | One or more values failed validation. |
+| `429` | `rate_limit_exceeded` | The applicable request limit was exceeded. |
+| `500` | `internal_server_error` | An unexpected server error occurred. |
+| `502` | `bad_gateway` | An upstream dependency failed. |
+| `503` | `service_unavailable` | The service is temporarily unavailable. |
+| `504` | `gateway_timeout` | An upstream dependency timed out. |
+
+Use `meta.request_id` when troubleshooting a response. Retry `429` and transient `5xx` responses only after the indicated delay and with exponential backoff.

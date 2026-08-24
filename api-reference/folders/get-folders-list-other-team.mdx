@@ -1,0 +1,62 @@
+---
+title: "GET /folders/list/other_team"
+description: "Captured contract for GET /folders/list/other_team."
+api: "GET /folders/list/other_team"
+public: true
+---
+
+This internal review page records the behavior captured for GET /folders/list/other_team.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+List other users’ root folders on the same account that are not already shared with you.
+
+Endpoint:
+
+GET: api/folders/list/other_team
+
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 610,
+            "name": "Folder 1"
+        },
+        {
+            "id": 1069,
+            "name": "asdas"
+        },
+        {
+            "id": 1146,
+            "name": "asdad"
+        },
+        {
+            "id": 1147,
+            "name": "not shared"
+        },
+        {
+            "id": 1148,
+            "name": "qweqwe"
+        },
+        {
+            "id": 1152,
+            "name": "asdasAAsa"
+        }
+    ],
+    "meta": {
+        "total": 6,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 15,
+        "request_id": "86ff7102-bdf4-4298-bde6-eb5f13e1c6ad"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

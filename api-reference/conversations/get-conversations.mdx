@@ -1,0 +1,89 @@
+---
+title: "GET /conversations"
+description: "Captured contract for GET /conversations."
+api: "GET /conversations"
+public: true
+---
+
+This page documents the behavior captured for GET /conversations in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Conversations list API:
+    
+    Endpoint:
+    
+    
+    GET: api/conversations?number_id={number_id}
+    
+    Filters:
+    GET: api/conversations?number_id={number_id}&is_open=true
+    
+    
+    GET: api/conversations?number_id={number_id}&is_done=true
+    
+    
+    GET: api/conversations?number_id={number_id}&unresponded=false
+    
+    
+    GET: api/conversations?number_id={number_id}&unread=false
+    
+    
+    GET: api/conversations?number_id={number_id}&search_string=13345103356
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 793,
+                "is_secure": false,
+                "from_number": "+13345103356",
+                "to_number": "+19382530055",
+                "is_pinned": false,
+                "is_marked_done": false,
+                "is_read": false,
+                "is_blocked": false,
+                "users": [
+                    48,
+                    53
+                ],
+                "created_at": "2026-01-28T05:58:05Z",
+                "updated_at": "2026-01-28 08:19:07",
+                "last_event_type": "call",
+                "last_event": {
+                    "id": 4084,
+                    "created_by": 53,
+                    "call_status": "ended",
+                    "created_at": "2026-01-28T08:18:57Z",
+                    "direction": "inbound",
+                    "has_voicemail": false
+                },
+                "is_anonymous": false,
+                "contact_details": {
+                   "id": 6981,
+                   "first_name": "",
+                   "last_name": "",
+                   "organization_name": "Open Phone LLC",
+                   "email": "",
+                   "phone_number": "18148316253",
+                   "fax_number": "",
+                   "type": 1
+                },
+                "unread_count": 1
+            }
+        ],
+        "meta": {
+            "total": 1,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 15,
+            "request_id": "0bee7386-5266-4ed4-b6d8-17d58a114db6"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

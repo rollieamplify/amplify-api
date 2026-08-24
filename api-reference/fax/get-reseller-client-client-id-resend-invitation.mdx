@@ -1,0 +1,28 @@
+---
+title: "GET /reseller/client/{client_id}/resend_invitation"
+description: "Captured contract for GET /reseller/client/{client_id}/resend_invitation."
+api: "GET /reseller/client/{client_id}/resend_invitation"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/client/{client_id}/resend_invitation.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Resend the invitation email for the client.
+
+Endpoint :
+GET - api/reseller/client/{client_id}/resend_invitation
+
+Response:
+{
+    "data": [],
+    "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

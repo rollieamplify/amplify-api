@@ -1,0 +1,54 @@
+---
+title: "POST /guest/esign_documents/download_document"
+description: "Captured contract for POST /guest/esign_documents/download_document."
+api: "POST /guest/esign_documents/download_document"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /guest/esign_documents/download_document.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+POST : api/guest/esign_documents/download_document
+
+
+Description :
+
+Returns a presigned S3 URL for guest/receiver users to download the eSign document PDF.
+No authentication is required, but the receiver must be identified via receiver_email.
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Request Payload :
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

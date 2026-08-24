@@ -1,0 +1,84 @@
+---
+title: "POST /billing/history"
+description: "Captured contract for POST /billing/history."
+api: "POST /billing/history"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing/history.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Returns the Total Unpaid invoice and List of Invoices.
+
+EndPoint:
+
+POST: api/billing/history
+
+
+
+
+Payload:
+
+{
+    "next_offset":"ZDRUZnUrNFNiblFuUzNxTWdOMUw2dmdKOWlaTjlSYW5LTS90Zy9pZjVZUT0="
+}
+
+Note : next_offset is an optional field which will be the 1 that is returned in the api to get the invoices next to the last invoice
+
+Response:
+
+{
+    "data": {
+        "unpaid_invoices_count": 0,
+        "invoices": {
+            "list": [
+                {
+                    "id": "38622",
+                    "status": "paid",
+                    "date": 1786539516,
+                    "amount": 80000,
+                    "descriptions": [
+                        "Overage Credits"
+                    ]
+                },
+                {
+                    "id": "38536",
+                    "status": "paid",
+                    "date": 1786438717,
+                    "amount": 1160.91,
+                    "descriptions": [
+                        "Basic License Add-on - Prorated Charges",
+                        "Plus License Add-on - Prorated Charges",
+                        "Pro License Add-on - Prorated Charges"
+                    ]
+                },
+                {
+                    "id": "38534",
+                    "status": "paid",
+                    "date": 1786438463,
+                    "amount": 31953.09,
+                    "descriptions": [
+                        "Numbers Add-on - Prorated Charges",
+                        "Numbers Tier1 Add-on - Prorated Charges",
+                        "Numbers Tier2 Add-on - Prorated Charges",
+                        "Numbers Tier3 Add-on - Prorated Charges",
+                        "Numbers Tier4 Add-on - Prorated Charges",
+                        "Numbers Tier5 Add-on - Prorated Charges"
+                    ]
+                }
+            ],
+            "next_offset": ""
+        }
+    },
+    "meta": {
+        "request_id": "1bd06330-f29c-4a9c-b5ff-c7979abb2696"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

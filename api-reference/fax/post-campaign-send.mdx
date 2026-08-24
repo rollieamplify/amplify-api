@@ -1,0 +1,63 @@
+---
+title: "POST /campaign/send"
+description: "Captured contract for POST /campaign/send."
+api: "POST /campaign/send"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /campaign/send.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Campaign Fax Send API
+
+
+Description : 
+Creates or uses a campaign and schedules/sends a fax broadcast to all recipients in the campaign’s broadcast lists.
+
+
+Endpoint :
+POST: api/campaign/send
+
+
+Request Body (example) :
+{
+  "local_fax_uuid": "01JGXK3F9M0J5W6E2N4YB7C8D9",
+  "campaign_id": 15,
+  "campaign_name": "January Recall Campaign",
+  "from_number": "+1 (212) 555-7890",
+  "fax_quality": 2,
+  "fax_priority": 2,
+  "location": "US",
+  "scheduled_time": "2026-01-20 10:30:00"
+}
+
+
+- local_fax_uuid : (string, required): Draft fax identifier created earlier.
+- campaign_id : (int, optional): Existing campaign to reuse; if not provided or not found, a new campaign is created.
+- campaign_name : (string, optional): Name for the new campaign (used when creating a new one).
+- from_number : (string, optional): Sender fax number.
+- fax_quality : (int, optional): Fax quality (defaults to normal).
+- fax_priority : (int, optional): Fax priority (1 = high, 2 = normal).
+- location : (string, optional): Sending location code.
+- scheduled_time : (string `Y-m-d H:i:s`, optional): When to start the campaign; if empty, sends immediately (queue-based).
+
+
+Success Response (200) :
+{
+  "data": {
+    "local_fax_uuid": "01JGXK3F9M0J5W6E2N4YB7C8D9",
+    "campaign_id": 21,
+    "message": "Campaign sent successfully",  
+  },
+  "meta": {
+    "request_id": "3f7f4a0d-0b5b-4f94-9c4d-1f0f2a6c9e12"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

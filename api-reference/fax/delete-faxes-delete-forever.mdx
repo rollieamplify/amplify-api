@@ -1,0 +1,34 @@
+---
+title: "DELETE /faxes/delete_forever"
+description: "Captured contract for DELETE /faxes/delete_forever."
+api: "DELETE /faxes/delete_forever"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /faxes/delete_forever.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Permanent delete the soft deleted faxes
+
+Endpoint:
+DELETE: /faxes/delete_forever
+
+Request:
+{
+    "fax_uuids" : [],
+    "broadcast_fax_uuids" : []
+}
+
+Response:
+
+
+  
+image.png
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

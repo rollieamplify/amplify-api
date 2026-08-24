@@ -1,0 +1,66 @@
+---
+title: "POST /profile"
+description: "Captured contract for POST /profile."
+api: "POST /profile"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /profile.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update User Profile.
+Endpoint:
+POST: /profile
+
+Request:
+{
+    "first_name" : "Web35",
+    "last_name" : "test",
+    "job_title" : "Manager",
+    "email" : "developer@example.com",
+    "street1": "ABC st.",
+    "street2" : "Ahmedabad",
+    "city" : "Ahmedabad",
+    "time_zone": 324,
+    "time_format": "12", // 12,24
+    "state" : "GJ",
+    "zip_code" : "636363",
+    "country_id" : 1,
+    "auth_type": 1, // 0 = OFF, 1= SMS, 2-GA
+    "auth_value": ""
+}
+
+Response:
+{
+    "data": {
+        "first_name": "Web35",
+        "last_name": "test",
+        "job_title": "Manager",
+        "email": "developer@example.com",
+        "phone_number": "565656",
+        "auth_type": 1,
+        "auth_value": null,
+        "street1": "ABC st.",
+        "street2": "Ahmedabad",
+        "city": "Ahmedabad",
+        "state": "GJ",
+        "zip_code": "636363",
+        "time_zone": 324,
+        "time_format": "12",
+        "country_id": 1,
+        "profile_image": "",
+        "profile_image_url": "",
+        "profile_image_uuid": ""
+    },
+    "meta": {
+        "request_id": "7d4c3bce-d807-474d-b040-31ac48ee373d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

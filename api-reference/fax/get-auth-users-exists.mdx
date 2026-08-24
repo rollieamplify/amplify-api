@@ -1,0 +1,260 @@
+---
+title: "GET /auth/users/exists"
+description: "Captured contract for GET /auth/users/exists."
+api: "GET /auth/users/exists"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /auth/users/exists.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Check User Exists
+
+
+
+
+Endpoint: GET /api/auth/users/exists
+
+
+
+
+Description: Checks if an email exists for login/signup. Supports reseller portal (product_name), work-email check (check_work_email), SSO, and restricted domain.
+
+Request
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+email
+
+	
+
+string
+
+	
+
+Yes
+
+	
+
+User email
+
+
+
+
+product_name
+
+	
+
+string
+
+	
+
+No
+
+	
+
+Reseller default_domain (empty = main Amplify)
+
+
+
+
+check_work_email
+
+	
+
+boolean
+
+	
+
+No
+
+	
+
+Validate work email when true
+
+
+
+
+Example:
+
+
+
+
+GET /api/auth/users/exists?email=user@example.com
+GET /api/auth/users/exists?email=client@example.com&product_name=reseller.example.com
+GET /api/auth/users/exists?email=user@company.com&check_work_email=1
+Response — Email exists (200)
+{
+  "data": {
+    "exists": true,
+    "login_by": "credentials",
+    "message": "",
+    "app_access_web_mobile": true
+  },
+  "meta": {
+    "request_id": "uuid-string"
+  }
+}
+Response — Email does not exist (200)
+{
+  "data": {
+    "exists": false,
+    "login_by": "credentials",
+    "message": "",
+    "app_access_web_mobile": false
+  },
+  "meta": {
+    "request_id": "uuid-string"
+  }
+}
+Response — OAuth account (200)
+{
+  "data": {
+    "exists": true,
+    "login_by": "google",
+    "message": "This email address is associated with a Google account. Login with Google or reset your password to log in manually.",
+    "app_access_web_mobile": true
+  },
+  "meta": {
+    "request_id": "uuid-string"
+  }
+}
+Case — Validation error (422)
+
+
+
+
+Request: GET /api/auth/users/exists
+
+
+
+
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "The email field is required."
+  }
+}
+Case — Invalid work email (422)
+
+
+
+
+Request: GET /api/auth/users/exists?email=test@tempmail.com&check_work_email=1
+
+
+
+
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Please enter valid email."
+  }
+}
+Case — Associated with reseller (422)
+
+
+
+
+Request: GET /api/auth/users/exists?email=client@example.com
+
+
+
+
+{
+  "error": {
+    "code": "ACCOUNT_ASSOCIATED_WITH_PRODUCT",
+    "message": "This account is associated with the Acme Fax",
+    "data": {
+      "product_name": "Acme Fax",
+      "default_domain": "reseller.example.com"
+    }
+  }
+}
+Case — Client not found on white-label (422)
+
+
+
+
+Request: GET /api/auth/users/exists?email=unknown@example.com&product_name=reseller.example.com
+
+
+
+
+{
+  "error": {
+    "code": "CLIENT_EMAIL_NOT_FOUND",
+    "message": "Your email is not found. Please contact the sales team."
+  }
+}
+Case — SSO enabled (422)
+
+
+
+
+Request: GET /api/auth/users/exists?email=sso.user@example.com
+
+
+
+
+{
+  "error": {
+    "code": "SSO_ENABLED",
+    "message": "This email account has enabled SSO so you must login with SSO"
+  }
+}
+Case — Restricted domain (422)
+
+
+
+
+Request: GET /api/auth/users/exists?email=new@restricted-domain.com
+
+
+
+
+{
+  "error": {
+    "code": "EMAIL_DOMAIN_RESTRICTED",
+    "message": "This email domain is restricted from self-registration. Please use your organization's provisioning process to access your account."
+  }
+}
+Case — App access denied (422)
+
+
+
+
+Request: GET /api/auth/users/exists?email=subuser@example.com
+
+
+
+
+{
+  "error": {
+    "code": "APP_ACCESS_DENIED",
+    "message": "You do not have permission to access the application."
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

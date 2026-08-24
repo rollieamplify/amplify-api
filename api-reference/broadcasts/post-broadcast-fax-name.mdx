@@ -1,0 +1,48 @@
+---
+title: "POST /broadcast/fax/name"
+description: "Captured contract for POST /broadcast/fax/name."
+api: "POST /broadcast/fax/name"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/fax/name.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update Broadcast & Campaign Name API
+
+
+Endpoint:
+POST: api/broadcast/fax/name
+
+
+Request Body :
+{
+    "id": 1,
+    "type": "broadcast", // campaign,broadcast
+    "name": "test 1st broadcast"
+}
+
+
+Response: campaign
+{
+    "data": "Campaign name updated successfully",
+    "meta": {
+        "request_id": "cef7d51e-14aa-49fa-b631-60114363170a"
+    }
+}
+
+Response: broadcast 
+{
+    "data": "Broadcast name updated successfully",
+    "meta": {
+        "request_id": "c981a31d-53ff-4de3-a55a-5502764dc5ab"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

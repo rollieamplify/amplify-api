@@ -1,0 +1,21 @@
+---
+title: "Webhooks overview"
+description: "Receive asynchronous Amplify resource updates."
+---
+
+Webhooks notify your application when an Amplify resource changes. Each request contains the event type, occurrence time, and event-specific resource data.
+
+<Card title="Create a webhook" icon="plus" href="/webhooks/create-webhook">
+  Configure and test a webhook from the Amplify dashboard.
+</Card>
+
+Your endpoint should:
+
+1. Accept HTTPS `POST` requests with JSON bodies.
+2. Return a successful `2xx` response after accepting an event.
+3. Process events asynchronously when work may take time.
+4. Store `event_id` values to prevent duplicate processing.
+
+<Warning>
+  Amplify v1 does not currently provide webhook signatures. Use a private, difficult-to-guess HTTPS endpoint and apply network controls where possible.
+</Warning>

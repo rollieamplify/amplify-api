@@ -1,0 +1,64 @@
+---
+title: "GET /forms/{form_id}/fields"
+description: "Captured contract for GET /forms/{form_id}/fields."
+api: "GET /forms/{form_id}/fields"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/{form_id}/fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/forms/{form_id}/fields
+
+
+
+
+Description :
+
+
+
+
+-> Returns all fields for a form. Without form_response_id, returns the base form template fields (where form_response_id is null). 
+-> With form_response_id, returns response-specific cloned fields and logs a form view event. 
+
+
+
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

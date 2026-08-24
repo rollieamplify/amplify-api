@@ -1,0 +1,40 @@
+---
+title: "POST /smart-gallery/clone"
+description: "Captured contract for POST /smart-gallery/clone."
+api: "POST /smart-gallery/clone"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /smart-gallery/clone.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Clone Smart Gallery Template API.
+
+Endpoint :
+POST - api/smart-gallery/clone
+
+
+Body:
+{
+    "template_id": 7,
+    "name": "test",
+    "annotations": [{"page":1,"fields":[{"key":"Fax Number","reference_id":"45ff13cd5b87486c95e76fda94fc6479","original_name":"Fax Number","left":"4.773869346733668%","top":"18.446601941747574%","type":"text","original_type":"text","additional_type":"text","field_validation":"fax_number","font_size":"14","value":"","width":344,"height":27,"is_static_field":true,"is_nlp_field":false,"is_contact_custom_field":false,"is_not_editable":false,"source":"","map_email_to_fax":"","is_required":true,"is_hide_background":false,"text_format":"","text_sub_format":"","fax_recipients_data":[],"is_html":true,"x_position":38,"y_position":190},{"key":"To","reference_id":"5c6704e817244bc495f0488535852d65","original_name":"To","left":"4.773869346733668%","top":"28.7378640776699%","type":"text","original_type":"text","additional_type":"text","field_validation":"none","font_size":"14","value":"","width":344,"height":27,"is_static_field":true,"is_nlp_field":false,"is_contact_custom_field":false,"is_not_editable":false,"source":"","map_email_to_fax":"","is_required":true,"is_hide_background":false,"text_format":"","text_sub_format":"","fax_recipients_data":[],"is_html":true,"x_position":38,"y_position":296},{"key":"From","reference_id":"8b1c5dc6e77c4d35ab1bf62a18eb0696","original_name":"From","left":"51.88442211055276%","top":"28.7378640776699%","type":"text","original_type":"text","additional_type":"text","field_validation":"none","font_size":"14","value":"","width":344,"height":27,"is_static_field":true,"is_nlp_field":false,"is_contact_custom_field":false,"is_not_editable":false,"source":"","map_email_to_fax":"","is_required":true,"is_hide_background":false,"text_format":"","text_sub_format":"","fax_recipients_data":[],"is_html":true,"x_position":413,"y_position":296},{"key":"Delivery Time Stamp","reference_id":"b363f35979b54bba95450c266cbedea3","original_name":"Delivery Time Stamp","left":"66.58291457286433%","top":"5.242718446601942%","type":"delivery_time_stamp","original_type":"delivery_time_stamp","additional_type":"delivery_time_stamp","field_validation":"text","font_size":"14","value":"","width":225,"height":27,"is_static_field":true,"is_nlp_field":false,"is_contact_custom_field":false,"is_not_editable":false,"source":"","map_email_to_fax":"","is_required":false,"is_hide_background":false,"text_format":"","text_sub_format":"","fax_recipients_data":[],"date_format":"dd\/MM\/yyyy h:mm a","is_html":true,"x_position":530,"y_position":54},{"key":"Pages","reference_id":"956dbf2db4794fc48893498b8ba26a3c","original_name":"Pages","left":"66.58291457286433%","top":"8.155339805825243%","type":"text","original_type":"text","additional_type":"text","field_validation":"string_only","font_size":"14","value":"","width":225,"height":27,"is_static_field":true,"is_nlp_field":false,"is_contact_custom_field":false,"is_not_editable":false,"source":"","map_email_to_fax":"","is_required":false,"is_hide_background":false,"text_format":"","text_sub_format":"","fax_recipients_data":[],"is_html":true,"x_position":530,"y_position":84},{"key":"Comment","reference_id":"6f8e71f286414e628b2047f49fe8a898","original_name":"Comment","left":"4.773869346733668%","top":"35.43689320388349%","type":"text","original_type":"text","additional_type":"text","field_validation":"none","font_size":"14","value":"","width":717,"height":110,"is_static_field":true,"is_nlp_field":false,"is_contact_custom_field":false,"is_not_editable":false,"source":"","map_email_to_fax":"","is_required":true,"is_hide_background":false,"text_format":"","text_sub_format":"","fax_recipients_data":[],"is_html":true,"x_position":38,"y_position":365}]}],
+    "fields_count": 3
+}
+
+
+Response:
+{
+    "data": "Smart Document Created Successfully",
+    "meta": {
+        "request_id": "25143d60-907d-4597-a5ce-664d302d9670"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,46 @@
+---
+title: "POST /faxes/nlp/convert"
+description: "Captured contract for POST /faxes/nlp/convert."
+api: "POST /faxes/nlp/convert"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/nlp/convert.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Convert all faxes to NLP API.
+
+Endpoint
+POST: api/faxes/nlp/convert
+
+Body:
+{
+    "pages": 1
+}
+
+Response:
+{
+    "data": [
+        {
+            "fax_uuid": "01KDQ2V74EX9Z5P3YK8DQ5CNGK",
+            "is_broadcast": 0,
+            "broadcast_fax_uuid": null
+        },
+        {
+            "fax_uuid": "01KDQE1RXCX0YJ6TBYJZZQM43X",
+            "is_broadcast": 0,
+            "broadcast_fax_uuid": null
+        }
+    ],
+    "meta": {
+        "request_id": "4fdc25c6-92ed-4d71-bd59-0ede63d237a8"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

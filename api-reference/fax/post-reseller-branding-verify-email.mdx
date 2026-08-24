@@ -1,0 +1,132 @@
+---
+title: "POST /reseller/branding/verify_email"
+description: "Captured contract for POST /reseller/branding/verify_email."
+api: "POST /reseller/branding/verify_email"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/branding/verify_email.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Verify Custom Sender Email API
+
+
+
+
+Endpoint:
+POST: api/reseller/branding/verify_email
+
+
+
+
+Description:
+Verifies SES identity for stored reply_to_email (or sub-user override). Email in body must match stored value.
+
+
+
+
+Request Body:
+
+{
+    "email": "billing@mycompany.com"
+}
+
+
+
+
+Request Example:
+
+POST /api/reseller/branding/verify_email
+Authorization: Bearer {token}
+Content-Type: application/json
+
+
+
+
+Response — Case A: Verification email sent 200
+{
+  "data": {
+    "message": "Verification email sent. Please check your inbox.",
+    "email": "noreply@acme.com"
+  },
+  "meta": {
+    "request_id": "..."
+  }
+}
+
+
+
+
+Response — Case B: Already verified 409
+{
+  "data": {
+    "error": {
+      "code": "EMAIL_ALREADY_VERIFIED",
+      "message": "Email is already verified."
+    }
+  }
+}
+
+
+
+
+Response — Case C: Default sender (no verify needed) 400
+
+{
+  "email": "no-reply@amplify.xyz"
+}
+{
+  "data": {
+    "error": {
+      "code": "DEFAULT_SENDER_EMAIL",
+      "message": "Verification is not required for the default sender email."
+    }
+  }
+}
+
+
+
+
+Response — Case D: Email does not match stored 400
+{
+  "data": {
+    "error": {
+      "code": "VERIFY_EMAIL_DIFFERENT",
+      "message": "The email does not match the sender email set for this account."
+    }
+  }
+}
+
+
+
+
+Response — Case E: No sender set 404
+{
+  "data": {
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "No sender email set for this account."
+    }
+  }
+}
+
+
+
+
+Response — Case F: Client not allowed 403
+{
+  "data": {
+    "error": {
+      "code": "PERMISSION_DENIED",
+      "message": "You are not allowed to verify sender email."
+    }
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

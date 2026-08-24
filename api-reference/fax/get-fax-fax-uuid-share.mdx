@@ -1,0 +1,35 @@
+---
+title: "GET /fax/{fax_uuid}/share"
+description: "Captured contract for GET /fax/{fax_uuid}/share."
+api: "GET /fax/{fax_uuid}/share"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/{fax_uuid}/share.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Shared Fax Details
+Endpoint:
+GET: api/fax/{fax_uuid}/share
+Response:
+{
+    "data": {
+        "permission": "editor",
+        "viewer_type": "team_only",
+        "users": [],
+        "start_page": 1,
+        "url": "https://beta.amplify.xyz/doc/MDFLRFc4MzRTSlc5SkRaQ1JWU0QxNTBRNlFmYXh7cz0lV3MxQ1J0LHZ0R3dyOWM4",
+        "guests": []
+    },
+    "meta": {
+        "request_id": "8b58ea5b-07af-42ab-8796-10c2c6bdadd6"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

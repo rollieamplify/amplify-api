@@ -1,0 +1,50 @@
+---
+title: "POST /esign_documents/{document_id}/download_document"
+description: "Captured contract for POST /esign_documents/{document_id}/download_document."
+api: "POST /esign_documents/{document_id}/download_document"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_documents/{document_id}/download_document.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+
+POST : api/esign_documents/{document_id}/download_document
+
+
+Description :
+
+Returns presigned S3 URLs to download completed eSign document attachments. Supports downloading the signed document PDF, completion certificate, a merged PDF (document + certificate), or both files separately.
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Query Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

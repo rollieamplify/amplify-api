@@ -1,0 +1,29 @@
+---
+title: "PATCH /assign_labels_to_fax/{fax_uuid}"
+description: "Captured contract for PATCH /assign_labels_to_fax/{fax_uuid}."
+api: "PATCH /assign_labels_to_fax/{fax_uuid}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /assign_labels_to_fax/{fax_uuid}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Assign/Remove Multiple Labels To Fax
+
+Endpoint:
+PATCH : api/assign_labels_to_fax/01KDSS8KHH1JM23D537S4XPTHY
+
+Body:
+{
+    "label_ids" : [
+        25
+    ]
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

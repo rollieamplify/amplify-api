@@ -1,0 +1,36 @@
+---
+title: "DELETE /fax/{fax_uuid}/users"
+description: "Captured contract for DELETE /fax/{fax_uuid}/users."
+api: "DELETE /fax/{fax_uuid}/users"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /fax/{fax_uuid}/users.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Unassigned user from fax 
+
+
+Endpoint:
+DELETE: api/fax/{fax_uuid}/users
+
+Request:
+{
+    "user_ids": [291,57]
+}
+
+Response:
+{
+    "data": "User unassigned successfully",
+    "meta": {
+        "request_id": "24a3e347-905d-4af1-bb78-be2428e7bc8c"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

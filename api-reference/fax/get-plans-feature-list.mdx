@@ -1,0 +1,225 @@
+---
+title: "GET /plans/feature-list"
+description: "Captured contract for GET /plans/feature-list."
+api: "GET /plans/feature-list"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /plans/feature-list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# List plan features for a plan type
+
+
+- **Method**: `GET`
+- **URL**: `/api/plans/feature-list`
+
+
+**Query parameters**
+- `plan_type` : Plan column on `plans_features_mapping`. One of: `basic_plan`, `plus_plan`, `pro_plan`, `enterprise_plan`.
+
+
+**Response 200**
+{
+    "data": {
+        "features": [
+            {
+                "id": 1,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Secure cloud fax (send & receive)",
+                "feature_slug": "secure_cloud_fax_send_receive",
+                "pro_plan": true,
+                "hippa_pro_plan": true
+            },
+            {
+                "id": 2,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Email to Fax",
+                "feature_slug": "email_to_fax",
+                "pro_plan": true,
+                "hippa_pro_plan": true
+            },
+            {
+                "id": 3,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Advanced Email to Fax (domain etc)",
+                "feature_slug": "advanced_email_to_fax_domain_etc",
+                "pro_plan": true,
+                "hippa_pro_plan": true
+            },
+            {
+                "id": 4,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Scheduled Faxes",
+                "feature_slug": "scheduled_faxes",
+                "pro_plan": true,
+                "hippa_pro_plan": true
+            },
+            {
+                "id": 5,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Broadcast Fax",
+                "feature_slug": "broadcast_fax",
+                "pro_plan": true,
+                "hippa_pro_plan": true
+            },
+            {
+                "id": 6,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Team Inbox & Assignments",
+                "feature_slug": "team_inbox_assignments",
+                "pro_plan": true,
+                "hippa_pro_plan": true
+            }
+    },
+    "meta": {
+        "request_id": "ee156e3e-2b74-468f-b715-834d19fc1d27"
+    }
+}
+
+NOTE: If plan_type is empty then returns all plan details.
+
+
+{
+    "data": {
+        "features": [
+            {
+                "id": 1,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Secure cloud fax (send & receive)",
+                "feature_slug": "secure_cloud_fax_send_receive",
+                "hippa_basic_plan": true,
+                "hippa_plus_plan": true,
+                "hippa_pro_plan": true,
+                "hippa_enterprise_plan": true,
+                "basic_plan": true,
+                "plus_plan": true,
+                "pro_plan": true,
+                "enterprise_plan": true,
+                "broadcast_healthcare_plan": true,
+                "broadcast_business_plan": true,
+                "api_healthcare_plan": true,
+                "api_business_plan": true
+            },
+            {
+                "id": 2,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Email to Fax",
+                "feature_slug": "email_to_fax",
+                "hippa_basic_plan": true,
+                "hippa_plus_plan": true,
+                "hippa_pro_plan": true,
+                "hippa_enterprise_plan": true,
+                "basic_plan": true,
+                "plus_plan": true,
+                "pro_plan": true,
+                "enterprise_plan": true,
+                "broadcast_healthcare_plan": true,
+                "broadcast_business_plan": true,
+                "api_healthcare_plan": true,
+                "api_business_plan": true
+            },
+            {
+                "id": 3,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Advanced Email to Fax (domain etc)",
+                "feature_slug": "advanced_email_to_fax_domain_etc",
+                "hippa_basic_plan": false,
+                "hippa_plus_plan": false,
+                "hippa_pro_plan": true,
+                "hippa_enterprise_plan": true,
+                "basic_plan": false,
+                "plus_plan": false,
+                "pro_plan": true,
+                "enterprise_plan": true,
+                "broadcast_healthcare_plan": true,
+                "broadcast_business_plan": true,
+                "api_healthcare_plan": true,
+                "api_business_plan": true
+            },
+            {
+                "id": 4,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Scheduled Faxes",
+                "feature_slug": "scheduled_faxes",
+                "hippa_basic_plan": false,
+                "hippa_plus_plan": true,
+                "hippa_pro_plan": true,
+                "hippa_enterprise_plan": true,
+                "basic_plan": false,
+                "plus_plan": true,
+                "pro_plan": true,
+                "enterprise_plan": true,
+                "broadcast_healthcare_plan": true,
+                "broadcast_business_plan": true,
+                "api_healthcare_plan": true,
+                "api_business_plan": true
+            },
+            {
+                "id": 5,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Broadcast Fax",
+                "feature_slug": "broadcast_fax",
+                "hippa_basic_plan": false,
+                "hippa_plus_plan": false,
+                "hippa_pro_plan": true,
+                "hippa_enterprise_plan": true,
+                "basic_plan": false,
+                "plus_plan": false,
+                "pro_plan": true,
+                "enterprise_plan": true,
+                "broadcast_healthcare_plan": true,
+                "broadcast_business_plan": true,
+                "api_healthcare_plan": true,
+                "api_business_plan": true
+            },
+            {
+                "id": 6,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Team Inbox & Assignments",
+                "feature_slug": "team_inbox_assignments",
+                "hippa_basic_plan": true,
+                "hippa_plus_plan": true,
+                "hippa_pro_plan": true,
+                "hippa_enterprise_plan": true,
+                "basic_plan": true,
+                "plus_plan": true,
+                "pro_plan": true,
+                "enterprise_plan": true,
+                "broadcast_healthcare_plan": true,
+                "broadcast_business_plan": true,
+                "api_healthcare_plan": true,
+                "api_business_plan": true
+            },
+            {
+                "id": 7,
+                "category_type": "Fax & Doc Exchange",
+                "feature": "Mobile Fax Scanner",
+                "feature_slug": "mobile_fax_scanner",
+                "hippa_basic_plan": true,
+                "hippa_plus_plan": true,
+                "hippa_pro_plan": true,
+                "hippa_enterprise_plan": true,
+                "basic_plan": true,
+                "plus_plan": true,
+                "pro_plan": true,
+                "enterprise_plan": true,
+                "broadcast_healthcare_plan": true,
+                "broadcast_business_plan": true,
+                "api_healthcare_plan": true,
+                "api_business_plan": true
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "3a1c259c-775e-4b17-ab96-1315320d4280"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

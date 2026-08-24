@@ -1,0 +1,60 @@
+---
+title: "POST /chargebee_contacts"
+description: "Captured contract for POST /chargebee_contacts."
+api: "POST /chargebee_contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /chargebee_contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Get Chargebee Contacts API
+
+
+**Endpoint:**  
+POST: api/chargebee_contacts
+
+
+# Description :
+Fetches billing contacts for a user from Chargebee by user ID and sandbox flag. Used when the frontend needs to list contacts associated with the Chargebee customer (Stripe customer ID).  
+Expects `userID` and `is_sandbox` (0 = live, 1 = sandbox).
+
+
+# Request Body :
+{
+  "userID": "123",
+  "is_sandbox": 0
+}
+
+
+| Field     | Type    | Required | Description                                      |
+|-----------|---------|----------|--------------------------------------------------|
+| userID    | string  | Yes      | User identifier (No).                            |
+| is_sandbox| integer | Yes      | 0 = live, 1 = sandbox.                           |
+
+
+# Response Format :
+
+
+## Success Response (HTTP 200) :
+{
+  "data": [
+    {
+      "id": "contact_id",
+      "email": "contact@example.com",
+      "first_name": "John",
+      "last_name": "Doe",
+      "enabled": true,
+      "send_billing_email": true,
+      "send_account_email": false
+    }
+  ]
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

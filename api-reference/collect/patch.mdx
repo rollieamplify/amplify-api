@@ -1,0 +1,58 @@
+---
+title: "PATCH /:"
+description: "Captured contract for PATCH /:."
+api: "PATCH /:"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /:.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+PATCH : api/esign_templates/{esign_template_id}/fields/{field_template_id}
+
+
+
+
+Description :
+
+-> Updates one or more fields using the same bulk-update format. 
+-> Returns a single field object when field_template_id is in the path.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

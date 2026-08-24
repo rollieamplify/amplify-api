@@ -1,0 +1,19 @@
+---
+title: "Upload a patient document"
+description: "Upload a document for patient-contact processing."
+api: "POST /patient_contacts/documents"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField body="document_file" type="file" required>Document sent as `multipart/form-data`.</ParamField>
+
+```bash
+curl --request POST \
+  --url 'https://api.amplify.xyz/v1/patient_contacts/documents' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
+  --form 'document_file=@patient-document.pdf'
+```
+
+Returns `201 Created` with the uploaded document ID in `data.id`.
+

@@ -1,0 +1,45 @@
+---
+title: "List available countries"
+description: "List countries where number selection is available."
+api: "GET /numbers/available/countries"
+public: true
+---
+
+`GET /numbers/available/countries` returns supported countries.
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/available/countries" \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+```
+
+## Country fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `code` | string | Two-letter country code. |
+| `name` | string | Country name. |
+| `prefix` | integer | International calling prefix. |
+| `is_active` | integer | Active-state flag returned by the API. |
+| `is_number_selection` | string | Number-selection availability flag returned by the API. |
+| `tier` | integer | Number-purchase tier. |
+
+## Response
+
+```json
+{
+  "data": [
+    {
+      "code": "US",
+      "name": "United States",
+      "prefix": 1,
+      "is_active": 1,
+      "is_number_selection": "1",
+      "tier": 0
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "request_id": "9b16f7a0-fdb4-457a-8cad-fa158c71cf78"
+  }
+}
+```

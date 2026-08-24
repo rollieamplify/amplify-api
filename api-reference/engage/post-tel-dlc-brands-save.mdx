@@ -1,0 +1,130 @@
+---
+title: "POST /tel_dlc/brands/save"
+description: "Captured contract for POST /tel_dlc/brands/save."
+api: "POST /tel_dlc/brands/save"
+public: true
+---
+
+This page documents the behavior captured for POST /tel_dlc/brands/save in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    [POST] api/tel_dlc/brands/save
+    
+    Body:
+    {
+        "id": 40,
+        "business_registration_id_type": "USA: Employer Identification Number (EIN)",
+        "registration_number": "12-3456789",
+        "brand_name": "Demo Technolabs",
+        "legal_business_name": "Demo Technolabs LLC",
+        "business_address_one": "Ganesh Meridian, Sola, Ahmedabad",
+        "business_address_two": "near kargil petrol pump",
+        "country": "138",
+        "city": "Ahmedabad",
+        "state": "GJ",
+        "postal_code": "380060",
+        "business_type": "Sole Proprietorship",
+        "company_type": "Publicly traded",
+        "industry": "2",
+        "website_url": "https://www.google.com",
+        "privacy_url": "https://example.com/privacy-policy",
+        "terms_url": "https://example.com/terms-and-conditions",
+        "regions_of_operation": "USA and Canada",
+        "employee_count": 200,
+        "estimated_daily_call": 2000,
+        "first_name": "Web",
+        "last_name": "Four",
+        "email": "developer@example.com",
+        "job_title": "Frontend Developer",
+        "job_position": "Senior Developer",
+        "phone_number": "19076000015",
+        "vertical": "PROFESSIONAL",
+        "use_case": "MIXED",
+        "message_sent_select": [
+            "USER_ACTION",
+            "SYSTEM_TRIGGERED",
+            "MANUAL_SEND"
+        ],
+        "is_healthcare_related": true,
+        "description": "Hello this is dummy description message",
+        "sample_message_one": "this is sample message one",
+        "sample_message_two": "this is sample message two",
+        "message_flow": "this is our message flow message, this is our message flow message",
+        "opt_out_keywords": "STOP, UNSUBSCRIBE",
+        "help_keywords": "HELP, INFO",
+        "forbidden_concent": true,
+        "stock_exchange": "NSE",
+        "stock_ticker": "Demo",
+        "business_contact_email": "developer@example.com",
+        "estimated_frequency_per_user": "1_2_PER_WEEK",
+    }
+    
+    Response:
+    {
+        "data": {
+            "id": 40,
+            "user_id": 33,
+            "business_registration_id_type": "USA: Employer Identification Number (EIN)",
+            "registration_number": "12-3456789",
+            "business_type": "Sole Proprietorship",
+            "company_type": "Publicly traded",
+            "industry": "2",
+            "legal_business_name": "Demo Technolabs LLC",
+            "brand_name": "Demo Technolabs",
+            "business_address_one": "Ganesh Meridian, Sola, Ahmedabad",
+            "business_address_two": "near kargil petrol pump",
+            "country": "138",
+            "state": "GJ",
+            "city": "Ahmedabad",
+            "postal_code": "380060",
+            "website_url": "https://www.google.com",
+            "regions_of_operation": "USA and Canada",
+            "employee_count": 200,
+            "estimated_daily_call": 2000,
+            "first_name": "Web",
+            "last_name": "Four",
+            "email": "developer@example.com",
+            "job_title": "Frontend Developer",
+            "job_position": "Senior Developer",
+            "phone_number": "19076000015",
+            "vertical": "PROFESSIONAL",
+            "stock_exchange": "NSE",
+            "stock_ticker": "Demo",
+            "business_contact_email": "developer@example.com",
+            "use_case": "MIXED",
+            "privacy_url": "https://example.com/privacy-policy",
+            "terms_url": "https://example.com/terms-and-conditions",
+            "description": "Hello this is dummy description message",
+            "message_flow": "this is our message flow message, this is our message flow message",
+            "sample_message_one": "this is sample message one",
+            "sample_message_two": "this is sample message two",
+            "help_message": "",
+            "estimated_frequency_per_user": "1_2_PER_WEEK",
+            "message_sent_select": [
+                "USER_ACTION",
+                "SYSTEM_TRIGGERED",
+                "MANUAL_SEND"
+            ],
+            "estimated_frequency_per_user": "",
+            "is_healthcare_related": true,
+            "forbidden_concent": true,
+            "help_keywords": "HELP, INFO",
+            "opt_out_keywords": "STOP, UNSUBSCRIBE",
+            "brand_status": "SUCCESS",
+            "campaign_status": "",
+            "brand_rejection_reason": "",
+            "campaign_rejection_reason": ""
+        },
+        "meta": {
+            "request_id": "55578e7a-b75b-458d-929c-660cde6e9eef"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

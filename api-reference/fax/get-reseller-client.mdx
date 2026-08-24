@@ -1,0 +1,146 @@
+---
+title: "GET /reseller/client"
+description: "Captured contract for GET /reseller/client."
+api: "GET /reseller/client"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/client.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Client API.
+
+Endpoint :
+
+GET - api/reseller/client?status=Active&search=""&is_starred=false
+
+
+Response:
+
+{
+    "data": {
+        "clients": [
+            {
+                "client_id": 28113,
+                "first_name": "web41",
+                "last_name": "client1",
+                "email": "developer@example.com",
+                "phonenumber": "",
+                "family_type": 5,
+                "license_type": 3,
+                "status": "Active",
+                "is_starred": true,
+                "organization": "Aceme",
+                "credit_allowed": 1000,
+                "credit_price": 0.046,
+                "number_licenses": {
+                    "numbers": 1,
+                    "numbers_1": 1,
+                    "numbers_2": 1,
+                    "numbers_3": 1,
+                    "numbers_4": 1,
+                    "numbers_5": 1
+                },
+                "number_licenses_price": {
+                    "numbers": 5.99,
+                    "numbers_1": 8.99,
+                    "numbers_2": 10.99,
+                    "numbers_3": 18.99,
+                    "numbers_4": 25.99,
+                    "numbers_5": 35.99
+                },
+                "team_licenses": {
+                    "basic_license": 1,
+                    "plus_license": 1,
+                    "pro_license": 1
+                },
+                "team_licenses_price": {
+                    "basic_license": 5.99,
+                    "plus_license": 6.99,
+                    "pro_license": 7.99
+                },
+                "custom_email_domain": true,
+                "custom_email_domain_price": 100.99,
+                "lab_ai_license": true,
+                "lab_ai_license_price": 10.99,
+                "api_license": true,
+                "api_license_price": 100.99,
+                "broadcast_fax": true,
+                "broadcast_fax_price": 100.99,
+                "document_splitting": true,
+                "document_splitting_price": 10.99,
+                "is_auto_topup_credits_enabled": true,
+                "auto_topup_credit": 3,
+                "is_autotopup_upgrade_limit": false,
+                "monthly_upgrade_limit": 0,
+                "used_autotopup_credit_limit": 0,
+                "allow_social_login": true,
+                "used_number_licenses": {
+                    "numbers": 1,
+                    "numbers_1": 0,
+                    "numbers_2": 0,
+                    "numbers_3": 0,
+                    "numbers_4": 0,
+                    "numbers_5": 0
+                },
+                "used_team_licenses": {
+                    "basic_license": 0,
+                    "plus_license": 0,
+                    "pro_license": 1
+                },
+                "used_credit_allowed": 0,
+                "monthly_sales": 498.86,
+                "monthly_cost": 483.86,
+                "monthly_profit": 15
+            }
+        ],
+        "total": {
+            "monthly_sales": 0,
+            "monthly_cost": 0,
+            "monthly_profit": 0,
+            "number_licenses": {
+                "numbers": 1,
+                "numbers_1": 1,
+                "numbers_2": 1,
+                "numbers_3": 1,
+                "numbers_4": 1,
+                "numbers_5": 1
+            },
+            "used_number_licenses": {
+                "numbers": 0,
+                "numbers_1": 0,
+                "numbers_2": 0,
+                "numbers_3": 0,
+                "numbers_4": 0,
+                "numbers_5": 0
+            },
+            "team_licenses": {
+                "basic_license": 1,
+                "plus_license": 1,
+                "pro_license": 1
+            },
+            "used_team_licenses": {
+                "basic_license": 0,
+                "plus_license": 0,
+                "pro_license": 0
+            },
+            "credit_allowed": 1000,
+            "used_credit_allowed": 0
+        }
+    },
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "edda6535-45a8-4adf-bdcf-b1787103c418"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

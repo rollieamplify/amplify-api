@@ -1,0 +1,37 @@
+---
+title: "DELETE /restrict_domain/remove"
+description: "Captured contract for DELETE /restrict_domain/remove."
+api: "DELETE /restrict_domain/remove"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /restrict_domain/remove.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Remove restricted domain
+
+Endpoint:
+DELETE: api/restrict_domain/remove
+
+Request:
+{
+    "domain_id" : 10
+}
+
+Response:
+{
+    "data": {
+        "message": "Domain restriction removed successfully."
+    },
+    "meta": {
+        "request_id": "af4300f1-83f4-4560-bf0e-649e82515286"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,62 @@
+---
+title: "Purchase with requirements"
+description: "Purchase a number while submitting its regulatory requirements."
+api: "POST /numbers/purchase_with_requirements"
+groups: ["internal"]
+---
+
+<Warning>This endpoint is for internal Amplify use only.</Warning>
+
+`POST /numbers/purchase_with_requirements` purchases a number and submits the regulatory information required by its country and number type.
+
+## Request body
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `number` | string | Number to purchase in E.164 format. |
+| `type` | string | Number type, such as `fax`. |
+| `country_code` | string | Two-letter country code. |
+| `requirements` | array | Regulatory requirement submissions. |
+
+Each `requirements` item contains:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `requirement_id` | string | Requirement UUID. |
+| `type` | string | `textual`, `document`, or `address`. |
+| `data` | string | Text, uploaded file reference, or provider address ID, depending on `type`. |
+| `other_data` | string | Additional display or context value. |
+
+```json
+{
+  "number": "+41445550123",
+  "type": "fax",
+  "country_code": "CH",
+  "requirements": [
+    {
+      "requirement_id": "2708e569-696a-4fc7-9305-5fdb3eb9c7dd",
+      "type": "textual",
+      "data": "Example Company",
+      "other_data": ""
+    },
+    {
+      "requirement_id": "0ba49bfa-8a0b-4e38-95ba-f1291507fad4",
+      "type": "document",
+      "data": "uploaded-document-reference.pdf",
+      "other_data": ""
+    }
+  ]
+}
+```
+
+## Response
+
+The response returns the purchased number under `data` and request metadata under `meta`. Verification may remain pending while submitted requirements are reviewed.
+
+## Related operations
+
+- [Upload a verification document](/api-reference/numbers/upload-verification-document)
+- [Create a verification address](/api-reference/numbers/create-verification-address)
+- [List filled requirements](/api-reference/numbers/list-filled-requirements)
+
+<Note>Regulatory processing and approval depend on the external carrier.</Note>

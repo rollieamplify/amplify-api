@@ -1,0 +1,60 @@
+---
+title: "GET /faxes/ocr/search"
+description: "Captured contract for GET /faxes/ocr/search."
+api: "GET /faxes/ocr/search"
+public: true
+---
+
+This internal review page records the behavior captured for GET /faxes/ocr/search.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/faxes/ocr/search
+
+Query params:
+GET: api/faxes/ocr/search?q=FAX&limit=155&sort=desc&last_id=01KH68WSXQFHH73WFEM2J22FRC
+Response:
+{
+    "data": {
+        "total": 2,
+        "record": [
+            "01KGPBNE2QG73GRJWAN1YBQ9DC",
+            "01KGM7TM7NXASBMG576B6G680G"
+        ]
+    },
+    "meta": {
+        "request_id": "5d41f8a2-2f2d-4a4c-b05d-35a0b2920db6"
+    }
+}
+
+Query params:
+GET: api/faxes/ocr/search?q=FAX&limit=10&sort=asc&last_id=01KH68WSXQFHH73WFEM2J22FRC
+Response:
+{
+    "data": {
+        "total": 152,
+        "record": [
+            "01KH8RQ302JGCNDRZBDJB3X0PN",
+            "01KH8RRHXE2V23PJBWJTTMAW72",
+            "01KH8V3858H0PGNRFHKJTAKJHA",
+            "01KHBDDKH4QAENSBGX7V7RHJB1",
+            "01KHBDN2HC2KPQ6YPRY7HGZAR7",
+            "01KHJA8F26C06G242YSPX1TDPH",
+            "01KHJN2GNNA8R9CT46J62EQCZ2",
+            "01KHZCQEC5PTGBS4AJDAMXFR7V",
+            "01KJ4C04E1MQXEWWJQ2RAFMFAY",
+            "01KJ71MXTCTXWAZKWQXWG5E544"
+        ]
+    },
+    "meta": {
+        "request_id": "3ec507e7-d693-4635-af0d-d576c1b61621"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

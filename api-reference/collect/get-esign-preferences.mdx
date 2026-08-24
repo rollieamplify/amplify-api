@@ -1,0 +1,64 @@
+---
+title: "GET /esign_preferences"
+description: "Captured contract for GET /esign_preferences."
+api: "GET /esign_preferences"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /esign_preferences.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/esign_preferences
+
+
+
+
+Description :
+
+
+
+
+-> Returns the authenticated user's eSign preference settings including contacts, signature options, PDF settings, auto-reminder defaults, suggested text, and UI tooltips. 
+-> Returns an empty object if no preferences have been saved yet.
+
+
+
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

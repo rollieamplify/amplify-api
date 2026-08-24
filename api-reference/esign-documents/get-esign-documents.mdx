@@ -1,0 +1,270 @@
+---
+title: "GET /esign_documents"
+description: "Captured contract for GET /esign_documents."
+api: "GET /esign_documents"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_documents.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+-> Document list API in case where label ids given in query params .
+
+
+-> Label ids accepted in two formats : -
+- Array
+- CSV Format
+
+Endpoint: 
+GET : api/esign_documents?cursor=1&limit=15&sort_by=latest&filter=all&date_filter=365&current_date=2026-01-28&label=146
+
+
+
+Response:
+{
+    "data": {
+        "documents": [
+            {
+                "id": 4136,
+                "name": "kkk",
+                "document_url": "https://beta-doc.amplify.xyz/VwJAX0Pd",
+                "status": "completed",
+                "storage_id": "9714ddcca14046e7a77b00b20235dbe4",
+                "is_owner": true,
+                "page_count": 1,
+                "created_at": "2026-01-28T09:29:55+00:00",
+                "updated_at": "2026-01-28T09:51:34+00:00",
+                "email": "developer@example.com",
+                "created_by": 3,
+                "has_sign_order": false,
+                "document_source": "blank",
+                "document_source_id": "",
+                "users": [
+                    {
+                        "id": 5981,
+                        "email": "developer@example.com",
+                        "first_name": "web",
+                        "last_name": "tus",
+                        "document_url": "https://beta-doc.amplify.xyz/VwJAX0Pd",
+                        "sign_order": 1,
+                        "document_status": "completed",
+                        "is_deleted": false,
+                        "label": "Recipient 1",
+                        "is_signer": true,
+                        "contact_id": 419
+                    }
+                ],
+                "config": {
+                    "due_date": "2026-02-01",
+                    "expiry_date": "",
+                    "message": "Please review this document online.\n\nBest regards,\nWeb Six",
+                    "notify_emails": "[]",
+                    "renewal": {},
+                    "allow_download": true
+                },
+                "collaborators": [],
+                "variables": [],
+                "fields": 1,
+                "rules": []
+            },
+            {
+                "id": 1363,
+                "name": "Untitled 1",
+                "document_url": "https://beta-doc.amplify.xyz/iF4qZ0eG",
+                "status": "sent",
+                "storage_id": "3cf462eada1c42f386747724cb488ffc",
+                "is_owner": true,
+                "page_count": 1,
+                "created_at": "2025-12-30T13:54:26+00:00",
+                "updated_at": "2026-01-27T09:44:55+00:00",
+                "email": "developer@example.com",
+                "created_by": 3,
+                "has_sign_order": false,
+                "document_source": "user",
+                "document_source_id": 964,
+                "users": [
+                    {
+                        "id": 2006,
+                        "email": "developer@example.com",
+                        "first_name": "Web",
+                        "last_name": "Six",
+                        "document_url": "https://beta-doc.amplify.xyz/HJVvba4W",
+                        "sign_order": 1,
+                        "document_status": "completed",
+                        "is_deleted": false,
+                        "label": "aaa",
+                        "is_signer": true,
+                        "contact_id": null
+                    },
+                    {
+                        "id": 2007,
+                        "email": "developer@example.com",
+                        "first_name": "Web",
+                        "last_name": "Tus",
+                        "document_url": "https://beta-doc.amplify.xyz/iF4qZ0eG",
+                        "sign_order": 2,
+                        "document_status": "pending",
+                        "is_deleted": false,
+                        "label": "bbb",
+                        "is_signer": true,
+                        "contact_id": null
+                    }
+                ],
+                "config": {
+                    "due_date": "",
+                    "expiry_date": "",
+                    "message": "Please review this document online.\n\nBest regards,\nWeb Six",
+                    "notify_emails": "[]",
+                    "renewal": {},
+                    "allow_download": false
+                },
+                "collaborators": [],
+                "variables": [],
+                "fields": 2,
+                "rules": []
+            },
+            {
+                "id": 3709,
+                "name": "Digital Marketing Proposal",
+                "document_url": "https://beta-doc.amplify.xyz/SZ6Buenb",
+                "status": "overdue",
+                "storage_id": "6a0cc3281ec94b97a2cafd019846827e",
+                "is_owner": true,
+                "page_count": 5,
+                "created_at": "2026-01-21T10:25:07+00:00",
+                "updated_at": "2026-01-21T10:25:33+00:00",
+                "email": "developer@example.com",
+                "created_by": 3,
+                "has_sign_order": false,
+                "document_source": "file",
+                "document_source_id": "",
+                "users": [
+                    {
+                        "id": 5340,
+                        "email": "developer@example.com",
+                        "first_name": "web",
+                        "last_name": "tus",
+                        "document_url": "https://beta-doc.amplify.xyz/SZ6Buenb",
+                        "sign_order": 1,
+                        "document_status": "pending",
+                        "is_deleted": false,
+                        "label": "Recipient 1",
+                        "is_signer": true,
+                        "contact_id": null
+                    }
+                ],
+                "config": {
+                    "due_date": "2026-01-25",
+                    "expiry_date": "",
+                    "message": "Please review this document online.\n\nBest regards,\nWeb Six",
+                    "notify_emails": "[]",
+                    "renewal": {},
+                    "allow_download": true
+                },
+                "collaborators": [],
+                "variables": [],
+                "fields": 1,
+                "rules": []
+            },
+            {
+                "id": 3640,
+                "name": "child-travel_smart",
+                "document_url": "https://beta-doc.amplify.xyz/IQwlxqn2",
+                "status": "draft",
+                "storage_id": "6839900f5e0849a894451e84a3b46715",
+                "is_owner": true,
+                "page_count": 1,
+                "created_at": "2026-01-21T05:15:43+00:00",
+                "updated_at": "2026-01-21T05:17:26+00:00",
+                "email": "developer@example.com",
+                "created_by": 3,
+                "has_sign_order": false,
+                "document_source": "file",
+                "document_source_id": "",
+                "users": [
+                    {
+                        "id": 5244,
+                        "email": "developer@example.com",
+                        "first_name": "web",
+                        "last_name": "dip",
+                        "document_url": "https://beta-doc.amplify.xyz/fZCt875Q",
+                        "sign_order": 1,
+                        "document_status": "pending",
+                        "is_deleted": false,
+                        "label": "Recipient 1",
+                        "is_signer": true,
+                        "contact_id": null
+                    },
+                    {
+                        "id": 5245,
+                        "email": "developer@example.com",
+                        "first_name": "web",
+                        "last_name": "tus",
+                        "document_url": "https://beta-doc.amplify.xyz/XqgXlEhh",
+                        "sign_order": 2,
+                        "document_status": "pending",
+                        "is_deleted": false,
+                        "label": "Recipient 2",
+                        "is_signer": true,
+                        "contact_id": null
+                    },
+                    {
+                        "id": 5246,
+                        "email": "developer@example.com",
+                        "first_name": "Web",
+                        "last_name": "Six",
+                        "document_url": "https://beta-doc.amplify.xyz/7JXbrTT0",
+                        "sign_order": 3,
+                        "document_status": "pending",
+                        "is_deleted": false,
+                        "label": "Recipient 3",
+                        "is_signer": true,
+                        "contact_id": null
+                    },
+                    {
+                        "id": 5247,
+                        "email": "developer@example.com",
+                        "first_name": "web",
+                        "last_name": "dip",
+                        "document_url": "https://beta-doc.amplify.xyz/IQwlxqn2",
+                        "sign_order": 4,
+                        "document_status": "pending",
+                        "is_deleted": false,
+                        "label": "Recipient 4",
+                        "is_signer": true,
+                        "contact_id": null
+                    }
+                ],
+                "config": {
+                    "due_date": "2026-01-25",
+                    "expiry_date": "",
+                    "message": null,
+                    "notify_emails": null,
+                    "renewal": {},
+                    "allow_download": true
+                },
+                "collaborators": [],
+                "variables": [],
+                "fields": 17,
+                "rules": []
+            }
+        ],
+        "folders": [],
+        "parentFolders": []
+    },
+    "meta": {
+        "total": 4,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 15,
+        "request_id": "e1871a88-616a-4d87-80cb-82b887c850f5"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

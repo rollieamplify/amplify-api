@@ -1,0 +1,122 @@
+---
+title: "PATCH /automations/{automation_id}"
+description: "Captured contract for PATCH /automations/{automation_id}."
+api: "PATCH /automations/{automation_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /automations/{automation_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update automation API.
+
+Endpoint:
+PATCH: api/automations/{automation_id}
+
+Body:
+{
+    "name":"test annotation six",
+    "trigger": "fax_received",
+    "conditions_logic": "all",
+    "skip_other_automation": true,
+    "check_duplicate_automation": 1,
+    "conditions" : {
+        "all": [
+            {
+                "segment_id": 3,
+                "condition_id": 1,
+                "value": "896",
+                "operator":"AND"
+            }
+        ],
+        "any": []
+    },
+    "actions": {
+        "folder_id": ["855290"],
+        "label_ids": [],
+        "subject": "",
+        "assigned_ids": [],
+        "emails": "", 
+        "send_email_attachment_type": ["pdf","txt"],
+        "automation_update_emails": ["test@test123.com","test@gmail.com"],
+        "automation_update_subject": "dgfgfdgdfgdf",
+        "update_automation_description": "dfgdfgdfgfdgdg",
+        "send_sms_numbers": ["12056369636"],
+        "send_sms_description": "dfgfdgdgdgdfgdfgf",
+        "send_fax_numbers": ["12235124523"],
+        "send_fax_reply_type": 0,
+        "send_fax_caller_id": "12057271166",
+        "template_id": 194185,
+        "send_fax_sender_name": "dfgfdgfd",
+        "send_fax_recipient_name": "dfgdfgfdg",
+        "send_fax_description": "gdfgreeterter",
+        "forward_secure_fax_numbers": [], 
+        "forward_to_fax_numbers": [], 
+        "forward_secure_sms": [], 
+        "forward_secure_emails": [], 
+        "move_to_trash_after_days": 1,
+        "delete_action_type": 2,
+        "file_format": ["txt","json","tif"],
+        "mark_as_done":"",
+        "ehr_type": "", 
+        "smart_document_template_id": 1599,
+        "send_fax_type_smart_document": 0,
+        "send_fax_caller_id_smart_document": "14083572042",
+        "send_fax_numbers_smart_document": ["12235124523"],
+        "smart_document_annotations": [],
+        "smart_document_value_type": 1,
+        "http_request_method": "POST",
+        "http_request_body_type": 1,
+        "http_request_body": "", 
+        "http_request_url": "fghgh",
+        "http_authentication": 1,
+        "http_user_name": "gfhfghfgh",
+        "http_password": "gfhfghfghgfh",
+        "document_name": "rtryrtyrtyrtyt"
+    }
+}
+Conflict Response:
+{
+    "error": {
+        "code": "AUTOMATION_CONFLICT",
+        "message": "Automation Already Exists!",
+        "data": {
+            "is_duplicate": 1,
+            "automation": "A1",
+            "condition": "Sender Number Begins with 0123"
+        }
+    }
+}
+
+Response:
+{
+    "data": {
+        "id": 23,
+        "account_id": 54,
+        "name": "test annotation six",
+        "first_name": "web",
+        "last_name": "twentynew",
+        "email": "developer@example.com",
+        "created_by": 53,
+        "updated_by": 53,
+        "last_run_at": "",
+        "is_active": true,
+        "trigger": "fax_received",
+        "conditions_logic": "all",
+        "execution_priority": 6,
+        "skip_other_automation": true,
+        "created_at": "2026-01-06T11:20:01.000000Z",
+        "updated_at": "2026-01-06T11:24:17.000000Z"
+    },
+    "meta": {
+        "request_id": "ed647d28-7854-40e1-aa83-a6494e770a38"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

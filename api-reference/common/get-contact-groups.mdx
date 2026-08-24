@@ -1,0 +1,47 @@
+---
+title: "GET /contact_groups"
+description: "Captured contract for GET /contact_groups."
+api: "GET /contact_groups"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /contact_groups.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/contact_groups
+
+Response:
+{
+    "data": [
+        {
+            "id": 152,
+            "name": "Group one",
+            "created_by": 53,
+            "created_at": "2026-02-23T05:25:53.000000Z",
+            "updated_at": "2026-02-23T05:25:53.000000Z"
+        },
+        {
+            "id": 153,
+            "name": "Group two",
+            "created_by": 53,
+            "created_at": "2026-02-23T05:26:01.000000Z",
+            "updated_at": "2026-02-23T05:26:01.000000Z"
+        }
+    ],
+    "meta": {
+        "total": 2,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "2241b803-eabd-4c3f-b450-2ca5cc81c6ce"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

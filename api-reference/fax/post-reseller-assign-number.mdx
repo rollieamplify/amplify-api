@@ -1,0 +1,187 @@
+---
+title: "POST /reseller/assign-number"
+description: "Captured contract for POST /reseller/assign-number."
+api: "POST /reseller/assign-number"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/assign-number.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Assign / Unassign Client Number
+
+
+
+
+Endpoint
+
+
+
+
+POST /api/reseller/assign-number
+
+
+
+
+Description
+
+
+
+
+Assigns a fax number to a client. If the number is already assigned to another client, the previous assignment is replaced. To unassign a number, omit the client_id or pass it as null.
+
+Request Body
+
+Field
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+number_id
+
+	
+
+Integer
+
+	
+
+Yes
+
+	
+
+ID of the fax number to assign or unassign.
+
+
+
+
+client_id
+
+	
+
+Integer | Null
+
+	
+
+No
+
+	
+
+Client user ID. If omitted or null, the number is unassigned.
+
+Assign Number
+{
+    "number_id": 15,
+    "client_id": 1024
+}
+Unassign Number
+{
+    "number_id": 15,
+    "client_id": null
+}
+
+
+
+
+or
+
+
+
+
+{
+    "number_id": 15
+}
+Success Response (Assign)
+{
+    "data": {
+        "message": "Number assigned successfully."
+    },
+    "meta": {
+        "request_id": "75a5e94c-fecc-4cef-b6ff-b63e1c02997b"
+    }
+}
+Success Response (Unassign)
+{
+    "data": {
+        "message": "Number unassigned successfully."
+    },
+    "meta": {
+        "request_id": "75a5e94c-fecc-4cef-b6ff-b63e1c02997b"
+    }
+}
+Error Responses
+
+Number Not Found
+
+HTTP 404
+
+
+
+
+{
+    "error": {
+        "code": "NOT_FOUND",
+        "message": "Number not found."
+    }
+}
+
+Client Not Found
+
+HTTP 404
+
+
+
+
+{
+    "error": {
+        "code": "NOT_FOUND",
+        "message": "Client not found."
+    }
+}
+
+Client Does Not Have Enough Number Allowance
+
+HTTP 400
+
+
+
+
+{
+    "error": {
+        "code": "BAD_REQUEST",
+        "message": "You can't give more numbers than allowed. Please increase the client's allowance."
+    }
+}
+
+Internal Server Error
+
+HTTP 500
+
+
+
+
+{
+    "error": {
+        "code": "INTERNAL_SERVER_ERROR",
+        "message": "Something went wrong. Please try again later."
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

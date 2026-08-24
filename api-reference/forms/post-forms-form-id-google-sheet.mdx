@@ -1,0 +1,56 @@
+---
+title: "POST /forms/{form_id}/google_sheet"
+description: "Captured contract for POST /forms/{form_id}/google_sheet."
+api: "POST /forms/{form_id}/google_sheet"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/{form_id}/google_sheet.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+This API is used for create/update google sheet.
+
+Endpoint: 
+POST: api/forms/{form_id}/google_sheet
+
+Payload:
+{
+    "file_name" : "Amplify",
+    "sheet_name" : "eSign",
+    "sheet_type" : "exist",
+    "file_id" : "asdasdsdd",
+    "file_url" : "https://docs.google.com/spreadsheets/d/1lPUUEKVvOfrTr97zdy4tA9berBb0Lqmqygneb21w6aw/edit?#gid=1697567856"
+}
+
+Response:
+{
+    "data": 
+        {
+            "id": 1,
+            "form_id": 520,
+            "form_integration": {
+                 "file_id": "asdasdasfsdfsdfsdf",
+                 "file_name": "Amplify",
+                 "file_url": "https://docs.google.com/spreadsheets/d/1lPUUEKVvOfrTr97zdy4tA9berBb0Lqmqygneb21w6aw/edit?#gid=1697567856",
+                 "sheet_id": 123456789,
+                 "sheet_name": "eSign"
+             }
+        },
+    "meta": {
+        "request_id": "8cd44ee7-c033-4238-a28f-dab0e36a0ba0"
+    }
+}
+
+Note: 
+
+
+sheet_type is either new or exist
+if sheet type exist then file_id and sheet_name are required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

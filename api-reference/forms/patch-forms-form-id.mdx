@@ -1,0 +1,61 @@
+---
+title: "PATCH /forms/{form_id}"
+description: "Captured contract for PATCH /forms/{form_id}."
+api: "PATCH /forms/{form_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /forms/{form_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+PATCH : api/forms/{form_id}
+
+
+
+
+Description :
+
+-> Updates form metadata, status, page count, and settings. Activating a form (status = active) for the first time deducts 1 form submission credit.  
+-> Optionally clears all respondent data when clear_respondents_data = 1.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

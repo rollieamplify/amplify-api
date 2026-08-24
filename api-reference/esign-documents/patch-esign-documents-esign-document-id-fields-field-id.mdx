@@ -1,0 +1,64 @@
+---
+title: "PATCH /esign_documents/{esign_document_id}/fields/{field_id}"
+description: "Captured contract for PATCH /esign_documents/{esign_document_id}/fields/{field_id}."
+api: "PATCH /esign_documents/{esign_document_id}/fields/{field_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /esign_documents/{esign_document_id}/fields/{field_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+PATCH : api/esign_templates/{esign_template_id}/variables/{template_variable_id}
+
+
+
+
+Description :
+
+
+
+
+-> Updates one or more fields using the same bulk-update format. 
+-> Pass a fields array with the target field id matching field_id in the path.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

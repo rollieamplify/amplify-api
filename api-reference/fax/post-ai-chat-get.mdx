@@ -1,0 +1,76 @@
+---
+title: "POST /ai_chat/get"
+description: "Captured contract for POST /ai_chat/get."
+api: "POST /ai_chat/get"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /ai_chat/get.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Chat API.
+
+Endpoint :
+POST - api/ai_chat/get
+
+
+POST - api/ai_chat/get?limit=20&cursor=1
+
+Body:
+{
+  "fax_uuid": "8c3a2c54-7d2e-4c4b-9a77-9d7c9f1b1111",
+  "is_broadcast": true
+}
+
+Response:
+{
+    "data": [
+        {
+            "id": 113,
+            "fax_uuid": "01KFAVV77YC4Q8GGE9PSKRFVY1",
+            "is_broadcast": false,
+            "question": "Provide a summary of the document.",
+            "answer": "**Document Summary:**\n\n- **Date:** 03-Jan-2026\n- **Time:** 2:06\n- **Type:** Fax\n- **Page:** 1\n- **Recipient Fax Number:** +1 (205) 890-1305\n- **From:** second num\n- **Subject:** Urgent Please Reply For Review\n- **Content:** The document requests a reply for review and comments, but the specific details are not provided in the summary.",
+            "created_at": "2026-01-20T07:23:20.000000Z",
+            "updated_at": "2026-01-20T07:23:20.000000Z"
+        },
+        {
+            "id": 112,
+            "fax_uuid": "01KFAVV77YC4Q8GGE9PSKRFVY1",
+            "is_broadcast": false,
+            "question": "Provide a summary of the document.",
+            "answer": "**Summary of Fax Message**\n\n- **Date**: 03-Jan-2026\n- **Time**: 2:06\n- **Sender**: Unknown (\"From: Subject\" missing)\n- **Recipient**: \"second num my\"\n- **Subject**: Urgent Please Reply For Review Please Comment\n- **Content**: Limited information provided due to unclear formatting.\n- **Urgency**: Urgent request for review and comments.\n- **Attached Document**: \"Angular Web\" on page 1.\n- **Additional Details**: No further details or specific content mentioned in the summary.",
+            "created_at": "2026-01-20T07:23:20.000000Z",
+            "updated_at": "2026-01-20T07:23:20.000000Z"
+        },
+        {
+            "id": 117,
+            "fax_uuid": "01KFAVV77YC4Q8GGE9PSKRFVY1",
+            "is_broadcast": false,
+            "question": "Provide a summary of the document.",
+            "answer": "**Document Summary:**\n\n- **Title:** **Test Coverpage**\n- **Date:** 03-Jan-2026 2:06\n- **Content:** The document seems to be a fax cover page with the subject line, \"Urgent Please Reply For Review.\" \n- **Recipient:** **Second Num**\n- **Sender:** Not directly mentioned, only \"From\" field present.\n- **Additional Information:** The content may require the recipient to review and provide comments. The fax contains 1 page and is named \"Angular Web.\" \n- **Urgency:** The use of the word \"Urgent\" in the subject line indicates that prompt attention is needed.\n- **Contact Information:** Recipient fax number: +1 (205) 890-1305\n\nThis document appears to be a fax cover page requesting a review and comments on the contents related to Angular Web.",
+            "created_at": "2026-01-20T07:23:20.000000Z",
+            "updated_at": "2026-01-20T07:23:20.000000Z"
+        },
+        {
+            "id": 116,
+            "fax_uuid": "01KFAVV77YC4Q8GGE9PSKRFVY1",
+            "is_broadcast": false,
+            "question": "Provide a summary of the document.",
+            "answer": "**Summary of the Document:**\n\n- **Date:** 03-Jan-2026\n- **Time:** 2:06\n- **Document Type:** Fax\n- **Page Count:** 1\n- **Recipient:** Second Num My\n- **Sender:** Unknown (\"From\" field missing)\n- **Subject:** Urgent Please Reply for Review\n- **Content:** The content of the document includes a brief message asking for a reply for review. The text also contains some gibberish text - \"sdfsdsdfsdfsd\". \n- **Additional Information:** The document mentioned \"Test Coverpage\" and \"Angular Web p.1\", but no further details are provided.",
+            "created_at": "2026-01-20T07:23:20.000000Z",
+            "updated_at": "2026-01-20T07:23:20.000000Z"
+        }
+    ],
+    "meta": {
+        "request_id": "a4fb24de-bca4-4a05-909f-668d1669b188"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,69 @@
+---
+title: "POST /subscription/acknowledge_hosted_page"
+description: "Captured contract for POST /subscription/acknowledge_hosted_page."
+api: "POST /subscription/acknowledge_hosted_page"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/acknowledge_hosted_page.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Acknowledge Hosted Page
+
+EndPoint:
+POST: api/subscription/acknowledge_hosted_page
+
+Payload:
+{
+    "hosted_page_id": "bmxcdXcubg1uBsP6tGXwdcdXUw1MHiyMeGO"
+}
+
+----------------------------------------------------------------------------------------------
+
+For Subscription Updated & Subscription Canceled
+
+
+Response: 
+{
+    "data": {
+        "subscription_id": "Adksndjksnjdns",
+    },
+    "meta": {
+        "request_id": "1f851357-4c9a-49ac-9ee2-c46eab9d7516"
+    }
+}
+
+
+----------------------------------------------------------------------------------------------
+
+For Schedule Meeting Payment Check
+
+Response (Success): 
+{
+    "data": [],
+    "meta": {}
+}
+
+Response (Not Paid): 
+{
+    "error": {
+        "code": "CHARGEBEE_ERROR",
+        "message": "Not able to collect amount with this card"
+    }
+}
+
+Response (Payment By gocardless): 
+{
+    "error": {
+        "code": "CHARGEBEE_ERROR",
+        "message": "Please checkout using the Credit Card payment option only."
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

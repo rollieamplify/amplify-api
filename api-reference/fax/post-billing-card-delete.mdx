@@ -1,0 +1,32 @@
+---
+title: "POST /billing/card/delete"
+description: "Captured contract for POST /billing/card/delete."
+api: "POST /billing/card/delete"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing/card/delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Delete the Card from Chargebee
+
+EndPoint:
+
+POST: api/billing/card/delete
+
+
+
+
+Payload:
+
+{
+    "payment_source_id":"ZDRUZnUrNFNiblFuUzNxTWdOMUw2dmdKOWlaTjlSYW5LTS90Zy9pZjVZUT0="
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

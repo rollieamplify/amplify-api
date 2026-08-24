@@ -1,0 +1,45 @@
+---
+title: "POST /team_chats/add_reaction"
+description: "Captured contract for POST /team_chats/add_reaction."
+api: "POST /team_chats/add_reaction"
+public: true
+---
+
+This page documents the behavior captured for POST /team_chats/add_reaction in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/team_chats/add_reaction
+    
+    Body:
+    {
+        "message_id": 15,
+        "reaction": "😂",
+        "to_user_id": 53
+    }
+    
+    Validation errors:
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The message id field is required.|The reaction field is required.|The to user id field is required."
+        }
+    }
+    
+    Response:
+    {
+        "data": {
+            "reaction": "👍"
+        },
+        "meta": {
+            "request_id": "49deb469-16af-4fc9-84f2-c07bf802fa85"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

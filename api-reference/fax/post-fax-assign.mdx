@@ -1,0 +1,54 @@
+---
+title: "POST /fax/assign"
+description: "Captured contract for POST /fax/assign."
+api: "POST /fax/assign"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/assign.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/fax/assign
+
+Body:
+{
+    "fax_uuid": "01KEH1KPP4VG3B4NXS12H30DEG",
+    "user_ids": [57],
+    "role_ids": [23]
+}
+
+Response:
+{
+    "data": [
+        {
+            "id": 57,
+            "name": "Manoj Prajapati",
+            "email": "developer@example.com",
+            "socket_ids": [
+                "DRcTI5nxOhuq65jUAAJk",
+                "TLU6ou1XeVLbFGbbAAKG",
+                "2ixr6UyX093smHaxAAL-",
+                "1EdKSKvlW6HwEmEUAAAh",
+                "a8wijh4mWL0cQxCCAAGH"
+            ]
+        },
+        {
+            "id": 291,
+            "name": "test",
+            "email": "test@example.com",
+            "socket_ids": []
+        }
+    ],
+    "meta": {
+        "request_id": "ca90d37e-fbc1-46b3-a388-e736bd994174"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,45 @@
+---
+title: "POST /accept_invitation"
+description: "Captured contract for POST /accept_invitation."
+api: "POST /accept_invitation"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /accept_invitation.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint :
+POST /api/accept_invitation
+
+
+Request :
+{
+    "type":"credentials",
+    "developer@example.com",
+    "password":"example_password",
+    "token":"ZXlKcGRpSTZJaTlQVFhKaGRVNHhOM3BsTjAxRFVrSnhTbFZ1ZUhjOVBTSXNJblpoYkhWbElqb2labEJ0Vm5kaU1qWlNlbVp0TlhZd2RqZFdRMjQzV2pSQ1NUQTNRVFpZTURWTWMxUkNhVEZTWlVOMmRubGpaemx2ZEZWRGVYQkdLMGxSZDAxeVlVbEZhVzFCWVZsd2JHVkNUM2swVG5JMVRuWmlPVlY0WVdoU1NrbFRRbW8wYUROdlVURkxiemhEYnpGTGJtRktPRzk0UzNVemIyVm9OMGxuU2pKSU5sRkVZMW96ZEhGM0wyWjZNekppV0ZnMFQyMU5SbnBPTTJ0UlBUMGlMQ0p0WVdNaU9pSXhNekZrWkRRek0yRTNaamswTVRCa1pUYzJNMkl4WWprMU5ETTRaVGhsTTJJMFpqZGlaV00zWmpnMllqa3hNemMzTkRNeE9URm1NR1F3WTJWbU56QmlJaXdpZEdGbklqb2lJbjA9",
+    "first_name":"fname",
+    "last_name":"lname",
+    "job_title":"developer"
+}
+
+Success Response (200 OK) :
+{
+    "data": {
+        "access_token": "20277|mQ6GX9VPydVYaJH7osQMd9olghiCtXxB6CdVgBuCe6717269",
+        "refresh_token": "20278|akHbQEAjJYni3iDIHR8ChgHEhmR7aJJUOPVDaebI5d70d4f3",
+        "token_type": "Bearer",
+        "expires_in": 36000
+    },
+    "meta": {
+        "request_id": "d4904f83-6dfc-4c97-afda-80af011718fe"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

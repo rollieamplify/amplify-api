@@ -1,0 +1,91 @@
+---
+title: "GET /broadcast_templates"
+description: "Captured contract for GET /broadcast_templates."
+api: "GET /broadcast_templates"
+public: true
+---
+
+This internal review page records the behavior captured for GET /broadcast_templates.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+List Broadcast Template
+
+EndPoint
+
+GET: api/broadcast_templates
+
+
+Returns broadcast templates visible to the authenticated account.
+
+Response
+
+{
+    "data": [
+        {
+            "id": 31,
+            "created_by": 28,
+            "updated_by": "",
+            "page_count": 10,
+            "used_count": 0,
+            "name": "test",
+            "broadcast_ids": [
+                {
+                    "id": 4,
+                    "name": "Broadcast List 2"
+                }
+            ],
+            "storage_id": "ajf85stge5d1fg22hfdf",
+            "annotations": [
+                {
+                    "page": 1,
+                    "fields": [
+                        {
+                            "key": "Image",
+                            "left": "0.9042%",
+                            "top": "-0.27076069999999997%",
+                            "type": "img",
+                            "font_size": 14,
+                            "value": "96ac7dc9-3619-4350-874c-f30698b89dc3.jpeg",
+                            "width": 193.438,
+                            "height": 45.5781,
+                            "url_type": null,
+                            "is_hide_back_ground": null,
+                            "s3_url": "https://example.com/signed-url
+                        },
+                        {
+                            "key": "Fax Number",
+                            "left": "39.89663677130044%",
+                            "top": "15.735578446909669%",
+                            "type": "text",
+                            "font_size": 14,
+                            "value": null,
+                            "width": 175,
+                            "height": 24,
+                            "url_type": null,
+                            "is_hide_background": null,
+                            "s3_url": ""
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2026-01-01T07:52:08.000000Z",
+            "updated_at": "2026-01-01T07:52:08.000000Z",
+            "last_used_at": ""
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "3f623a6d-b8d7-4f4e-b085-1ff51a0e9351"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,34 @@
+---
+title: "PATCH /fax/ai_ocr_settings"
+description: "Captured contract for PATCH /fax/ai_ocr_settings."
+api: "PATCH /fax/ai_ocr_settings"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /fax/ai_ocr_settings.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update AI or OCR Settings.
+
+Endpoint
+PATCH : api/fax/ai_ocr_settings
+
+Request
+{
+    "ai_ocr_settings_key" : "ai_feature_enabled",
+    "value" : true
+}
+
+Response
+{
+    "data": [],
+    "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

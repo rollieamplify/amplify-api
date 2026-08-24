@@ -1,0 +1,84 @@
+---
+title: "GET /resend_invitation/{team_user_id}"
+description: "Captured contract for GET /resend_invitation/{team_user_id}."
+api: "GET /resend_invitation/{team_user_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /resend_invitation/{team_user_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Resend Invitation API
+
+
+**Endpoint:**  
+GET: api/resend_invitation/{team_user_id}
+
+
+# Description :
+
+Handles a 2-step resend invitation flow for pending team users (is_email_verified = 0):
+Preview step (default): returns popup flags + invitation link so frontend can show confirmation modal.
+Send step (is_send=true): sends the invitation email and returns the same payload with send status.
+If the sub-user is not found (or already verified), API returns success with empty data and meta.
+
+
+Request
+Path Params
+team_user_id (integer, required): Team user ID
+Query Params
+is_send (boolean, optional, default: false)
+false / not provided -> only response for popup, no email send
+true -> send invitation email
+Request Body
+None.
+
+
+# Response Format :
+
+## Success Response (sub-user exists and pending)
+{
+  "data": {
+    "id": 813,
+    "email": "user@example.com",
+    "status": "Pending",
+    "show_invitation_popup": true,
+    "is_invitation_pending": true,
+    "is_send": false,
+    "email_sent": false,
+    "invitation_link": "https://webapp.example.com/accept-invitation/..."
+  },
+  "meta": {}
+}
+
+
+Success Response (when sending email)
+Request:
+GET /api/resend_invitation/813?is_send=true
+{
+  "data": {
+    "id": 813,
+    "email": "user@example.com",
+    "status": "Pending",
+    "show_invitation_popup": true,
+    "is_invitation_pending": true,
+    "is_send": true,
+    "email_sent": true,
+    "invitation_link": "https://webapp.example.com/accept-invitation/..."
+  },
+  "meta": {}
+}
+
+Success Response (sub-user not found / already verified)
+{
+  "data": [],
+  "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,59 @@
+---
+title: "PATCH /guest/forms/{form_id}/responses/{response_id}"
+description: "Captured contract for PATCH /guest/forms/{form_id}/responses/{response_id}."
+api: "PATCH /guest/forms/{form_id}/responses/{response_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /guest/forms/{form_id}/responses/{response_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+PATCH : api/guest/forms/{form_id}/responses/{response_id}
+
+
+
+
+Description :
+
+-> Updates a respondent's in-progress or completed form response without authentication. 
+-> Used during public form fill flow. 
+-> On completed/complete status, sends completion emails, logs activity for the owner, and may push data to Google Sheets integration.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

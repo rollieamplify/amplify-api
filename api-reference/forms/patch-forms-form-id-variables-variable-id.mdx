@@ -1,0 +1,62 @@
+---
+title: "PATCH /forms/{form_id}/variables/{variable_id}"
+description: "Captured contract for PATCH /forms/{form_id}/variables/{variable_id}."
+api: "PATCH /forms/{form_id}/variables/{variable_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /forms/{form_id}/variables/{variable_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+PATCH : api/forms/{form_id}/variables/{variable_id}
+
+
+
+
+Description :
+
+-> Updates a form variable's name, value, or position
+-> When form_response_id is provided, updates the response-scoped variable copy. 
+-> OTP verification is required if the form has require_otp enabled.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

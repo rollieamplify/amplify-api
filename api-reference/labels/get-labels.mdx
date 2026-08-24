@@ -1,0 +1,226 @@
+---
+title: "GET /labels"
+description: "Captured contract for GET /labels."
+api: "GET /labels"
+public: true
+---
+
+This internal review page records the behavior captured for GET /labels.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Labels API.
+
+Endpoint :
+GET - api/labels
+
+Response:
+{
+    "data": [
+        {
+            "id": 670,
+            "parent_id": 0,
+            "name": "Amplify 2.0",
+            "text_color": "",
+            "background_color": "#f18787",
+            "created_by": 401,
+            "created_at": "2026-02-25T11:14:43.000000Z",
+            "updated_at": "2026-03-02T09:08:00.000000Z",
+            "show_in_preview": false,
+            "show_in_list": true,
+            "count": 5
+        },
+        {
+            "id": 843,
+            "parent_id": 0,
+            "name": "Automation - Updated",
+            "text_color": "",
+            "background_color": "#973DE4",
+            "created_by": 401,
+            "created_at": "2026-03-18T08:40:24.000000Z",
+            "updated_at": "2026-03-18T08:40:24.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 0
+        },
+        {
+            "id": 756,
+            "parent_id": 0,
+            "name": "E-Sign",
+            "text_color": "#2a28b2",
+            "background_color": "#9e82c4",
+            "created_by": 401,
+            "created_at": "2026-03-05T09:05:11.000000Z",
+            "updated_at": "2026-03-06T12:25:14.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 2
+        },
+        {
+            "id": 589,
+            "parent_id": 0,
+            "name": "Email working",
+            "text_color": "",
+            "background_color": "#7AC044",
+            "created_by": 401,
+            "created_at": "2026-02-20T10:24:56.000000Z",
+            "updated_at": "2026-03-11T08:26:25.000000Z",
+            "show_in_preview": false,
+            "show_in_list": false,
+            "count": 5
+        },
+        {
+            "id": 338,
+            "parent_id": 0,
+            "name": "fail",
+            "text_color": "",
+            "background_color": "#FF0000",
+            "created_by": 401,
+            "created_at": "2026-02-05T12:17:35.000000Z",
+            "updated_at": "2026-03-02T09:31:45.000000Z",
+            "show_in_preview": true,
+            "show_in_list": false,
+            "count": 7
+        },
+        {
+            "id": 674,
+            "parent_id": 0,
+            "name": "Fax Delivered",
+            "text_color": "",
+            "background_color": "#e89bcf",
+            "created_by": 401,
+            "created_at": "2026-02-26T06:42:11.000000Z",
+            "updated_at": "2026-03-02T09:31:54.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 6
+        },
+        {
+            "id": 323,
+            "parent_id": 0,
+            "name": "Hello",
+            "text_color": "",
+            "background_color": "#973DE4",
+            "created_by": 401,
+            "created_at": "2026-02-05T05:35:28.000000Z",
+            "updated_at": "2026-03-02T09:31:53.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 8
+        },
+        {
+            "id": 493,
+            "parent_id": 0,
+            "name": "I am label",
+            "text_color": "",
+            "background_color": "#7AC044",
+            "created_by": 401,
+            "created_at": "2026-02-17T11:43:47.000000Z",
+            "updated_at": "2026-03-02T09:31:53.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 10
+        },
+        {
+            "id": 324,
+            "parent_id": 0,
+            "name": "janviiiiii",
+            "text_color": "",
+            "background_color": "#009FDA",
+            "created_by": 401,
+            "created_at": "2026-02-05T05:35:51.000000Z",
+            "updated_at": "2026-03-24T10:43:33.000000Z",
+            "show_in_preview": true,
+            "show_in_list": false,
+            "count": 9
+        },
+        {
+            "id": 361,
+            "parent_id": 0,
+            "name": "Label 1",
+            "text_color": "",
+            "background_color": "#e8aa10",
+            "created_by": 401,
+            "created_at": "2026-02-10T11:18:29.000000Z",
+            "updated_at": "2026-03-02T09:08:12.000000Z",
+            "show_in_preview": false,
+            "show_in_list": false,
+            "count": 4
+        },
+        {
+            "id": 362,
+            "parent_id": 361,
+            "name": "Label 1.1",
+            "text_color": "",
+            "background_color": "#719d82",
+            "created_by": 401,
+            "created_at": "2026-02-10T11:19:47.000000Z",
+            "updated_at": "2026-02-26T06:52:52.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 2
+        },
+        {
+            "id": 678,
+            "parent_id": 362,
+            "name": "Label 1.1.1",
+            "text_color": "",
+            "background_color": "#84414d",
+            "created_by": 401,
+            "created_at": "2026-02-26T06:52:14.000000Z",
+            "updated_at": "2026-02-26T06:52:39.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 2
+        },
+        {
+            "id": 328,
+            "parent_id": 0,
+            "name": "labelllllll",
+            "text_color": "",
+            "background_color": "#000000",
+            "created_by": 401,
+            "created_at": "2026-02-05T06:53:32.000000Z",
+            "updated_at": "2026-03-02T09:08:15.000000Z",
+            "show_in_preview": false,
+            "show_in_list": true,
+            "count": 10
+        },
+        {
+            "id": 590,
+            "parent_id": 0,
+            "name": "PN working",
+            "text_color": "",
+            "background_color": "#a8e43d",
+            "created_by": 401,
+            "created_at": "2026-02-20T10:25:07.000000Z",
+            "updated_at": "2026-03-02T09:08:16.000000Z",
+            "show_in_preview": true,
+            "show_in_list": false,
+            "count": 2
+        },
+        {
+            "id": 337,
+            "parent_id": 0,
+            "name": "testing",
+            "text_color": "",
+            "background_color": "#FFD768",
+            "created_by": 401,
+            "created_at": "2026-02-05T11:01:08.000000Z",
+            "updated_at": "2026-02-05T11:01:08.000000Z",
+            "show_in_preview": true,
+            "show_in_list": true,
+            "count": 7
+        }
+    ],
+    "meta": {
+        "request_id": "c3427dd3-0d37-450a-a548-fad0cb8c8e3c"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

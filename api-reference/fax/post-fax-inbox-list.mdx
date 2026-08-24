@@ -1,0 +1,122 @@
+---
+title: "POST /fax/inbox/list"
+description: "Captured contract for POST /fax/inbox/list."
+api: "POST /fax/inbox/list"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/inbox/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Inbox Fax List
+
+Endpoint:
+
+POST: api/fax/inbox/list?limit=20&cursor=1
+
+
+Body:
+
+{
+    "assigned_to_user_ids": [
+        50,
+        119
+    ],
+    "fax_numbers": [
+        "+12057566913",
+        "+12566708163"
+    ],
+    "label_ids": [
+        25,
+        49,
+        65
+    ],
+    "fax_status": [
+        "unviewed",
+        "done",
+        "action_required"
+    ],
+    "start_date": "2024-01-01 00:00:00",
+    "end_date": "2024-12-31 23:59:59",
+    "sort_by": "latest",
+    "priority": ["yes","no","unknown"],
+    "document_type": ["Admin Note"],
+    "is_pinned" : "true"
+}
+
+fax_status in : unviewed,action_required,pending_others,unassigned,receiving
+
+priority in : yes,no,unknown
+document_type in : Admin Note,Consult Note,Cover Page,Imaging Note,Insurance Authorization,Intake Forms,Lab Test,Other,Patient Profile,Prescriptions,Referral Letter,Requisition Form,Insurance Authorization Request Form,Consent Form
+
+Response:
+
+{
+    "data": [
+        {
+            "fax_uuid": "01KEBBRRDFSF5RX31APZPGDBK6",
+            "is_read": true,
+            "fax_type": "inbound",
+            "to_number": 12566708163,
+            "from_number": 12057566913,
+            "document_name": "Fax 12566708163",
+            "pages": 1,
+            "labels": [
+                {
+                    "id": 25,
+                    "name": "Test Faxes",
+                    "text_color": "#ffffff",
+                    "bg_color": "#ff0000"
+                }
+            ],
+            "fax_status": "Action Required",
+            "assigned_emails": [
+                "developer@example.com",
+                "developer@example.com"
+            ],
+            "assigned_names": [
+                "web35 sub1",
+                "Web 35"
+            ],
+            "created_at": 1767760486,
+            "updated_at": 1767854039,
+            "to_contact_details": {
+                "first_name": "Web",
+                "last_name": "35 New",
+                "email": "developer@example.com",
+                "organization_name": "",
+                "full_name": "Web 35 New",
+                "is_organization": false
+            },
+            "from_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false
+            },
+            "start_time": 1767760467,
+            "end_time": 1767760486,
+            "duration": "00:19",
+            "thumbnail_image": "",
+            "ocr_status": "",
+            "nlp_status": ""
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "47449f52-13e7-4bf8-88bc-8682137612c3"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

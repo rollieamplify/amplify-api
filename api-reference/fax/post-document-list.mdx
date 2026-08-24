@@ -1,0 +1,83 @@
+---
+title: "POST /document/list"
+description: "Captured contract for POST /document/list."
+api: "POST /document/list"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /document/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Document List API:
+
+Endpoint:
+POST: api/document/list?limit=20&cursor=2
+
+Body:
+{
+   "fax_numbers": [
+        45654,
+        4545
+   ],
+    "method":[
+        "app"
+    ],
+  "start_date" : "2025-11-30 06:00:00",
+    "end_date" : "2026-01-30 09:00:00",
+    "sort_by" : "oldest",
+    "label_ids" : [
+        49
+    ]
+}
+
+Response:
+{
+    "data": [
+        {
+            "fax_uuid": "01KDT7Y6MDVFN0F35EQ1E53F49",
+            "created_by": 122,
+            "created_by_email": "test@example.com",
+            "to_number": null,
+            "from_number": null,
+            "document_name": "sample.pdf",
+            "subject": null,
+            "pages": 1,
+            "labels": [],
+            "assigned_email": [],
+            "assigned_names": "",
+            "created_at": 1767186045,
+            "updated_at": 1767186045
+        },
+        {
+            "fax_uuid": "01KDT80F1BT6S9RC7BXE3XAQQP",
+            "created_by": 122,
+            "created_by_email": "test@example.com",
+            "to_number": null,
+            "from_number": null,
+            "document_name": "file-sample_150kB (1).pdf",
+            "subject": null,
+            "pages": 4,
+            "labels": [],
+            "assigned_email": [],
+            "assigned_names": "",
+            "created_at": 1767186119,
+            "updated_at": 1767186119
+        },
+       
+    ],
+    "meta": {
+        "total": 28,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "63a8017f-2952-4d0e-81c6-10f2e33b3b53"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,173 @@
+---
+title: "POST /faxes/nlp/fields"
+description: "Captured contract for POST /faxes/nlp/fields."
+api: "POST /faxes/nlp/fields"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/nlp/fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+NLP Fields update API.
+
+Endpoint :
+
+POST - api/faxes/nlp/fields
+
+Body:
+
+{
+    "id": 5845,
+    "fax_uuid": "01KG1RV2M2PQCVS6TQ0RKD37KK",
+    "document_type": "Referral Letter",
+    "priority": "Yes",
+    "priority_source": "text",
+    "patient_full_name": "John Michael Doe",
+    "patient_first_name": "John",
+    "patient_middle_name": "Michael",
+    "patient_last_name": "Doe",
+    "patient_id": "P123456",
+    "medical_record_number": "MRN789012",
+    "social_security_number": "123-45-6789",
+    "health_card_number": "1234567890AB",
+    "patient_dob": "1990-01-15",
+    "patient_age": "34",
+    "patient_phone": "+12125551234",
+    "patient_phone_cell": "+12125551234",
+    "patient_phone_home": "+12125559876",
+    "patient_phone_work": "+12125555678",
+    "patient_email": "john.doe@email.com",
+    "patient_address": "123 Main St, New York, NY 10001, USA",
+    "patient_gender": "M",
+    "referring_physician_name": "Dr. Jane Smith",
+    "provider_phone": "+12125554321",
+    "provider_fax_number": "+12125557890",
+    "provider_email": "jane.smith@clinic.com",
+    "provider_address": "456 Medical Ave, New York, NY 10002, USA",
+    "provider_id": "PROV001",
+    "billing_number": "BILL12345",
+    "provider_npi": "1234567890",
+    "facility": "City Medical Center",
+    "provider_specialty": "Cardiology",
+    "provider_degree": "MD",
+    "insurance_primary_name": "Blue Cross Blue Shield",
+    "insurance_primary_plan": "PPO Gold",
+    "insurance_primary_group_number": "GRP001234",
+    "insurance_primary_bill_type": "131",
+    "insurance_primary_subscriber_name": "John Doe",
+    "insurance_primary_subscriber_dob": "1990-01-15",
+    "insurance_primary_subscriber_age": "34",
+    "insurance_primary_subscriber_id": "MEM123456",
+    "insurance_primary_subscriber_phone": "+12125551234",
+    "insurance_primary_subscriber_address": "123 Main St, New York, NY 10001, USA",
+    "insurance_primary_subscriber_group_number": "SGRP001",
+    "insurance_secondary_name": "Aetna",
+    "insurance_secondary_plan": "HMO Silver",
+    "insurance_secondary_group_number": "GRP005678",
+    "insurance_secondary_bill_type": "132",
+    "insurance_secondary_subscriber_name": "John Doe",
+    "insurance_secondary_subscriber_dob": "1990-01-15",
+    "insurance_secondary_subscriber_id": "MEM789012",
+    "insurance_secondary_subscriber_phone": "+12125559876",
+    "insurance_secondary_subscriber_address": "123 Main St, New York, NY 10001, USA",
+    "insurance_secondary_subscriber_group_number": "SGRP002",
+    "guarantor_name": "Jane Doe",
+    "guarantor_address": "123 Main St, New York, NY 10001, USA",
+    "guarantor_phone": "+12125551111",
+    "encounter_date": "2024-03-15",
+    "verified_date": "2024-03-16",
+    "rdp_complete_text": "Patient presents with Type 2 Diabetes and Hypertension requiring specialist referral to Cardiology for further evaluation and management.",
+    "rdp_reason": "Abnormal lab findings, Elevated blood pressure",
+    "diagnosis": "Type 2 Diabetes Mellitus, Hypertension, Hyperlipidemia",
+    "order_date": "2024-03-15",
+    "extracted_dates": "2024-03-15, 2024-03-20, 2024-04-01",
+    "lab_test_name": "HbA1c, Blood Glucose, Cholesterol",
+    "lab_value": "7.2, 180, 210",
+    "lab_unit": "%, mg/dL, mg/dL",
+    "lab_test_status": "High, High, High",
+    "lab_reference_range": "4.0 - 5.6, 70 - 100, 0 - 200"
+
+}
+
+
+
+
+Request Parameters
+
+Parameter
+
+	
+
+Type
+
+	
+
+Required
+
+	
+
+Description
+
+
+
+
+id
+
+	
+
+Integer
+
+	
+
+No*
+
+	
+
+Updates a specific patient NLP record by its ID.
+
+
+
+
+fax_uuid
+
+	
+
+String
+
+	
+
+No*
+
+	
+
+Updates the primary patient NLP record for the fax. If no primary patient record exists, one will be created.
+
+
+
+
+* Either id or fax_uuid is required.
+
+Response:
+
+{
+    "data": {
+        "key": "Patient Last Name",
+        "data": [],
+        "extra": "",
+        "value": "test name",
+        "key_slug": "patient_last_name",
+        "multiple": 0,
+        "confidence": 0
+    },
+    "meta": {
+        "request_id": "bee37c67-93db-42b8-9e89-218aca34ad83"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

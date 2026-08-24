@@ -1,0 +1,33 @@
+---
+title: "POST /subscription/end_trial"
+description: "Captured contract for POST /subscription/end_trial."
+api: "POST /subscription/end_trial"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/end_trial.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Subscription Trial
+
+Endpoint:
+POST: api/subscription/end_trial
+
+Payload:
+{
+    "request_from" : "banner"
+}
+
+Response (Success):
+{
+    "data": [],
+    "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

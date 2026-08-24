@@ -1,0 +1,65 @@
+---
+title: "POST /esign_templates"
+description: "Captured contract for POST /esign_templates."
+api: "POST /esign_templates"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_templates.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/esign_templates
+
+
+
+
+Description :
+
+
+
+
+-> Creates a new eSign template. 
+-> Supports blank upload, cloning from existing template/document, or gallery source. 
+-> Optionally creates signers, theme, and multi-page files.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

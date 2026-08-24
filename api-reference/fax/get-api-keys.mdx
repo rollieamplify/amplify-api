@@ -1,0 +1,35 @@
+---
+title: "GET /api_keys"
+description: "Captured contract for GET /api_keys."
+api: "GET /api_keys"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /api_keys.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+API keys List API.
+
+Endpoint
+GET : api/api_keys
+
+Response
+{
+    "data": [
+        {
+            "id": 72,
+            "name": "Test"
+        }
+    ],
+    "meta": {
+        "request_id": "140142a6-259f-43a4-8fea-e9845c965368"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

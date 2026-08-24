@@ -1,0 +1,28 @@
+---
+title: "POST /guest_message/conversation/delete"
+description: "Captured contract for POST /guest_message/conversation/delete."
+api: "POST /guest_message/conversation/delete"
+public: true
+---
+
+This page documents the behavior captured for POST /guest_message/conversation/delete in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/guest_message/conversation/delete
+    
+    Body:
+    {
+        "conversation_id": 0
+    }
+    
+    Response:
+    image.png
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

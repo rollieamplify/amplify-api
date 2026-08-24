@@ -1,0 +1,52 @@
+---
+title: "GET /user/filter/list"
+description: "Captured contract for GET /user/filter/list."
+api: "GET /user/filter/list"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /user/filter/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+List filter data of user
+
+Endpoint:
+GET: /user/filter/list
+
+Request:
+{
+    "created_from" : "Tests"
+}
+
+Response:
+{
+    "data": [
+        {
+            "user_id": 57,
+            "account_id": 58,
+            "created_from": "Tests",
+            "filter_data": {
+                "status": [
+                    "time",
+                    "delivered"
+                ],
+                "date_to": "2025-01-31",
+                "date_from": "2025-01-01"
+            },
+            "created_at": null,
+            "updated_at": "2026-01-05T08:50:48.000000Z",
+            "deleted_at": null
+        }
+    ],
+    "meta": {
+        "request_id": "5de99855-e46f-4cd5-b264-51306b82fd5b"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

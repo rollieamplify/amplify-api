@@ -1,0 +1,58 @@
+---
+title: "PATCH /esign_templates/{template_id}"
+description: "Captured contract for PATCH /esign_templates/{template_id}."
+api: "PATCH /esign_templates/{template_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /esign_templates/{template_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+PATCH : api/esign_templates/{template_id}
+
+
+
+
+Description :
+
+-> Updates template metadata, config, signers, theme, and page count. 
+-> When page_count increases, field page numbers are shifted starting from page_no.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

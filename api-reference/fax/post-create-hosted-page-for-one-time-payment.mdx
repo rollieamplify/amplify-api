@@ -1,0 +1,40 @@
+---
+title: "POST /create_hosted_page_for_one_time_payment"
+description: "Captured contract for POST /create_hosted_page_for_one_time_payment."
+api: "POST /create_hosted_page_for_one_time_payment"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /create_hosted_page_for_one_time_payment.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Hosted Page For 1 time Payment : (Via Company page)
+
+Endpoint:
+POST: api/create_hosted_page_for_one_time_payment
+
+Body:
+{
+    "currency_code" : "usd",
+    "company_page_id" : "cUFoRGsxWFZEcWdMNldvQ3o4UWtrZz09",
+    "amount" : 10
+}
+
+Response:
+{
+    "data": {
+        "hosted_page_url": "https://ifaxapp-poc5-test.chargebee.com/pages/v3/TTGK5cu8UKhFPAePHF0ZdL4lZgrOtPaycu/",
+        "hosted_page_id": "TTGK5cu8UKhFPAePHF0ZdL4lZgrOtPaycu"
+    },
+    "meta": {
+        "request_id": "e88fb2f8-5d97-4e6d-9384-8c3f58dd3ffc"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

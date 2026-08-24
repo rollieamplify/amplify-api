@@ -1,0 +1,12 @@
+---
+title: "Update a contact custom field"
+description: "Update a custom-field definition."
+api: "PATCH /contact_fields/{contact_field_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_field_id" type="integer" required>Custom-field ID.</ParamField>
+
+The request accepts `contact_type`, `validation`, `label`, `required`, and `group_ids`.
+

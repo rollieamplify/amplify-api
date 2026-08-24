@@ -1,0 +1,103 @@
+---
+title: "POST /esign_templates/{esign_template_id}/variables"
+description: "Captured contract for POST /esign_templates/{esign_template_id}/variables."
+api: "POST /esign_templates/{esign_template_id}/variables"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_templates/{esign_template_id}/variables.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/esign_templates/{esign_template_id}/variables
+
+
+
+
+
+Description :
+
+
+
+
+Creates a merge variable on a template (name/value with optional position on page).
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Request :
+
+
+
+
+{
+    "name": "Untitled",
+    "storage_id": "a3b4d5021c6245d183138359f84536f7",
+    "file_type": "pdf",
+    "files": [],
+    "folder_id": 0,
+    "smart_fields": [],
+    "signers": [
+        "asdasd"
+    ],
+    "template_source": "blank"
+}
+
+
+Response :
+
+
+
+
+{
+    "data": {
+        "id": 4026,
+        "name": "Untitled",
+        "storage_id": "a3b4d5021c6245d183138359f84536f7",
+        "page_count": "1",
+        "created_by": 55,
+        "template_source": "blank",
+        "template_source_id": 0,
+        "original_source": "blank",
+        "config": {
+            "message": null,
+            "notify_emails": null,
+            "redirect_url": null
+        },
+        "signers": [
+            {
+                "id": 6063,
+                "role": "asdasd",
+                "field_count": 0,
+                "sign_order": 1
+            }
+        ],
+        "file_type": "pdf",
+        "files": [],
+        "smart_fields": []
+    },
+    "meta": {
+        "request_id": "cc8c3bcb-be0c-4592-930d-86adaa6db4ee"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

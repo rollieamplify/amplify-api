@@ -1,0 +1,61 @@
+---
+title: "PATCH /esign_signatures"
+description: "Captured contract for PATCH /esign_signatures."
+api: "PATCH /esign_signatures"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /esign_signatures.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+PATCH : api/esign_signatures
+
+
+
+
+Description :
+
+-> Updates the display order of saved signatures. 
+-> Pass an array of signature objects with id; order in the array determines the new sort_order (1-based).
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

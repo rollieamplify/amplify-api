@@ -1,0 +1,61 @@
+---
+title: "POST /faxes/secure/preview"
+description: "Captured contract for POST /faxes/secure/preview."
+api: "POST /faxes/secure/preview"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/secure/preview.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+This api used for view inbound secure fax preview.
+Endpoint:
+/api/faxes/secure/preview
+
+Request:
+{
+    "secure_code": "407-86D"
+}
+
+Response:
+{
+    "data": {
+        "is_shareable": false,
+        "sign_required": false,
+        "doc_id": 0,
+        "file_name": "407-86D.pdf",
+        "presigned_url": "https://example.com/signed-url
+    },
+    "meta": {
+        "request_id": "97019e54-73c1-48b5-9c2b-f371d23ca301"
+    }
+}
+
+
+If user enter invalid secure code then retrurn response like below
+Invalid Request:
+{
+    "secure_code": "hdhdgh-86D"
+}
+
+
+Error Response:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "secure_code": [
+            "The secure code format is invalid."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

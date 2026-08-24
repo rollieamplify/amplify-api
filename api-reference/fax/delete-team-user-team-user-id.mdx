@@ -1,0 +1,41 @@
+---
+title: "DELETE /team-user/{team_user_id}"
+description: "Captured contract for DELETE /team-user/{team_user_id}."
+api: "DELETE /team-user/{team_user_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /team-user/{team_user_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Delete Sub-User API
+
+
+**Endpoint:**  
+DELETE: api/team-user/{team_user_id}
+
+
+# Description :
+Deletes a single sub-user (team user) by ID. If the sub-user is not found within the account, the API still returns success with empty `data` and `meta`.
+
+
+# Request Body :
+None.
+
+
+# Response Format :
+
+
+## Success Response :
+{
+  "data": [],
+  "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

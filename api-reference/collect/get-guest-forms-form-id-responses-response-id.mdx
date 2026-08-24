@@ -1,0 +1,64 @@
+---
+title: "GET /guest/forms/{form_id}/responses/{response_id}"
+description: "Captured contract for GET /guest/forms/{form_id}/responses/{response_id}."
+api: "GET /guest/forms/{form_id}/responses/{response_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /guest/forms/{form_id}/responses/{response_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/guest/forms/{form_id}/responses/{response_id}
+
+
+
+
+Description :
+
+
+
+
+-> Returns form response metadata for a respondent session without authentication. 
+-> Includes form name, page count, document URL, and respondent info (fields are not included in this response shape).
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

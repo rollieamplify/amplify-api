@@ -1,0 +1,28 @@
+---
+title: "POST /import_contacts/salesforce"
+description: "Captured contract for POST /import_contacts/salesforce."
+api: "POST /import_contacts/salesforce"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /import_contacts/salesforce.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Import Contacts from Salesforce API.
+
+EndPoint:
+POST: api/import_contacts/salesforce
+
+Body:
+{
+  "code": "01KF5V17NPKA69ERZ7XVQRZ70Q",
+  "verifier": "a1b2c3"
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

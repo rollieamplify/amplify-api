@@ -1,0 +1,139 @@
+---
+title: "POST /fax/status"
+description: "Captured contract for POST /fax/status."
+api: "POST /fax/status"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+This API used for get the fax status by socket api.
+Endpoint:
+POST: api/fax/status
+
+Request:
+{
+    "fax_uuid" : "01KH0CXZKBGS3XVW8ZKFE9FQH4"
+}
+
+Response:
+{
+    "data": {
+        "fax_uuid": "01KH0CXZKBGS3XVW8ZKFE9FQH4",
+        "is_read": false,
+        "fax_type": "outbound",
+        "created_by": 293,
+        "created_by_email": "developer@example.com",
+        "is_broadcast": false,
+        "broadcast_id": "",
+        "broadcast_name": "",
+        "broadcast_recipients_count": 0,
+        "campaign_id": "",
+        "campaign_name": "",
+        "to_number": 12562571126,
+        "from_number": 19073131400,
+        "document_name": "Fax 12562571126",
+        "sender_name": "",
+        "sender_email": "",
+        "recipient_name": "",
+        "recipient_email": "",
+        "subject": null,
+        "pages": 1,
+        "labels": [],
+        "retry_attempt": 0,
+        "fax_status": "Delivered",
+        "assigned_emails": [],
+        "assigned_names": [],
+        "created_at": 1770613833,
+        "updated_at": 1770613859,
+        "to_contact_details": {
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "organization_name": "",
+            "full_name": "",
+            "is_organization": false,
+            "id": 0
+        },
+        "from_contact_details": {
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "organization_name": "",
+            "full_name": "",
+            "is_organization": false,
+            "id": 0
+        },
+        "start_time": 1770613836,
+        "end_time": 1770613856,
+        "duration": "00:21",
+        "fax_error": "0",
+        "thumbnail_image": "https://example.com/signed-url
+        "is_cancelled": false,
+        "method": "app",
+        "ocr_status": "",
+        "nlp_status": "",
+        "source": "fax",
+        "local_fax_uuid": "01KH0CXJY2A8CXM8QAZ37ZSGWC",
+        "is_blocked": false,
+        "nlp_fields": {
+            "document_type": null,
+            "address": null,
+            "subscriber_id": null,
+            "subscriber_name": null,
+            "subscriber_dob": null,
+            "subscriber_address": null,
+            "subscriber_phone": null,
+            "subscriber_group_number": null,
+            "social_security_number": null,
+            "health_card_number": null,
+            "facility": null,
+            "physician_name": null,
+            "bill_type": null,
+            "billing_number": null,
+            "degree": null,
+            "diagnosis": null,
+            "phone": null,
+            "group_number": null,
+            "insurance_name": null,
+            "insurance_plan": null,
+            "medical_record_number": null,
+            "npi": null,
+            "patient_id": null,
+            "patient_name": null,
+            "patient_first_name": null,
+            "patient_middle_name": null,
+            "patient_last_name": null,
+            "patient_age": null,
+            "patient_dob": null,
+            "patient_email": null,
+            "patient_address": null,
+            "patient_phone_cell": null,
+            "patient_phone_home": null,
+            "patient_phone_work": null,
+            "patient_gender": null,
+            "provider_id": null,
+            "speciality": null
+        },
+        "transmission_end_estimate": 1770613953,
+        "notes_count": 0,
+        "faster_delivered_percentage" : 50,
+        "delivered_fax_pages" : 1,
+        "fax_cancel_timestamp" : 1718284800,
+        "is_right_time_delivered" : true,
+        "cancel_by_user" : "Web 35",
+        "marked_by_user" : "Web 35",
+    },
+    "meta": {
+        "request_id": "e9156fa4-4469-4105-b96f-d6a2fd6a1d09"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

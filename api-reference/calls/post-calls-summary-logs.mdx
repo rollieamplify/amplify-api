@@ -1,0 +1,52 @@
+---
+title: "POST /calls/summary/logs"
+description: "Captured contract for POST /calls/summary/logs."
+api: "POST /calls/summary/logs"
+public: true
+---
+
+This page documents the behavior captured for POST /calls/summary/logs in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/calls/summary/logs
+    
+    Body:
+    {
+        "event_type": "summary_viewed",
+        "call_id": 13263
+    }
+    
+    Error response:
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The event type field is required."
+        }
+    }
+    
+    Accepted values:
+    event_type: recording_played,transcript_viewed,summary_viewed,recording_download,transcript_download,summary_download
+    Response:
+    {
+        "data": {
+            "id": 4,
+            "conversation_id": 2966,
+            "reference_id": 13263,
+            "event_type": "summary_viewed",
+            "user_email": "developer@example.com",
+            "ip_address": "110.227.199.237",
+            "created_at": "2026-04-24T08:20:33.000000Z"
+        },
+        "meta": {
+            "request_id": "346dc1a8-dc45-4d19-8bc5-5b74e9223946"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

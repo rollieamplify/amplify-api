@@ -1,0 +1,39 @@
+---
+title: "PATCH /conversations/{conversation_id}/secure_chat/link"
+description: "Captured contract for PATCH /conversations/{conversation_id}/secure_chat/link."
+api: "PATCH /conversations/{conversation_id}/secure_chat/link"
+public: true
+---
+
+This page documents the behavior captured for PATCH /conversations/{conversation_id}/secure_chat/link in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    PATCH: api/conversations/{conversation_id}/secure_chat/link
+    
+    Body:
+    {
+        "expiry_date_time":"2026-04-16 10:28:00",
+        "revoke": true/false
+    }
+    
+    NOTE: pass revoke param to revoke link only
+    
+    Response:
+    {
+        "data": {
+            "expiry_date": "2026-04-16 10:28:00",
+            "status": "pending"
+        },
+        "meta": {
+            "request_id": "3e3a71ab-59ce-47c0-8b5a-1916b842694d"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

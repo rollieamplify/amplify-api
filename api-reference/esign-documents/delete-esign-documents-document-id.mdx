@@ -1,0 +1,65 @@
+---
+title: "DELETE /esign_documents/{document_id}"
+description: "Captured contract for DELETE /esign_documents/{document_id}."
+api: "DELETE /esign_documents/{document_id}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /esign_documents/{document_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+DELETE : api/esign_templates/{esign_template_id}/variables/{template_variable_id}
+
+
+
+
+Description :
+
+
+
+
+-> Permanently deletes a document from trash. 
+-> For owners: removes document, users, logs, reminders, and files. 
+-> For receivers: marks their copy as permanently deleted.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

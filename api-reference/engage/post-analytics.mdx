@@ -1,0 +1,57 @@
+---
+title: "POST /analytics"
+description: "Captured contract for POST /analytics."
+api: "POST /analytics"
+public: true
+---
+
+This page documents the behavior captured for POST /analytics in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/analytics
+    
+    Body:
+    {
+        "start_date": "2026-03-31",
+        "end_date": "2026-03-31",
+        "number_ids": [928,25]
+    }
+    
+    Response:
+    {
+        "data": {
+            "user_name": "web twentynew",
+            "start_date": "2026-03-31",
+            "end_date": "2026-03-31",
+            "time_series": [
+                {
+                    "date": "2026-03-31",
+                    "calls": {
+                        "total": 0,
+                        "outgoing": 0,
+                        "answered": 0,
+                        "missed": 0,
+                        "time_on_calls": 0
+                    },
+                    "messages": {
+                        "total": 1,
+                        "sent": 0,
+                        "received": 1
+                    },
+                    "unique_conversations": 1
+                }
+            ]
+        },
+        "meta": {
+            "request_id": "f16082e7-ac87-483e-baea-2c5e9081814e"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

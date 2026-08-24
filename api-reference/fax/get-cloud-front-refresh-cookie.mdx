@@ -1,0 +1,41 @@
+---
+title: "GET /cloud-front/refresh-cookie"
+description: "Captured contract for GET /cloud-front/refresh-cookie."
+api: "GET /cloud-front/refresh-cookie"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /cloud-front/refresh-cookie.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Description
+
+
+
+
+Refreshes the CloudFront signed cookies used to access private documents hosted on CloudFront. This endpoint generates a new set of signed cookies with an updated expiration time and returns them in the response headers as Set-Cookie.
+
+
+
+
+The frontend should call this endpoint before the existing CloudFront cookies expire or after receiving a 403 Forbidden response from CloudFront due to expired cookies. This ensures uninterrupted access to protected resources without requiring the user to log in again.
+
+
+
+
+Response
+Returns 200 OK on success.
+Sets the following cookies:
+CloudFront-Policy
+CloudFront-Signature
+CloudFront-Key-Pair-Id
+Authentication
+Required: Yes (Authenticated user)
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

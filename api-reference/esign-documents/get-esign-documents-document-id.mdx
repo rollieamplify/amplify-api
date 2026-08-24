@@ -1,0 +1,63 @@
+---
+title: "GET /esign_documents/{document_id}"
+description: "Captured contract for GET /esign_documents/{document_id}."
+api: "GET /esign_documents/{document_id}"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_documents/{document_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/esign_documents/{document_id}
+
+
+
+
+Description :
+
+
+
+
+-> Returns full document details including status, config, recipients, collaborators, renewal and reminder settings, labels, files, variables, and preferences. 
+->Works for both sender (owner) and receiver views.
+
+ 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

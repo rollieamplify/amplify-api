@@ -1,0 +1,27 @@
+---
+title: "POST /email_to_fax/update_status"
+description: "Captured contract for POST /email_to_fax/update_status."
+api: "POST /email_to_fax/update_status"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /email_to_fax/update_status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+- Update Email To Fax Configurations Details
+
+Endpoint:
+POST: api/email_to_fax/update_status
+Body:
+{
+    "status":"anyone_with_allowed_domains"
+}
+status = not_allowed || account_users_only || anyone_with_allowed_domains
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

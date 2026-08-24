@@ -1,0 +1,48 @@
+---
+title: "DELETE /team-user/bulk_delete"
+description: "Captured contract for DELETE /team-user/bulk_delete."
+api: "DELETE /team-user/bulk_delete"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /team-user/bulk_delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Bulk Delete Sub-Users API
+
+
+**Endpoint:**  
+DELETE: api/team-user/bulk_delete
+
+
+# Description :
+Deletes multiple sub-users by comma-separated IDs. Returns success with empty `data` and `meta` even when no users were found or deleted.
+
+
+# Request Body :
+{
+  "ids": "103,104,105"
+}
+
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| ids | string | Yes | Comma-separated sub-user IDs. |
+
+
+# Response Format :
+
+
+## Success Response :
+{
+  "data": [],
+  "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

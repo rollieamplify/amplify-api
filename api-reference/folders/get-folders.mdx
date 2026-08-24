@@ -1,0 +1,84 @@
+---
+title: "GET /folders"
+description: "Captured contract for GET /folders."
+api: "GET /folders"
+public: true
+---
+
+This internal review page records the behavior captured for GET /folders.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+GET: api/folders
+
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 989,
+            "parent_id": 553,
+            "name": "Sub user folder",
+            "slug": "sub-user-folder",
+            "sort_order": 0,
+            "is_shared": true,
+            "shared": [
+                {
+                    "id": 53,
+                    "first_name": "web",
+                    "last_name": "twentynew",
+                    "email": "developer@example.com"
+                }
+            ],
+            "created_at": 1770020365,
+            "has_child": false,
+            "count": 1,
+            "owner_name": "Taylor Swift",
+            "file_size": "",
+            "updated_at": 1770020365,
+            "is_starred": false
+        },
+        {
+            "id": 553,
+            "parent_id": null,
+            "name": "Test 1",
+            "slug": "test-1-3",
+            "sort_order": 0,
+            "is_shared": false,
+            "shared": [
+                {
+                    "id": 322,
+                    "first_name": "Taylor",
+                    "last_name": "Swift",
+                    "email": "developer@example.com"
+                }
+            ],
+            "created_at": 1768193558,
+            "has_child": false,
+            "count": 49,
+            "direct_count": 46, // only in root folder
+            "subfolder_count": 3, // only in root folder
+            "owner_name": "web twentynew",
+            "file_size": "",
+            "updated_at": 1768193558,
+            "is_starred": true
+        }
+    ],
+    "meta": {
+        "total": 2,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "e7f4f360-09f0-48c8-9754-eb0719c42221"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,62 @@
+---
+title: "POST /esign_signatures"
+description: "Captured contract for POST /esign_signatures."
+api: "POST /esign_signatures"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /esign_signatures.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/esign_signatures
+
+
+
+
+Description :
+
+-> Saves a new signature to the authenticated user's signature library. 
+-> The signature image must already be uploaded to S3 via the presigned upload URL. 
+-> Supports draw, type, and upload methods.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,35 @@
+---
+title: "DELETE /user/filter"
+description: "Captured contract for DELETE /user/filter."
+api: "DELETE /user/filter"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /user/filter.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Clear filter data
+
+Endpoint:
+DELETE: /user/filter
+
+Request:
+{
+    "created_from" : "Tests3"
+}
+
+Response:
+{
+    "data": "Filter clear successfully.",
+    "meta": {
+        "request_id": "5ff8e26d-e2ef-4e3f-827c-96ec3a5aefab"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

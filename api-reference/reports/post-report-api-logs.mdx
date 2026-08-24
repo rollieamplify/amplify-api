@@ -1,0 +1,69 @@
+---
+title: "POST /report/api_logs"
+description: "Captured contract for POST /report/api_logs."
+api: "POST /report/api_logs"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /report/api_logs.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+API Log Report and Activity
+
+EndPoint
+POST : api/reports/api_logs
+
+Request
+{
+    "start_date": "2025-01-01",
+    "end_date": "2026-02-04",
+    "api_keys" : [72],
+    "sort_by" : "",
+    "last_id" : ""
+}
+
+
+Validation Error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "start_date": [
+            "The start date does not match the format Y-m-d."
+        ],
+        "end_date": [
+            "The end date does not match the format Y-m-d."
+        ],
+        "api_keys": [
+            "The api keys must be an array."
+        ]
+    }
+}
+
+Respone
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Test",
+            "api_end_point": "v1/customer/fax-send",
+            "response_code": 200,
+            "date": 1770198199,
+            "ip_address": "",
+            "method": "Post"
+        }
+    ],
+    "meta": {
+        "request_id": "2b42f298-a002-4cf7-8896-d0bb09fcf0d1"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

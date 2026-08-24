@@ -1,0 +1,84 @@
+---
+title: "POST /fax/ocr/details"
+description: "Captured contract for POST /fax/ocr/details."
+api: "POST /fax/ocr/details"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/ocr/details.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/fax/ocr/details
+
+Body:
+{
+    "fax_uuid": "01KDWKVG5ZTBPF8A3Y4QVP34XP",
+    "is_broadcast": false
+}
+
+Response:
+{
+    "data": {
+        "custom_fields": [
+            {
+                "id": 21,
+                "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+                "broadcast_fax_uuid": "",
+                "key_id": 85,
+                "data_key": "Test",
+                "data_type": "ALLERGIES",
+                "key_value": "ertrtre",
+                "confidence": ""
+            },
+            {
+                "id": 22,
+                "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+                "broadcast_fax_uuid": "",
+                "key_id": 86,
+                "data_key": "Test one",
+                "data_type": "ALLERGIES",
+                "key_value": "hfghgfh",
+                "confidence": ""
+            },
+            {
+                "id": 23,
+                "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+                "broadcast_fax_uuid": "",
+                "key_id": 87,
+                "data_key": "Test two",
+                "data_type": "ALLERGIES",
+                "key_value": "435dfgdf",
+                "confidence": ""
+            },
+            {
+                "id": 24,
+                "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+                "broadcast_fax_uuid": "",
+                "key_id": 88,
+                "data_key": "Test three",
+                "data_type": "ALLERGIES",
+                "key_value": "erwre8768",
+                "confidence": ""
+            }
+        ],
+        "ocr_status": "Pending",
+        "request_ocr": 2,
+        "json_s3_sign_url": null,
+        "process_ocr": true,
+        "allow_free_ocr": false,
+        "process_ocr_message": "This may take a few seconds. Accelerate this process in the future by selecting automatic fax OCR optimization.",
+        "is_searchable_pdf": false
+    },
+    "meta": {
+        "request_id": "f6bcd0d0-71e6-431f-9ba0-e9b0d5a90649"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

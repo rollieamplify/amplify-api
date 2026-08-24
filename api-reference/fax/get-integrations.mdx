@@ -1,0 +1,124 @@
+---
+title: "GET /integrations"
+description: "Captured contract for GET /integrations."
+api: "GET /integrations"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /integrations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+List integrations
+
+
+Endpoint :
+
+GET - api/integrations
+
+
+Response:
+
+{
+    "data": {
+        "integrations": [
+            {
+                "app": "google_drive",
+                "is_active": true,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "dropbox",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "one_drive",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "sharepoint",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "box",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "sftp",
+                "is_active": true,
+                "sync_in_progress": false,
+                "token_expired": false,
+                "configured": true,
+                "needs_configuration": false
+            },
+            {
+                "app": "epic",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "elation_health",
+                "is_active": true,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "deep_cura",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "okta",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "google_workspace",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "azure",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "hubspot",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            },
+            {
+                "app": "salesforce",
+                "is_active": false,
+                "sync_in_progress": false,
+                "token_expired": false
+            }
+        ],
+        "sftp_configured": true
+    },
+    "meta": {
+        "request_id": "05f3d9e0-28ef-46d9-bff2-c2820c0d222f"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

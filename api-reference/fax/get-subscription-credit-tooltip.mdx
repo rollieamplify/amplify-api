@@ -1,0 +1,94 @@
+---
+title: "GET /subscription/credit_tooltip"
+description: "Captured contract for GET /subscription/credit_tooltip."
+api: "GET /subscription/credit_tooltip"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /subscription/credit_tooltip.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Subscription Credit Tooltip API
+
+Endpoint :  
+GET: api/subscription/credit_tooltip
+
+Query Parameters :  
+- None
+
+Response : 
+ {
+    "data": [
+        {
+            "key": "send_receive_faxes",
+            "title": "Send/Receive Faxes",
+            "value": "1 credit ($0.035/page*)"
+        },
+        {
+            "key": "ocr",
+            "title": "OCR",
+            "value": "1 credit ($0.03/10 pages)"
+        },
+        {
+            "key": "field_and_data_extraction",
+            "title": "Field & Data Extraction",
+            "value": "14 credits ($0.49/document)"
+        },
+        {
+            "key": "ai_chat",
+            "title": "AI Chat",
+            "value": "1 credit ($0.035/message)"
+        },
+        {
+            "key": "automation",
+            "title": "Automation",
+            "value": "1 credit ($0.035/task)"
+        },
+        {
+            "key": "eSign",
+            "title": "eSign",
+            "value": "1 credit ($0.035/envelope)"
+        },
+        {
+            "key": "forms",
+            "title": "Forms",
+            "value": "1 credit ($0.035/submission)"
+        },
+        {
+            "key": "sms",
+            "title": "SMS",
+            "value": "1 credits ($0.035/message)"
+        },
+        {
+            "key": "mms",
+            "title": "MMS",
+            "value": "3 credits ($0.035/message)"
+        },
+        {
+            "key": "voice_call",
+            "title": "Voice Call",
+            "value": "1 credit ($0.035/min)"
+        },
+        {
+            "key": "voice_mail",
+            "title": "Voicemail",
+            "value": "1 credit ($0.035/min)"
+        },
+        {
+            "key": "ai_intake",
+            "title": "AI Intake",
+            "value": "9 credits ($0.035/min)"
+        }
+    ],
+    "meta": {
+        "request_id": "2256464d-927f-440b-8d48-3303d52d6f14"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

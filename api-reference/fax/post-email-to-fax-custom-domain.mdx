@@ -1,0 +1,35 @@
+---
+title: "POST /email_to_fax/custom_domain"
+description: "Captured contract for POST /email_to_fax/custom_domain."
+api: "POST /email_to_fax/custom_domain"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /email_to_fax/custom_domain.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+- Add/Update Custom Domain
+
+Endpoint:
+POST:  /api/email_to_fax/custom_domain
+Body:
+{
+  "domain": "newexample.com"
+}
+
+- Delete Custom Domain
+
+Endpoint:
+POST:  /api/email_to_fax/custom_domain
+Body:
+{
+  "domain": ""
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

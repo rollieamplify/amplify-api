@@ -1,0 +1,64 @@
+---
+title: "GET /forms/responses"
+description: "Captured contract for GET /forms/responses."
+api: "GET /forms/responses"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/responses.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/forms/responses
+
+
+
+
+Description :
+
+
+
+
+-> Returns paginated list of form responses where the authenticated user's email matches the response email (respondent inbox across all forms). 
+-> Requires sub-user permission VIEW_FORM_RESPONSES.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

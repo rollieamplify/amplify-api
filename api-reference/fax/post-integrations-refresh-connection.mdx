@@ -1,0 +1,55 @@
+---
+title: "POST /integrations/refresh_connection"
+description: "Captured contract for POST /integrations/refresh_connection."
+api: "POST /integrations/refresh_connection"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /integrations/refresh_connection.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Refresh connection
+Endpoint: POST /integrations/refresh_connection
+Description: Refresh OAuth for an already-connected app (does not reset root folder ID if already present).
+Request:
+{
+  "app": "google_drive",
+  "metadata": {}
+}
+
+Field
+
+	
+
+Rules
+
+
+
+
+app
+
+	
+
+required: google_drive, dropbox, one_drive, sharepoint, box
+
+
+
+
+metadata
+
+	
+
+required array
+
+Response:
+{
+  "status": "ok"
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

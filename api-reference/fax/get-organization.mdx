@@ -1,0 +1,60 @@
+---
+title: "GET /organization"
+description: "Captured contract for GET /organization."
+api: "GET /organization"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /organization.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/organization
+
+Response:
+{
+    "data": {
+        "organization_name": "dfgdgg",
+        "industry": "Insurance",
+        "organization_size": "10001+",
+        "onboarding_use_case": "Sending audit or compliance packets to regulators",
+        "onboarding_workflow": "dfgdfdfdfgdf",
+        "estimated_fax_pages": "20,000 - 49,999 pages",
+        "usage_duration": "<1 Year",
+        "current_ehr_emr": "athenahealth",
+        "software": "",
+        "hear_from": "Advertisement",
+        "feature_send_faxes": true,
+        "feature_receive_faxes": true,
+        "feature_fax_ocr": false,
+        "feature_broadcast_fax": false,
+        "feature_hippa_cloud_storage": false,
+        "feature_api": true,
+        "feature_ai_data_extraction": false,
+        "hipaa_sms_messages": false,
+        "hipaa_voice_calls": true,
+        "hipaa_video_meetings": false,
+        "hipaa_forms_intake": false,
+        "hipaa_esign_documents": false,
+        "street1": "ABC st.",
+        "street2": "Ahmedabad",
+        "city": "Ahmedabad",
+        "state": "GJ",
+        "zip_code": "382415",
+        "country_id": 1,
+        "organization_logo": "default_company_logo.png",
+        "organization_logo_url": "https://dev-api.amplify.xyz/images/default_company_logo.png",
+        "organization_logo_uuid": ""
+    },
+    "meta": {
+        "request_id": "12aa7c6b-ee3a-4d45-9507-e37edcc1dcef"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

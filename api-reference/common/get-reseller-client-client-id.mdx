@@ -1,0 +1,44 @@
+---
+title: "GET /reseller/client/{client_id}"
+description: "Captured contract for GET /reseller/client/{client_id}."
+api: "GET /reseller/client/{client_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/client/{client_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+USE: Get details of given client.
+
+
+
+
+Endpoint:
+
+GET: api/reseller/client/27968
+
+
+
+
+Response:
+
+{
+    "data": {
+        "profile_image": "https://example.com/signed-url
+        "first_name": "angular",
+        "last_name": "15",
+        "organization_name": "Client_org",
+        "created_at": 1785318966
+    },
+    "meta": {
+        "request_id": "13bde3c6-94c5-4ffc-b4be-382215d6d2a9"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

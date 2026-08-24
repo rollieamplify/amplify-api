@@ -1,0 +1,40 @@
+---
+title: "List filled requirements"
+description: "Retrieve previously filled regulatory requirement values for a country."
+api: "POST /numbers/filled_requirements"
+groups: ["internal"]
+---
+
+<Warning>This endpoint is for internal Amplify use only.</Warning>
+
+`POST /numbers/filled_requirements` retrieves requirement definitions and previously stored values.
+
+## Request body
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `country_code` | string | Two-letter country code. |
+
+```json
+{
+  "country_code": "CH"
+}
+```
+
+## Response fields
+
+Each item in `data` can contain:
+
+- `id`
+- `requirement_id`
+- `example`
+- `description`
+- `name`
+- `type`
+- `country_code`
+- `value`
+- `other_data`
+
+Requirement types observed in the captured contract are `textual`, `document`, and `address`.
+
+<Warning>Requirement values can contain personal or business identity data. Handle and log them according to your privacy and retention requirements.</Warning>

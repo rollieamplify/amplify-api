@@ -1,0 +1,46 @@
+---
+title: "POST /subscription/update_for_items"
+description: "Captured contract for POST /subscription/update_for_items."
+api: "POST /subscription/update_for_items"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/update_for_items.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update Subscription For Items
+
+Endpoint:
+POST: api/subscription/update_for_items
+
+Only pass addons that needs to update, in case remove addon set quantity to 0.
+
+Body:
+{
+    "subscription_id" : "AzydJBVExjPSQHb0",
+    "addons" : [
+        {
+            "addon_id" : 18,
+            "quantity" : 1
+        }
+    ]
+}
+
+Response:
+{
+    "data": {
+        "last_action": "update_request",
+        "action_status": "pending"
+    },
+    "meta": {
+        "request_id": "a145f8ba-61ca-4918-9076-8bd75db52ae4"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

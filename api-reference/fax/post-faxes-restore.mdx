@@ -1,0 +1,38 @@
+---
+title: "POST /faxes/restore"
+description: "Captured contract for POST /faxes/restore."
+api: "POST /faxes/restore"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/restore.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Restore soft deleted faxes
+Endpoint:
+POST: /faxes/restore
+
+Request:
+{
+    "fax_uuids" : [
+        "01KDMQ9QVH822JJET45F58G8QQ",
+        "01KDMQCMGC3RZGH4GSVRBCN9RR"
+    ],
+    "broadcast_fax_uuids" : []
+}
+
+Response:
+{
+    "data": "FAX_RESTORED_SUCCESSFULLY",
+    "meta": {
+        "request_id": "57958489-4a67-499c-9def-03654cf27692"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

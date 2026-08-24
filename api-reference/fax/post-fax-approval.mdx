@@ -1,0 +1,66 @@
+---
+title: "POST /fax/approval"
+description: "Captured contract for POST /fax/approval."
+api: "POST /fax/approval"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/approval.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Approve or Reject Fax API
+
+## Description
+Approves or rejects one or more pending faxes. This endpoint supports batch processing, allowing you to approve or reject multiple faxes in a single request. Requires the `approve_faxes` permission.
+
+
+**Note:** This endpoint accepts an array of fax UUIDs in the request body instead of a single UUID in the path.
+
+
+Endpoint :
+POST: /api/fax/approval
+
+
+## Request Body :
+
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | string | Yes | Action type: `"approve"` or `"reject"` |
+| `fax_uuids` | array | Yes | Array of fax UUIDs (ULID format). Minimum 1 UUID required. |
+| `fax_uuids.*` | string | Yes | Individual fax UUID (ULID format) |
+| `comment` | string | No | Optional comment (max 500 characters). Useful for rejection notes. |
+
+
+## Example Request (Approve Multiple Faxes) : 
+{
+    "type": "approve",
+    "fax_uuids": [
+        "01HZ1234567890ABCDEFGHIJK",
+        "01HZ1234567890ABCDEFGHIJL",
+        "01HZ1234567890ABCDEFGHIJM"
+    ],
+    "comment": "All faxes approved for sending"
+}
+
+
+Response :
+ {
+    "data": {
+        "fax_uuid": "01HZ1234567890ABCDEFGHIJK",
+        "message": "Fax has been successfully approved and is being sent.",
+        "approval_status": 1,
+        "approval_time": "2024-01-01 12:00:00"
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

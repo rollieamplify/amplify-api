@@ -1,0 +1,64 @@
+---
+title: "GET /forms/{form_id}/variables"
+description: "Captured contract for GET /forms/{form_id}/variables."
+api: "GET /forms/{form_id}/variables"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/{form_id}/variables.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/forms/{form_id}/variables
+
+
+
+
+Description :
+
+
+
+
+-> Returns form variables. Without form_response_id, returns base template variables (where form_response_id is null).
+-> With form_response_id, returns response-scoped variables for a specific form response.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

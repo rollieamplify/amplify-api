@@ -1,0 +1,38 @@
+---
+title: "POST /conversations/notes"
+description: "Captured contract for POST /conversations/notes."
+api: "POST /conversations/notes"
+public: true
+---
+
+This page documents the behavior captured for POST /conversations/notes in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/conversations/notes
+    
+    Body:
+    {
+        "conversation_id": 1937,
+        "note": "Test Note two"
+    }
+    
+    
+    Response:
+    {
+        "data": {
+            "note": "Test Note two",
+            "created_at": "2026-03-23T11:43:14Z"
+        },
+        "meta": {
+            "request_id": "dbefa0ed-6bab-4bd3-a715-62445a65d2db"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

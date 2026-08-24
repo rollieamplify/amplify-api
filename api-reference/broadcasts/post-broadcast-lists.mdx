@@ -1,0 +1,98 @@
+---
+title: "POST /broadcast_lists"
+description: "Captured contract for POST /broadcast_lists."
+api: "POST /broadcast_lists"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast_lists.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Broadcast List API :
+
+
+Endpoint :
+POST: api/broadcast_lists
+
+
+Body :
+{
+    "name": "My Broadcast List",
+    "recipients": [
+        {
+            "fax_number": "1234567890",
+            "country_code": "US",
+            "area_code": "123",
+            "metadata": {
+                "region": "US",
+                "cost": 0.06,
+                "price_per_page": 0.03, 
+                "broadcast_label_id": null
+            },
+            "fields": [
+                {
+                    "key": "firstName",
+                    "value": "John"
+                },
+                {
+                    "key": "lastName",
+                    "value": "Doe"
+                }
+            ]
+        },
+        {
+            "fax_number": "0987654321",
+            "country_code": "US",
+            "area_code": "456",
+            "metadata": {
+                "region": "US",
+                "cost": 0.06,
+                "price_per_page": 0.03, 
+                "broadcast_label_id": 1
+            },
+            "fields": [
+                {
+                    "key": "firstName",
+                    "value": "Jane"
+                },
+                {
+                    "key": "lastName",
+                    "value": "Smith"
+                }
+            ]
+        }
+    ],
+    "fields": [
+        {
+            "key": "firstName",
+            "cover_page_field": "to"
+        },
+        {
+            "key": "lastName",
+            "cover_page_field": null
+        }
+    ],
+    "total_cost": 0.12,
+    "invalid_nums_count": 0,
+    "is_favorite": false,
+    "recipients_optout_count": 0
+}
+
+
+Response :
+{
+    "data": {
+        "broadcast_id": 1
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

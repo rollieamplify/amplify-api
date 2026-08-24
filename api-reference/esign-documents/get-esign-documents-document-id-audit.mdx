@@ -1,0 +1,62 @@
+---
+title: "GET /esign_documents/{document_id}/audit"
+description: "Captured contract for GET /esign_documents/{document_id}/audit."
+api: "GET /esign_documents/{document_id}/audit"
+public: true
+---
+
+This internal review page records the behavior captured for GET /esign_documents/{document_id}/audit.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/esign_documents/{document_id}/audit
+
+
+
+
+Description :
+
+
+
+
+Returns the full audit trail for a document — sender logs and per-recipient activity logs including viewed, completed, declined, trashed, restored, and updated events with device, IP, and location metadata.
+
+ 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

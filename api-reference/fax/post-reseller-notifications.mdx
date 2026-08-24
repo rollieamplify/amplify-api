@@ -1,0 +1,157 @@
+---
+title: "POST /reseller/notifications"
+description: "Captured contract for POST /reseller/notifications."
+api: "POST /reseller/notifications"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/notifications.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Add/Update Reseller Notification Default API.
+
+Endpoint :
+
+POST - api/reseller/notifications
+
+
+Body:
+
+{
+    "notifications": [
+        {
+            "key": "faxes_sent_by_me",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "push",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false
+            }
+        },
+        {
+            "key": "faxes_sent_by_others_accessible_number",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false
+            }
+        }
+        },
+        {
+            "key": "tips_feature",
+            "product": "other",
+            "category": "other",
+            "type": "",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false
+            }
+        }
+    ]
+}
+
+
+Response:
+
+{
+    "data": [
+        {
+            "key": "faxes_sent_by_me",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "push",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false,
+                "play_notification_sound": false
+            }
+        },
+        {
+            "key": "faxes_sent_by_others_accessible_number",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false,
+                "play_notification_sound": false
+            }
+        },
+        {
+            "key": "faxes_sent_by_email_to_fax",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false,
+                "play_notification_sound": false
+            }
+        },
+        {
+            "key": "fax_send_approval_email",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false,
+                "play_notification_sound": false
+            }
+        },
+        {
+            "key": "cc_email_user",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false,
+                "play_notification_sound": false
+            }
+        },
+        {
+            "key": "fax_received_assigned_to_me",
+            "product": "fax",
+            "category": "inbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false,
+                "play_notification_sound": false
+            }
+        }
+    ],
+    "meta": {
+        "request_id": "d28b6351-dee7-43f7-acb6-7a2a9a0c502e"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

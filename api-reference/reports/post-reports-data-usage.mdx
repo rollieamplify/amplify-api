@@ -1,0 +1,273 @@
+---
+title: "POST /reports/data_usage"
+description: "Captured contract for POST /reports/data_usage."
+api: "POST /reports/data_usage"
+public: true
+---
+
+This internal review page records the behavior captured for POST /reports/data_usage.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/reports/data_usages?limit=10&cursor=1
+
+Body:
+{
+    "start_date": "2026-02-04",
+    "end_date": "2026-02-04",
+    "direction": "all",
+    "by_time": "by_day",
+    "emails": [
+        "2733"
+    ],
+    "methods": ["app"],
+    "numbers": ["12055574540"],
+    "folder_ids": [],
+    "module" : "ifax"
+}
+
+direction: all, inbound, outbound
+by_time: by_day, by_week, by_month, by_year 
+method: Method for module-wise
+           'ifax' => ['app','email_to_fax','fcl_to_fax','api','broadcast'],
+            'engage' => ['call','sms','secure_sms','meeting','recording',' voicemail'],
+            'esign' => ['signature_requests','bulk_signature_requests','form_submissions'],
+            'ai_session' => ['phone_call','web_call'],
+status: Status for module-wise
+           'ifax' => ['delivered',' confirmed',' failed', 'received', 'partially_cancelled','failed_chargeable'],
+            'esign' => ['signed',' sent','draft','viewed','completed',' declined','expired'],
+
+module: ifax, engage, ai_session, esign
+
+Validation Errors:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The module field is required."
+    },
+    "errors": {
+        "module": [
+            "The module field is required."
+        ],
+        "direction": [
+            "The direction must be an array."
+        ],
+        "start_date": [
+            "The start date does not match the format Y-m-d H:i:s."
+        ],
+        "end_date": [
+            "The end date does not match the format Y-m-d H:i:s."
+        ],
+        "methods": [
+            "The methods must be an array."
+        ]
+    }
+}
+
+Response:
+
+For ifax Module
+{
+    "data": [
+        {
+            "label": "2026-05-05",
+            "actual_usage": {
+                "faxes_sent": 0,
+                "faxes_received": 0,
+                "faxes_deleted": 1,
+                "pages_sent": 0,
+                "pages_received": 0,
+                "pages_deleted": 1,
+                "smart_template_used": 0,
+                "ocr_processed": 0,
+                "nlp_processed": 0
+            },
+            "credit_usage": {
+                "fax_outbound": 0,
+                "fax_inbound": 0,
+                "fax_document": 0,
+                "ocr": 18,
+                "nlp": 0,
+                "automation": 0,
+                "ai_chat": 0,
+                "total_credits_used": 18
+            }
+        },
+        {
+            "label": "2026-05-04",
+            "actual_usage": {
+                "faxes_sent": 4,
+                "faxes_received": 10,
+                "faxes_deleted": 0,
+                "pages_sent": 9,
+                "pages_received": 28,
+                "pages_deleted": 0,
+                "smart_template_used": 0,
+                "ocr_processed": 5,
+                "nlp_processed": 0
+            },
+            "credit_usage": {
+                "fax_outbound": 44,
+                "fax_inbound": 28,
+                "fax_document": 0,
+                "ocr": 6,
+                "nlp": 0,
+                "automation": 0,
+                "ai_chat": 0,
+                "total_credits_used": 78
+            }
+        }
+    ],
+    "meta": {
+        "total": 109,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 2,
+        "request_id": "2ff9a787-2ff4-447c-9566-bd552e89542f"
+    }
+}
+
+For engage Module
+{
+    "data": [
+        {
+            "label": "2026-05-05",
+            "actual_usage": {
+                "call_duration": 0,
+                "sms_count": 0,
+                "voicemail_count": 0,
+                "recording_duration": 0
+            },
+            "credit_usage": {
+                "call_credits": 0,
+                "sms_credits": 0,
+                "voicemail_credits": 0,
+                "recording_credits": 0,
+                "total_credits_used": 0
+            }
+        },
+        {
+            "label": "2026-05-04",
+            "actual_usage": {
+                "call_duration": 0,
+                "sms_count": 0,
+                "voicemail_count": 0,
+                "recording_duration": 0
+            },
+            "credit_usage": {
+                "call_credits": 0,
+                "sms_credits": 0,
+                "voicemail_credits": 0,
+                "recording_credits": 0,
+                "total_credits_used": 0
+            }
+        }
+    ],
+    "meta": {
+        "total": 109,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 2,
+        "request_id": "2764970b-6c0a-42d0-94b0-df1e8b4e7b9a"
+    }
+}
+
+For esign Module
+{
+    "data": [
+        {
+            "label": "2026-05-05",
+            "actual_usage": {
+                "signature_requests": 0,
+                "bulk_send": 0,
+                "form_submissions": 0
+            },
+            "credit_usage": {
+                "signature_requests": 0,
+                "bulk_signature_requests": 0,
+                "form_submissions": 0,
+                "ai_document": 0,
+                "total_credits_used": 0
+            }
+        },
+        {
+            "label": "2026-05-04",
+            "actual_usage": {
+                "signature_requests": 0,
+                "bulk_send": 0,
+                "form_submissions": 0
+            },
+            "credit_usage": {
+                "signature_requests": 0,
+                "bulk_signature_requests": 0,
+                "form_submissions": 0,
+                "ai_document": 0,
+                "total_credits_used": 0
+            }
+        }
+    ],
+    "meta": {
+        "total": 109,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 2,
+        "request_id": "c9498141-4a88-4343-8eff-60bb7807c1d4"
+    }
+}
+
+For Ai Session Module
+
+
+{
+    "data": [
+        {
+            "label": "2026-05-05",
+            "actual_usage": {
+                "phone_calls": 0,
+                "web_calls": 0
+            },
+            "credit_usage": {
+                "phone_call_credits": 0,
+                "web_call_credits": 0,
+                "total_credits_used": 0
+            },
+            "cost_usage": {
+                "phone_call_cost": 0,
+                "web_call_cost": 0,
+                "total_cost": 0
+            }
+        },
+        {
+            "label": "2026-05-04",
+            "actual_usage": {
+                "phone_calls": 0,
+                "web_calls": 0
+            },
+            "credit_usage": {
+                "phone_call_credits": 0,
+                "web_call_credits": 0,
+                "total_credits_used": 0
+            },
+            "cost_usage": {
+                "phone_call_cost": 0,
+                "web_call_cost": 0,
+                "total_cost": 0
+            }
+        }
+    ],
+    "meta": {
+        "total": 109,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 2,
+        "request_id": "c8fb8678-8f9f-4a33-ab07-df38281810ce"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

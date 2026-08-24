@@ -1,0 +1,52 @@
+---
+title: "POST /plan/downgrade/preview"
+description: "Captured contract for POST /plan/downgrade/preview."
+api: "POST /plan/downgrade/preview"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plan/downgrade/preview.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint :
+POST - api/plan/downgrade/preview
+
+
+Body:
+{
+    "new_plan_type": "basic_plan"
+}
+
+Response:
+ 
+{
+    "data": [
+        {
+            "feature": "Advanced Email to Fax (domain etc)",
+            "feature_slug": "advanced_email_to_fax_domain_etc"
+        },
+        {
+            "feature": "Scheduled Faxes",
+            "feature_slug": "scheduled_faxes"
+        },
+        {
+            "feature": "Broadcast Fax",
+            "feature_slug": "broadcast_fax"
+        },
+        {
+            "feature": "Cover Pages & Templates",
+            "feature_slug": "cover_pages_templates"
+        }
+    ],
+    "meta": {
+        "request_id": "da2095bc-973f-48e6-8eae-a1cfdf446dcd"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

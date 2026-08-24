@@ -1,0 +1,36 @@
+---
+title: "POST /hubspot/integration"
+description: "Captured contract for POST /hubspot/integration."
+api: "POST /hubspot/integration"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /hubspot/integration.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Hub Spot Integration.
+
+Endpoint:
+POST: api/hubspot/integration
+
+Request:
+{
+    "code" : "na2-df4e-b1d5-4609-ab52-db1824acf913",
+    "redirect_uri" : "https://dev.amplify.xyz/hubspot/status"
+}
+
+Response:
+{
+    "data": "Hubspot integrated successfully.",
+    "meta": {
+        "request_id": "e1419d6e-7297-4770-8352-a2a5da736fd5"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

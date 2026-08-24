@@ -1,0 +1,125 @@
+---
+title: "POST /faxes/nlp/data"
+description: "Captured contract for POST /faxes/nlp/data."
+api: "POST /faxes/nlp/data"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/nlp/data.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update NLP json data
+
+Endpoint:
+
+POST: api/faxes/nlp/data
+
+
+Body:
+
+{
+    "fax_uuid" : "", // or
+    "broadcast_fax_uuid": "" 
+}
+
+
+Response:
+
+{
+    "data": {
+        "request_nlp": false,
+        "process_nlp": false,
+        "request_lab": false,
+        "json_s3_nlp_url": "",
+        "json_s3_lab_nlp_url": "",
+        "nlp_data": [
+            {
+                "id": 7371,
+                "is_primary_patient": true,
+                "is_read": false,
+                "pages": "1-2",
+                "data": [
+                    {
+                        "key": "Document Type",
+                        "data": [],
+                        "extra": "",
+                        "value": "Other",
+                        "key_slug": "document_type",
+                        "multiple": 0,
+                        "confidence": 0
+                    },
+                    {
+                        "key": "Priority",
+                        "data": [],
+                        "extra": "",
+                        "value": "No",
+                        "key_slug": "priority",
+                        "multiple": 0,
+                        "confidence": 0
+                    },
+                    {
+                        "key": "Priority Source",
+                        "data": [],
+                        "extra": "",
+                        "value": "context",
+                        "key_slug": "priority_source",
+                        "multiple": 0,
+                        "confidence": 0
+                    },
+                    {
+                        "key": "RDP Reason",
+                        "data": [
+                            {
+                                "key": "RDP Reason",
+                                "extra": {
+                                    "cpt4": "",
+                                    "reason": "Amplify 2.0",
+                                    "cpt_code": ""
+                                },
+                                "value": "Amplify 2.0",
+                                "category": "Unknown",
+                                "key_slug": "rdp_reason",
+                                "confidence": 0.948
+                            },
+                            {
+                                "key": "RDP Reason",
+                                "extra": {
+                                    "cpt4": "",
+                                    "reason": "Open vs Closed Defects",
+                                    "cpt_code": ""
+                                },
+                                "value": "Open vs Closed Defects",
+                                "category": "Unknown",
+                                "key_slug": "rdp_reason",
+                                "confidence": 0.8858
+                            }
+                        ],
+                        "extra": "",
+                        "value": "Amplify 2.0,Open vs Closed Defects",
+                        "key_slug": "rdp_reason",
+                        "multiple": 1,
+                        "confidence": null
+                    },
+                ]
+            }
+        ],
+        "message": "This may take a few seconds. Accelerate this process in the future by setting up automatic OCR for all incoming faxes.",
+        "auto_nlp_fields": [
+            "document_type",
+            "priority",
+            "priority_source"
+        ],
+        "minimum_nlp_confidence": "20"
+    },
+    "meta": {
+        "request_id": "3eb10dee-811c-4765-bf2f-27b557b6fdb1"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

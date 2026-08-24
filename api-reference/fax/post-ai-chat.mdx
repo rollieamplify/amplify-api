@@ -1,0 +1,48 @@
+---
+title: "POST /ai_chat"
+description: "Captured contract for POST /ai_chat."
+api: "POST /ai_chat"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /ai_chat.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Chat API.
+
+Endpoint :
+POST - api/ai_chat
+
+Body:
+{
+  "fax_uuid": "8c3a2c54-7d2e-4c4b-9a77-9d7c9f1b1111",
+  "is_broadcast": false,
+  "question": "Who is the sender of this fax?",
+  "answer": "The sender is ABC Healthcare Services."
+}
+
+
+
+Response:
+{
+    "data": {
+        "id": 5,
+        "fax_uuid": "8c3a2c54-7d2e-4c4b-9a77-9d7c9f1b1111",
+        "is_broadcast": false,
+        "question": "Who is the sender of this fax?",
+        "answer": "The sender is ABC Healthcare Services.",
+        "created_at": "2026-01-05T11:51:58.000000Z",
+        "updated_at": "2026-01-05T11:51:58.000000Z"
+    },
+    "meta": {
+        "request_id": "99b0e258-3972-4ae6-acb0-98d86200bb6d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

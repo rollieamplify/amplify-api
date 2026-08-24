@@ -1,0 +1,66 @@
+---
+title: "POST /team-user/microsoft-users"
+description: "Captured contract for POST /team-user/microsoft-users."
+api: "POST /team-user/microsoft-users"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /team-user/microsoft-users.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Get All Microsoft Users API
+
+
+**Endpoint:**  
+POST: api/team-user/microsoft-users
+
+
+# Description :
+Fetches all Microsoft 365 / Azure AD users for the organization using the Microsoft Graph API. Used when adding sub-users from the Microsoft directory (e.g. invite by selecting from org users).  
+Expects `code` (OAuth authorization code) and `state` from the Microsoft login flow. Exchanges the code for an access token, then calls Graph `GET /users` with `user.readbasic.all` scope, and follows `@odata.nextLink` until all users are collected.
+
+
+# Request Body :
+{
+  "code": "authorization_code_from_microsoft_redirect",
+  "state": "state_value_used_in_auth_request"
+}
+
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| code | string | Yes | OAuth authorization code from Microsoft redirect. |
+| state | string | Yes | State value used in the Microsoft auth request. |
+
+
+# Response Format :
+
+
+## Success Response (HTTP 200) :
+{
+  "data": {
+    "message": "User details",
+    "users": [
+      {
+        "id": "uuid",
+        "displayName": "Jane Doe",
+        "mail": "jane@example.com",
+        "userPrincipalName": "jane@example.com",
+        "givenName": "Jane",
+        "surname": "Doe",
+        "jobTitle": "Engineer"
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,63 @@
+---
+title: "DELETE /esign_documents/{document_id}/renewal_setting"
+description: "Captured contract for DELETE /esign_documents/{document_id}/renewal_setting."
+api: "DELETE /esign_documents/{document_id}/renewal_setting"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /esign_documents/{document_id}/renewal_setting.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+DELETE : api/esign_documents/{document_id}/renewal_setting
+
+
+
+
+Description :
+
+
+
+
+Removes the renewal setting for a document and sets is_renewal = 0 on document config.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

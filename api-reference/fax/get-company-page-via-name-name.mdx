@@ -1,0 +1,253 @@
+---
+title: "GET /company_page/via_name/{name}"
+description: "Captured contract for GET /company_page/via_name/{name}."
+api: "GET /company_page/via_name/{name}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /company_page/via_name/{name}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Company Page Via name
+
+Endpoint :
+GET : api/company_page/via_name/{name}
+
+Response :
+{
+    "data": {
+        "template_metadata": {
+            "id": 517,
+            "created_by": 50,
+            "is_default": false,
+            "name": "New Fax Default",
+            "caller_id": "12566708163",
+            "recipients": [
+                "15872105766"
+            ],
+            "broadcast_recipients": [],
+            "broadcast_ids": [],
+            "quality": "standard",
+            "speed": "regular",
+            "approval_required": false,
+            "default_content_type": "cover_page",
+            "include_cover_page": 1,
+            "cover_page_id": 3,
+            "cover_page_url": "https://example.com/signed-url
+            "cover_page_metadata": {
+                "show_logo": false,
+                "show_badge": false,
+                "show_disclaimer": false,
+                "subject": "",
+                "comment": "",
+                "disclaimer_text": "<p><strong> This transmission is intended for the exclusive use of the individual or entity to whom it is addressed and may contain information that is proprietary, privileged, confidential and/or exempt from disclosure under applicable law.</strong></p>",
+                "from_name": "",
+                "to_name": "",
+                "logo_filename": "63488160-8e3f-4486-9235-b2d02e36b723.png",
+                "logo_url": "https://example.com/signed-url
+                "badge_filename": "",
+                "badge_url": ""
+            },
+            "include_smart_template": false,
+            "smart_template_metadata": {
+                "name": "",
+                "page_count": 0,
+                "storage_id": "",
+                "annotations": [
+                    {
+                        "page": 1,
+                        "fields": [
+                            {
+                                "key": "Fax Logo",
+                                "top": "8.401826484018265%",
+                                "left": "1.1627906976744187%",
+                                "type": "img",
+                                "value": "9c319583-5af4-458e-ac30-6a049357f98d.png",
+                                "width": 100,
+                                "height": 100,
+                                "isHTML": true,
+                                "source": "",
+                                "urlType": null,
+                                "fontSize": "14",
+                                "dateFormat": "",
+                                "isNlpField": false,
+                                "isRequired": true,
+                                "textFormat": "",
+                                "x_position": 9,
+                                "y_position": 92,
+                                "originalType": "img",
+                                "reference_id": "ae0689c724f348558eec1a6d0d381e54",
+                                "isNotEditable": false,
+                                "isStaticField": true,
+                                "mapEmailToFax": "",
+                                "original_name": "Fax Logo",
+                                "textSubFormat": "",
+                                "characterLimit": null,
+                                "fieldValidation": "fax_logo",
+                                "isHideBackground": false,
+                                "faxRecipientsData": [],
+                                "isContactCustomField": false
+                            },
+                            {
+                                "key": "HIPAA Disclaimer",
+                                "top": "19.17808219178082%",
+                                "left": "1.1627906976744187%",
+                                "type": "text",
+                                "value": " This transmission is intended for the exclusive use of the individual or entity to whom it is addressed and may contain information that is proprietary, privileged, confidential and/or exempt from disclosure under applicable law.",
+                                "width": 525,
+                                "height": 60,
+                                "isHTML": true,
+                                "source": "",
+                                "urlType": null,
+                                "fontSize": "14",
+                                "dateFormat": "",
+                                "isNlpField": false,
+                                "isRequired": true,
+                                "textFormat": "",
+                                "x_position": 9,
+                                "y_position": 210,
+                                "originalType": "text",
+                                "reference_id": "413ea4eb424b41f2a74f951f61e36527",
+                                "isNotEditable": false,
+                                "isStaticField": true,
+                                "mapEmailToFax": "",
+                                "original_name": "HIPAA Disclaimer",
+                                "textSubFormat": "",
+                                "characterLimit": 229,
+                                "fieldValidation": "none",
+                                "isHideBackground": false,
+                                "faxRecipientsData": [],
+                                "isContactCustomField": false
+                            },
+                            {
+                                "key": "HIPAA Badge",
+                                "top": "11.232876712328768%",
+                                "left": "33.850129198966414%",
+                                "type": "img",
+                                "value": "789a798d-25e2-4b2e-b983-f4bb52c8319e.png",
+                                "width": 93,
+                                "height": 60,
+                                "isHTML": true,
+                                "source": "",
+                                "urlType": null,
+                                "fontSize": "14",
+                                "dateFormat": "",
+                                "isNlpField": false,
+                                "isRequired": true,
+                                "textFormat": "",
+                                "x_position": 262,
+                                "y_position": 123,
+                                "originalType": "img",
+                                "reference_id": "c4962f1cbc4446d4bf8a01aeb497ed34",
+                                "isNotEditable": false,
+                                "isStaticField": true,
+                                "mapEmailToFax": "",
+                                "original_name": "HIPAA Badge",
+                                "textSubFormat": "",
+                                "characterLimit": null,
+                                "fieldValidation": "hipaa_badge",
+                                "isHideBackground": false,
+                                "faxRecipientsData": [],
+                                "isContactCustomField": false
+                            },
+                            {
+                                "key": "QR Code",
+                                "top": "19.726027397260275%",
+                                "left": "81.65374677002583%",
+                                "type": "QR",
+                                "value": "",
+                                "width": 125,
+                                "height": 125,
+                                "isHTML": true,
+                                "source": "",
+                                "urlType": "OPENURL",
+                                "fontSize": "14",
+                                "dateFormat": "",
+                                "isNlpField": false,
+                                "isRequired": false,
+                                "textFormat": "",
+                                "x_position": 632,
+                                "y_position": 216,
+                                "originalType": "QR",
+                                "reference_id": "849f2bdace0c44688889ca981b468e0d",
+                                "isNotEditable": false,
+                                "isStaticField": true,
+                                "mapEmailToFax": "",
+                                "original_name": "QR Code",
+                                "textSubFormat": "",
+                                "characterLimit": null,
+                                "fieldValidation": "qr_code",
+                                "isHideBackground": false,
+                                "faxRecipientsData": [],
+                                "isContactCustomField": false
+                            },
+                            {
+                                "key": "Pages",
+                                "top": "26.84931506849315%",
+                                "left": "1.1627906976744187%",
+                                "type": "text",
+                                "value": "",
+                                "width": 225,
+                                "height": 27,
+                                "isHTML": true,
+                                "source": "pages",
+                                "urlType": null,
+                                "fontSize": "14",
+                                "dateFormat": "",
+                                "isNlpField": false,
+                                "isRequired": false,
+                                "textFormat": "",
+                                "x_position": 9,
+                                "y_position": 294,
+                                "originalType": "text",
+                                "reference_id": "7880fa58d00d42649b0c6d949c77cc9b",
+                                "isNotEditable": true,
+                                "isStaticField": true,
+                                "mapEmailToFax": "",
+                                "original_name": "Pages",
+                                "textSubFormat": "",
+                                "characterLimit": null,
+                                "fieldValidation": "string_only",
+                                "isHideBackground": false,
+                                "faxRecipientsData": [],
+                                "isContactCustomField": false
+                            },
+                            {
+                                "key": "Delivery Timestamp",
+                                "top": "26.666666666666668%",
+                                "left": "34.883720930232556%",
+                                "type": "text",
+                                "value": "",
+                                "width": 225,
+                                "height": 27,
+                                "isHTML": true,
+                                "source": "timestamp",
+                                "urlType": null,
+                                "fontSize": "14",
+                                "dateFormat": "dd/MM/yyyy h:mm a",
+                                "isNlpField": false,
+                                "isRequired": false,
+                                "textFormat": "",
+                                "x_position": 270,
+                                "y_position": 292,
+                                "originalType": "text",
+                                "reference_id": "2b98bad8fb5a4102bd3999995626fe72",
+                                "isNotEditable": false,
+                                "isStaticField": true,
+                                "mapEmailToFax": "",
+                                "original_name": "Delivery Timestamp",
+                                "textSubFormat": "",
+                                "characterLimit": null,
+                                "fieldValidation": "string_only",
+                                "isHideBackground": false,
+                                "faxRecipientsData": [],
+                                "isContactCustomField": false
+       
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

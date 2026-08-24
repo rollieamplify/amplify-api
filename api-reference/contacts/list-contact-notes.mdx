@@ -1,0 +1,12 @@
+---
+title: "List contact notes"
+description: "Retrieve notes associated with a contact."
+api: "GET /contacts/{contact_id}/notes"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_id" type="integer" required>Contact ID.</ParamField>
+
+Each note includes its ID, contact and user references, category, content, author name, and ISO 8601 timestamps.
+

@@ -1,0 +1,28 @@
+---
+title: "DELETE /fax/{local_fax_uuid}/draft"
+description: "Captured contract for DELETE /fax/{local_fax_uuid}/draft."
+api: "DELETE /fax/{local_fax_uuid}/draft"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /fax/{local_fax_uuid}/draft.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+DELETE: api/fax/{local_fax_uuid}/draft
+
+Response:
+{
+    "data": "Draft fax(es) deleted successfully.",
+    "meta": {
+        "request_id": "7a209ba1-b76f-4ff8-a313-d508c8a797e2"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

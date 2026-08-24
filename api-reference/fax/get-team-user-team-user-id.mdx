@@ -1,0 +1,188 @@
+---
+title: "GET /team-user/{team_user_id}"
+description: "Captured contract for GET /team-user/{team_user_id}."
+api: "GET /team-user/{team_user_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /team-user/{team_user_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Get Sub-User Detail
+
+**Endpoint**  
+
+GET api/team-user/{team_user_id}
+
+
+**Description**  
+
+Returns **full detail for a specific sub-user** (team user) belonging to the authenticated account, including the same fields and nested structures as the list API
+
+## Path Parameters
+
+| Parameter     | Type | Required | Description                       |
+
+|--------------|------|----------|-----------------------------------|
+
+| team_user_id | int  | Yes      | ID of the team user (sub-user).  |
+
+**Example**
+
+GET api/team-user/4415
+
+
+#### Request Body
+
+None.
+
+## Success Response
+
+**Status:** `200 OK`
+
+{
+    "data": {
+        "id": 4415,
+        "account_id": 285,
+        "first_name": "Taylor",
+        "last_name": "Swift",
+        "job_title": "Account Manager",
+        "email": "bob1@example.com",
+        "password": "",
+        "phone_number": "",
+        "status": "Pending",
+        "assigned_numbers_count": 0,
+        "created_at": "2026-06-08T09:03:53Z",
+        "created_by": 293,
+        "reference_id": "",
+        "referred_by": "",
+        "timezone": "",
+        "permission_id": "",
+        "role_id": "",
+        "role_name": "",
+        "type": "user",
+        "timestamp": "",
+        "signature_id": "",
+        "invitation_link": "https://example.com/signed-url
+        "show_invitation_popup": true,
+        "is_invitation_pending": true,
+        "user_permissions": {
+            "Product": [
+                {
+                    "id": 1,
+                    "title": "iFax",
+                    "key": "access_ifax",
+                    "enabled": true,
+                    "value": "",
+                    "category": "product"
+                },
+                {
+                    "id": 2,
+                    "title": "Connect",
+                    "key": "access_connect",
+                    "enabled": true,
+                    "value": "",
+                    "category": "product"
+                }
+            ]
+            "iFax": [
+                    {
+                        "id": 43,
+                        "title": "View navigation menus",
+                        "key": "view_navigation_menus",
+                        "enabled": true,
+                        "value": "dashboard,inbox,my_assignment,done,draft,sent,all_faxes,schedule,all_documents,trash,folders,labels,integrations",
+                        "category": "ifax"
+                    },
+                    {
+                        "id": 145,
+                        "title": "Monthly Page Limit",
+                        "key": "monthly_page_limit",
+                        "enabled": false,
+                        "value": "",
+                        "category": "ifax"
+                    }
+                ],
+        },
+        "user_notifications": [
+            {
+                "key": "individual_session_dropped_off",
+                "product": "ai_session",
+                "category": "ai_session",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "open_respondent_started",
+                "product": "ai_session",
+                "category": "ai_session",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "open_respondent_completed",
+                "product": "ai_session",
+                "category": "ai_session",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "open_respondent_dropped_off",
+                "product": "ai_session",
+                "category": "ai_session",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            },
+            {
+                "key": "play_notification_sound",
+                "product": "call",
+                "category": "call",
+                "type": "",
+                "settings": {
+                    "attach_certificate": false,
+                    "include_audit_trail": false,
+                    "attach_pdf": false,
+                    "show_open_link": false
+                }
+            }
+        ],
+        "created_from": "app",
+        "license_type": 3,
+        "last_logged_in": false,
+        "engage_assign_number": {},
+        "last_activity": "",
+        "last_activity_time": false,
+        "user_note": "webapp owner note"
+    },
+    "meta": {
+        "request_id": "5592fb61-b2ea-47cb-b4b6-5365e94ea35a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

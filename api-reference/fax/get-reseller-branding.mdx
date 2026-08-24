@@ -1,0 +1,109 @@
+---
+title: "GET /reseller/branding"
+description: "Captured contract for GET /reseller/branding."
+api: "GET /reseller/branding"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/branding.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Reseller Branding API.
+
+Endpoint: 
+GET: api/reseller/branding
+
+
+Description:
+Returns unified branding for the authenticated account.
+
+Request Example :
+
+GET /api/reseller/branding
+Authorization: Bearer {token}
+
+Response Example (configured account):
+{
+    "data": {
+        "configuration": {
+            "is_active_reseller": true,
+            "sales_inquiries": "developer@example.com",
+            "support_email": "developer@example.com",
+            "support_number": "15876065252",
+            "support_message": "34223S",
+            "default_domain": "amplify.fax.cc",
+            "domain_verification": false,
+            "provisioning_mode": "client",
+            "is_client_auto_topup_enabled": true,
+            "topup_amount": 20,
+            "balance_trigger": 50,
+            "reseller_mode": true,
+            "product_name": "Amplify"
+        },
+        "custom_branding": {
+            "logo_light_background": "https://example.com/signed-url
+            "logo_dark_background": "https://example.com/signed-url
+            "primary_color": "#f1ad71",
+            "accent_color": "#197700",
+            "sender_email_address": "no-reply@amplify.xyz",
+            "sender_email_verified": true,
+            "company_name": "Amplify",
+            "is_sender_email_enabled": false,
+            "enable_portal_access": false,
+            "email_footer_text": "",
+            "remove_amplify_branding_in_subject": false
+        }
+    },
+    "meta": {
+        "request_id": "a8ea2736-ea15-4b5d-8328-7b3d62e8c967"
+    }
+}
+
+
+
+
+Response Example (no reseller row — empty defaults):
+
+{
+    "data": {
+        "configuration": {
+            "is_active_reseller": null,
+            "sales_inquiries": null,
+            "support_email": null,
+            "support_number": null,
+            "support_message": null,
+            "default_domain": null,
+            "domain_verification": false,
+            "provisioning_mode": null,
+            "is_client_auto_topup_enabled": false,
+            "topup_amount": null,
+            "balance_trigger": null,
+            "reseller_mode": false,
+            "product_name": null
+        },
+        "custom_branding": {
+            "logo_light_background": "https://dev-api.amplify.xyz/images/email_logo_light.png",
+            "logo_dark_background": "https://dev-api.amplify.xyz/images/email_logo_grey.png",
+            "primary_color": "#FFFFFF",
+            "accent_color": "#9432fd",
+            "sender_email_address": "no-reply@amplify.xyz",
+            "sender_email_verified": true,
+            "company_name": "Amplify",
+            "is_sender_email_enabled": true,
+            "enable_portal_access": true,
+            "email_footer_text": "Use Amplify to simplify the process of agreement management and obtaining eSignatures.",
+            "remove_amplify_branding_in_subject": false
+        }
+    },
+    "meta": {
+        "request_id": "d1e68362-f7e0-41cd-8771-1c275a59596b"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

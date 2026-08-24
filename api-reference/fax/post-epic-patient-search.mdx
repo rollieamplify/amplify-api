@@ -1,0 +1,57 @@
+---
+title: "POST /epic/patient/search"
+description: "Captured contract for POST /epic/patient/search."
+api: "POST /epic/patient/search"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /epic/patient/search.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get patient details from epic
+Endpoint:
+POST: /epic/patient/search
+
+Request:
+{
+    "family_name" : "Davis",
+    "patient_name" : "Elijah John Davis",
+    "phone": "6085555555",
+    "gender" :"male",
+    "birth_date":"1993-08-18"
+}
+
+Response:
+{
+    "data": [
+        {
+            "id": "egqBHVfQlt4Bw3XGXoxVxHg3",
+            "name": "Elijah John Davis",
+            "dob": "1993-08-18",
+            "gender": "male",
+            "phone": "",
+            "email": "",
+            "encounters": [
+                {
+                    "id": "emhwuharfnf8VhCQg97qP7Q3",
+                    "name": "Office Visit"
+                },
+                {
+                    "id": "efIW9lG0EC.C2hf32Szp9EQ3",
+                    "name": "Documentation"
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "request_id": "350a3649-1134-441d-9a02-e172631e586b"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,64 @@
+---
+title: "POST /folders/starred"
+description: "Captured contract for POST /folders/starred."
+api: "POST /folders/starred"
+public: true
+---
+
+This internal review page records the behavior captured for POST /folders/starred.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Description:
+This API is used to mark a folder as starred for the logged-in user. It supports both single and multiple folder IDs in a single request and adds the specified folder(s) to the user’s starred folders list.
+
+Endpoint :
+POST - /api/folders/starred
+
+Body:
+
+# Star folder with single folder id
+{
+    "folder_id": [754, 745]
+}
+
+
+# Star folder with multiple folder ids
+{
+    "folder_id": [754, 745]
+}
+
+Response:
+{
+    "data": {
+        "message": Folder added to starred.'
+    },
+    "meta": {
+        "request_id": "73ce15eb-376f-4052-8900-73f3e8cec58b"
+    }
+}
+
+Validations:
+{
+    "folder_id": ""
+}
+
+# Validation error response if send request without folder id
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "folder_id": [
+            "The folder id field is required."
+        ]
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

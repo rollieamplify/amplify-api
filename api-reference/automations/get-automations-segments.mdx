@@ -1,0 +1,78 @@
+---
+title: "GET /automations/segments"
+description: "Captured contract for GET /automations/segments."
+api: "GET /automations/segments"
+public: true
+---
+
+This internal review page records the behavior captured for GET /automations/segments.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+API to get list of segments, actions and conditions.
+Endpoint:
+GET: api/automations/segments
+
+Response:
+{
+    "data": {
+        "segments": {
+            "Fax Metadata": [
+                {
+                    "id": 1,
+                    "name": "Sender Number",
+                    "key": null,
+                    "segment_identify": null,
+                    "priority": 1,
+                    "fax_delivered": true,
+                    "fax_received": true,
+                    "fax_failed": true,
+                    "fax_updated": true,
+                    "document_added": false,
+                    "document_updated": false,
+                    "status": true,
+                    "created_at": "2025-11-26T05:01:40.000000Z",
+                    "updated_at": "2025-12-29T11:15:24.000000Z"
+                },
+                .......
+            ]
+        },
+        "actions": {
+            "Fax Management": [
+                {
+                    "id": 1,
+                    "name": "Move to Folder",
+                    "fax_delivered": true,
+                    "fax_received": true,
+                    "fax_failed": true,
+                    "fax_updated": true,
+                    "document_added": true,
+                    "document_updated": true,
+                    "created_at": "2025-12-29T11:42:14.000000Z",
+                    "updated_at": "2025-12-29T11:42:14.000000Z"
+                },
+                .........
+        },
+        "conditions": [
+            {
+                "id": 1,
+                "name": "Begins with",
+                "key": "begins_with",
+                "status": true,
+                "created_at": "2025-12-23T13:18:15.000000Z",
+                "updated_at": "2025-12-23T13:18:15.000000Z"
+            },
+            ........
+        ]
+    },
+    "meta": {
+        "request_id": "80af3f39-c86b-4d77-988c-3dce0aaa3160"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

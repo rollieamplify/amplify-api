@@ -1,0 +1,53 @@
+---
+title: "GET /reseller/client/{client_id}/users"
+description: "Captured contract for GET /reseller/client/{client_id}/users."
+api: "GET /reseller/client/{client_id}/users"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/client/{client_id}/users.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+USE: Get list of users of client.
+
+
+
+
+Endpoint:
+
+GET: api/reseller/client/27968/users?cursor=1&limit=1
+
+
+
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 27972,
+            "first_name": "web",
+            "last_name": "88",
+            "email": "developer@example.com",
+            "phonenumber": null,
+            "status": "Active",
+            "job_title": "Account Manager",
+            "user_license_type": "Pro"
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "next_cursor": "",
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "8248efa8-af0e-438a-9a65-e734d3ef848f"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

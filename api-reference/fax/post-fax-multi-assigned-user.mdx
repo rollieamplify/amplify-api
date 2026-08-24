@@ -1,0 +1,71 @@
+---
+title: "POST /fax/multi_assigned_user"
+description: "Captured contract for POST /fax/multi_assigned_user."
+api: "POST /fax/multi_assigned_user"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/multi_assigned_user.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Multi Assign User API
+
+
+**Endpoint:**  
+POST: api/fax/multi_assigned_user
+
+
+# Description :
+Assigns multiple inbound faxes to multiple users in one request. Uses the `assigned_faxes` table to store mappings. Only inbound faxes (type = 2) are processed; invalid faxes, invalid users, and already-existing (fax_uuid + user_id) pairs are skipped. User IDs are restricted to those belonging to the logged-in user (primary/client: any user in the account; sub-user: only themselves).  
+Expects `fax_uuids` (array of fax UUID strings) and `user_ids` (array of user IDs).
+
+
+# Request Body :
+{
+  "fax_uuids": ["abc-123-uuid-1", "abc-123-uuid-2"],
+  "user_ids": [1, 2],
+  "role_ids": [1, 2]
+}
+
+
+| Field        | Type    | Required | Description                                                                 |
+|--------------|---------|----------|-----------------------------------------------------------------------------|
+| fax_uuids    | array   | Yes      | List of inbound fax UUIDs (strings).                                        |
+| fax_uuids.*  | string  | Yes      | Inbound fax UUID (must exist, belong to account, and be type = inbound).    |
+| user_ids     | array   | Yes      | List of user IDs (integers) to assign to.                                    |
+| user_ids.*   | integer | Yes      | User ID (must belong to the account and to the logged-in user’s scope).          |
+
+
+# Response Format :
+
+
+## Success Response (HTTP 200) :
+{
+  "data": {
+    "message": "Faxes assigned successfully.",
+    "socket_users": [
+      {
+        "user_id": 1,
+        "socket_ids": [
+          "socket-id-1",
+          "socket-id-2"
+        ]
+      },
+      {
+        "user_id": 2,
+        "socket_ids": []
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "uuid-string"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

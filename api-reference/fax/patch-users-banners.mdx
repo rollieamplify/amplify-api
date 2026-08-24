@@ -1,0 +1,47 @@
+---
+title: "PATCH /users/banners"
+description: "Captured contract for PATCH /users/banners."
+api: "PATCH /users/banners"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /users/banners.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update banner API
+
+
+Endpoint :
+PATCH: api/users/banners
+
+
+Status :
+dismissed
+completed
+
+
+Request :
+{
+    "banner_id": 4033,
+    "status": "dismissed"
+}
+
+
+Response :
+{
+    "data": {
+        "banner_id": 4033,
+        "status": "dismissed"
+    },
+    "meta": {
+        "request_id": "d5532f55-6e69-4717-870e-c9155bd14f83"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

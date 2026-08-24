@@ -1,0 +1,100 @@
+---
+title: "POST /faxes/nlp/split_documents"
+description: "Captured contract for POST /faxes/nlp/split_documents."
+api: "POST /faxes/nlp/split_documents"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/nlp/split_documents.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/faxes/nlp/split_documents
+
+Request:
+
+{
+    "fax_uuid":"01KYPE3DR83G4V80H04G73QJA2",
+    "delete_original_fax": false,
+    "is_broadcast": false,
+    "data":[
+        {
+            "nlp_data_id": 9296,
+            "document_name":"Lab Test",
+            "page_range":"1-2",
+            "folder_id": 3775,
+            "label_ids": [1816,1817],
+            "assign_ids": [322]
+        },
+        {
+            "nlp_data_id": 9297,
+            "document_name":"Lab Test One",
+            "page_range":"3-3",
+            "folder_id": 3775,
+            "label_ids": [1816,1817],
+            "assign_ids": []
+        },
+        {
+            "nlp_data_id": 9298,
+            "document_name":"Lab Test Two",
+            "page_range":"4-4",
+            "folder_id": 3775,
+            "label_ids": [1816,1817],
+            "assign_ids": []
+        }
+    ]
+}
+
+
+Validation errors:
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The fax uuid field is required."
+    },
+    "errors": {
+        "fax_uuid": [
+            "The fax uuid field is required."
+        ],
+        "is_broadcast": [
+            "The is broadcast field is required."
+        ],
+        "data": [
+            "The data field is required."
+        ]
+    }
+}
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The is broadcast field must be true or false."
+    },
+    "errors": {
+        "is_broadcast": [
+            "The is broadcast field must be true or false."
+        ]
+    }
+}
+
+
+Response:
+
+{
+    "data": {
+        "status": true,
+        "message": "Documents split successfully"
+    },
+    "meta": {
+        "request_id": "ebc61169-fb55-4867-9c84-b6bb99d9b0c2"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

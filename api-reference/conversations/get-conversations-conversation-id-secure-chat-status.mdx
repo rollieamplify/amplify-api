@@ -1,0 +1,32 @@
+---
+title: "GET /conversations/{conversation_id}/secure_chat/status"
+description: "Captured contract for GET /conversations/{conversation_id}/secure_chat/status."
+api: "GET /conversations/{conversation_id}/secure_chat/status"
+public: true
+---
+
+This page documents the behavior captured for GET /conversations/{conversation_id}/secure_chat/status in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/conversations/{conversation_id}/secure_chat/status
+    
+    Response:
+    {
+        "data": {
+            "is_expired": true
+        },
+        "meta": {
+            "request_id": "7e169804-f6b3-440a-8608-749442d732d4"
+        }
+    }
+    
+    NOTE: need to call this API before send message if message is secure and conversation is not internal.
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

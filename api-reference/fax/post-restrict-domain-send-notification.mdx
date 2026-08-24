@@ -1,0 +1,37 @@
+---
+title: "POST /restrict_domain/send_notification"
+description: "Captured contract for POST /restrict_domain/send_notification."
+api: "POST /restrict_domain/send_notification"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /restrict_domain/send_notification.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Send Email notification for domain restriction.
+
+Endpoint:
+POST: api/restrict_domain/send_notification
+
+Request:
+{
+    "email" : "subuserh3@gmail.com"
+}
+
+Response:
+{
+    "data": {
+        "message": "We have sent Email notification to this email address subuserh3@gmail.com, Please check your Email."
+    },
+    "meta": {
+        "request_id": "d55f63c5-8d33-4204-bee5-14a7849bfd87"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

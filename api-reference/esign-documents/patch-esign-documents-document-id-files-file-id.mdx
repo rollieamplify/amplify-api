@@ -1,0 +1,61 @@
+---
+title: "PATCH /esign_documents/{document_id}/files/{file_id}"
+description: "Captured contract for PATCH /esign_documents/{document_id}/files/{file_id}."
+api: "PATCH /esign_documents/{document_id}/files/{file_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /esign_documents/{document_id}/files/{file_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+PATCH : api/esign_documents/{document_id}/files/{file_id}
+
+
+
+
+Description :
+
+-> Updates a multi-page attachment file entry on a document (name, page range, page count). 
+-> Recalculates total document page count when pages change.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

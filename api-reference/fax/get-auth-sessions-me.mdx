@@ -1,0 +1,111 @@
+---
+title: "GET /auth/sessions/me"
+description: "Captured contract for GET /auth/sessions/me."
+api: "GET /auth/sessions/me"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /auth/sessions/me.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Description
+
+Retrieves the authenticated user's session information, including profile details, account information, roles, permissions, and application-specific settings required to initialize the user session after login.
+
+
+
+
+This endpoint also returns CloudFront signed cookies in the response headers (CloudFront-Policy, CloudFront-Signature, and CloudFront-Key-Pair-Id). These cookies are required to securely access private documents and files served through CloudFront. The browser stores these cookies automatically and includes them in subsequent requests to protected CloudFront resources.
+
+
+
+
+Authentication: Required (Bearer Token)
+
+
+
+
+Response Includes:
+
+User profile details
+Account information
+User permissions and access controls
+Timezone and application settings
+Session-related metadata
+CloudFront signed cookies (via Set-Cookie response headers)
+
+Note:
+The frontend should make this request with withCredentials: true to allow the browser to store the CloudFront signed cookies. If the cookies expire, the frontend can call GET /api/cloud-front/refresh-cookie to obtain a new set of signed cookies without requiring the user to authenticate again.
+
+
+EndPoint
+GET : api/auth/sessions/me
+
+
+Response
+
+{
+    "data": {
+        "id": 28,
+        "account_id": "70b48809e0305276c9defa82d51fb48c",
+        "first_name": "Web 55",
+        "last_name": "55",
+        "job_title": "Account Manager",
+        "email": "developer@example.com",
+        "phone_number": "9898989898",
+        "status": "active",
+        "created_at": "2025-12-09T13:11:16Z",
+        "created_by": "",
+        "reference_id": "",
+        "referred_by": "",
+        "timezone": {
+            "id": 324,
+            "name": "Asia/Kolkata",
+            "format": "UTC+05:30",
+            "country_code": "IN",
+            "country": "India",
+            "created_at": null,
+            "updated_at": null
+        },
+        "license_type": "Pro", // if client or client user
+        "time_format": "24",
+        "permission_id": "",
+        "type": "primary",
+        "last_login_at": "2026-03-31T12:29:57Z",
+        "signature_id": "",
+        "active_reseller_mode": false,
+        "name": "Web 55 55",
+        "is_email_verified": 1,
+        "permission": {
+            "access_numbers": true,
+            "access_numbers_value": "432",
+            "auto_assigned_to_faxes": true,
+            "auto_assigned_to_faxes_value": "472",
+            "fax_number_access": true,
+            "fax_number_access_value": "286",
+            "fax_number_assign": true,
+            "fax_number_assign_value": "286",
+            "view_team_folders": false,
+            "manage_preferences": false,
+            "manage_fax_cover_sheet": false,
+            "share_folders": false
+        },
+        "profile_image_url": "",
+        "team_auth_type": 0,
+        "auth_type": 0,
+        "auth_value": null,
+        "survey_form_filled": false,
+        "pending_required_credit": 0
+    },
+    "meta": {
+        "request_id": "3c042e34-a756-428d-997c-59f8a8ab5c68"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

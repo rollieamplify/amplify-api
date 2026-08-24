@@ -1,0 +1,30 @@
+---
+title: "DELETE /fax_templates/{template_id}"
+description: "Captured contract for DELETE /fax_templates/{template_id}."
+api: "DELETE /fax_templates/{template_id}"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for DELETE /fax_templates/{template_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Delete fax default
+Endpoint: DELETE /fax_templates/{template_id}
+Permission: delete_fax_defaults
+Success: 204 + empty data when deleted.
+Blocked: if any user has this ID as default_fax_template:
+{
+  "error": "UNPROCESSABLE_ENTITY",
+  "message": "You can’t delete this fax default because this template is already used as a primary fax default by:",
+  "data": {
+    "users": ["owner@example.com", "user@example.com"]
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

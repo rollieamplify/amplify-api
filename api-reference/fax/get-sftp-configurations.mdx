@@ -1,0 +1,58 @@
+---
+title: "GET /sftp_configurations"
+description: "Captured contract for GET /sftp_configurations."
+api: "GET /sftp_configurations"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /sftp_configurations.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+List SFTP Configurations API.
+
+Endpoint :
+GET - api/sftp_configurations
+
+
+PASSWORD
+Response:
+{
+    "data": {
+        "host": "sftp.example.com",
+        "port": 22,
+        "username": "sftp_user",
+        "authentication_method": false,
+        "path": "/incoming/faxes",
+        "password": "example_password",
+        "ssh_key": "YOUR_PRIVATE_KEY"
+    },
+    "meta": {
+        "request_id": "a0958db0-91b2-4e12-8866-ae73f294561b"
+    }
+}
+
+
+SSH KEY
+Response:
+{
+    "data": {
+        "host": "sftp.example.com",
+        "port": 22,
+        "username": "sftp_user",
+        "authentication_method": true,
+        "path": "/incoming/faxes",
+        "password": "",
+        "ssh_key": "YOUR_PRIVATE_KEY"
+    },
+    "meta": {
+        "request_id": "82d58f12-3ec7-49ee-8447-61746d033731"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

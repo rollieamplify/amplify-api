@@ -1,0 +1,144 @@
+---
+title: "POST /broadcast/status"
+description: "Captured contract for POST /broadcast/status."
+api: "POST /broadcast/status"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Broadcast Status API
+
+
+**Endpoint:**  
+POST: api/broadcast/status
+
+
+## Description :
+Real-time socket-style API used by the frontend to **poll / refresh broadcast or campaign progress** while the user is on the dashboard or broadcast detail screen.
+- If `campaign_id` is empty/0 → **Broadcast** status.
+- If `campaign_id` > 0 → **Campaign** status.
+
+
+## Request Body :
+
+
+### Option 1: Broadcast Status (Broadcast Only) : 
+{
+  "fax_uuid": "string (required)",
+  "broadcast_id": 123
+}
+
+
+### Option 2: Campaign Status (Broadcast + Campaign) :
+{
+  "fax_uuid": "string (required)",
+  "broadcast_id": 123,
+  "campaign_id": 456
+}
+
+
+| Field        | Type   | Required | Description                                                                                |
+|-------------|--------|----------|--------------------------------------------------------------------------------------------|
+| fax_uuid    | string | Yes      | Parent fax UUID. Must exist in `faxes` and `broadcast_faxes_counts`.                      |
+| broadcast_id| int    | Yes      | Broadcast ID attached to the fax.                                                         |
+| campaign_id | int    | No       | When provided and > 0, API returns **campaign** status; if omitted/0, returns **broadcast** status. |
+
+
+## Response Format :
+
+
+### Success Response (Broadcast) :
+{
+  "data": {
+    "fax_uuid": "550e8400-e29b-41d4-a716-446655440000",
+    "broadcast_id": 123,
+    "campaign_id": null,
+    "type": "broadcast",
+
+    "total": 100,
+    "pending": 10,
+    "delivered": 70,
+    "sent": 5,
+    "failed": 15,
+    "draft": 0,
+    "sending": 5,
+    "failed_chargeable": 3,
+    "failed_without_chargeable": 12,
+    "manually_cancelled": 0,
+    "blocked": 0,
+
+    "is_opted_out_count": 2,
+    "is_converted_via_qr_count": 1,
+    "delivery_rate": 70.0,
+    "conversion_rate": 1.0,
+    "sent_percentage": 5.0,
+    "delivered_percentage": 70.0,
+    "estimate_complete_time": 1738000000,
+
+    "fax_pages": 3,
+    "retry_attempt": 0,
+    "from_number": "18005550123",
+    "to_number": null,
+
+    "name": "January Broadcast",
+    "recipients": 100,
+    "fax_timestamp": 1737990000,
+    "is_canceled": 0
+  },
+  "meta": {
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+}
+
+### Success Response (Campaign) :
+{
+  "data": {
+    "fax_uuid": "770e8400-e29b-41d4-a716-446655440002",
+    "broadcast_id": 321,
+    "campaign_id": 456,
+    "type": "campaign",
+
+    "total": 500,
+    "pending": 120,
+    "delivered": 320,
+    "sent": 20,
+    "failed": 60,
+    "draft": 0,
+    "sending": 20,
+    "failed_chargeable": 10,
+    "failed_without_chargeable": 50,
+    "manually_cancelled": 5,
+    "blocked": 2,
+
+    "is_opted_out_count": 8,
+    "is_converted_via_qr_count": 4,
+    "delivery_rate": 64.0,
+    "conversion_rate": 0.8,
+    "sent_percentage": 4.0,
+    "delivered_percentage": 64.0,
+    "estimate_complete_time": 1738000500,
+
+    "fax_pages": 2,
+    "retry_attempt": 1,
+    "from_number": "18005550999",
+    "to_number": null,
+
+    "name": "Q1 Reminder Campaign",
+    "recipients": 500,
+    "fax_timestamp": 1737985000,
+    "is_canceled": 0
+  },
+  "meta": {
+    "request_id": "c9d8e7f6-5432-1098-abcd-ef1234567890"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

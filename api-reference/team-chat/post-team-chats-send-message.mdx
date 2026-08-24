@@ -1,0 +1,125 @@
+---
+title: "POST /team_chats/send/message"
+description: "Captured contract for POST /team_chats/send/message."
+api: "POST /team_chats/send/message"
+public: true
+---
+
+This page documents the behavior captured for POST /team_chats/send/message in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/team_chats/send/message
+    
+    
+    accept values:
+    type: sms,mms,meeting,location
+    
+    Validation errors:
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The selected type is invalid."
+        }
+    }
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The content field is required."
+        }
+    }
+    For SMS Body:
+    {
+        "to_user_id": 322,
+        "type": "sms",
+        "content": "Hello sub user"
+    }
+    
+    Response:
+    {
+        "data": {
+            "id": 12,
+            "from_user_id": 53,
+            "to_user_id": 322,
+            "content": "Hello sub user",
+            "direction": "outbound",
+            "type": "sms",
+            "status": "delivered",
+            "created_at": "2026-05-04T06:33:39Z"
+        },
+        "meta": {
+            "request_id": "ba860a6d-a62a-4ab6-aa40-ef7cac3ba182"
+        }
+    }
+    
+    For MMS body:
+    {
+        "to_user_id": 322,
+        "type": "mms",
+        "file_name": "image (7).png",
+        "file_type": "png",
+        "unique_file_name": "JOZCMD_image%20%287%29.png"
+    }
+    
+    Response:
+    {
+        "data": {
+            "id": 8,
+            "from_user_id": 53,
+            "to_user_id": 322,
+            "content": "",
+            "direction": "outbound",
+            "type": "mms",
+            "status": "delivered",
+            "created_at": "2026-05-04T06:24:31Z",
+            "file": {
+                "name": "image (7).png",
+                "url": "https://example.com/signed-upload-url
+                "type": "png",
+                "data": ""
+            }
+        },
+        "meta": {
+            "request_id": "dddeaeb7-baa1-4af7-9b7c-1a458acc7760"
+        } 
+    }
+    
+    For Meeting Body:
+    {
+        "to_user_id": 322,
+        "type": "meeting",
+        "room_id": "MpEx-kgr-abcd",
+        "host_id": 53,
+        "content": "https://beta.amplify.xyz/meet/MpEx-kgr-abcd"
+    }
+    
+    Response:
+    {
+        "data": {
+            "id": 10,
+            "from_user_id": 53,
+            "to_user_id": 322,
+            "content": "",
+            "direction": "outbound",
+            "type": "meeting",
+            "status": "delivered",
+            "created_at": "2026-05-04T06:29:08Z",
+            "meeting": {
+                "room_id": "MpEx-kgr-abcd",
+                "host_id": "53",
+                "url": "https://beta.amplify.xyz/meet/MpEx-kgr-abcd"
+            }
+        },
+        "meta": {
+            "request_id": "dddeaeb7-baa1-4af7-9b7c-1a458acc7760"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

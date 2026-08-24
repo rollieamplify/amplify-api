@@ -1,0 +1,73 @@
+---
+title: "GET /tel_dlc/brands/details"
+description: "Captured contract for GET /tel_dlc/brands/details."
+api: "GET /tel_dlc/brands/details"
+public: true
+---
+
+This page documents the behavior captured for GET /tel_dlc/brands/details in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    
+    GET: api/tel_dlc/brands/details
+    
+    
+    Response:
+    
+    {
+        "data": {
+            "id": 45,
+            "user_id": 53,
+            "business_registration_id_type": "USA: Employer Identification Number (EIN)",
+            "registration_number": "12-3456789",
+            "business_type": "Corporation",
+            "company_type": "Publicly traded",
+            "industry": "2",
+            "legal_business_name": "Tack Technolabs LLC",
+            "brand_name": "Tack Technolabs",
+            "business_address_one": "Ganesh Meridian, Sola, Ahmedabad",
+            "business_address_two": "",
+            "country": "138",
+            "state": "GJ",
+            "city": "Ahmedabad",
+            "postal_code": "380060",
+            "website_url": "https://www.google.com",
+            "regions_of_operation": "USA and Canada",
+            "employee_count": 200,
+            "estimated_daily_call": 200,
+            "first_name": "web",
+            "last_name": "twenty",
+            "email": "developer@example.com",
+            "job_title": "Backend Developer",
+            "job_position": "other",
+            "phone_number": "19076000015",
+            "vertical": "PROFESSIONAL",
+            "stock_exchange": "NSE",
+            "stock_ticker": "Demo",
+            "business_contact_email": "developer@example.com",
+            "use_case": "DELIVERY_NOTIFICATION",
+            "description": "Hello this is dummy description messsage",
+            "message_flow": "Customers opt in by checking a box during checkout on our website agreeing to receive SMS order updates. The checkbox is not pre-checked.",
+            "sample_message_one": "Acme Corp: Your order #12345 has been confirmed. Track at https://acme.com/track/12345. Reply STOP to opt out.",
+            "sample_message_two": "Acme Corp: Your order #67890 has shipped. Expected delivery tomorrow. Track here: https://acme.com/track/67890. Reply STOP to unsubscribe.",
+            "help_message": "Acme Corp: Your order has been delivered successfully. Need help? Reply HELP or contact support@acmecorp.com.",
+            "brand_status": "SUCCESS",
+            "campaign_status": "REJECTED",
+            "brand_rejection_reason": "",
+            "campaign_rejection_reason": "Brand does not qualify for submitted campaign use-case.",
+            "brand_is_payment_done": false,
+            "campaign_is_payment_done": false
+        },
+        "meta": {
+            "request_id": "f8604ae8-c710-49f6-bc42-6b9823ba86cc"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

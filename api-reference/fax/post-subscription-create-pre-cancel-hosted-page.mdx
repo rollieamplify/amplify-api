@@ -1,0 +1,39 @@
+---
+title: "POST /subscription/create_pre_cancel_hosted_page"
+description: "Captured contract for POST /subscription/create_pre_cancel_hosted_page."
+api: "POST /subscription/create_pre_cancel_hosted_page"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/create_pre_cancel_hosted_page.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Pre Cancel Hosted Page
+
+Endpoint:
+POST: api/subscription/create_pre_cancel_hosted_page
+
+Payload:
+{
+    "redirect_url" : "https://dev.amplify.xyz/settings/team-and-sso/users",
+    "cancel_url" : "https://dev.amplify.xyz/settings/team-and-sso/users"
+}
+
+Response:
+{
+    "data": {
+        "hosted_page_url": "https://amplifylabs-test.chargebee.com/pages/v4/kcVJwcuYJ5UcdRDiZG32jXC5wVV9wOeiey/?signature=FjIUpdcvPcuJRlcu56RzTwXdhONC4B2ou3",
+        "hosted_page_id": "kcVJwcuYJ5UcdRDiZG32jXC5wVV9wOeiey"
+    },
+    "meta": {
+        "request_id": "04e351df-dc5e-4fdb-9550-b30af6fc00f5"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,117 @@
+---
+title: "PATCH /broadcast_templates/{template_id}"
+description: "Captured contract for PATCH /broadcast_templates/{template_id}."
+api: "PATCH /broadcast_templates/{template_id}"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /broadcast_templates/{template_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update the Broadcast template API.
+
+EndPoint
+PATCH: api/broadcast_templates/{template_id}
+
+Request
+{
+    "name":"test",
+    "page_count":10,
+    "storage_id":"ajf85stge5d1fg22hfdf",
+    "broadcast_ids" : [1,2,3],
+    "annotations": [
+        {
+            "page": 1,
+            "fields": [
+                {
+                    "key": "Image",
+                    "left": "0.9042%",
+                    "top": "-0.27076069999999997%",
+                    "type": "img",
+                    "font_size": 14,
+                    "value": "96ac7dc9-3619-4350-874c-f30698b89dc3.jpeg",
+                    "width": 193.438,
+                    "height": 45.5781,
+                    "url_type": "",
+                    "is_hide_back_ground": ""
+                },
+                {
+                    "key": "Fax Number",
+                    "left": "39.89663677130044%",
+                    "top": "15.735578446909669%",
+                    "type": "text",
+                    "font_size": 14,
+                    "value": "",
+                    "width": 175,
+                    "height": 24,
+                    "url_type": "",
+                    "is_hide_background": ""
+                }
+            ]
+        }
+    ]
+}
+Response
+{
+    "data": {
+        "id": 20,
+        "created_by": 28,
+        "updated_by": 28,
+        "page_count": 10,
+        "used_count": 0,
+        "name": "test",
+        "broadcast_ids": [
+            1,
+            2,
+            3
+        ],
+        "storage_id": "ajf85stge5d1fg22hfdf",
+        "annotations": [
+            {
+                "page": 1,
+                "fields": [
+                    {
+                        "key": "Image",
+                        "left": "0.9042%",
+                        "top": "-0.27076069999999997%",
+                        "type": "img",
+                        "font_size": 14,
+                        "value": "96ac7dc9-3619-4350-874c-f30698b89dc3.jpeg",
+                        "width": 193.438,
+                        "height": 45.5781,
+                        "url_type": null,
+                        "is_hide_back_ground": null,
+                        "s3_url": "https://example.com/signed-url
+                    },
+                    {
+                        "key": "Fax Number",
+                        "left": "39.89663677130044%",
+                        "top": "15.735578446909669%",
+                        "type": "text",
+                        "font_size": 14,
+                        "value": null,
+                        "width": 175,
+                        "height": 24,
+                        "url_type": null,
+                        "is_hide_background": null,
+                        "s3_url": ""
+                    }
+                ]
+            }
+        ],
+        "created_at": "2025-12-31T08:32:04.000000Z",
+        "updated_at": "2025-12-31T08:37:13.000000Z",
+        "last_used_at": ""
+    },
+    "meta": {
+        "request_id": "da07af81-f057-4ebe-8073-f5775ab19370"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

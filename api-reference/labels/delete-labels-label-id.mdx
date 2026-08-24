@@ -1,0 +1,40 @@
+---
+title: "DELETE /labels/{label_id}"
+description: "Captured contract for DELETE /labels/{label_id}."
+api: "DELETE /labels/{label_id}"
+public: true
+---
+
+This internal review page records the behavior captured for DELETE /labels/{label_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+NOTE:
+Deletes an existing label using the label ID.
+Permanently removes the specified label from the system.
+The endpoint requires the label ID in the URL.
+Returns the deletion status or confirmation in the response.
+
+
+
+
+Endpoint:
+
+
+
+
+Delete: api/labels/26
+
+
+
+
+Response:
+
+image.png
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

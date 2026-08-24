@@ -1,0 +1,136 @@
+---
+title: "Create a webhook"
+description: "Configure and test a webhook from the Amplify dashboard."
+---
+
+Create webhooks from the Amplify dashboard to receive fax, document, or contact events at your application’s URL.
+
+## Before you begin
+
+Prepare a publicly reachable endpoint that:
+
+- Accepts `POST` requests
+- Returns a successful `2xx` response
+- Can safely process duplicate deliveries
+- Does not perform long-running work before responding
+
+<Warning>
+  Amplify v1 does not currently sign webhook requests. Use a private HTTPS URL and enable URL authentication when your receiving endpoint supports it.
+</Warning>
+
+## Create the webhook
+
+<Steps>
+  <Step title="Open Developer Tools">
+    In the Amplify dashboard, open **Settings**, select **Developer Tools**, and choose the **Webhooks** tab.
+
+    ![The Webhooks tab in Developer Tools showing the empty state and Add Webhooks button.](/images/webhooks/webhooks-empty-state.png)
+  </Step>
+
+  <Step title="Start a new webhook">
+    Click **Add Webhooks**. The **Add Webhook** form opens.
+
+    ![The Add Webhook form with Name, Events, Webhook URL, URL Authentication, Test Webhook, and Save controls.](/images/webhooks/add-webhook-form.png)
+  </Step>
+
+  <Step title="Enter a name">
+    Enter a recognizable name that describes the destination or workflow, such as `Outbound Fax`.
+  </Step>
+
+  <Step title="Select an event">
+    Open **Events** and select the event category that Amplify should send to this webhook.
+
+    | Product | Event option |
+    | --- | --- |
+    | iFax | `[iFax] Outbound Fax Events` |
+    | iFax | `[iFax] Inbound Fax Events` |
+    | Collect | `[Collect] Document Sent` |
+    | Collect | `[Collect] Document Viewed` |
+    | Collect | `[Collect] Document Signed` |
+    | Collect | `[Collect] Document Completed` |
+    | Contacts | `[Contacts] Contact Created` |
+    | Contacts | `[Contacts] Contact Updated` |
+    | Contacts | `[Contacts] Contact Deleted` |
+
+    ![The Events menu showing iFax and Collect webhook event options.](/images/webhooks/webhook-events-ifax-collect.png)
+
+    ![The Events menu showing the Contacts webhook event options.](/images/webhooks/webhook-events-contacts.png)
+  </Step>
+
+  <Step title="Enter the destination URL">
+    Enter the destination in **Webhook URL**. Amplify sends an HTTP `POST` request to this URL when the selected event occurs.
+  </Step>
+
+  <Step title="Configure URL authentication">
+    This step is optional. Turn on **Protect webhook URL with authentication** and enter the **Username** and **Password** expected by your endpoint.
+
+    ![URL Authentication enabled with Username and Password fields.](/images/webhooks/webhook-url-authentication.png)
+
+    <Warning>
+      Store the receiving endpoint’s credentials securely. Do not reuse your Amplify password or API access token.
+    </Warning>
+  </Step>
+
+  <Step title="Test the endpoint">
+    Click **Test Webhook** before saving. Amplify sends a sample event payload to the destination URL.
+
+    ```json
+    {
+      "event_id": "evt_XXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "event_type": "outbound_fax",
+      "occurred_at": "2026-08-22T08:23:28Z",
+      "data": {
+        "fax": {
+          "direction": "outbound",
+          "fax_uuid": "XXXXXXXXXXXXXXXX",
+          "transmission_duration": 59,
+          "transmission_start": "2023-11-10T00:00:34Z",
+          "transmission_end": "2023-11-10T00:01:33Z",
+          "pages": 1,
+          "fax_status": "Delivered",
+          "from_number": "19073331000",
+          "to_number": "19073331000",
+          "transferred_pages": 1,
+          "retry_attempt": 0
+        }
+      }
+    }
+    ```
+
+    The test payload uses placeholder identifiers and phone numbers. `occurred_at`, `transmission_start`, and `transmission_end` use ISO 8601 UTC strings.
+
+    A successful request displays **Webhook test successful** in the upper-right corner.
+
+    ![A success notification reading Webhook test successful.](/images/webhooks/webhook-test-success.png)
+
+    If the destination returns an error, Amplify displays the result. For example, a `404` response displays **Webhook endpoint returned an error: Not Found**.
+
+    ![An error notification reporting that the webhook endpoint returned Not Found.](/images/webhooks/webhook-test-error.png)
+  </Step>
+
+  <Step title="Save the webhook">
+    Click **Save**. Amplify returns to the **Webhooks** tab and adds the webhook to the list.
+
+    ![The Webhooks list showing a saved active webhook.](/images/webhooks/webhook-list.png)
+  </Step>
+</Steps>
+
+## Review saved webhooks
+
+The webhook list displays:
+
+- **Name**
+- **URL**, with a copy control
+- **Events**
+- **Status**
+- **Action** menu
+
+<Tip>
+  Test the destination again whenever its URL, authentication, network rules, or application behavior changes.
+</Tip>
+
+## Next steps
+
+- Review the [webhook event payload](/webhooks/events).
+- Learn how to [protect webhook endpoints](/webhooks/verifying-webhooks).
+- Design your consumer for [retry behavior](/webhooks/retry-behavior).

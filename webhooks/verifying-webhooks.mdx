@@ -1,0 +1,20 @@
+---
+title: "Verifying webhooks"
+description: "Protect webhook endpoints while signature verification is unavailable."
+---
+
+Amplify v1 does not currently sign webhook requests. You cannot cryptographically verify that a request originated from Amplify.
+
+Until signatures are available:
+
+- Use HTTPS only.
+- Generate an endpoint path containing a high-entropy secret.
+- Keep the endpoint URL out of logs and public repositories.
+- Apply an IP allowlist or gateway authentication when your deployment supports it.
+- Validate the payload shape and reject malformed requests.
+- Deduplicate events using `event_id`.
+- Fetch the affected resource through the API before sensitive follow-up actions.
+
+<Warning>
+  Do not treat fields in an unsigned payload as authoritative for security-sensitive decisions.
+</Warning>

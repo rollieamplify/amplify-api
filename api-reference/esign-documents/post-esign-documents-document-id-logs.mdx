@@ -1,0 +1,62 @@
+---
+title: "POST /esign_documents/{document_id}/logs"
+description: "Captured contract for POST /esign_documents/{document_id}/logs."
+api: "POST /esign_documents/{document_id}/logs"
+public: true
+---
+
+This internal review page records the behavior captured for POST /esign_documents/{document_id}/logs.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/esign_documents/{document_id}/logs
+
+
+
+
+Description :
+
+
+
+
+-> Records recipient status changes (viewed, completed, declined) and triggers email notifications, signing-order sync, webhook dispatch, and document completion logic.
+
+ 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

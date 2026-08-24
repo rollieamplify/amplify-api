@@ -1,0 +1,103 @@
+---
+title: "GET /client/feature-access"
+description: "Captured contract for GET /client/feature-access."
+api: "GET /client/feature-access"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /client/feature-access.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+USE: Get feature access list for client.
+
+Retrieves the list of available product features for the authenticated client along with their access permissions for each subscription plan.
+
+
+
+
+The API can be used by the frontend to determine which features should be available based on the client's current plan.
+
+
+
+
+Response fields:
+
+
+
+
+category_type — Category/module the feature belongs to, such as Fax & Doc Exchange or eSign & Forms.
+feature — Name of the feature.
+basic_plan — Indicates whether the feature is available in the Basic plan.
+plus_plan — Indicates whether the feature is available in the Plus plan.
+pro_plan — Indicates whether the feature is available in the Pro plan.
+meta.request_id — Unique request identifier for logging and troubleshooting.
+
+
+
+
+Boolean values: true means the feature is included in that plan, while false means it is not available.
+
+
+
+
+Example use case: When a client is on the Basic plan, the frontend can use basic_plan to determine which features are accessible and which require an upgrade.
+
+
+
+
+Endpoint:
+
+GET: api/client/feature-access
+
+
+
+
+Response:
+
+{
+    "data": [
+        {
+            "category_type": "Fax & Doc Exchange",
+            "feature": "Secure cloud fax (send & receive)",
+            "feature_slug": "secure_cloud_fax_send_receive",
+            "basic_plan": true,
+            "plus_plan": true,
+            "pro_plan": true
+        },
+        {
+            "category_type": "Fax & Doc Exchange",
+            "feature": "Email to Fax",
+            "feature_slug": "email_to_fax",
+            "basic_plan": true,
+            "plus_plan": true,
+            "pro_plan": true
+        },
+        {
+            "category_type": "Fax & Doc Exchange",
+            "feature": "Advanced Email to Fax (domain etc)",
+            "feature_slug": "advanced_email_to_fax_domain_etc",
+            "basic_plan": false,
+            "plus_plan": false,
+            "pro_plan": true
+        },
+        {
+            "category_type": "eSign & Forms",
+            "feature": "Document Variables",
+            "feature_slug": "document_variables",
+            "basic_plan": false,
+            "plus_plan": true,
+            "pro_plan": true
+        }
+    ],
+    "meta": {
+        "request_id": "2982a94b-2d85-4c76-9208-49c29f21fb32"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,26 @@
+---
+title: "PUT /email_to_fax/allowed_domain/1"
+description: "Captured contract for PUT /email_to_fax/allowed_domain/1."
+api: "PUT /email_to_fax/allowed_domain/1"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PUT /email_to_fax/allowed_domain/1.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+- Update Allowed Domain
+
+Endpoint:
+PUT:  /api/email_to_fax/allowed_domain/1
+Body:
+{
+  "domain": "newexample.com"
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,358 @@
+---
+title: "POST /plans/addon"
+description: "Captured contract for POST /plans/addon."
+api: "POST /plans/addon"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /plans/addon.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Addons List
+
+EndPoint:
+
+POST: api/plans/addon
+
+
+Payload:
+
+{
+    "duration" : "monthly",
+    "currency" : "usd"
+}
+
+
+duration in : monthly,annual,2_year,3_year
+currency in : usd,gbp
+
+Response:
+
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Basic License Add-on",
+            "addon_type": "license_1",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 1.99,
+            "currency": "usd",
+            "volume_based_pricing": true,
+            "price_breakdown": [
+                {
+                    "starting_unit": 1,
+                    "ending_unit": 9,
+                    "price": 1.99
+                },
+                {
+                    "starting_unit": 10,
+                    "ending_unit": 49,
+                    "price": 1.79
+                },
+                {
+                    "starting_unit": 50,
+                    "ending_unit": 99,
+                    "price": 1.49
+                },
+                {
+                    "starting_unit": 100,
+                    "ending_unit": 499,
+                    "price": 0.99
+                },
+                {
+                    "starting_unit": 500,
+                    "ending_unit": 9223372036854775807,
+                    "price": 0.79
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Plus License Add-on",
+            "addon_type": "license_2",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 4.99,
+            "currency": "usd",
+            "volume_based_pricing": true,
+            "price_breakdown": [
+                {
+                    "starting_unit": 1,
+                    "ending_unit": 9,
+                    "price": 4.99
+                },
+                {
+                    "starting_unit": 10,
+                    "ending_unit": 49,
+                    "price": 3.99
+                },
+                {
+                    "starting_unit": 50,
+                    "ending_unit": 99,
+                    "price": 2.99
+                },
+                {
+                    "starting_unit": 100,
+                    "ending_unit": 499,
+                    "price": 1.49
+                },
+                {
+                    "starting_unit": 500,
+                    "ending_unit": 9223372036854775807,
+                    "price": 0.99
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "name": "Pro License Add-on",
+            "addon_type": "license_3",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 19.99,
+            "currency": "usd",
+            "volume_based_pricing": true,
+            "price_breakdown": [
+                {
+                    "starting_unit": 1,
+                    "ending_unit": 9,
+                    "price": 19.99
+                },
+                {
+                    "starting_unit": 10,
+                    "ending_unit": 49,
+                    "price": 17.99
+                },
+                {
+                    "starting_unit": 50,
+                    "ending_unit": 99,
+                    "price": 14.99
+                },
+                {
+                    "starting_unit": 100,
+                    "ending_unit": 499,
+                    "price": 12.99
+                },
+                {
+                    "starting_unit": 500,
+                    "ending_unit": 9223372036854775807,
+                    "price": 9.99
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "name": "IT License Add-on",
+            "addon_type": "license_4",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 1.99,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        },
+        {
+            "id": 17,
+            "name": "Credits Add-on",
+            "addon_type": "credits",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 0.075,
+            "currency": "usd",
+            "volume_based_pricing": true,
+            "price_breakdown": [
+                {
+                    "starting_unit": 1,
+                    "ending_unit": 199,
+                    "price": 0.075
+                },
+                {
+                    "starting_unit": 200,
+                    "ending_unit": 499,
+                    "price": 0.06
+                },
+                {
+                    "starting_unit": 500,
+                    "ending_unit": 999,
+                    "price": 0.04
+                },
+                {
+                    "starting_unit": 1000,
+                    "ending_unit": 2499,
+                    "price": 0.035
+                },
+                {
+                    "starting_unit": 2500,
+                    "ending_unit": 4999,
+                    "price": 0.03
+                },
+                {
+                    "starting_unit": 5000,
+                    "ending_unit": 19999,
+                    "price": 0.025
+                },
+                {
+                    "starting_unit": 20000,
+                    "ending_unit": 49999,
+                    "price": 0.02
+                },
+                {
+                    "starting_unit": 50000,
+                    "ending_unit": 99999,
+                    "price": 0.015
+                },
+                {
+                    "starting_unit": 100000,
+                    "ending_unit": 499999,
+                    "price": 0.012
+                },
+                {
+                    "starting_unit": 500000,
+                    "ending_unit": 999999,
+                    "price": 0.01
+                },
+                {
+                    "starting_unit": 1000000,
+                    "ending_unit": 9223372036854775807,
+                    "price": 0.009
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "name": "Overage Credits Add-On",
+            "addon_type": "credits_overage",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 0,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        },
+        {
+            "id": 25,
+            "name": "10DLC Add-on",
+            "addon_type": "10dlc",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 12.99,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        },
+        {
+            "id": 29,
+            "name": "Custom Email Domain",
+            "addon_type": "custom_domain",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 99.99,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        },
+        {
+            "id": 33,
+            "name": "Numbers Add-on",
+            "addon_type": "numbers",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 4.99,
+            "currency": "usd",
+            "volume_based_pricing": true,
+            "price_breakdown": [
+                {
+                    "starting_unit": 1,
+                    "ending_unit": 4,
+                    "price": 4.99
+                },
+                {
+                    "starting_unit": 5,
+                    "ending_unit": 9,
+                    "price": 3.99
+                },
+                {
+                    "starting_unit": 10,
+                    "ending_unit": 49,
+                    "price": 2.99
+                },
+                {
+                    "starting_unit": 50,
+                    "ending_unit": 99,
+                    "price": 1.99
+                },
+                {
+                    "starting_unit": 100,
+                    "ending_unit": 249,
+                    "price": 1.49
+                },
+                {
+                    "starting_unit": 250,
+                    "ending_unit": 499,
+                    "price": 0.99
+                },
+                {
+                    "starting_unit": 500,
+                    "ending_unit": 9223372036854775807,
+                    "price": 0.49
+                }
+            ]
+        },
+        {
+            "id": 37,
+            "name": "Developer API Add-on",
+            "addon_type": "api",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 99.99,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        },
+        {
+            "id": 41,
+            "name": "Broadcast Fax Add-on",
+            "addon_type": "broadcast",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 99.99,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        },
+        {
+            "id": 45,
+            "name": "Whitelabel Add-on",
+            "addon_type": "whitelabel",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 99.99,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        },
+        {
+            "id": 49,
+            "name": "Premier Support",
+            "addon_type": "premier_support",
+            "family_name": "amplify",
+            "duration": "monthly",
+            "amount": 1499.99,
+            "currency": "usd",
+            "volume_based_pricing": false,
+            "price_breakdown": []
+        }
+    ],
+    "meta": {
+        "request_id": "16216790-f0f2-45f1-8713-8345b36a73c1"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

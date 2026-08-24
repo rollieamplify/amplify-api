@@ -1,0 +1,79 @@
+---
+title: "POST /esign/credit_deduct/ai"
+description: "Captured contract for POST /esign/credit_deduct/ai."
+api: "POST /esign/credit_deduct/ai"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /esign/credit_deduct/ai.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+POST : api/esign/credit_deduct/ai
+
+Description :
+Performs AI-driven actions on a document, form, or template, such as summarization, creation, or answering questions. It deducts credits based on the action type and the respective resource.
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+Request Body :
+Field | Type | Required | Description
+--------------------------------------------------------
+type | string | Yes | The type of AI action. Supported values: summarize, question, created (for template and form only).
+resource_type | string | Yes | The type of the resource. Supported values: document, form, template.
+resource_id | integer | Yes | The unique identifier of the resource.
+
+Request :
+{
+    "type": "summarize",
+    "resource_type": "document",
+    "resource_id": 9107
+}
+
+
+
+Response :
+{
+    "data": {
+        "id": 9251,
+        "name": "Untitled",
+        "credits_deducted": 4,
+        "remaining_credits": "11847.0000"
+    },
+    "meta": {
+        "request_id": "9db3555b-5765-4062-91ba-c402e9b7de40"
+    }
+}
+
+
+Error  : 
+
+
+Field | Type | Reason | Description
+--------------------------------------------------------------
+401 | UNAUTHORIZED | Unauthorized | Request missing or has invalid Bearer token.
+422 | VALIDATION_ERROR | Validation Failed | Missing type, resource_type, or resource_id in payload.
+422 | NOT_FOUND | Resource not found | The requested Document, Form, or Template does not exist.
+422 | ACCOUNT_NOT_FOUND | Account not found | User account not found for credit deduction.
+422 | NO_ENOUGH_CREDIT | Insufficient credits | User account does not have enough credits for the action.
+422 | INVALID_TYPE | Invalid AI action type | The type must be summarize, created, or question.
+422 | INVALID_RESOURCE_TYPE | Invalid Resource | The created type is only available for form and template resource types.
+
+Note : 
+Credit Deduction:
+summarize & created: Deducts credits based on the resource page count.
+question: Deducts a fixed amount (1 credit) per request.
+Resource Scope:
+The created type will return an error if used with resource_type: document.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

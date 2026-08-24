@@ -1,0 +1,34 @@
+---
+title: "GET /accept_invitation"
+description: "Captured contract for GET /accept_invitation."
+api: "GET /accept_invitation"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /accept_invitation.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint :
+GET /api/accept_invitation?token=ZXlKcGRpSTZJaTlQVFhKaGRVNHhOM3BsTjAxRFVrSnhTbFZ1ZUhjOVBTSXNJblpoYkhWbElqb2labEJ0Vm5kaU1qWlNlbVp0TlhZd2RqZFdRMjQzV2pSQ1NUQTNRVFpZTURWTWMxUkNhVEZTWlVOMmRubGpaemx2ZEZWRGVYQkdLMGxSZDAxeVlVbEZhVzFCWVZsd2JHVkNUM2swVG5JMVRuWmlPVlY0WVdoU1NrbFRRbW8wYUROdlVURkxiemhEYnpGTGJtRktPRzk0UzNVemIyVm9OMGxuU2pKSU5sRkVZMW96ZEhGM0wyWjZNekppV0ZnMFQyMU5SbnBPTTJ0UlBUMGlMQ0p0WVdNaU9pSXhNekZrWkRRek0yRTNaamswTVRCa1pUYzJNMkl4WWprMU5ETTRaVGhsTTJJMFpqZGlaV00zWmpnMllqa3hNemMzTkRNeE9URm1NR1F3WTJWbU56QmlJaXdpZEdGbklqb2lJbjA9
+
+
+Response:
+{
+    "data": {
+        "email": "developer@example.com",
+        "first_name": "New",
+        "last_name": "User",
+        "job_title": "Account Manager"
+    },
+    "meta": {
+        "request_id": "b58800ed-64fe-4cc4-971e-6f1774356810"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

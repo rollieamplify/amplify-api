@@ -1,0 +1,35 @@
+---
+title: "POST /2factor_auth/config"
+description: "Captured contract for POST /2factor_auth/config."
+api: "POST /2factor_auth/config"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /2factor_auth/config.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST : api/2factor_auth/config
+
+Payload:
+{
+    "auth_type": 2,  // 0 = OFF, 1= SMS, 2-GA (for users)     
+    "auth_value": "OGc0RUxlM09qT3BwQ0NLd3lWUVBRQm94V1MzMFZHOHJCalpqSDZPemtWTjFMRkNzUTU%3D",
+    "team_auth_type": 1  // 0 = OFF, 1= SMS, 2-GA (for team) 
+} 
+
+Response:
+{
+    "data": "User 2FA configuration updated successfully",
+    "meta": {
+        "request_id": "1b519c22-6575-46ff-baaf-73781025ba0f"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

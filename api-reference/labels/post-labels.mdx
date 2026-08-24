@@ -1,0 +1,64 @@
+---
+title: "POST /labels"
+description: "Captured contract for POST /labels."
+api: "POST /labels"
+public: true
+---
+
+This internal review page records the behavior captured for POST /labels.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Note: Add Label
+
+
+
+
+Creates a new label with the specified name, text color, background color, and optional parent label. The endpoint returns the newly created label details, including its ID, parent ID, creator, and timestamps.
+
+
+
+
+Endpoint:
+
+POST: api/labels
+
+
+
+
+Request:
+
+{
+    "name": "Test Faxes",
+    "text_color": "#ffffff",
+    "background_color": "#ff0000",
+    "parent_id": 0
+}
+
+
+
+
+Response:
+
+{
+    "data": {
+        "id": 26,
+        "parent_id": 0,
+        "name": "Test Faxes",
+        "text_color": "#ffffff",
+        "background_color": "#ff0000",
+        "created_by": 140,
+        "created_at": "2025-11-12T12:41:11.000000Z",
+        "updated_at": "2025-11-12T12:41:11.000000Z"
+    },
+    "meta": {
+        "request_id": "baff691e-78a0-4a97-8e66-40400043df9d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

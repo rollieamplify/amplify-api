@@ -1,0 +1,37 @@
+---
+title: "PATCH /automations/{automation_id}/status"
+description: "Captured contract for PATCH /automations/{automation_id}/status."
+api: "PATCH /automations/{automation_id}/status"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /automations/{automation_id}/status.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Automation status update API.
+
+Endpoint:
+PATCH: api/automations/{automation_id}/status
+
+Body:
+{
+    "is_active": false
+}
+
+Response:
+{
+    "data": {
+        "is_active": false
+    },
+    "meta": {
+        "request_id": "a2afb5d3-1f0b-449a-90a1-30a4df530b1a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,64 @@
+---
+title: "POST /fax/document/upload/drive"
+description: "Captured contract for POST /fax/document/upload/drive."
+api: "POST /fax/document/upload/drive"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/document/upload/drive.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Upload from Drive API 
+
+
+Endpoint :
+POST: /api/fax/document/upload/drive
+
+
+## Description:
+Upload documents from cloud drive services (Google Drive, Dropbox, Box, OneDrive) to the system. The API downloads files from the specified drive service, converts them to PDF format if needed, uploads them to S3, and returns presigned URLs for access.
+
+
+Body :
+{
+  "files": [
+    {
+      "synctype": "google|dropbox|box|onedrive",
+      "url": "string (file ID/URL from drive)",
+      "ext": "string (file extension, e.g., pdf, doc, docx, png, jpg, jpeg)",
+      "accessToken": "string (OAuth access token for the drive service)",
+      "fileName": "string (optional, original file name)",
+      "path": "string (optional, file path in drive)"
+    }
+  ],
+  "templateUUID": "string (optional)",
+  "annotations": "any (optional)",
+  "HW": "any (optional)"
+}
+
+
+Response :
+{
+  "data": [
+    {
+      "file_uuid": "uuid.pdf",
+      "orgFileName": "original_file_name.pdf",
+      "presigned_url": "https://s3-presigned-url.com/file.pdf",
+      "pages": 5,
+      "templateUUID": "template-uuid",
+      "extras": "HW value",
+      "annotations": "annotations value"
+    }
+  ],
+  "meta": {
+    "request_id": "b196e1ee-bc95-4279-adac-7a3fb82d9d46"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

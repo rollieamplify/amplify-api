@@ -1,0 +1,72 @@
+---
+title: "POST /retry_configurations/bulk_update"
+description: "Captured contract for POST /retry_configurations/bulk_update."
+api: "POST /retry_configurations/bulk_update"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /retry_configurations/bulk_update.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Retry Configurations Bulk Update API
+
+
+**Endpoint:**  
+POST: api/retry_configurations/bulk_update
+
+
+# Description :
+Creates or updates fax retry configurations in bulk. Uses the `fax_retry_configuration` table. For each item: `id = 0` creates a new configuration; `id > 0` updates an existing one. Duplicate types are skipped silently. If any types are missing for the account, default entries are created for all 8 types. 
+
+# Request Body :
+{
+  "data": [
+    {
+      "id": 0,
+      "type": "busy_line",
+      "retry_attempts": 2,
+      "retry_interval": 180,
+      "batch_time_delay": 10,
+      "batch_fax_limit": 50
+    },
+    {
+      "id": 2,
+      "type": "call_rejected",
+      "retry_attempts": 4,
+      "retry_interval": 180,
+      "batch_time_delay": 10,
+      "batch_fax_limit": 50
+    }
+  ]
+}
+
+# Response Format :
+
+
+## Success Response (HTTP 200) :
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "busy_line",
+      "retry_attempts": 2,
+      "retry_interval": 180,
+      "batch_time_delay": 10,
+      "batch_fax_limit": 50,
+      "created_at": "2026-01-31T11:00:00.000000Z",
+      "created_by": 58,
+      "updated_at": "2026-01-31T11:00:00.000000Z"
+    }
+  ],
+  "meta": {
+    "request_id": "uuid-string"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,32 @@
+---
+title: "POST /folders/accept_permission_request"
+description: "Captured contract for POST /folders/accept_permission_request."
+api: "POST /folders/accept_permission_request"
+public: true
+---
+
+This internal review page records the behavior captured for POST /folders/accept_permission_request.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Accept Permission Request
+Endpoint: POST api/folders/accept_permission_request
+Description: Accept a folder access request and share the folder.
+Request:
+{
+  "folder_id": 12
+}
+Response:
+{
+  "data": {
+    "message": "The folder has been shared successfully."
+  },
+  "meta": {}
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,156 @@
+---
+title: "POST /broadcast/fax/details"
+description: "Captured contract for POST /broadcast/fax/details."
+api: "POST /broadcast/fax/details"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/fax/details.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/broadcast/fax/details
+
+Body:
+{
+    "fax_uuid": "01KF6EBWD3J57JYZSD8HAZDQ39",
+    "fax_status": "sending"
+}
+
+
+
+fax_status: delivered, sending, failed, opted_out, converted_via_qr
+
+
+
+Response:
+{
+    "data": {
+        "fax_uuid": "01KFQ8DEYD51178Q40H9EFRVG8",
+        "fields": {
+            "First Name": "Rahul",
+            "Last Name": "Patel",
+            "fax_number": "+1 (205) 850-9126",
+            "Company": "nnnn"
+        },
+        "estimate_complete_time": 1769520373,
+        "full_name": "First Broadcast",
+        "broadcast_name": "First Broadcast",
+        "total": 4,
+        "pending": 4,
+        "sent": 0,
+        "delivered": 0,
+        "failed": 0,
+        "draft": 0,
+        "blocked": 0,
+        "failed_chargeable": 0,
+        "failed_without_chargeable": 0,
+        "recepients": 4,
+        "fax_pages": null,
+        "fax_timestamp": 1769233365,
+        "fax_id": 1300,
+        "sent_percentage": 0,
+        "delivered_percentage": 0,
+        "failed_percentage": 0,
+        "opted_out_percentage": 0,
+        "converted_percentage": 0,
+        "is_opted_out_count": 0,
+        "is_converted_via_qr_count": 0,
+        "broadcast_id": 131, // or
+        "campaign_id": 34 ,
+        "fax_ai_tab": 1,
+        "broadcast_faxes": [
+          {
+                "broadcast_fax_uuid": "01KJYQXYEZH99ZYVAA3QRJXVJZ",
+                "id": 11510,
+                "broadcast_id": null,
+                "fax_status": "Delivered",
+                "error_code": "0",
+                "from_number": 12095820132,
+                "to_number": 12058598125,
+                "broadcast_name": "Untitled",
+                "document_name": "Download (1)",
+                "pages": 1,
+                "delivered_fax_pages": 1,
+                "fax_id": 15439,
+                "broadcast_number_id": 490100,
+                "retry_attempt": null,
+                "fax_timestamp": 1772705741,
+                "last_updated": 1772705937,
+                "fax_error_code": "0",
+                "location": null,
+                "is_split_fax": false,
+                "transmission_end_estimate": 1772706641,
+                "transmission_end": 1772705934,
+                "faster_delivered_percentage": null,
+                "is_right_time_delivered": null,
+                "is_delivered": null,
+                "fax_error": "",
+                "request_fax_confirmed_time": null,
+                "cancel_at": null,
+                "cancel_by": null,
+                "cancel_by_user": " ",
+                "marked_by": null,
+                "recipients_count": 2,
+                "total_cost": 2,
+                "fields": {
+                    "comment": "",
+                    "from": ""
+                }
+            },
+            {
+                "broadcast_fax_uuid": "01KJYQXYF08C07SE4EJ9JYA13G",
+                "id": 11511,
+                "broadcast_id": null,
+                "fax_status": "Delivered",
+                "error_code": "0",
+                "from_number": 12095820132,
+                "to_number": 12095820132,
+                "broadcast_name": "Untitled",
+                "document_name": "Download (1)",
+                "pages": 1,
+                "delivered_fax_pages": 1,
+                "fax_id": 15439,
+                "broadcast_number_id": 489737,
+                "retry_attempt": null,
+                "fax_timestamp": 1772705741,
+                "last_updated": 1772705939,
+                "fax_error_code": "0",
+                "location": null,
+                "is_split_fax": false,
+                "transmission_end_estimate": 1772706641,
+                "transmission_end": 1772705936,
+                "faster_delivered_percentage": null,
+                "is_right_time_delivered": null,
+                "is_delivered": null,
+                "fax_error": "",
+                "request_fax_confirmed_time": null,
+                "cancel_at": null,
+                "cancel_by": null,
+                "cancel_by_user": " ",
+                "marked_by": null,
+                "recipients_count": 2,
+                "total_cost": 2,
+                "fields": {
+                    "comment": "test comment",
+                    "from": "12344"
+                }
+            }
+        ]
+    },
+    "meta": {
+        "total": 20,
+        "next_cursor": "",
+        "previous_cursor": 1,
+        "limit": 20,
+        "request_id": "257130c1-5f22-4571-9029-17736383b80c"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

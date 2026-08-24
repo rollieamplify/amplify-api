@@ -1,0 +1,50 @@
+---
+title: "GET /fax/scheduled/send/{fax_uuid}"
+description: "Captured contract for GET /fax/scheduled/send/{fax_uuid}."
+api: "GET /fax/scheduled/send/{fax_uuid}"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/scheduled/send/{fax_uuid}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Send Scheduled Fax
+
+EndPoint:
+
+GET: api/fax/scheduled/send/{fax_uuid}
+
+
+Description: Immediately send a one-time scheduled outbound fax that is still pending/draft with a future scheduled_time. Feature: SCHEDULED_FAXES. Subusers need send-fax permission.
+
+
+
+
+Response:
+
+{
+    "data": {
+        "fax_uuid": "01KFG9X4BTGW4FQFATTASWY7CJ",
+        "local_fax_uuid": "01KFG9WRNSZ8WHXPVX9S62XXWV",
+        "cancelable": true,
+        "show_confetti": false,
+        "is_first_fax": false,
+        "is_scheduled": false,
+        "show_rating_popup": false,
+        "secure_code": null,
+        "show_enjoying": false,
+        "is_required_approval": false,
+        "show_video_testimonial": false
+    },
+    "meta": {
+        "request_id": "b63c0127-69fd-487b-884b-644bb3b3efbf"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

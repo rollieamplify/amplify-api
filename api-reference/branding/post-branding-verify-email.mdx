@@ -1,0 +1,51 @@
+---
+title: "POST /branding/verify_email"
+description: "Captured contract for POST /branding/verify_email."
+api: "POST /branding/verify_email"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /branding/verify_email.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+-> This API is used to send the verification email to the account for verification process of custom email set by the primary user or by its sub user.
+
+Endpoint: 
+POST: api/branding/verify_email
+
+
+Body :
+{
+        "email": "sender_demo@gmail.com"
+}
+
+Response : 
+{
+    "data": {
+        "message": "Verification email sent. Please check your inbox.",
+        "email": "sender_demo@gmail.com",
+    },
+    "meta": {
+        "request_id": "280f8a02-9ad1-4e34-80f9-8ab7b3a46ef9"
+    }
+}
+
+
+Error Code :-
+
+
+- DEFAULT_SENDER_EMAIL (When default email is passed)
+- INTERNAL_SERVER_ERROR (Any internal server error)
+- VERIFY_EMAIL_DIFFERENT (When email passed for verification is different than account user has set)
+- EMAIL_ALREADY_VERIFIED (When email is already verified)
+
+->  Sub User Error code : 
+- PERMISSION_DENIED (When sub user do not have the permission)
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

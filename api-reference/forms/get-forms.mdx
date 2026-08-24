@@ -1,0 +1,62 @@
+---
+title: "GET /forms"
+description: "Captured contract for GET /forms."
+api: "GET /forms"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+GET : api/forms
+
+
+
+
+Description :
+
+
+
+
+Returns a paginated list of forms for the authenticated user with optional search, status filter, label filter, and metrics.
+
+ 
+
+Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

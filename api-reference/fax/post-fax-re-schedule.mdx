@@ -1,0 +1,42 @@
+---
+title: "POST /fax/re_schedule"
+description: "Captured contract for POST /fax/re_schedule."
+api: "POST /fax/re_schedule"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/re_schedule.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Reschedule API.
+
+Endpoint
+POST : api/fax/re_schedule
+
+Request
+{
+    "local_fax_uuid" : "01KERZJDJQZ6TKNDDG41E8K4F7",
+    "schedule_time" : "01/22/2026 11:41am",
+    "recurring_type" : "",
+    "recurring_day_name" : "",
+    "schedule_type" : "",
+    "recurring_schedule_id" : ""
+}
+
+Response
+{
+    "data": {
+        "message": "Fax re-scheduled successfully."
+    },
+    "meta": {
+        "request_id": "79cfa6d4-0cfe-43d7-9e07-6f1a3f855c03"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

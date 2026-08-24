@@ -1,0 +1,89 @@
+---
+title: "POST /reports/data_by_folder"
+description: "Captured contract for POST /reports/data_by_folder."
+api: "POST /reports/data_by_folder"
+public: true
+---
+
+This internal review page records the behavior captured for POST /reports/data_by_folder.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/reports/data_by_folder?limit=1&cursor=1
+
+Body:
+{
+    "start_date": "2026-01-25",
+    "end_date": "2026-02-15",
+    "direction": "any"
+}
+
+direction: any, inbound, outbound
+
+Note: validation added for date format
+
+Validation Error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "direction": [
+            "The selected direction is invalid."
+        ],
+        "start_date": [
+            "The start date does not match the format Y-m-d."
+        ],
+        "end_date": [
+            "The end date does not match the format Y-m-d."
+        ]
+    }
+}
+
+Response:
+{
+    "data": [
+        {
+            "id": 553,
+            "name": "Test 1",
+            "inbound_count": 1,
+            "outbound_count": 0
+        },
+        {
+            "id": 1032,
+            "name": "Sub folder",
+            "inbound_count": 0,
+            "outbound_count": 0
+        },
+        {
+            "id": 1033,
+            "name": "Main Folder",
+            "inbound_count": 1,
+            "outbound_count": 2
+        },
+        {
+            "id": 1034,
+            "name": "Sub folder of main",
+            "inbound_count": 0,
+            "outbound_count": 0
+        },
+        {
+            "id": 989,
+            "name": "Sub user folder",
+            "inbound_count": 0,
+            "outbound_count": 0
+        }
+    ],
+    "meta": {
+        "request_id": "9d158eb4-3345-4ac6-8cdb-74a6542f723a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

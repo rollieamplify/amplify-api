@@ -1,0 +1,81 @@
+---
+title: "GET /company_types"
+description: "Captured contract for GET /company_types."
+api: "GET /company_types"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /company_types.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get list of company type
+Endpoint:
+POST: /company_types
+
+
+Response:
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Healthcare & Wellness",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "name": "Accounting & Financial Services",
+            "status": 1
+        },
+        {
+            "id": 3,
+            "name": "Legal Services",
+            "status": 1
+        },
+        {
+            "id": 4,
+            "name": "Construction & Real Estate",
+            "status": 1
+        },
+        {
+            "id": 5,
+            "name": "Business Consulting & Professional Services",
+            "status": 1
+        },
+        {
+            "id": 6,
+            "name": "Non-Profit & Government",
+            "status": 1
+        },
+        {
+            "id": 7,
+            "name": "Information Technology & Software",
+            "status": 1
+        },
+        {
+            "id": 8,
+            "name": "Retail & Consumer Services",
+            "status": 1
+        },
+        {
+            "id": 9,
+            "name": "Education & Administration",
+            "status": 1
+        },
+        {
+            "id": 10,
+            "name": "Insurance",
+            "status": 1
+        }
+    ],
+    "meta": {
+        "request_id": "37dc979e-1eb2-499c-880d-2d5247da9725"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

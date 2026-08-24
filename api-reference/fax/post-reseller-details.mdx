@@ -1,0 +1,62 @@
+---
+title: "POST /reseller/details"
+description: "Captured contract for POST /reseller/details."
+api: "POST /reseller/details"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reseller/details.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Get Reseller by Product Name API
+
+**Endpoint:**  
+
+POST: api/reseller/details
+
+# Description :
+
+Fetches reseller branding details by product name (default domain). Used when the frontend needs to load reseller/whitelabel configuration (logos, colors, product name) for a given domain or product identifier.  
+
+Expects `product_name` (the reseller’s default domain or product name).
+
+
+# Request Body :
+
+{
+  "product_name": "example.ifaxapp.com"
+}
+
+| Field        | Type   | Required | Description                                      |
+
+|-------------|--------|----------|--------------------------------------------------|
+
+| product_name | string | Yes      | Reseller’s default domain or product name (max 255). |
+
+# Response Format :
+
+## Success Response (HTTP 200) :
+
+{
+    "data": {
+        "default_domain": "bhaishab.fax.cc",
+        "dark_logo": "adiyogi-lord-shiva-3840x2160-14420 (1).png",
+        "light_logo": "_The first and best victory is to conquer self__ -Plato.png",
+        "logo_dark_background": "https://example.com/signed-url
+        "logo_light_background": "https://example.com/signed-url
+        "product_name": "bhaishab",
+        "primary_color": "#fa0909",
+        "accent_color": "#cd2044"
+    },
+    "meta": {
+        "request_id": "05a81113-3db7-4bce-9e05-a75e65a0efb9"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

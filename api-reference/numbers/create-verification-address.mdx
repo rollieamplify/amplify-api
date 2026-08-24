@@ -1,0 +1,54 @@
+---
+title: "Create a verification address"
+description: "Create an address for a regulatory DID requirement."
+api: "POST /numbers/verification/create_address"
+groups: ["internal"]
+---
+
+<Warning>This endpoint is for internal Amplify use only.</Warning>
+
+`POST /numbers/verification/create_address` validates and creates a carrier address.
+
+## Request body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | Person or organization name. |
+| `street_address` | string | Yes | Street address, including the building number. |
+| `locality` | string | Yes | City or locality. |
+| `country_code` | string | Yes | Two-letter country code. |
+| `postal_code` | string | Yes | Postal code. |
+| `administrative_area` | string | No | State, province, or administrative area when applicable. |
+
+```json
+{
+  "name": "Example Company",
+  "street_address": "100 Example Street",
+  "locality": "Zurich",
+  "administrative_area": "ZH",
+  "country_code": "CH",
+  "postal_code": "8000"
+}
+```
+
+## Response
+
+```json
+{
+  "data": {
+    "address_id": "2898526900051772938"
+  },
+  "meta": {
+    "request_id": "9b16f7a0-fdb4-457a-8cad-fa158c71cf78"
+  }
+}
+```
+
+Treat `address_id` as a string. Submit it as the `data` value for an `address` requirement.
+
+## Errors
+
+- Missing required fields return `VALIDATION_ERROR` with field-level messages.
+- A rejected address returns `INVALID_ADDRESS`.
+
+<Warning>Addresses are sensitive personal or business data. Protect them in transit, at rest, and in logs.</Warning>

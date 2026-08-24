@@ -1,0 +1,63 @@
+---
+title: "POST /fax/annotate_attachment"
+description: "Captured contract for POST /fax/annotate_attachment."
+api: "POST /fax/annotate_attachment"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/annotate_attachment.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Annotate Attachment API
+
+
+## Description :
+Uploads an annotated PDF attachment for a draft fax. This endpoint saves the annotated PDF file locally, uploads it to S3, removes any existing attachments for the fax, creates a new attachment record, and returns a presigned URL for accessing the uploaded file.
+
+
+**Note:** This endpoint replaces any existing attachments for the specified draft fax with the newly uploaded annotated PDF.
+
+
+## Endpoint :
+POST: api/fax/annotate_attachment
+
+
+## Request Body : 
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `local_fax_uuid` | string | Yes | UUID of the draft fax that must exist and be in draft status |
+| `pages` | integer | Yes | Number of pages in the PDF (minimum: 1) |
+| `file` | file | Yes | PDF file to upload (must be PDF format) |
+
+
+### Example Request (Form Data)
+local_fax_uuid: "550e8400-e29b-41d4-a716-446655440000"
+pages: 2
+file: [PDF file]
+
+
+## Response
+
+
+### Success Response (200)
+{
+    "data": {
+        "local_fax_uuid": "550e8400-e29b-41d4-a716-446655440000",
+        "attachment_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890.pdf",
+        "presigned_url": "https://example.com/signed-url
+        "pages": 2,
+        "file_size": 245678,
+        "attachment_id": 12345
+    },
+    "meta": {
+        "request_id": "8cfe25a8-2a71-426a-aa04-fb8e309a2168"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

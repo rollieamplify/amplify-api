@@ -1,0 +1,42 @@
+---
+title: "Upload a verification document"
+description: "Upload a regulatory document for DID verification."
+api: "POST /numbers/verification/upload_document"
+groups: ["internal"]
+---
+
+<Warning>This endpoint is for internal Amplify use only.</Warning>
+
+`POST /numbers/verification/upload_document` uploads a document and returns the reference used in a regulatory requirement.
+
+## Request
+
+Send a `multipart/form-data` request with one `file` field.
+
+```bash
+curl "https://api.amplify.xyz/v1/numbers/verification/upload_document" \
+  --request POST \
+  --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+  --form "file=@proof-of-address.pdf"
+```
+
+## Response
+
+```json
+{
+  "data": {
+    "file_name": "89282f25-7a15-4657-b4ea-d680f3d6f91e.pdf"
+  },
+  "meta": {
+    "request_id": "9b16f7a0-fdb4-457a-8cad-fa158c71cf78"
+  }
+}
+```
+
+Use `data.file_name` as the `data` value for a `document` requirement.
+
+## Validation errors
+
+Omitting `file` returns `VALIDATION_ERROR` with an error associated with the `file` field.
+
+<Warning>Verification documents can contain sensitive personal or business data. Do not include document contents or references in application logs.</Warning>

@@ -1,0 +1,73 @@
+---
+title: "PATCH /fax/{fax_uuid}/pin"
+description: "Captured contract for PATCH /fax/{fax_uuid}/pin."
+api: "PATCH /fax/{fax_uuid}/pin"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /fax/{fax_uuid}/pin.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+USE: Pin or unpin the fax.
+
+
+
+
+Endpoint:
+
+PATCH: api/fax/01KXGAZQHXD4GVGM3K7PW9QGMW/pin
+
+
+
+
+Request:
+
+{
+    "is_pinned" : "true"
+}
+
+
+
+
+Response:
+
+{
+    "data": "Fax pinned successfully.",
+    "meta": {
+        "request_id": "fb9db462-6fc6-406e-ac0b-aa281f0a0668"
+    }
+}
+
+
+
+
+NOTE: For unpin
+
+
+
+
+Request:
+
+{
+    "is_pinned" : "false"
+}
+
+
+
+
+Response:
+
+{
+    "data": "Fax unpinned successfully.",
+    "meta": {
+        "request_id": "10f54a42-1936-45ad-bfff-dad96bf17a14"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

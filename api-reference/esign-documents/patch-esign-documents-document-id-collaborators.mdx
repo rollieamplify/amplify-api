@@ -1,0 +1,51 @@
+---
+title: "PATCH /esign_documents/{document_id}/collaborators"
+description: "Captured contract for PATCH /esign_documents/{document_id}/collaborators."
+api: "PATCH /esign_documents/{document_id}/collaborators"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /esign_documents/{document_id}/collaborators.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint: 
+PATCH : api/esign_documents/{document_id}/collaborators
+
+Body :
+{
+    "collaborator_id":2,
+    "access_type":"editor",
+    "is_request_edit_access" : true (optional param)
+}
+
+
+
+Response:
+{
+    "data": {
+        "id": 2,
+        "document_id": 4066,
+        "user_id": 1166,
+        "email": "developer@example.com",
+        "name": "",
+        "access_type": "editor",
+        "created_by": 55,
+        "created_at": "2026-03-18T12:06:16.000000Z",
+        "updated_at": "2026-03-18T12:44:57.000000Z"
+    },
+    "meta": {
+        "request_id": "21aac6ee-8001-4254-a66a-0669109fdce0"
+    }
+}
+
+Note : -
+- This API can be used to update the access type for the collaborator .
+- In case where the permission for changeing access type to editor is granted then a param like "is_request_edit_access" should be provided.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

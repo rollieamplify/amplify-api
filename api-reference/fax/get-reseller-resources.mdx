@@ -1,0 +1,108 @@
+---
+title: "GET /reseller/resources"
+description: "Captured contract for GET /reseller/resources."
+api: "GET /reseller/resources"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /reseller/resources.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+API: GET api/reseller/resources
+
+
+
+
+Description
+Returns the reseller's resource allocation summary, including total allocated, used, and remaining resources.
+
+Authentication
+Bearer Token required
+Request
+
+
+
+
+Method: GET
+
+
+
+
+Query Parameters: None
+
+Success Response (200)
+{
+    "data": {
+        "numbers_license": {
+            "total": 21,
+            "used": 5,
+            "remaining": 16
+        },
+        "numbers_license_tier_1": {
+            "total": 0,
+            "used": 0,
+            "remaining": 0
+        },
+        "numbers_license_tier_2": {
+            "total": 0,
+            "used": 0,
+            "remaining": 0
+        },
+        "numbers_license_tier_3": {
+            "total": 0,
+            "used": 0,
+            "remaining": 0
+        },
+        "numbers_license_tier_4": {
+            "total": 0,
+            "used": 0,
+            "remaining": 0
+        },
+        "numbers_license_tier_5": {
+            "total": 0,
+            "used": 0,
+            "remaining": 0
+        },
+        "basic_license": {
+            "total": 10,
+            "used": 10,
+            "remaining": 0
+        },
+        "plus_license": {
+            "total": 10,
+            "used": 10,
+            "remaining": 0
+        },
+        "pro_license": {
+            "total": 20,
+            "used": 14,
+            "remaining": 6
+        },
+        "allowed_credit": {
+            "total": 4000,
+            "used": 600,
+            "remaining": 3400
+        },
+        "total_clients": 5,
+        "total_number_licenses": 16,
+        "total_team_licenses": 6
+    },
+    "meta": {
+        "request_id": "20f02d03-7e20-46d9-99f0-c09ff41ac6ab"
+    }
+}
+Error Response (500)
+{
+    "error": {
+        "code": "INTERNAL_SERVER_ERROR",
+        "message": "Something went wrong. Please try again later."
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

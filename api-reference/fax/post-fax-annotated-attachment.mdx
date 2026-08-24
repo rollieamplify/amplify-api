@@ -1,0 +1,97 @@
+---
+title: "POST /fax/annotated/attachment"
+description: "Captured contract for POST /fax/annotated/attachment."
+api: "POST /fax/annotated/attachment"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/annotated/attachment.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Save Fax Annotation API
+
+
+## Overview
+This API endpoint saves fax annotations for a fax identified by `fax_uuid`. It updates annotation metadata in the database, marks related fax headers (single and broadcast) as annotated, and generates/uploads annotated PDFs to S3 for all related attachments.
+
+
+## Endpoint :
+POST /api/fax/annotated/attachment
+
+
+## Request
+### Request Body :
+{
+  "fax_uuid": "f1b2c3d4-e5f6-7890-abcd-1234567890ab",
+  "annotations": [
+    {
+      "page": 1,
+      "fields": [
+        {
+          "key": "Patient Name",
+          "value": "John Doe",
+          "x_position": 100,
+          "y_position": 150,
+          "width": 200,
+          "height": 30,
+          "font_size": 12,
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+
+
+### Request Parameters :
+
+
+| Parameter         | Type           | Required | Description |
+|------------------|----------------|----------|-------------|
+| `fax_uuid`       | string (UUID)  | Yes      | Fax UUID that identifies the fax |
+| `annotations`    | array / object | Yes      | Annotation payload to apply on the fax and all of its attachments |
+
+
+### Example Request :
+{
+  "fax_uuid": "f1b2c3d4-e5f6-7890-abcd-1234567890ab",
+  "annotations": [
+    {
+      "page": 1,
+      "fields": [
+        {
+          "key": "Signature",
+          "value": "",
+          "x_position": 250,
+          "y_position": 700,
+          "width": 150,
+          "height": 40,
+          "type": "signature"
+        }
+      ]
+    }
+  ]
+}
+
+
+## Response
+### Success Response (200 OK) :
+{
+  "data": {
+    "local_fax_uuid": "f1b2c3d4-e5f6-7890-abcd-1234567890ab",
+    "is_annotate": true,
+    "fax_uuid": "fax-uuid-001",
+    "broadcast_fax_uuid": "broadcast-fax-uuid-1"
+  },
+  "meta": {
+    "request_id": "123e4567-e89b-12d3-a456-426614174000"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

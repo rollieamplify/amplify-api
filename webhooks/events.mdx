@@ -1,0 +1,33 @@
+---
+title: "Webhook events"
+description: "Understand event names and webhook payloads."
+---
+
+Event names use lowercase `snake_case`. For example, outbound fax webhooks use `outbound_fax`.
+
+```json
+{
+  "event_id": "evt_abc123xyz789",
+  "event_type": "outbound_fax",
+  "occurred_at": "2026-08-22T08:23:28Z",
+  "data": {
+    "fax": {
+      "direction": "outbound",
+      "fax_uuid": "XXXXXXXXXXXXXXXX",
+      "transmission_duration": 59,
+      "transmission_start": "2023-11-10T00:00:34Z",
+      "transmission_end": "2023-11-10T00:01:33Z",
+      "pages": 1,
+      "fax_status": "Delivered",
+      "from_number": "19073331000",
+      "to_number": "19073331000",
+      "transferred_pages": 1,
+      "retry_attempt": 0
+    }
+  }
+}
+```
+
+The `data` object contains one property named for the affected resource. Its value contains the fields relevant to that event. Date and timestamp fields use ISO 8601 UTC strings.
+
+Your integration should ignore unknown fields and safely handle new event types.

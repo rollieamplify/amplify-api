@@ -1,0 +1,49 @@
+---
+title: "POST /import_contacts/check_duplicate_contacts"
+description: "Captured contract for POST /import_contacts/check_duplicate_contacts."
+api: "POST /import_contacts/check_duplicate_contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /import_contacts/check_duplicate_contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Check Duplication Contact API.
+
+Endpoint :
+POST - api/import_contacts/check_duplicate_contacts
+
+Body:
+{
+    "fax_number": "2059907060,4349411362,8392208958",
+    "email": "john@example.com,primediagnostics@example.com,emily@example.com",
+    "phone_number": "5990961540,9264517818",
+    "work_number": "2059907060,4349411362,8392208958"
+}
+
+Response:
+{
+    "data": {
+        "duplicate_fax": [],
+        "duplicate_email": [],
+        "duplicate_phone_number": [],
+        "invalid_fax_number": [
+            "8392208958"
+        ],
+        "invalid_phone_number": [],
+        "invalid_work_number": [
+            "8392208958"
+        ]
+    },
+    "meta": {
+        "request_id": "d566c532-2555-4a78-a73e-79d592271ea1"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

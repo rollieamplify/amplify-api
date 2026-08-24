@@ -1,0 +1,39 @@
+---
+title: "POST /faxes/nlp"
+description: "Captured contract for POST /faxes/nlp."
+api: "POST /faxes/nlp"
+public: true
+---
+
+This internal review page records the behavior captured for POST /faxes/nlp.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Store NLP API.
+
+Endpoint:
+POST: api/faxes/nlp
+
+Body:
+{
+    "uuid":"01KDSS2X3J392GK2RDX4H9ET50",
+    "is_broadcast": false
+}
+
+Response:
+{
+    "data": {
+        "status": "draft",
+        "message": "This may take a few seconds. Accelerate this process in the future by setting up automatic OCR for all incoming faxes. "
+    },
+    "meta": {
+        "request_id": "0c430a8a-2831-4560-afee-a0cc9ce15249"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

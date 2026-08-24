@@ -1,0 +1,117 @@
+---
+title: "POST /fax/zip_create"
+description: "Captured contract for POST /fax/zip_create."
+api: "POST /fax/zip_create"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/zip_create.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Download Multiple Fax File API
+
+
+Endpoint : 
+POST: api/fax/zip_create
+
+
+# Description :
+Downloads a fax file in the requested format. This API supports multiple file formats:
+- PDF (default format)
+- TIFF/TIF (if available in S3)
+- JPG/JPEG (converts PDF to JPG)
+- TXT (OCR text - requires OCR processing to be completed)
+- JSON (NLP data - requires NLP processing to be completed)
+
+
+The API returns a presigned URL for downloading the file in the requested format.
+
+
+**Important:** Provide the `format` parameter to specify the desired file format. If not provided, defaults to PDF.
+
+
+# Request Body :
+
+
+## Option 1: Download PDF (Default) :
+{
+  "format": "pdf",
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"]
+  "is_broadcast": true 
+}
+
+
+## Option 2: Download PDF with OCR :
+{
+  "format": "pdf",
+  "ocr": true,
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"],
+  "is_broadcast": true 
+}
+
+
+## Option 3: Download Searchable PDF :
+{
+  "format": "pdf",
+  "is_searchable_pdf": true,
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"],
+  "is_broadcast": false
+}
+
+
+## Option 4: Download JPG :
+{
+  "format": "jpg",
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"],
+  "is_broadcast": false
+}
+
+
+## Option 5: Download TIFF :
+{
+  "format": "tiff",
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"],
+  "is_broadcast": false
+}
+
+
+## Option 6: Download TXT (OCR Text) :
+{
+  "format": "txt",
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"],
+  "is_broadcast": false
+}
+
+
+## Option 7: Download JSON (NLP Data) :
+{
+  "format": "json",
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"],
+  "is_broadcast": false
+}
+
+
+## Option 8: No Format (Defaults to PDF) :
+{    
+  "fax_uuids": ["01KEH3B1R69D6X80RKTMNCRWB1", "01KERCBXRAQTE2ES5G9M1EJYH4"],
+  "is_broadcast": false
+}
+
+# Response: 
+{
+    "data": {
+        "export_id": 56,
+        "message": "Zip export has been queued. Check export history or use export_id to get the download link when processing is complete."
+    },
+    "meta": {
+        "request_id": "11893b8b-669e-410e-8fc7-249157d40be3"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

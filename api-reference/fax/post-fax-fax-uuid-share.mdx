@@ -1,0 +1,39 @@
+---
+title: "POST /fax/{fax_uuid}/share"
+description: "Captured contract for POST /fax/{fax_uuid}/share."
+api: "POST /fax/{fax_uuid}/share"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/{fax_uuid}/share.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Share Fax
+Endpoint:
+POST: api/fax/{fax_uuid}/share
+Body:
+{
+    "viewer_type" : "all",
+    "permission" : "editor",
+    "start_page" : "1",
+    "guest_emails" : [
+        "developer@example.com",
+        "developer@example.com",
+        "developer@example.com",
+        "developer@example.com"
+    ],
+    "users" : [
+        119,1
+    ],
+    "send_mail" : true
+}
+viewer_type : all || team_only || users_only
+permission : editor || viewer
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,87 @@
+---
+title: "GET /broadcast_lists/{broadcast_list_id}"
+description: "Captured contract for GET /broadcast_lists/{broadcast_list_id}."
+api: "GET /broadcast_lists/{broadcast_list_id}"
+public: true
+---
+
+This internal review page records the behavior captured for GET /broadcast_lists/{broadcast_list_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Broadcast List Details API:
+
+
+Endpoint :
+GET: api/broadcast_lists/{broadcast_list_id}
+
+
+Query Parameters :
+- only_custom_fields (optional): 1 to get only custom fields, 0 to get recipients too (default: 0)
+- last_id (optional): Last recipient ID for pagination (default: 0)
+- limit (optional): Max recipients per request (default: 3000, max: 3000)
+
+
+Response :
+{
+    "data": {
+        "broadcast_id": 1,
+        "name": "My Broadcast List",
+        "is_favorite": false,
+        "custom_fields": [
+            {
+                "key": "firstName",
+                "cover_page_field": "to"
+            },
+            {
+                "key": "lastName",
+                "cover_page_field": null
+            }
+        ],
+        "total_cost": 0.60,
+        "recipients_count": 10,
+        "recipients_optout_count": 0,
+        "last_faxed": "2024-01-14T15:20:00.000000Z",
+        "created_at": "2024-01-10T08:00:00.000000Z",
+        "updated_at": "2024-01-15T10:30:00.000000Z",
+        "recipients": [
+            {
+                "id": 1,
+                "fax_number": "1234567890",
+                "formatted_fax_number": "+1234567890",
+                "region": "US",
+                "country_code": "US",
+                "area_code": "123",
+                "cost": 0.06,
+                "price_per_page": 0.06,
+                "fields": [
+                    {
+                        "key": "firstName",
+                        "value": "John"
+                    },
+                    {
+                        "key": "lastName",
+                        "value": "Doe"
+                    }
+                ],
+                "label": {
+                    "id": 1,
+                    "name": "VIP",
+                    "text_color": "#FFFFFF",
+                    "bg_color": "#FF0000"
+                }
+            }
+        ],
+        "limit": 3000
+    },
+    "meta": {
+        "request_id": "550e8400-e29b-41d4-a716-446655440000"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

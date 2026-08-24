@@ -1,0 +1,58 @@
+---
+title: "PATCH /esign_documents/{document_id}/renewal_setting"
+description: "Captured contract for PATCH /esign_documents/{document_id}/renewal_setting."
+api: "PATCH /esign_documents/{document_id}/renewal_setting"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /esign_documents/{document_id}/renewal_setting.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+PATCH : api/esign_documents/{document_id}/renewal_setting
+
+
+
+
+Description :
+
+-> Updates only the renewal fields provided in the request. 
+-> Returns current setting if no updatable fields are sent.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

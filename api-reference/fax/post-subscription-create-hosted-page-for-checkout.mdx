@@ -1,0 +1,104 @@
+---
+title: "POST /subscription/create_hosted_page_for_checkout"
+description: "Captured contract for POST /subscription/create_hosted_page_for_checkout."
+api: "POST /subscription/create_hosted_page_for_checkout"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /subscription/create_hosted_page_for_checkout.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create Hosted Page For Checkout
+
+EndPoint:
+
+POST: api/subscription/create_hosted_page_for_checkout
+
+
+Payload:
+
+{
+    "addons" : [
+        {
+            "addon": "license_1",
+            "quantity": 20
+        },
+        {
+            "addon": "license_2",
+            "quantity": 30
+        },
+        {
+            "addon": "license_3",
+            "quantity": 40
+        },
+        {
+            "addon": "credits",
+            "quantity": 7000
+        },
+        {
+            "addon": "numbers",
+            "quantity": 20
+        },
+        {
+            "addon": "api",
+            "quantity": 1
+        },
+        {
+            "addon": "broadcast",
+            "quantity": 1
+        },
+        {
+            "addon": "premier_support",
+            "quantity": 1
+        }
+    ],
+    "is_trial" : true,
+    "redirect_url" : "https://google.com",
+    "cancel_url" : "https://google.com",
+    "duration" : "annual",
+    "plan" : "hippa_basic_plan",
+    "currency" : "usd",
+    "layout" : "full_page"
+}
+
+Note :
+is_trial : in true, false
+
+plan : in hippa_basic_plan, hippa_plus_plan, hippa_pro_plan, hippa_enterprise_plan, basic_plan, plus_plan, pro_plan, enterprise_plan, broadcast_business_plan, broadcast_healthcare_plan, api_business_plan, api_healthcare_plan,broadcast_free_plan, api_free_plan
+
+addon : in license_1,license_2,license_3,license_4,credits,numbers,api,broadcast,whitelabel,premier_support,custom_domain,labs_ai,unlimited_cloud_storage,document_splitting,numbers_1,numbers_2,numbers_3,numbers_4,numbers_5
+
+
+duration : in monthly, annual, 2_year, 3_year
+
+
+
+
+currency : in usd, gbp
+
+
+layout : in in_app, full_page (default will be full_page )
+
+
+
+
+
+Response:
+
+{
+    "data": {
+        "hosted_page_url": "https://ifaxapp-poc5-test.chargebee.com/pages/v3/CVKPmQ2s8bBLH0hI1VFkzB3mEahfW4Ws/",
+        "hosted_page_id": "CVKPmQ2s8bBLH0hI1VFkzB3mEahfW4Ws"
+    },
+    "meta": {
+        "request_id": "5822c31a-6ddc-4c09-9a5f-167430fa936d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

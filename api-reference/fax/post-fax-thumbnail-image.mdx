@@ -1,0 +1,42 @@
+---
+title: "POST /fax/thumbnail_image"
+description: "Captured contract for POST /fax/thumbnail_image."
+api: "POST /fax/thumbnail_image"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/thumbnail_image.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+
+POST: api/fax/thumbnail_image
+
+
+Body:
+
+{
+    "fax_uuid": "01KWV66N4DZA5QJ9C1G5XVGYDJ",
+    "page_number": 1
+}
+
+
+Response:
+
+{
+    "data": {
+        "page_number": 1,
+        "image_url": "https://example.com/signed-url
+    },
+    "meta": {
+        "request_id": "02da510b-1755-47ec-9da5-6712c9a432bc"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

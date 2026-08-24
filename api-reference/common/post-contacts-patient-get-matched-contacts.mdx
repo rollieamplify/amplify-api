@@ -1,0 +1,86 @@
+---
+title: "POST /contacts/patient/get_matched_contacts"
+description: "Captured contract for POST /contacts/patient/get_matched_contacts."
+api: "POST /contacts/patient/get_matched_contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /contacts/patient/get_matched_contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/contacts/patient/get_matched_contacts
+
+
+Body:
+
+{
+    "fax_uuid": "01KVQ5MD8ZJXHJTPRP45JAQXQS"
+}
+
+
+Validation Errors:
+
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "The fax uuid field is required."
+    }
+}
+
+
+Response:
+
+{
+    "data": [
+        {
+            "nlp_data_id": 5944,
+            "contacts": [
+                {
+                    "id": 215636,
+                    "matched": 83,
+                    "matched_columns": 5,
+                    "first_name": "nameAarav",
+                    "last_name": "Mehta"
+                }
+            ]
+        },
+        {
+            "nlp_data_id": 5945,
+            "contacts": []
+        },
+        {
+            "nlp_data_id": 5946,
+            "contacts": []
+        },
+        {
+            "nlp_data_id": 5947,
+            "contacts": []
+        }
+    ],
+    "meta": {
+        "request_id": "45f8d43b-dd07-4a68-acbb-c07f85aea07d"
+    }
+}
+
+
+
+
+NOTE: Currently we are matching below columns of contacts.
+
+first_name
+last_name
+dob
+email
+phone_number
+physician_name
+medical_record_number
+gender (When check gender match with first_name is mandatory)
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

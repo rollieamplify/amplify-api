@@ -1,0 +1,54 @@
+---
+title: "POST /schedule/report/download"
+description: "Captured contract for POST /schedule/report/download."
+api: "POST /schedule/report/download"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /schedule/report/download.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/schedule/report/download
+
+Body:
+{
+    "id": 1,
+}
+
+Response:
+{
+    "data": {
+         "file_path": "https://example.com/signed-download-url"
+    },
+    "meta": {
+        "request_id": "dede737b-527a-4a7d-9f52-3f8decff76f8"
+    }
+}
+
+
+Response when report is not generated yet:
+{
+    "data": {
+         "message": "Report is not generated yet."
+    },
+    "meta": {
+        "request_id": "dede737b-527a-4a7d-9f52-3f8decff76f8"
+    }
+}
+
+Response (No Record):
+{
+    "error": {
+        "code": "NOT_FOUND",
+        "message": "No record found"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

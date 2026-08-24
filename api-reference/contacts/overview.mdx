@@ -1,0 +1,52 @@
+---
+title: "Contacts"
+description: "Create and organize contacts, groups, custom fields, notes, and patient records."
+public: true
+---
+
+The Contacts API provides public endpoints for individual, organization, and patient contacts. All requests use the Amplify API base URL:
+
+```text
+https://api.amplify.xyz/v1
+```
+
+<CardGroup cols={2}>
+  <Card title="Contacts" icon="address-book" href="/api-reference/contacts/list-contacts">
+    Create, find, and update contact records.
+  </Card>
+  <Card title="Contact groups" icon="users" href="/api-reference/contacts/list-contact-groups">
+    Organize contacts into reusable groups.
+  </Card>
+  <Card title="Custom fields" icon="input-text" href="/api-reference/contacts/list-contact-fields">
+    Define additional fields for contact types and groups.
+  </Card>
+  <Card title="Contact notes" icon="note-sticky" href="/api-reference/contacts/list-contact-notes">
+    Record contextual notes against a contact.
+  </Card>
+  <Card title="Patient contacts" icon="user-doctor" href="/api-reference/contacts/upload-patient-document">
+    Upload documents, identify likely matches, and save patient data.
+  </Card>
+  <Card title="Sales inquiries" icon="handshake" href="/api-reference/contacts/create-sales-inquiry">
+    Submit reseller sales inquiries.
+  </Card>
+</CardGroup>
+
+## Authentication
+
+Send your API access token in the `access_token` request header unless an endpoint explicitly states otherwise.
+
+```bash
+curl --request GET \
+  --url 'https://api.amplify.xyz/v1/contacts' \
+  --header 'access_token: YOUR_ACCESS_TOKEN'
+```
+
+## Contact types
+
+| Value | Type |
+| --- | --- |
+| `0` | Individual |
+| `1` | Organization |
+| `2` | Patient |
+
+Dates and timestamps in responses use ISO 8601 UTC format.

@@ -1,0 +1,84 @@
+---
+title: "POST /nlp/custom_fields"
+description: "Captured contract for POST /nlp/custom_fields."
+api: "POST /nlp/custom_fields"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /nlp/custom_fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Create, Update, and Delete Custom Field API.
+
+Endpoint
+POST: api/nlp/custom_fields
+
+Request
+{
+    "custom_fields" : [
+        {
+            "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+            "broadcast_fax_uuid": "",
+            "id": 85,
+            "data_key": "Test",
+            "data_type": "ALLERGIES",
+            "confidence": "12.00"
+        },
+        {
+            "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+            "broadcast_fax_uuid": "",
+            "id": 86,
+            "data_key": "Test one",
+            "data_type": "ALLERGIES",
+            "confidence": "4.00"
+        },
+        {
+            "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+            "broadcast_fax_uuid": "",
+            "data_key": "Test four",
+            "data_type": "ALLERGIES",
+            "confidence": ""
+        }
+    ]
+}
+
+Response
+{
+    "data": [
+        {
+            "id": 85,
+            "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+            "broadcast_fax_uuid": "",
+            "data_key": "Test",
+            "data_type": "ALLERGIES",
+            "confidence": "12.00"
+        },
+        {
+            "id": 86,
+            "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+            "broadcast_fax_uuid": "",
+            "data_key": "Test one",
+            "data_type": "ALLERGIES",
+            "confidence": "4.00"
+        },
+        {
+            "id": 109,
+            "fax_uuid": "01KF321K2W81FCD9DYCXWCNCEY",
+            "broadcast_fax_uuid": "",
+            "data_key": "Test four",
+            "data_type": "ALLERGIES",
+            "confidence": "0.00"
+        }
+    ],
+    "meta": {
+        "request_id": "2f1ac730-1552-4f1c-881a-22193a803920"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

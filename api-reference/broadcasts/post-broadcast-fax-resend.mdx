@@ -1,0 +1,75 @@
+---
+title: "POST /broadcast/fax/resend"
+description: "Captured contract for POST /broadcast/fax/resend."
+api: "POST /broadcast/fax/resend"
+public: true
+---
+
+This internal review page records the behavior captured for POST /broadcast/fax/resend.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Resend Broadcast Fax API
+
+
+**Endpoint:** 
+POST api/broadcast/fax/resend
+
+
+### Description :
+Resends **all failed/cancelled recipients** of a single broadcast or campaign. Works like `broadcast/cancel`: pass `fax_uuid` and the API determines if it is a **broadcast** or **campaign** from the database.
+
+
+**Handles:**
+- **Broadcast** (type 3): All failed/cancelled recipients in that broadcast list.
+- **Campaign** (type 5 / has `campaign_id`): All failed/cancelled recipients in that campaign.
+
+
+**Important:**
+- Only **failed** or **cancelled** recipients are resent (not sent, delivered, pending, etc.).
+- Processing is **synchronous** in the API (no background job).
+- Resends recipients for **one** broadcast or campaign identified by the given `fax_uuid`.
+
+
+### Request Body :
+{
+  "fax_uuid": "770e8400-e29b-41d4-a716-446655440002"
+}
+
+
+| Field      | Type   | Required | Description                                                   |
+|-----------|--------|----------|---------------------------------------------------------------|
+| fax_uuid  | string | Yes      | Parent fax UUID; broadcast or campaign is inferred from DB    |
+
+
+### Response Format 
+
+
+#### Success Response
+Failed recipients are skipped silently.}
+{
+  "data": {
+    "message": "Broadcast fax resend completed."
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440000"
+  }
+}
+
+
+Or for campaign: 
+{
+  "data": {
+    "message": "Campaign fax resend completed."
+  },
+  "meta": {
+    "request_id": "550e8400-e29b-41d4-a716-446655440001"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

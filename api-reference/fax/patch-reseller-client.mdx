@@ -1,0 +1,135 @@
+---
+title: "PATCH /reseller/client"
+description: "Captured contract for PATCH /reseller/client."
+api: "PATCH /reseller/client"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for PATCH /reseller/client.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Update Client API.
+
+Endpoint :
+
+PATCH - api/reseller/client/{client_id}
+
+
+Body:
+
+{
+    "first_name": "Web41",
+    "last_name": "Client 23",
+    "email": "developer@example.com",
+    "phonenumber": "15551234567",
+    "license_type": 1,
+    "family_type": 1, //1: Healthcare, 2: Business, 3: Broadcast, 4: API, 5: Reseller
+    "status": "Pending",
+    "organization": "Acme Corporation",
+    "credit_allowed": 100,
+    "credit_price": 0,
+    "numbers": 1, 
+    "numbers_price": 5, 
+    "numbers_1": 0, 
+    "numbers_1_price": 0, 
+    "numbers_2": 0, 
+    "numbers_2_price": 0, 
+    "numbers_3": 0, 
+    "numbers_3_price": 0, 
+    "numbers_4": 0, 
+    "numbers_4_price": 0, 
+    "numbers_5": 0, 
+    "numbers_5_price": 0,
+    "basic_license": 3,
+    "basic_license_price": 2.5,
+    "plus_license": 1,
+    "plus_license_price": 5,
+    "pro_license": 1,
+    "pro_license_price": 10,
+    "custom_email_domain": false,
+    "custom_email_domain_price": 15,
+    "lab_ai_license": true,
+    "lab_ai_license_price": 25,
+    "api_license": false,
+    "api_license_price": 50,
+    "broadcast_fax": true,
+    "broadcast_fax_price": 50,
+    "auto_topup_credit": 3,
+    "document_splitting": false,
+    "document_splitting_price": 3,
+    "monthly_upgrade_limit": 0,
+    "allow_social_login": true
+}
+
+
+Response:
+
+{
+    "data": {
+        "client_id": 28841,
+        "first_name": "Web41",
+        "last_name": "Client 23",
+        "email": "developer@example.com",
+        "phonenumber": "15551234567",
+        "family_type": 1,
+        "license_type": 1,
+        "status": "Pending",
+        "is_starred": false,
+        "organization": "Acme Corporation",
+        "credit_allowed": 10,
+        "credit_price": 0.06,
+        "number_licenses": {
+            "numbers": 0,
+            "numbers_1": 0,
+            "numbers_2": 0,
+            "numbers_3": 0,
+            "numbers_4": 0,
+            "numbers_5": 0
+        },
+        "number_licenses_price": {
+            "numbers": 0,
+            "numbers_1": 0,
+            "numbers_2": 0,
+            "numbers_3": 0,
+            "numbers_4": 0,
+            "numbers_5": 0
+        },
+        "team_licenses": {
+            "basic_license": 0,
+            "plus_license": 0,
+            "pro_license": 0
+        },
+        "team_licenses_price": {
+            "basic_license": 5.99,
+            "plus_license": 0,
+            "pro_license": 0
+        },
+        "custom_email_domain": false,
+        "custom_email_domain_price": 0,
+        "lab_ai_license": false,
+        "lab_ai_license_price": 0,
+        "api_license": false,
+        "api_license_price": 0,
+        "broadcast_fax": false,
+        "broadcast_fax_price": 0,
+        "document_splitting": false,
+        "document_splitting_price": 0,
+        "is_auto_topup_credits_enabled": true,
+        "auto_topup_credit": 3,
+        "is_autotopup_upgrade_limit": false,
+        "monthly_upgrade_limit": 300,
+        "used_autotopup_credit_limit": 0,
+        "allow_social_login": true
+    },
+    "meta": {
+        "request_id": "be3e64c0-e163-49fb-afe4-3e8e269ae04d"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

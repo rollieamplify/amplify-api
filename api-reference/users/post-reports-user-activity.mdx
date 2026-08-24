@@ -1,0 +1,127 @@
+---
+title: "POST /reports/user_activity"
+description: "Captured contract for POST /reports/user_activity."
+api: "POST /reports/user_activity"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /reports/user_activity.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+User Activity API.
+
+Endpoint
+POST : api/reports/user_activity?limit=10&cursor=1
+
+Request
+{
+    "start_date": "",
+    "end_date": "",
+    "ids": [28],
+    "activity_ids" : [],
+    "reseller_view" : 0
+}
+
+
+Validation Error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "activity_ids": [
+            "The activity ids must be an array."
+        ],
+        "start_date": [
+            "The start date does not match the format Y-m-d."
+        ],
+        "end_date": [
+            "The end date does not match the format Y-m-d."
+        ]
+    }
+}
+
+Respone
+{
+    "data": [
+        {
+            "title_id": 67,
+            "title": "Forwarded as Fax",
+            "slug": "FORWARD_FAX",
+            "description": "Forwarded as fax",
+            "fax_id": "01KK8TC0B6K3FBXJAM80NKX65V",
+            "fax_type": "IB",
+            "first_name": "web",
+            "last_name": "55",
+            "email": "developer@example.com",
+            "event_category": "Send",
+            "device": "Unknown  Unknown",
+            "reason_for_access": "",
+            "record_accessed": "",
+            "status": "success",
+            "encryption_status": "Encrypted",
+            "geo_location": "Portland, United States",
+            "ip_address": "52.27.114.173",
+            "retention_period": "",
+            "created_at": 1773043845
+        },
+        {
+            "title_id": 53,
+            "title": "OCR",
+            "slug": "OCR",
+            "description": "OCR 3 Pages (01:01 to complete)</br>Start Time : 03/09/2026 08:08AM</br>Complete Time : 03/09/2026 08:09AM",
+            "fax_id": "01KK8HAN1GZXBDAHPX9BAQSDSA",
+            "fax_type": "OB",
+            "first_name": "web",
+            "last_name": "55",
+            "email": "developer@example.com",
+            "event_category": null,
+            "device": "Unknown  Unknown",
+            "reason_for_access": "",
+            "record_accessed": "",
+            "status": "success",
+            "encryption_status": "Encrypted",
+            "geo_location": "Portland, United States",
+            "ip_address": "52.25.192.9",
+            "retention_period": "1",
+            "created_at": 1773043744
+        },
+        {
+            "title_id": 15,
+            "title": "New Fax sent",
+            "slug": "SEND_FAX",
+            "description": "Fax sent to +1 (251) 249-9468  with 3 pages",
+            "fax_id": "01KK8T857VZ17RF9YKSTA09ZXE",
+            "fax_type": null,
+            "first_name": "web",
+            "last_name": "55",
+            "email": "developer@example.com",
+            "event_category": "Send",
+            "device": "Unknown  Unknown",
+            "reason_for_access": "",
+            "record_accessed": "",
+            "status": "success",
+            "encryption_status": "Encrypted",
+            "geo_location": "Portland, United States",
+            "ip_address": "52.27.114.173",
+            "retention_period": "1",
+            "created_at": 1773043720
+        },
+    ],
+    "meta": {
+        "total": 433,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 20,
+        "request_id": "aab1dfc2-b453-4bb5-b4c0-44717a5a1d33"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

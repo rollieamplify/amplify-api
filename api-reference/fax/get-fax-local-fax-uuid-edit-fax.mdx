@@ -1,0 +1,118 @@
+---
+title: "GET /fax/{local_fax_uuid}/edit-fax"
+description: "Captured contract for GET /fax/{local_fax_uuid}/edit-fax."
+api: "GET /fax/{local_fax_uuid}/edit-fax"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/{local_fax_uuid}/edit-fax.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+## Edit Failed Fax API
+
+
+Description : 
+Retrieves failed fax details for editing and review. Returns all fax information, including recipients, attachments, templates, and settings.
+
+
+Endpoint : 
+GET: api/fax/{local_fax_uuid}/edit-fax
+
+
+Request Parameters :
+- **local_fax_uuid** (string, required): UUID of the failed fax to retrieve.
+
+
+Success Response (200) :
+{
+    "data": {
+        "fax_uuid": "01KFCXZ9421812H2D3WTGKJTP2",
+        "local_fax_uuid": "01KFCXY9YVDS58W5REZBK909W8",
+        "template_id": 147,
+        "caller_id": "15873301592",
+        "recipients": [
+            "12058577249"
+        ],
+        "broadcast_recipients": [],
+        "broadcast_ids": [],
+        "quality": "standard",
+        "speed": "regular",
+        "approval_required": false,
+        "default_content_type": "cover_page",
+        "include_cover_page": true,
+        "cover_page_id": 1,
+        "cover_page_metadata": {
+            "show_logo": true,
+            "show_badge": false,
+            "show_disclaimer": false,
+            "subject": "test edit fax ",
+            "comment": "<p>test thumb  123465 ee</p>",
+            "disclaimer_text": "",
+            "from_name": "test web 67",
+            "to_name": "",
+            "logo_filename": "ifax_black.png",
+            "logo_url": "https://example.com/signed-url
+            "badge_filename": "",
+            "badge_url": ""
+        },
+        "include_smart_template": false,
+        "smart_template_metadata": {
+            "name": "",
+            "page_count": 0,
+            "storage_id": "",
+            "annotations": []
+        },
+        "smart_template_id": 0,
+        "attachments": [
+            {
+                "s3_url": "https://example.com/signed-url
+                "uuid": "39633608-cbad-4511-a254-71627761dd88.pdf",
+                "attachment_id": 577
+            }
+        ],
+        "attachments_count": 1,
+        "header_settings": {
+            "show_sender_name": false,
+            "sender_name_type": "",
+            "show_caller_id": false,
+            "show_delivery_time": false,
+            "delivery_time_format": "",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": ""
+        },
+        "footer_settings": {
+            "show_sender_name": true,
+            "sender_name_type": "user",
+            "show_caller_id": false,
+            "show_delivery_time": 0,
+            "delivery_time_format": "",
+            "show_page": true,
+            "show_other_text": true,
+            "other_text": ""
+        },
+        "created_at": 1768886839,
+        "updated_at": 1768886871,
+        "fax_paper_size": "letter",
+        "broadcast_template_id": 0,
+        "broadcast_template_metadata": {
+            "name": "",
+            "page_count": 0,
+            "storage_id": "",
+            "annotations": []
+        },
+        "fax_status": "failed",
+        "fax_type": 1
+    },
+    "meta": {
+        "request_id": "f8cfcd16-f14a-4154-840b-7dca084e4602"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

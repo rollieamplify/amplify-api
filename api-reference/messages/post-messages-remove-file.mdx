@@ -1,0 +1,49 @@
+---
+title: "POST /messages/remove_file"
+description: "Captured contract for POST /messages/remove_file."
+api: "POST /messages/remove_file"
+public: true
+---
+
+This page documents the behavior captured for POST /messages/remove_file in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    POST: api/messages/remove_file
+    
+    Body:
+    
+    {
+        "file_name":"Z9UBQD_synthetic_multi_patient_nlp_sample.pdf"
+    }
+    
+    
+    Validation error:
+    
+    {
+        "error": {
+            "code": "BAD_REQUEST",
+            "message": "The file name field is required."
+        }
+    }
+    
+    
+    Response:
+    
+    {
+        "data": {
+            "status": true,
+            "message": "File deleted successfully"
+        },
+        "meta": {
+            "request_id": "cce4aeec-808b-4244-9214-1b3767f211d3"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

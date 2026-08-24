@@ -1,0 +1,16 @@
+---
+title: "List contact-picker contacts"
+description: "Retrieve contacts grouped for contact-picker interfaces."
+api: "GET /contacts/list"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField query="search_by" type="string">One of `recent`, `email`, or `phone_number`.</ParamField>
+<ParamField query="search_value" type="string">Value to search for.</ParamField>
+<ParamField query="type" type="integer">Contact type: `0`, `1`, or `2`.</ParamField>
+
+The response groups results into `recent_contacts`, `stared_contacts`, and `contact_group_contacts`.
+
+<Warning>`stared_contacts` is the current response key captured from the API. It is intentionally documented with the existing spelling.</Warning>
+

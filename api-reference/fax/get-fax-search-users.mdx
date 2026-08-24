@@ -1,0 +1,59 @@
+---
+title: "GET /fax/search/users"
+description: "Captured contract for GET /fax/search/users."
+api: "GET /fax/search/users"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/search/users.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+GET: api/fax/search/users
+
+Request:
+{
+   search: "test"
+}
+Response:
+{
+    "data": {
+        "users": [
+            {
+                "id": 291,
+                "name": "test",
+                "email": "test@example.com"
+            },
+            {
+                "id": 57,
+                "name": "Manoj Prajapati",
+                "email": "developer@example.com"
+            }
+        ],
+        "roles": [
+            {
+                "id": 29,
+                "name": "test8",
+                "total_users": 0,
+                 "user_ids": ""
+            },
+            {
+                "id": 538,
+                "name": "test",
+                "total_users": 2,
+                "user_ids": "1202,1268"
+            },
+        ]
+    },
+    "meta": {
+        "request_id": "83e95216-7b07-43fe-a2a3-46bb3c17cc89"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,33 @@
+---
+title: "POST /webhooks/test"
+description: "Captured contract for POST /webhooks/test."
+api: "POST /webhooks/test"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /webhooks/test.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Test Webhook
+
+Endpoint:
+POST: api/webhooks/test
+
+Body:
+{
+    "url" : "https://dev-api.amplify.xyz/api/test/webhook",
+    "events" : "inbound_fax"
+    "authentication" : true,
+    "username" : "web35",
+    "password" : "example_password"
+}
+events in : inbound_fax, outbound_fax
+authentication : boolean
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

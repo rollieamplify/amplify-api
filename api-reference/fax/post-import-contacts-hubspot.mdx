@@ -1,0 +1,28 @@
+---
+title: "POST /import_contacts/hubspot"
+description: "Captured contract for POST /import_contacts/hubspot."
+api: "POST /import_contacts/hubspot"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /import_contacts/hubspot.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Import Contacts from Hubspot API.
+
+EndPoint:
+POST: api/import_contacts/hubspot
+
+Body:
+{
+  "code": "01KF5V17NPKA69ERZ7XVQRZ70Q",
+  "redirect_uri": "https://redirect_example.com"
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,47 @@
+---
+title: "POST /user/filter/save"
+description: "Captured contract for POST /user/filter/save."
+api: "POST /user/filter/save"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /user/filter/save.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Save/Update user filter
+
+Endpoint:
+POST: /user/filter/save
+
+Request:
+{
+    "created_from" : "dashboard",
+    "filter_data" : {
+      "status": ["test2", "delivered"],
+      "date_from": "2025-01-01",
+      "date_to": "2025-01-31"
+    }
+}
+
+Response:
+{
+    "data": {
+        "status": [
+            "test2",
+            "delivered"
+        ],
+        "date_from": "2025-01-01",
+        "date_to": "2025-01-31"
+    },
+    "meta": {
+        "request_id": "e711de12-81f1-4948-84d6-999a736c1704"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

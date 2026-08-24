@@ -1,0 +1,60 @@
+---
+title: "GET /fax/{fax_uuid}/users"
+description: "Captured contract for GET /fax/{fax_uuid}/users."
+api: "GET /fax/{fax_uuid}/users"
+public: true
+---
+
+This internal review page records the behavior captured for GET /fax/{fax_uuid}/users.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Assigned Users
+
+Endpoint:
+GET: api/fax/{fax_uuid}/users
+
+Response:
+{
+    "data": {
+        "users": [
+            {
+                "id": 58,
+                "name": "web 67",
+                "email": "developer@example.com"
+            }
+        ],
+        "roles": [
+            {
+                "id": 151,
+                "name": "tes role p",
+                "total_users": 0
+            },
+            {
+                "id": 139,
+                "name": "test m",
+                "total_users": 1
+            },
+            {
+                "id": 43,
+                "name": "test mm",
+                "total_users": 1
+            },
+            {
+                "id": 18,
+                "name": "admin ",
+                "total_users": 2
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "7dec8292-9735-4327-a5ba-af0a9b828557"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

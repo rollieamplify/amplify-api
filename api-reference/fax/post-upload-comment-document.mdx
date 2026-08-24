@@ -1,0 +1,49 @@
+---
+title: "POST /upload/comment_document"
+description: "Captured contract for POST /upload/comment_document."
+api: "POST /upload/comment_document"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /upload/comment_document.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Upload comment document API:
+Endpoint:
+POST: /api/upload/comment_document
+
+Body:
+{
+   "file":""
+}
+
+Validation error:
+{
+    "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Validation failed."
+    },
+    "errors": {
+        "file": [
+            "The file must be an image."
+        ]
+    }
+}
+
+Response:
+{
+    "data": {
+        "url": "https://ifax-2-0.s3.us-west-2.amazonaws.com/ded2d3d30720c9e297f9ec297962375e/attachments/211d3c33-7f55-48d1-87cc-f8ed3932b86b.jpg"
+    },
+    "meta": {
+        "request_id": "103ee07b-8bbc-493e-b51a-a1d5eb8f376a"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

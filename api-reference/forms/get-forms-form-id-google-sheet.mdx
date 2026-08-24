@@ -1,0 +1,87 @@
+---
+title: "GET /forms/{form_id}/google_sheet"
+description: "Captured contract for GET /forms/{form_id}/google_sheet."
+api: "GET /forms/{form_id}/google_sheet"
+public: true
+---
+
+This internal review page records the behavior captured for GET /forms/{form_id}/google_sheet.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+This API is used for get google sheet from drive.
+
+Endpoint: 
+GET: api/forms/{form_id}/google_sheet
+
+
+
+Response:
+{
+    "data": [
+        {
+            "file_id": "1lPUUEKVvOfrTr97zdy4tA9berBb0Lqmqygneb21w6aw",
+            "file_name": "Testsheet",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNz6dTkmH1gCBM_AGKCfimy6zDWZjT0d7854Ro39SwRiPM9SitHvOqdFQFBtXBf9v_am7wIQUCWN1IVzI0HLP_iG-VWOLrB1cKbqLfIWM613Aor6SWRTXEYAnq-ntmk=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1lPUUEKVvOfrTr97zdy4tA9berBb0Lqmqygneb21w6aw/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1Ht_VKkakW3346sZd3Wb8rnuXB_x_jnNnIFpCOIvDE_s",
+            "file_name": "Copy of Testsheet",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNTJUr6ao-YJdEA16p-I6YZ2Z-OHLSkqRhoui0Vqr2kH-Cw1SfDm3R4s7eFyllBf-rNTFtR09J0XQWunrvhubKa3En_SM0ErNpZzjhMJEkpo_0saLNBhxPDmWA52kJ_=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1Ht_VKkakW3346sZd3Wb8rnuXB_x_jnNnIFpCOIvDE_s/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1jxjdFPvoKHpbe3Zc7mPH4nUrvkl-DGsgZosHPXK1st4",
+            "file_name": "Testsheet",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNbHq5mzUHw97-fI--9q_CcZVAJEmuCzkrWE9qHqxn8I0usLjks1xIrnLBgagVe70hMrTJ7hRp26jU6rVU9jxICmxAqyCuKTBqLEXFQ6uu5bSRP-CpblqK-CBlJNYN4=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1jxjdFPvoKHpbe3Zc7mPH4nUrvkl-DGsgZosHPXK1st4/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1dbgAxv_RT0p1oEggWrT9mN-Sv_7DZA_ITPsrSHyy-7Q",
+            "file_name": "Testsheet",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNbEXHxchOuPtFvKeW0TBFmC2slalzWjZtBmRCAvJZB3cXQMdfyxyxjN4rSknJwVsK-wWsT8y4m2sWHOcn5GNeTpmCeEUpJMFSdFStjfB_r1SH4pIU-J5-YmGDb30pb=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1dbgAxv_RT0p1oEggWrT9mN-Sv_7DZA_ITPsrSHyy-7Q/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1Spt09iXPIMegmwvw4kKkj6ccwDBfebcPKMgbeotNYnk",
+            "file_name": "testamplify",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBMdkbwiwBdinJC9ap2QSbBgn6WBD2jr0nAbpRFsfKoM3CNT0Wl9vOF1s_XFG4iuABPVrEslHmCT5cNJD58Sf_LqE3OJu9YMry1w70ECIrT4iLSrW-VGqXyCK23z1vZ4=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1Spt09iXPIMegmwvw4kKkj6ccwDBfebcPKMgbeotNYnk/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1BSAx0IxtS9vBB4O1_HbSiJc1gx2MVgUKmmIvhxrzsp0",
+            "file_name": "testamplify",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNFzIDQAMga9gW3zuy45ECQufgTdzAm7QSoVoQ_MqfMacNkU_Upx8W0cnftdt0Lg6Wkrc_Pr6Ixddutj9LwmmuFabh9zhWTGpUR4VhF6MLrwR3ks27isBQQ4w3aMlDq=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1BSAx0IxtS9vBB4O1_HbSiJc1gx2MVgUKmmIvhxrzsp0/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1Z98TPOcnCuKlK08IzdB-Lr-li0vYm5W0Aw6PEj-I56A",
+            "file_name": "testamplify",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBNK1H9FV0IJ_USuYwQ8OV4-K_mzEImK4SrWaFuTG0TNq3o2m9wfjMBKY2VnRFUBurrxX3LskEsYTrvSrYlWnEjtsU5YQur5eAHm1W66sx2lxw8Z1d8JTRojk88aHrbm=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1Z98TPOcnCuKlK08IzdB-Lr-li0vYm5W0Aw6PEj-I56A/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1lpc7x1WFzLwLg1opo0bL6ERfDgym6rhB8lmC5wLuzkQ",
+            "file_name": "testamplify",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBO7Jlk8Uus-ldng_0Va4TPXIjbogtZFjDUcpHtgVoxHk5B4edxkBHblnapBmHCmCPDTn5AcZep-fVL-gXXZYDjJ7ZI-uGhctcB9r4xWwv65VTpw6fr_UgG1hwFAVFz2=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1lpc7x1WFzLwLg1opo0bL6ERfDgym6rhB8lmC5wLuzkQ/edit?usp=drivesdk"
+        },
+        {
+            "file_id": "1Pq70bnI1V5HZrLcvrwl5YfV1_eeaNPUFiDx_HbFLBE8",
+            "file_name": "testamplify",
+            "thumbnail": "https://lh3.googleusercontent.com/drive-storage/AJQWtBN6ODgteWEbWoZZTemyuz3D5jTepWXUdfRWjtTHDddgJhReta49UjqNhGBL46GXmw50KlyuqPBuEAOUXneNrQdwy5qucyKbX04iyBilOyf68_Sy1wZEN2aVZ3ZBvt-_=s220",
+            "file_url": "https://docs.google.com/spreadsheets/d/1Pq70bnI1V5HZrLcvrwl5YfV1_eeaNPUFiDx_HbFLBE8/edit?usp=drivesdk"
+        }
+    ],
+    "meta": {
+        "request_id": "e6c8ee50-12cb-4882-8fd3-ca84d0b73dc1"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

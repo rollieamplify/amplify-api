@@ -1,0 +1,63 @@
+---
+title: "POST /forms/responses/delete"
+description: "Captured contract for POST /forms/responses/delete."
+api: "POST /forms/responses/delete"
+public: true
+---
+
+This internal review page records the behavior captured for POST /forms/responses/delete.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+POST : api/forms/responses/delete
+
+
+
+
+Description :
+
+
+
+
+Soft-deletes multiple form responses belonging to the authenticated user's email (respondent inbox cleanup).
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

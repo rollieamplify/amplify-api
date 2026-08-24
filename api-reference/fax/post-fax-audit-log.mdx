@@ -1,0 +1,106 @@
+---
+title: "POST /fax/audit/log"
+description: "Captured contract for POST /fax/audit/log."
+api: "POST /fax/audit/log"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/audit/log.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+POST: api/fax/audit/log
+
+Body:
+{
+    "fax_uuid": "01KDNNW9WXVCPG1D3NDZ857NEV", // or
+    "broadcast_fax_uuid": "01KE73S6AN1Y51X1DHW8VK4YCZ",
+    "types": ["notes"], // include this to return only notes 
+}
+
+
+Response:
+{
+    "data": {
+        "info": {
+            "transmission": {
+                "fax_uuid": "01KF80WNVWN5C0XZ0A436ZW65N",
+                "direction": "outbound",
+                "type": "Broadcast",
+                "status": "Active",
+                "error_code": null,
+                "start_time": 1769058264,
+                "completed_time": 1769058264,
+                "transmission_time": null,
+                "retries": null,
+                "last_updated": 1768735754,
+                "credits": "0.00"
+            },
+            "content": {
+                "pages": 1,
+                "fax_quality": "Standard",
+                "fax_priority": "High Priority",
+                "fax_format": null
+            },
+            "sender_recipient": {
+                "sender_name": "",
+                "recipient_name": "",
+                "sender_number": 19073131400,
+                "recipient_number": null
+            }
+        },
+        "notes": [],
+        "activities":  [
+            {
+                "activity_type": "DELETE_FAX",
+                "metadata": {
+                    "fax_type": "IB",
+                    "fax_id": "01KHJYJZB6FPRNZZAAAEFS4VVR",
+                    "deleted_at": "1771243402",
+                    "deleted_by": 581
+                },
+                "perfomed_by_email": "developer@example.com",
+                "perfomed_by_name": "Vismay K",
+                "timestamp": 1771243402,
+                "title": "Inbound fax moved to Trash"
+            },
+            {
+                "activity_type": "DELETE_FAX",
+                "metadata": {
+                    "fax_type": "IB",
+                    "fax_id": "01KHJYJZB6FPRNZZAAAEFS4VVR",
+                    "deleted_at": "1771243640",
+                    "deleted_by": 581
+                },
+                "perfomed_by_email": "developer@example.com",
+                "perfomed_by_name": "Vismay K",
+                "timestamp": 1771243640,
+                "title": "Inbound fax moved to Trash"
+            },
+            {
+                "activity_type": "RENAME_FAX",
+                "metadata": {
+                    "fax_type": null,
+                    "fax_id": "01KHJYJZB6FPRNZZAAAEFS4VVR",
+                    "renamed_at": "1771308452",
+                    "old_name": "Fax 12095820132",
+                    "new_name": "sdfsdf"
+                },
+                "perfomed_by_email": "developer@example.com",
+                "perfomed_by_name": "Vismay K",
+                "timestamp": 1771308452,
+                "title": "Renamed from 'Fax 12095820132' to 'sdfsdf'"
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "cf02dd94-404f-4690-b2a3-d331a1906331"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

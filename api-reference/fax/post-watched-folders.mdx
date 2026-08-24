@@ -1,0 +1,62 @@
+---
+title: "POST /watched_folders"
+description: "Captured contract for POST /watched_folders."
+api: "POST /watched_folders"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /watched_folders.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+NOTE: Allowed  only methods: ['fixed', 'fcl']
+
+Endpoint:
+
+POST: api/watched_folders
+
+
+Note:-  If authentication_method is 1, send ssh_key. If it is 0, send the password.
+
+ 
+Body:
+
+{
+    "host": "52.36.169.228",
+    "port": "22",
+    "username": "ubuntu",
+    "password": "",
+    "path": "/home/ubuntu/test1",
+    "method": "fixed",
+    "ssh_key" :"YOUR_PRIVATE_KEY",
+    "authentication_method" : 1,
+    "fax_number": "18334286878"
+}
+
+
+Response:
+
+{
+    "data": {
+        "id": 2,
+        "host": "52.36.169.228",
+        "port": "22",
+        "username": "ubuntu",
+        "password": "",
+        "path": "/home/ubuntu/test1",
+        "method": "fixed",
+        "fax_number": "18334286878",
+        "ssh_key": "YOUR_PRIVATE_KEY",
+        "authentication_method": 1
+    },
+    "meta": {
+        "request_id": "e33ffec6-fa05-4e00-aaf1-6655e23eea39"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

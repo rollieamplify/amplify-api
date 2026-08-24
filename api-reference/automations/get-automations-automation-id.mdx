@@ -1,0 +1,119 @@
+---
+title: "GET /automations/{automation_id}"
+description: "Captured contract for GET /automations/{automation_id}."
+api: "GET /automations/{automation_id}"
+public: true
+---
+
+This internal review page records the behavior captured for GET /automations/{automation_id}.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Automation by automation id API.
+
+Endpoint: 
+GET: api/automations/{automation_id}
+
+Response:
+{
+    "data": {
+        "id": 15,
+        "account_id": 54,
+        "name": "test annotation five",
+        "first_name": "web",
+        "last_name": "twentynew",
+        "email": "developer@example.com",
+        "created_by": 53,
+        "updated_by": "",
+        "last_run_at": "",
+        "is_active": true,
+        "trigger": "fax_received",
+        "conditions_logic": "all",
+        "execution_priority": 3,
+        "created_at": "2026-01-01T11:27:51.000000Z",
+        "updated_at": "2026-01-01T11:27:51.000000Z",
+        "conditions": {
+            "all": [
+                {
+                    "segment_id": 3,
+                    "condition_id": 1,
+                    "value": "896",
+                    "operator": "AND"
+                }
+            ],
+            "any": []
+        },
+        "actions": {
+            "trigger_type": "fax_received",
+            "folder_id": 1,
+            "label_ids": [],
+            "subject": "",
+            "assigned_ids": [],
+            "emails": [],
+            "automation_update_emails": [
+                "test@test123.com",
+                "test@gmail.com"
+            ],
+            "automation_update_subject": "dgfgfdgdfgdf",
+            "update_automation_description": "dfgdfgdfgfdgdg",
+            "send_email_attachment_type": [
+                "pdf",
+                "txt"
+            ],
+            "send_sms_numbers": [
+                "12056369636"
+            ],
+            "send_sms_description": "dfgfdgdgdgdfgdfgf",
+            "send_fax_reply_type": "",
+            "send_fax_caller_id": "12057271166",
+            "send_fax_numbers": [
+                "12235124523"
+            ],
+            "template_id": 194185,
+            "send_fax_sender_name": "dfgfdgfd",
+            "send_fax_recipient_name": "dfgdfgfdg",
+            "send_fax_description": "gdfgreeterter",
+            "forward_secure_fax_numbers": [],
+            "forward_secure_sms": [],
+            "forward_secure_emails": [],
+            "forward_to_fax_numbers": [],
+            "file_format": [
+                "txt",
+                "json",
+                "tif"
+            ],
+            "move_to_trash_folder": "",
+            "move_to_trash_after_days": 1,
+            "delete_action_type": 2,
+            "mark_as_done": "",
+            "ehr_type": "",
+            "smart_document_template_id": 1599,
+            "send_fax_type_smart_document": "",
+            "send_fax_caller_id_smart_document": "14083572042",
+            "send_fax_numbers_smart_document": [
+                "12235124523"
+            ],
+            "smart_document_value_type": 1,
+            "smart_document_annotations": "",
+            "http_request_method": "POST",
+            "http_request_body_type": 1,
+            "http_request_body": "",
+            "http_request_url": "fghgh",
+            "http_authentication": 1,
+            "http_user_name": "gfhfghfgh",
+            "http_password": "gfhfghfghgfh",
+            "document_name": "rtryrtyrtyrtyt",
+            "deleted_at": ""
+        }
+    },
+    "meta": {
+        "request_id": "9b2980c6-2e88-433f-83f7-9a05dedbc459"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

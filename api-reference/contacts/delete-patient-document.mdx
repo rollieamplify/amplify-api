@@ -1,0 +1,12 @@
+---
+title: "Delete a patient document"
+description: "Permanently delete a patient-processing document."
+api: "DELETE /patient_contacts/documents/{document_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="document_id" type="integer" required>Patient document ID.</ParamField>
+
+Returns `204 No Content` after successful deletion.
+

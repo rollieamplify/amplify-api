@@ -1,0 +1,22 @@
+---
+title: "Rate limits"
+description: "Monitor limits and recover from rate-limited requests."
+---
+
+Amplify applies the following default v1 limits:
+
+| Scope | Limit | Window |
+| --- | --- | --- |
+| Per endpoint | 2,500 requests | 5 minutes |
+| Per tenant | 100,000 requests | 24 hours |
+
+Endpoint- or plan-specific overrides may apply.
+
+Responses expose the active limit through these headers:
+
+- `X-RateLimit-Limit`: Maximum requests in the current window
+- `X-RateLimit-Remaining`: Requests remaining
+- `X-RateLimit-Reset`: Unix timestamp when the window resets
+- `Retry-After`: Seconds to wait after a `429` response
+
+When the API returns `429 Too Many Requests`, pause until `Retry-After` or `X-RateLimit-Reset`, then retry with exponential backoff and jitter.

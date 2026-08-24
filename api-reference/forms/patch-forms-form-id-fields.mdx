@@ -1,0 +1,62 @@
+---
+title: "PATCH /forms/{form_id}/fields"
+description: "Captured contract for PATCH /forms/{form_id}/fields."
+api: "PATCH /forms/{form_id}/fields"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /forms/{form_id}/fields.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+PATCH : api/forms/{form_id}/fields
+
+
+
+
+Description :
+
+-> Updates one or more existing form fields in a single request. 
+-> Used by form owners during form design (is_owner_update: true) or by respondents filling an active form. 
+-> When updating response fields, OTP must be verified if the form requires it.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

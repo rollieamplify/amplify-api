@@ -1,0 +1,61 @@
+---
+title: "PATCH /forms/{form_id}/theme"
+description: "Captured contract for PATCH /forms/{form_id}/theme."
+api: "PATCH /forms/{form_id}/theme"
+public: true
+---
+
+This internal review page records the behavior captured for PATCH /forms/{form_id}/theme.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+End Point :
+
+
+
+
+PATCH : api/forms/{form_id}/theme
+
+
+
+
+Description :
+
+-> Updates the visual theme for a form. 
+-> If a theme record already exists for the form, it is updated; otherwise a new record is created.
+
+
+
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+
+
+
+
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+
+
+Path Parameters:
+
+
+
+
+Param
+
+	
+
+Type
+
+	
+
+Required
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

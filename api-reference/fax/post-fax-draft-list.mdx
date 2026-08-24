@@ -1,0 +1,74 @@
+---
+title: "POST /fax/draft/list"
+description: "Captured contract for POST /fax/draft/list."
+api: "POST /fax/draft/list"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/draft/list.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Endpoint:
+POST: api/fax/draft/list
+
+Body:
+{
+    "start_date" : "2025-12-22 00:00:00",
+    "end_date" : "2025-12-22 23:00:00",
+    "sort_by" : "latest"
+}
+sort_by = latest || oldest
+Response:
+{
+    "data": [
+        {
+            "local_fax_uuid": "01KHGGS54PA1EFKN5QXBK405QD",
+            "is_broadcast": false,
+            "fax_type": "outbound",
+            "broadcast_ids": "",
+            "from_number": "12052938854",
+            "from_name": "Test Name",
+            "subject": "Hello Subject",
+            "pages": 1,
+            "created_at": 1771154740,
+            "updated_at": 1771154792,
+            "fax_recipients": [
+                {
+                    "to_number": "12052938854",
+                    "contact_id": 0
+                }
+            ],
+            "recipient_names": [
+                "12052938854"
+            ],
+            "to_contact_details": {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "organization_name": "",
+                "full_name": "",
+                "is_organization": false,
+                "id": 0
+            },
+            "fax_status": "Draft",
+            "is_rejected": false,
+            "document_name": "Fax 12052938854",
+            "approval_info": null
+        },
+    ],
+    "meta": {
+        "total": 7,
+        "next_cursor": 2,
+        "previous_cursor": "",
+        "limit": 2,
+        "request_id": "654b4596-4963-44de-b609-6e5ce9693650"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

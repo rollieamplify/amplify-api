@@ -1,0 +1,191 @@
+---
+title: "POST /roles"
+description: "Captured contract for POST /roles."
+api: "POST /roles"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /roles.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Use: Create role.
+
+
+
+
+Endpoint:
+
+POST: api/roles
+
+
+
+
+Request:
+
+{
+    "name": "test34",
+    "permissions": [
+        {
+            "key": "monthly_page_limit",
+            "value": true
+        },
+        {
+            "key": "monthly_page_limit_value",
+            "value": 1000
+        }
+    ],
+    "notifications" : [
+        {
+            "key": "faxes_sent_by_me",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "push",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false
+            }
+        },
+        {
+            "key": "faxes_sent_by_others_accessible_number",
+            "product": "fax",
+            "category": "outbound_fax",
+            "type": "email",
+            "settings": {
+                "attach_certificate": false,
+                "include_audit_trail": false,
+                "attach_pdf": false,
+                "show_open_link": false
+            }
+        }
+    ]
+}
+
+
+
+
+Response:
+
+{
+    "data": {
+        "id": 6093,
+        "account_id": 2592,
+        "name": "test",
+        "user_permissions": {
+            "Product": [
+                {
+                    "id": 1,
+                    "title": "iFax",
+                    "key": "access_ifax",
+                    "enabled": false,
+                    "value": "",
+                    "category": "product"
+                },
+                {
+                    "id": 2,
+                    "title": "Connect",
+                    "key": "access_connect",
+                    "enabled": false,
+                    "value": "",
+                    "category": "product"
+                },
+                {
+                    "id": 3,
+                    "title": "eSign",
+                    "key": "access_esign",
+                    "enabled": false,
+                    "value": "",
+                    "category": "product"
+                },
+                {
+                    "id": 4,
+                    "title": "Forms",
+                    "key": "access_forms",
+                    "enabled": false,
+                    "value": "",
+                    "category": "product"
+                }
+            ],
+            "General": [
+                {
+                    "id": 5,
+                    "title": "Access Numbers",
+                    "key": "access_numbers",
+                    "enabled": false,
+                    "value": "",
+                    "category": "general"
+                },
+                {
+                    "id": 147,
+                    "title": "Download Form Responses",
+                    "key": "download_form_responses",
+                    "enabled": false,
+                    "value": "",
+                    "category": "forms"
+                }
+            ]
+        },
+        "role_notification": [
+            {
+                "key": "faxes_sent_by_me",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": 0,
+                "settings": {
+                    "attach_certificate": 0,
+                    "include_audit_trail": 0,
+                    "attach_pdf": 0,
+                    "show_open_link": 0
+                }
+            },
+            {
+                "key": "faxes_sent_by_others_accessible_number",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": 1,
+                "settings": {
+                    "attach_certificate": 0,
+                    "include_audit_trail": 0,
+                    "attach_pdf": 0,
+                    "show_open_link": 1
+                }
+            },
+            {
+                "key": "faxes_sent_by_email_to_fax",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": 0,
+                    "include_audit_trail": 0,
+                    "attach_pdf": 0,
+                    "show_open_link": 0
+                }
+            },
+            {
+                "key": "fax_send_approval_email",
+                "product": "fax",
+                "category": "outbound_fax",
+                "type": "",
+                "settings": {
+                    "attach_certificate": 0,
+                    "include_audit_trail": 0,
+                    "attach_pdf": 0,
+                    "show_open_link": 0
+                }
+            }
+        ]
+    },
+    "meta": {
+        "request_id": "87923816-1536-43e6-bbe3-2dbfe562a4e0"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

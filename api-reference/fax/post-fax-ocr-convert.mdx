@@ -1,0 +1,135 @@
+---
+title: "POST /fax/ocr/convert"
+description: "Captured contract for POST /fax/ocr/convert."
+api: "POST /fax/ocr/convert"
+public: true
+---
+
+This internal review page records the behavior captured for POST /fax/ocr/convert.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Convert OCR API.
+
+Endpoint
+POST : api/fax/ocr/convert
+Request
+{
+    "pages" : 1
+}
+
+Response
+{
+    "data": [
+        {
+            "fax_uuid": "01KDQ25XSQPZK85FNGD71KA5V4",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDQ2V74EX9Z5P3YK8DQ5CNGK",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDQ3B8ZB7VSZN2AE8D3NVBN3",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDQ5XFW18T9M3P68NF5DTB5X",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDQ6GT2T7TZEAP33Y5A5Z37Q",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDQE1RXCX0YJ6TBYJZZQM43X",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDQSDFQ98Y1D1FM88W2QJ9TW",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDSEC63VYA5SP684M9YPRNA9",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDSFPDQC1V4TREGFFH8979CH",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDSJRFYGJQ84J2MXKDF0WTX1",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDSS2X3J392GK2RDX4H9ET50",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDWM1T6BXSAY2MBQEDSNSYEC",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDWQKC3KVWMREV4XGH3Q0WK1",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDWQVVDW6DQ0GPK02D4NGFRB",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDYM0VH5FS5TM2ZWRFNPHAB4",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDYMW40T08Y02WY9VHJXGQKC",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDYP3CA0SJ6S4RDAGV3Y54VJ",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDZ615T6KEY4CTS42NNYXR27",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDZ61H3592VFMHZ762R5GCQQ",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        },
+        {
+            "fax_uuid": "01KDZ63470Q51095JVEJT5WASK",
+            "broadcast_fax_uuid": "",
+            "is_broadcast": 0
+        }
+    ],
+    "meta": {
+        "request_id": "286ebefe-ab95-4baf-9a9d-cba74e412886"
+    }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

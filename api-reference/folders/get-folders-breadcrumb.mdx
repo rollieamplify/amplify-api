@@ -1,0 +1,35 @@
+---
+title: "GET /folders/breadcrumb"
+description: "Captured contract for GET /folders/breadcrumb."
+api: "GET /folders/breadcrumb"
+public: true
+---
+
+This internal review page records the behavior captured for GET /folders/breadcrumb.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Breadcrumb
+Endpoint: GET /folders/breadcrumb
+Description: Get the breadcrumb path for a folder.
+Request:
+{
+  "folder_id": 25
+}
+Response:
+{
+  "data": [
+    { "id": 12, "name": "Reports", "parent_id": null },
+    { "id": 25, "name": "Invoices 2026", "parent_id": 12 }
+  ],
+  "meta": {
+    "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

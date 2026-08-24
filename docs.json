@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "Amplify API",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -11,24 +11,651 @@
   "navigation": {
     "pages": [
       {
-        "group": "Getting Started",
+        "group": "Introduction",
         "pages": [
           "index",
           "quickstart"
+        ]
+      },
+      {
+        "group": "Guides",
+        "pages": [
+          "guides/authentication",
+          "guides/api-conventions",
+          "guides/requests-and-responses",
+          "guides/pagination",
+          "guides/errors",
+          "guides/rate-limits"
+        ]
+      },
+      {
+        "group": "Webhooks",
+        "pages": [
+          "webhooks/overview",
+          "webhooks/create-webhook",
+          "webhooks/events",
+          "webhooks/verifying-webhooks",
+          "webhooks/retry-behavior"
+        ]
+      },
+      {
+        "group": "API reference",
+        "pages": [
+          "api-reference/introduction"
+        ]
+      },
+      {
+        "group": "Fax API",
+        "pages": [
+          {
+            "group": "Faxes",
+            "pages": [
+              "api-reference/fax/overview",
+              "api-reference/fax/delete-fax-delete-draft",
+              "api-reference/fax/delete-fax-document-document-uuid",
+              "api-reference/fax/delete-fax-fax-uuid-users",
+              "api-reference/fax/delete-fax-local-fax-uuid-draft",
+              "api-reference/fax/delete-faxes",
+              "api-reference/fax/delete-faxes-delete-forever",
+              "api-reference/fax/delete-faxes-empty-trash",
+              "api-reference/fax/get-fax-ai-ocr-settings",
+              "api-reference/fax/get-fax-broadcast-lists",
+              "api-reference/fax/get-fax-fax-uuid",
+              "api-reference/fax/get-fax-fax-uuid-download",
+              "api-reference/fax/get-fax-fax-uuid-share",
+              "api-reference/fax/get-fax-fax-uuid-users",
+              "api-reference/fax/get-fax-local-fax-uuid-details",
+              "api-reference/fax/get-fax-local-fax-uuid-edit-fax",
+              "api-reference/fax/get-fax-preferences",
+              "api-reference/fax/get-fax-scheduled-send-fax-uuid",
+              "api-reference/fax/get-fax-search-users",
+              "api-reference/fax/get-fax-webhook-id-refire",
+              "api-reference/fax/get-faxes-ocr-search",
+              "api-reference/fax/patch-fax-ai-ocr-settings",
+              "api-reference/fax/patch-fax-fax-uuid-pin",
+              "api-reference/fax/patch-fax-preferences",
+              "api-reference/fax/post-fax-ai-ocr-settings-check-automations",
+              "api-reference/fax/post-fax-ai-preview-tab",
+              "api-reference/fax/post-fax-all-list",
+              "api-reference/fax/post-fax-annotate-attachment",
+              "api-reference/fax/post-fax-annotated-attachment",
+              "api-reference/fax/post-fax-approval",
+              "api-reference/fax/post-fax-assign",
+              "api-reference/fax/post-fax-assigned-list",
+              "api-reference/fax/post-fax-audit-log",
+              "api-reference/fax/post-fax-caller-id-list",
+              "api-reference/fax/post-fax-cancel",
+              "api-reference/fax/post-fax-count",
+              "api-reference/fax/post-fax-custom-field-save",
+              "api-reference/fax/post-fax-dashboard-list",
+              "api-reference/fax/post-fax-delivery-confirm",
+              "api-reference/fax/post-fax-document",
+              "api-reference/fax/post-fax-document-upload-drive",
+              "api-reference/fax/post-fax-done-list",
+              "api-reference/fax/post-fax-download",
+              "api-reference/fax/post-fax-draft-list",
+              "api-reference/fax/post-fax-fax-uuid-download-file",
+              "api-reference/fax/post-fax-fax-uuid-new-received",
+              "api-reference/fax/post-fax-fax-uuid-share",
+              "api-reference/fax/post-fax-forward-bulk",
+              "api-reference/fax/post-fax-inbox-list",
+              "api-reference/fax/post-fax-multi-assigned-user",
+              "api-reference/fax/post-fax-notes",
+              "api-reference/fax/post-fax-ocr",
+              "api-reference/fax/post-fax-ocr-convert",
+              "api-reference/fax/post-fax-ocr-details",
+              "api-reference/fax/post-fax-pending-approvals",
+              "api-reference/fax/post-fax-re-schedule",
+              "api-reference/fax/post-fax-request-confirmation-send",
+              "api-reference/fax/post-fax-resend",
+              "api-reference/fax/post-fax-save-comment",
+              "api-reference/fax/post-fax-schedule-cancel",
+              "api-reference/fax/post-fax-secure-message",
+              "api-reference/fax/post-fax-send",
+              "api-reference/fax/post-fax-sent-list",
+              "api-reference/fax/post-fax-status",
+              "api-reference/fax/post-fax-thumbnail-image",
+              "api-reference/fax/post-fax-transmission-receipt",
+              "api-reference/fax/post-fax-upload-patient-document",
+              "api-reference/fax/post-fax-zip-create",
+              "api-reference/fax/post-faxes-mark-multiple-status",
+              "api-reference/fax/post-faxes-mark-status",
+              "api-reference/fax/post-faxes-merge-document",
+              "api-reference/fax/post-faxes-nlp",
+              "api-reference/fax/post-faxes-nlp-convert",
+              "api-reference/fax/post-faxes-nlp-data",
+              "api-reference/fax/post-faxes-nlp-fields",
+              "api-reference/fax/post-faxes-nlp-manual",
+              "api-reference/fax/post-faxes-nlp-split-documents",
+              "api-reference/fax/post-faxes-print",
+              "api-reference/fax/post-faxes-restore",
+              "api-reference/fax/post-faxes-secure-preview",
+              "api-reference/fax/post-faxes-trashed",
+              "api-reference/fax/post-faxes-view-status"
+            ]
+          },
+          {
+            "group": "Folders",
+            "pages": [
+              "api-reference/folders/overview",
+              "api-reference/folders/delete-folders",
+              "api-reference/folders/delete-folders-folder",
+              "api-reference/folders/get-folders",
+              "api-reference/folders/get-folders-breadcrumb",
+              "api-reference/folders/get-folders-exclude-subuser-owned-shared",
+              "api-reference/folders/get-folders-fax-count",
+              "api-reference/folders/get-folders-fax-document",
+              "api-reference/folders/get-folders-list-other-team",
+              "api-reference/folders/get-folders-shared-me",
+              "api-reference/folders/get-folders-starred",
+              "api-reference/folders/patch-folders-folder",
+              "api-reference/folders/post-folders",
+              "api-reference/folders/post-folders-accept-permission-request",
+              "api-reference/folders/post-folders-share",
+              "api-reference/folders/post-folders-starred",
+              "api-reference/folders/post-folders-transfer-ownership",
+              "api-reference/folders/post-folders-unstarred"
+            ]
+          },
+          {
+            "group": "Labels",
+            "pages": [
+              "api-reference/labels/overview",
+              "api-reference/labels/delete-labels-label-id",
+              "api-reference/labels/get-labels",
+              "api-reference/labels/patch-labels-label-id",
+              "api-reference/labels/post-labels"
+            ]
+          },
+          {
+            "group": "Broadcasts",
+            "pages": [
+              "api-reference/broadcasts/overview",
+              "api-reference/broadcasts/delete-broadcast-labels-id",
+              "api-reference/broadcasts/delete-broadcast-lists-broadcast-list-id",
+              "api-reference/broadcasts/delete-broadcast-templates-template-id",
+              "api-reference/broadcasts/get-broadcast-labels",
+              "api-reference/broadcasts/get-broadcast-labels-id",
+              "api-reference/broadcasts/get-broadcast-lists",
+              "api-reference/broadcasts/get-broadcast-lists-broadcast-list-id",
+              "api-reference/broadcasts/get-broadcast-templates",
+              "api-reference/broadcasts/get-broadcast-templates-template-id",
+              "api-reference/broadcasts/get-broadcast-unsubscribe-token",
+              "api-reference/broadcasts/patch-broadcast-labels-id",
+              "api-reference/broadcasts/patch-broadcast-labels-id-toggle-active",
+              "api-reference/broadcasts/patch-broadcast-lists-broadcast-list-id",
+              "api-reference/broadcasts/patch-broadcast-templates-template-id",
+              "api-reference/broadcasts/post-broadcast-annotations",
+              "api-reference/broadcasts/post-broadcast-cancel",
+              "api-reference/broadcasts/post-broadcast-fax-details",
+              "api-reference/broadcasts/post-broadcast-fax-name",
+              "api-reference/broadcasts/post-broadcast-fax-remove-failed-recipients",
+              "api-reference/broadcasts/post-broadcast-fax-resend",
+              "api-reference/broadcasts/post-broadcast-fax-send",
+              "api-reference/broadcasts/post-broadcast-labels",
+              "api-reference/broadcasts/post-broadcast-labels-recipients",
+              "api-reference/broadcasts/post-broadcast-lists",
+              "api-reference/broadcasts/post-broadcast-lists-broadcast-list-id-favorite",
+              "api-reference/broadcasts/post-broadcast-lists-get-fax-number-costs",
+              "api-reference/broadcasts/post-broadcast-send",
+              "api-reference/broadcasts/post-broadcast-status",
+              "api-reference/broadcasts/post-broadcast-templates"
+            ]
+          },
+          {
+            "group": "Automations",
+            "pages": [
+              "api-reference/automations/overview",
+              "api-reference/automations/delete-automations-automation-id",
+              "api-reference/automations/get-automations",
+              "api-reference/automations/get-automations-automation-id",
+              "api-reference/automations/get-automations-segments",
+              "api-reference/automations/patch-automations-automation-id",
+              "api-reference/automations/patch-automations-automation-id-status",
+              "api-reference/automations/post-automations",
+              "api-reference/automations/post-automations-change-priority"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Numbers API",
+        "pages": [
+          "api-reference/numbers/overview",
+          "api-reference/numbers/list-numbers",
+          "api-reference/numbers/create-number",
+          "api-reference/numbers/get-number-details",
+          "api-reference/numbers/delete-number",
+          "api-reference/numbers/bulk-delete-numbers",
+          "api-reference/numbers/search-available-numbers",
+          "api-reference/numbers/list-available-areas",
+          "api-reference/numbers/list-available-countries",
+          "api-reference/numbers/update-number-configuration"
+        ]
+      },
+      {
+        "group": "Contacts API",
+        "pages": [
+          "api-reference/contacts/overview",
+          {
+            "group": "Contacts",
+            "pages": [
+              "api-reference/contacts/list-contacts",
+              "api-reference/contacts/create-contact",
+              "api-reference/contacts/list-picker-contacts",
+              "api-reference/contacts/update-contact"
+            ]
+          },
+          {
+            "group": "Contact groups",
+            "pages": [
+              "api-reference/contacts/list-contact-groups",
+              "api-reference/contacts/create-contact-group",
+              "api-reference/contacts/get-contact-group",
+              "api-reference/contacts/update-contact-group",
+              "api-reference/contacts/delete-contact-group"
+            ]
+          },
+          {
+            "group": "Custom fields",
+            "pages": [
+              "api-reference/contacts/list-contact-fields",
+              "api-reference/contacts/create-contact-field",
+              "api-reference/contacts/get-contact-field",
+              "api-reference/contacts/update-contact-field",
+              "api-reference/contacts/delete-contact-field"
+            ]
+          },
+          {
+            "group": "Contact notes",
+            "pages": [
+              "api-reference/contacts/list-contact-notes",
+              "api-reference/contacts/create-contact-note",
+              "api-reference/contacts/update-contact-note",
+              "api-reference/contacts/delete-contact-note"
+            ]
+          },
+          {
+            "group": "Patient contacts",
+            "pages": [
+              "api-reference/contacts/upload-patient-document",
+              "api-reference/contacts/delete-patient-document",
+              "api-reference/contacts/match-patient-contacts",
+              "api-reference/contacts/save-patient-contact"
+            ]
+          },
+          "api-reference/contacts/create-sales-inquiry"
+        ]
+      },
+      {
+        "group": "Engage API",
+        "pages": [
+          {
+            "group": "Conversations",
+            "pages": [
+              "api-reference/conversations/overview",
+              "api-reference/conversations/get-conversations",
+              "api-reference/conversations/get-conversations-conversation-id-messages",
+              "api-reference/conversations/get-conversations-conversation-id-notes",
+              "api-reference/conversations/get-conversations-conversation-id-secure-chat-export",
+              "api-reference/conversations/get-conversations-conversation-id-secure-chat-info",
+              "api-reference/conversations/get-conversations-conversation-id-secure-chat-logs",
+              "api-reference/conversations/get-conversations-conversation-id-secure-chat-status",
+              "api-reference/conversations/get-conversations-list",
+              "api-reference/conversations/patch-conversations-conversation-id-secure-chat-link",
+              "api-reference/conversations/patch-conversations-secure-toggle-conversation-id",
+              "api-reference/conversations/post-conversations-bulk-delete",
+              "api-reference/conversations/post-conversations-notes"
+            ]
+          },
+          {
+            "group": "Messages",
+            "pages": [
+              "api-reference/messages/overview",
+              "api-reference/messages/delete-messages-number-id-history",
+              "api-reference/messages/post-messages-remove-file",
+              "api-reference/messages/post-messages-search-results",
+              "api-reference/messages/post-messages-send"
+            ]
+          },
+          {
+            "group": "Secure chat",
+            "pages": [
+              "api-reference/secure-chat/overview",
+              "api-reference/secure-chat/get-secure-chat-conversation-id-messages",
+              "api-reference/secure-chat/post-secure-chat-validate-link",
+              "api-reference/secure-chat/post-secure-chat-validate-otp"
+            ]
+          },
+          {
+            "group": "Guest messaging",
+            "pages": [
+              "api-reference/guest-messaging/overview",
+              "api-reference/guest-messaging/get-guest-message-conversation-id-messages",
+              "api-reference/guest-messaging/get-guest-message-secure-chat-conversation-id-export",
+              "api-reference/guest-messaging/post-guest-message-conversation-delete",
+              "api-reference/guest-messaging/post-guest-message-message-id-reaction",
+              "api-reference/guest-messaging/post-guest-message-send",
+              "api-reference/guest-messaging/post-guest-message-storage-upload-url",
+              "api-reference/guest-messaging/post-guest-message-validate-invite-link"
+            ]
+          },
+          {
+            "group": "Calls",
+            "pages": [
+              "api-reference/calls/overview",
+              "api-reference/calls/delete-calls-number-id-history",
+              "api-reference/calls/get-calls",
+              "api-reference/calls/get-calls-call-id-summary-logs",
+              "api-reference/calls/get-calls-call-id-transcript",
+              "api-reference/calls/get-calls-list",
+              "api-reference/calls/patch-call-recordings-call-session-id-change-state",
+              "api-reference/calls/post-calls-bulk-delete",
+              "api-reference/calls/post-calls-summary-logs",
+              "api-reference/calls/post-calls-transfter"
+            ]
+          },
+          {
+            "group": "Meetings",
+            "pages": [
+              "api-reference/meetings/overview",
+              "api-reference/meetings/post-meeting-user-invite",
+              "api-reference/meetings/post-meetings",
+              "api-reference/meetings/post-meetings-validate-link"
+            ]
+          },
+          {
+            "group": "Team chat",
+            "pages": [
+              "api-reference/team-chat/overview",
+              "api-reference/team-chat/get-team-chats",
+              "api-reference/team-chat/get-team-chats-to-user-id-messages",
+              "api-reference/team-chat/patch-team-chats-to-user-id",
+              "api-reference/team-chat/post-team-chats-add-reaction",
+              "api-reference/team-chat/post-team-chats-send-message"
+            ]
+          },
+          {
+            "group": "Engage utilities",
+            "pages": [
+              "api-reference/engage/delete-tel-dlc-brands-brand-id",
+              "api-reference/engage/get-engage-search-contact",
+              "api-reference/engage/get-tel-dlc-brands-details",
+              "api-reference/engage/get-tel-dlc-brands-industries",
+              "api-reference/engage/post-analytics",
+              "api-reference/engage/post-analytics-export",
+              "api-reference/engage/post-storage-upload-url",
+              "api-reference/engage/post-tel-dlc-brands-create",
+              "api-reference/engage/post-tel-dlc-brands-save"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Collect API",
+        "pages": [
+          {
+            "group": "Documents",
+            "pages": [
+              "api-reference/esign-documents/overview",
+              "api-reference/esign-documents/delete-esign-documents-document-id",
+              "api-reference/esign-documents/delete-esign-documents-document-id-collaborators-collaborator-id",
+              "api-reference/esign-documents/delete-esign-documents-document-id-field-rule-action-action-id",
+              "api-reference/esign-documents/delete-esign-documents-document-id-field-rule-field-rule-id",
+              "api-reference/esign-documents/delete-esign-documents-document-id-files-file-id",
+              "api-reference/esign-documents/delete-esign-documents-document-id-reminder-setting",
+              "api-reference/esign-documents/delete-esign-documents-document-id-renewal-setting",
+              "api-reference/esign-documents/delete-esign-documents-esign-document-id-fields-delete",
+              "api-reference/esign-documents/delete-esign-documents-esign-document-id-fields-field-id",
+              "api-reference/esign-documents/delete-esign-documents-esign-document-id-pages-page-number",
+              "api-reference/esign-documents/delete-esign-documents-esign-document-id-recipients-recipient-id",
+              "api-reference/esign-documents/delete-esign-documents-esign-document-id-variables-variable-id",
+              "api-reference/esign-documents/get-esign-documents",
+              "api-reference/esign-documents/get-esign-documents-document-id",
+              "api-reference/esign-documents/get-esign-documents-document-id-analytics",
+              "api-reference/esign-documents/get-esign-documents-document-id-audit",
+              "api-reference/esign-documents/get-esign-documents-document-id-collaborators",
+              "api-reference/esign-documents/get-esign-documents-document-id-collaborators-request-access",
+              "api-reference/esign-documents/get-esign-documents-document-id-field-rule",
+              "api-reference/esign-documents/get-esign-documents-document-id-recipients-recipient-id-analytics",
+              "api-reference/esign-documents/get-esign-documents-document-id-reminder-setting",
+              "api-reference/esign-documents/get-esign-documents-document-id-renewal-setting",
+              "api-reference/esign-documents/get-esign-documents-document-id-theme",
+              "api-reference/esign-documents/get-esign-documents-esign-document-id-fields",
+              "api-reference/esign-documents/get-esign-documents-esign-document-id-fields-field-id",
+              "api-reference/esign-documents/get-esign-documents-esign-document-id-recipients",
+              "api-reference/esign-documents/get-esign-documents-esign-document-id-recipients-recipient-id",
+              "api-reference/esign-documents/get-esign-documents-esign-document-id-variables",
+              "api-reference/esign-documents/get-esign-documents-esign-document-id-variables-variable-id",
+              "api-reference/esign-documents/get-esign-documents-inbox-count",
+              "api-reference/esign-documents/patch-esign-documents-document-id",
+              "api-reference/esign-documents/patch-esign-documents-document-id-collaborators",
+              "api-reference/esign-documents/patch-esign-documents-document-id-field-rule-field-rule-id",
+              "api-reference/esign-documents/patch-esign-documents-document-id-files-file-id",
+              "api-reference/esign-documents/patch-esign-documents-document-id-reminder-setting",
+              "api-reference/esign-documents/patch-esign-documents-document-id-renewal-setting",
+              "api-reference/esign-documents/patch-esign-documents-document-id-theme",
+              "api-reference/esign-documents/patch-esign-documents-esign-document-id-fields",
+              "api-reference/esign-documents/patch-esign-documents-esign-document-id-fields-field-id",
+              "api-reference/esign-documents/patch-esign-documents-esign-document-id-recipients-recipient-id",
+              "api-reference/esign-documents/patch-esign-documents-esign-document-id-variables-variable-id",
+              "api-reference/esign-documents/post-esign-documents",
+              "api-reference/esign-documents/post-esign-documents-bulk-send",
+              "api-reference/esign-documents/post-esign-documents-delete",
+              "api-reference/esign-documents/post-esign-documents-document-id-analytics-document-user-id",
+              "api-reference/esign-documents/post-esign-documents-document-id-collaborators-invite",
+              "api-reference/esign-documents/post-esign-documents-document-id-download-document",
+              "api-reference/esign-documents/post-esign-documents-document-id-field-rule",
+              "api-reference/esign-documents/post-esign-documents-document-id-logs",
+              "api-reference/esign-documents/post-esign-documents-document-id-reminder-setting",
+              "api-reference/esign-documents/post-esign-documents-document-id-renewal-setting",
+              "api-reference/esign-documents/post-esign-documents-document-id-restore",
+              "api-reference/esign-documents/post-esign-documents-document-id-send",
+              "api-reference/esign-documents/post-esign-documents-document-id-send-reminder",
+              "api-reference/esign-documents/post-esign-documents-document-id-theme",
+              "api-reference/esign-documents/post-esign-documents-document-id-trash",
+              "api-reference/esign-documents/post-esign-documents-esign-document-id-fields",
+              "api-reference/esign-documents/post-esign-documents-esign-document-id-recipients",
+              "api-reference/esign-documents/post-esign-documents-esign-document-id-variables",
+              "api-reference/esign-documents/post-esign-documents-restore",
+              "api-reference/esign-documents/post-esign-documents-trash",
+              "api-reference/esign-documents/put-esign-documents-esign-document-id-recipients"
+            ]
+          },
+          {
+            "group": "Recipients",
+            "pages": [
+              "api-reference/esign-recipients/overview"
+            ]
+          },
+          {
+            "group": "Fields",
+            "pages": [
+              "api-reference/esign-fields/overview"
+            ]
+          },
+          {
+            "group": "Variables",
+            "pages": [
+              "api-reference/esign-variables/overview"
+            ]
+          },
+          {
+            "group": "Templates",
+            "pages": [
+              "api-reference/esign-templates/overview",
+              "api-reference/esign-templates/delete-esign-templates-esign-template-id-pages-page-number",
+              "api-reference/esign-templates/delete-esign-templates-esign-template-id-variables-template-variable-id",
+              "api-reference/esign-templates/delete-esign-templates-template-id",
+              "api-reference/esign-templates/delete-esign-templates-template-id-collaborators-collaborator-id",
+              "api-reference/esign-templates/delete-esign-templates-template-id-field-rule-action-action-id",
+              "api-reference/esign-templates/delete-esign-templates-template-id-field-rule-field-rule-id",
+              "api-reference/esign-templates/delete-esign-templates-template-id-files-file-id",
+              "api-reference/esign-templates/delete-esign-templates-template-id-signer-signer-id",
+              "api-reference/esign-templates/get-esign-templates",
+              "api-reference/esign-templates/get-esign-templates-category-list",
+              "api-reference/esign-templates/get-esign-templates-esign-template-id-fields",
+              "api-reference/esign-templates/get-esign-templates-esign-template-id-fields-field-template-id",
+              "api-reference/esign-templates/get-esign-templates-esign-template-id-theme",
+              "api-reference/esign-templates/get-esign-templates-esign-template-id-variables",
+              "api-reference/esign-templates/get-esign-templates-esign-template-id-variables-template-variable-id",
+              "api-reference/esign-templates/get-esign-templates-gallery",
+              "api-reference/esign-templates/get-esign-templates-recent",
+              "api-reference/esign-templates/get-esign-templates-template-id",
+              "api-reference/esign-templates/get-esign-templates-template-id-analytics",
+              "api-reference/esign-templates/get-esign-templates-template-id-collaborators",
+              "api-reference/esign-templates/get-esign-templates-template-id-collaborators-request-access",
+              "api-reference/esign-templates/get-esign-templates-template-id-field-rule",
+              "api-reference/esign-templates/patch-esign-templates-esign-template-id-fields",
+              "api-reference/esign-templates/patch-esign-templates-esign-template-id-variables-template-variable-id",
+              "api-reference/esign-templates/patch-esign-templates-template-id",
+              "api-reference/esign-templates/patch-esign-templates-template-id-collaborators",
+              "api-reference/esign-templates/patch-esign-templates-template-id-field-rule-field-rule-id",
+              "api-reference/esign-templates/patch-esign-templates-template-id-files-file-id",
+              "api-reference/esign-templates/patch-esign-templates-template-id-theme",
+              "api-reference/esign-templates/post-esign-templates",
+              "api-reference/esign-templates/post-esign-templates-delete",
+              "api-reference/esign-templates/post-esign-templates-esign-template-id-fields",
+              "api-reference/esign-templates/post-esign-templates-esign-template-id-fields-delete",
+              "api-reference/esign-templates/post-esign-templates-esign-template-id-variables",
+              "api-reference/esign-templates/post-esign-templates-template-id-collaborators-invite",
+              "api-reference/esign-templates/post-esign-templates-template-id-field-rule",
+              "api-reference/esign-templates/post-esign-templates-template-id-theme"
+            ]
+          },
+          {
+            "group": "Collaborators",
+            "pages": [
+              "api-reference/esign-collaborators/overview"
+            ]
+          },
+          {
+            "group": "Reminders and renewals",
+            "pages": [
+              "api-reference/esign-reminders-renewals/overview"
+            ]
+          },
+          {
+            "group": "Signatures",
+            "pages": [
+              "api-reference/esign-signatures/overview"
+            ]
+          },
+          {
+            "group": "Forms",
+            "pages": [
+              "api-reference/forms/overview",
+              "api-reference/forms/delete-forms-form-id",
+              "api-reference/forms/delete-forms-form-id-collaborators-collaborator-id",
+              "api-reference/forms/delete-forms-form-id-field-rule-action-form-action-id",
+              "api-reference/forms/delete-forms-form-id-field-rule-field-rule-id",
+              "api-reference/forms/delete-forms-form-id-field-rule-form-field-rule-id",
+              "api-reference/forms/delete-forms-form-id-fields-field-id",
+              "api-reference/forms/delete-forms-form-id-pages-page-number",
+              "api-reference/forms/delete-forms-form-id-responses-response-id",
+              "api-reference/forms/delete-forms-form-id-theme",
+              "api-reference/forms/delete-forms-form-id-variables-variable-id",
+              "api-reference/forms/get-forms",
+              "api-reference/forms/get-forms-form-id",
+              "api-reference/forms/get-forms-form-id-analytics",
+              "api-reference/forms/get-forms-form-id-collaborators",
+              "api-reference/forms/get-forms-form-id-collaborators-request-access",
+              "api-reference/forms/get-forms-form-id-field-rule",
+              "api-reference/forms/get-forms-form-id-field-rule-respondent-id",
+              "api-reference/forms/get-forms-form-id-fields",
+              "api-reference/forms/get-forms-form-id-fields-field-id",
+              "api-reference/forms/get-forms-form-id-google-sheet",
+              "api-reference/forms/get-forms-form-id-responses",
+              "api-reference/forms/get-forms-form-id-responses-response-id",
+              "api-reference/forms/get-forms-form-id-responses-response-id-logs",
+              "api-reference/forms/get-forms-form-id-theme",
+              "api-reference/forms/get-forms-form-id-variables",
+              "api-reference/forms/get-forms-form-id-variables-variable-id",
+              "api-reference/forms/get-forms-responses",
+              "api-reference/forms/patch-forms-form-id",
+              "api-reference/forms/patch-forms-form-id-collaborators",
+              "api-reference/forms/patch-forms-form-id-field-rule-field-rule-id",
+              "api-reference/forms/patch-forms-form-id-field-rule-form-field-rule-id",
+              "api-reference/forms/patch-forms-form-id-fields",
+              "api-reference/forms/patch-forms-form-id-fields-field-id",
+              "api-reference/forms/patch-forms-form-id-responses-response-id",
+              "api-reference/forms/patch-forms-form-id-sync-sheet",
+              "api-reference/forms/patch-forms-form-id-theme",
+              "api-reference/forms/patch-forms-form-id-unsync-sheet",
+              "api-reference/forms/patch-forms-form-id-variables-variable-id",
+              "api-reference/forms/post-forms",
+              "api-reference/forms/post-forms-bulk-delete",
+              "api-reference/forms/post-forms-form-id-analytics-form-response-id",
+              "api-reference/forms/post-forms-form-id-collaborators-invite",
+              "api-reference/forms/post-forms-form-id-field-rule",
+              "api-reference/forms/post-forms-form-id-fields",
+              "api-reference/forms/post-forms-form-id-fields-delete",
+              "api-reference/forms/post-forms-form-id-google-sheet",
+              "api-reference/forms/post-forms-form-id-reminder",
+              "api-reference/forms/post-forms-form-id-reminder-setting",
+              "api-reference/forms/post-forms-form-id-responses",
+              "api-reference/forms/post-forms-form-id-responses-delete",
+              "api-reference/forms/post-forms-form-id-responses-download",
+              "api-reference/forms/post-forms-form-id-send",
+              "api-reference/forms/post-forms-form-id-theme",
+              "api-reference/forms/post-forms-form-id-variables",
+              "api-reference/forms/post-forms-response-id-otp-request",
+              "api-reference/forms/post-forms-response-id-otp-verify",
+              "api-reference/forms/post-forms-responses-delete"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Common APIs",
+        "pages": [
+          {
+            "group": "Users",
+            "pages": [
+              "api-reference/users/overview"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/webhooks/overview"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "api-reference/integrations/overview"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "api-reference/reports/overview",
+              "api-reference/reports/post-reports-client",
+              "api-reference/reports/post-reports-client-usage-by-user",
+              "api-reference/reports/post-reports-dashboard",
+              "api-reference/reports/post-reports-dashboard-view",
+              "api-reference/reports/post-reports-data-by-folder",
+              "api-reference/reports/post-reports-data-by-user",
+              "api-reference/reports/post-reports-data-fax-number",
+              "api-reference/reports/post-reports-data-usage"
+            ]
+          },
+          {
+            "group": "Scheduled reports",
+            "pages": [
+              "api-reference/scheduled-reports/overview"
+            ]
+          }
         ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Amplify",
+          "href": "https://amplify.xyz",
+          "icon": "house"
         }
       ]
     }
@@ -40,14 +667,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Amplify",
+        "href": "https://amplify.xyz"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "API reference",
+      "href": "/api-reference/introduction"
     }
   },
   "contextual": {
@@ -61,12 +688,5 @@
       "cursor",
       "vscode"
     ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   }
 }

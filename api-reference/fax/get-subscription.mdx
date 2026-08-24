@@ -1,0 +1,358 @@
+---
+title: "GET /subscription"
+description: "Captured contract for GET /subscription."
+api: "GET /subscription"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for GET /subscription.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Get Subscription API
+
+Endpoint:
+
+GET: api/subscription
+
+
+Response: for primary account
+
+{
+    "data": {
+        "subscription": {
+            "plan": {
+                "name": "HIPAA Enterprise",
+                "cb_plan_code": "healthcare_plan_4_36month_usd",
+                "family_name": "healthcare",
+                "duration": "3_year",
+                "amount": "7199.64",
+                "currency": "usd",
+                "trial_days": null,
+                "overage_credit": 0,
+                "remaining_credit": "4994764.0000",
+                "training_price": "49.99",
+                "plan_type": "hippa_enterprise_plan",
+                "is_free_plan": false,
+                "is_auto_topup_enable": false,
+                "topup_trigger_percentage": 95,
+                "topup_percentage": 20,
+                "discount_pct": 15,
+                "license_free": 0,
+                "license_1": 50,
+                "license_2": 50,
+                "license_3": 50,
+                "license_4": 0,
+                "credits": 5000000,
+                "numbers": 101,
+                "numbers_1": 50,
+                "numbers_2": 108,
+                "numbers_3": 50,
+                "numbers_4": 50,
+                "numbers_5": 50,
+                "api": 2,
+                "broadcast": 2,
+                "whitelabel": 0,
+                "premier_support": 0,
+                "10dlc": 0,
+                "custom_domain": 2,
+                "labs_ai": 3,
+                "unlimited_cloud_storage": 0,
+                "document_splitting": 3
+            },
+            "has_scheduled_changes": false,
+            "amount": "200205.67",
+            "status": "active",
+            "start_date": "2026-08-10",
+            "expiry_date": "2029-08-10",
+            "payment_source": "chargebee",
+            "platform": "web",
+            "addons": [
+                {
+                    "name": "Numbers 5 Add-on",
+                    "addon_type": "numbers_5",
+                    "quantity": 50,
+                    "amount": "43182.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 4
+                },
+                {
+                    "name": "Credits Add-on",
+                    "addon_type": "credits",
+                    "quantity": 5000000,
+                    "amount": "50000.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 5236
+                },
+                {
+                    "name": "Labs AI Add-on",
+                    "addon_type": "labs_ai",
+                    "quantity": 3,
+                    "amount": "1078.92",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 3
+                },
+                {
+                    "name": "Numbers Add-on",
+                    "addon_type": "numbers",
+                    "quantity": 101,
+                    "amount": "5417.64",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 23
+                },
+                {
+                    "name": "Numbers 1 Add-on",
+                    "addon_type": "numbers_1",
+                    "quantity": 50,
+                    "amount": "8982.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 7
+                },
+                {
+                    "name": "Numbers 2 Add-on",
+                    "addon_type": "numbers_2",
+                    "quantity": 108,
+                    "amount": "23289.12",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 10
+                },
+                {
+                    "name": "Numbers 3 Add-on",
+                    "addon_type": "numbers_3",
+                    "quantity": 50,
+                    "amount": "21582.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 4
+                },
+                {
+                    "name": "Numbers 4 Add-on",
+                    "addon_type": "numbers_4",
+                    "quantity": 50,
+                    "amount": "30582.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 4
+                },
+                {
+                    "name": "Basic License Add-on",
+                    "addon_type": "license_1",
+                    "quantity": 50,
+                    "amount": "5382.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 6
+                },
+                {
+                    "name": "Plus License Add-on",
+                    "addon_type": "license_2",
+                    "quantity": 50,
+                    "amount": "7182.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 48
+                },
+                {
+                    "name": "Pro License Add-on",
+                    "addon_type": "license_3",
+                    "quantity": 50,
+                    "amount": "8982.00",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 18
+                },
+                {
+                    "name": "Broadcast Fax Add-on",
+                    "addon_type": "broadcast",
+                    "quantity": 2,
+                    "amount": "7199.28",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 2
+                },
+                {
+                    "name": "Document Splitting Add-on",
+                    "addon_type": "document_splitting",
+                    "quantity": 3,
+                    "amount": "1078.92",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 2
+                },
+                {
+                    "name": "Domain Sending Add-on",
+                    "addon_type": "custom_domain",
+                    "quantity": 2,
+                    "amount": "7199.28",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 2
+                },
+                {
+                    "name": "Developer API Add-on",
+                    "addon_type": "api",
+                    "quantity": 2,
+                    "amount": "7199.28",
+                    "start_date": "2026-08-12",
+                    "expiry_date": "2029-08-10",
+                    "is_trial": false,
+                    "used_quantity": 2
+                }
+            ],
+            "usage": {
+                "license_1": 6,
+                "license_2": 48,
+                "license_3": 18,
+                "license_4": 0,
+                "license_free": 0,
+                "numbers": 23,
+                "numbers_1": 7,
+                "numbers_2": 10,
+                "numbers_3": 4,
+                "numbers_4": 4,
+                "numbers_5": 4,
+                "credits": 5236,
+                "api": 2,
+                "broadcast": 2,
+                "whitelabel": 0,
+                "premier_support": 0,
+                "custom_domain": 2,
+                "labs_ai": 3,
+                "document_splitting": 2,
+                "credit_breakdown": {
+                    "fax": {
+                        "outbound": 7,
+                        "inbound": 7,
+                        "document": 0,
+                        "total_credit": 14,
+                        "total_credit_percentage": 0
+                    },
+                    "esign_forms": {
+                        "signature_requests": 0,
+                        "bulk_signature_requests": 0,
+                        "form_submissions": 0,
+                        "total_credit": 0,
+                        "total_credit_percentage": 0
+                    },
+                    "data_processing": {
+                        "ocr": 13,
+                        "fax_ai": 789,
+                        "lab_ai": 420,
+                        "healthcare_idp": 0,
+                        "total_credit": 1222,
+                        "total_credit_percentage": 0.02
+                    },
+                    "communication": {
+                        "call": 0,
+                        "sms": 0,
+                        "meeting": 0,
+                        "recording": 0,
+                        "voicemail": 0,
+                        "total_credit": 0,
+                        "total_credit_percentage": 0
+                    },
+                    "ai_automation": {
+                        "ai_document": 0,
+                        "ai_response": 0,
+                        "automation": 0,
+                        "web_call": 0,
+                        "phone_call": 0,
+                        "total_credit": 0,
+                        "total_credit_percentage": 0
+                    }
+                },
+                "10dlc": 0,
+                "unlimited_cloud_storage": 0
+            },
+            "entitlements": [],
+            "created_at": "2026-08-10T10:51:15.000000Z",
+            "updated_at": "2026-08-12T06:12:56.000000Z"
+        },
+        "additional_info": {
+            "is_schedule_meeting_payment_received": false,
+            "price_for_schedule_meeting": 0
+        }
+    },
+    "meta": {
+        "request_id": "1f63e32c-4250-4599-b553-2edecf3a1b9f"
+    }
+}
+
+
+
+
+Response: Reseller Client
+
+{
+    "data": {
+        "subscription": {
+            "plan": {
+                "name": "Pro",
+                "plan_type": "Pro",
+                "is_auto_topup_enable": false,
+                "topup_trigger_percentage": 95,
+                "topup_percentage": 20,
+                "credits": 1280,
+                "remaining_credit": "1280.0000",
+                "numbers": 42,
+                "numbers_1": 31,
+                "numbers_2": 31,
+                "numbers_3": 1,
+                "numbers_4": 1,
+                "numbers_5": 1,
+                "license_1": 7,
+                "license_2": 15,
+                "license_3": 5,
+                "custom_domain": 1,
+                "labs_ai": 0,
+                "api": 1,
+                "broadcast": 1,
+                "document_splitting": 0
+            },
+            "addons": [
+                {
+                    "name": "Credits Add-on",
+                    "quantity": 1280,
+                    "addon_type": "credits",
+                    "amount": "1.00",
+                    "used_quantity": 0
+                },
+                {
+                    "name": "Numbers Add-on",
+                    "quantity": 42,
+                    "addon_type": "numbers",
+                    "amount": "0.00",
+                    "used_quantity": 3
+                },
+                {
+                    "name": "Numbers 1 Add-on",
+                    "quantity": 31,
+                    "addon_type": "numbers_1",
+                    "amount": "10.0
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

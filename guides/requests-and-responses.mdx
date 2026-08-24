@@ -1,0 +1,37 @@
+---
+title: "Requests and responses"
+description: "Learn the shared formats used by Amplify API operations."
+---
+
+## JSON requests
+
+Send JSON request bodies with `Content-Type: application/json`. Field names use `snake_case`, and timestamps use ISO 8601 UTC.
+
+## Resource responses
+
+Successful responses wrap the requested resource in `data` and request metadata in `meta`.
+
+```json
+{
+  "data": {
+    "id": "12345",
+    "status": "completed",
+    "created_at": "2026-08-22T10:00:00Z"
+  },
+  "meta": {
+    "request_id": "req_abc123xyz789"
+  }
+}
+```
+
+List responses return an array in `data` and include pagination fields in `meta`.
+
+## Request tracing
+
+Responses provide a request identifier as `meta.request_id`. Record it when investigating an error or contacting support.
+
+## File input and output
+
+Depending on the operation, you can provide files as multipart uploads, Base64-encoded `file_content`, or a `file_url`. When an operation accepts multiple files, Amplify processes them in the order submitted.
+
+File-content endpoints return temporary URLs by default. Use `format=base64` when the endpoint supports Base64 output.

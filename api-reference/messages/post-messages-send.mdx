@@ -1,0 +1,55 @@
+---
+title: "POST /messages/send"
+description: "Captured contract for POST /messages/send."
+api: "POST /messages/send"
+public: true
+---
+
+This page documents the behavior captured for POST /messages/send in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Send SMS API:
+    
+    Endpoint:
+    POST: api/messages/send
+    
+    Body:
+    {
+        "from_number": "+13345103356",
+        "to_number": "+19382530055",
+        "type": "sms",
+        "content": "dfdsfsdfsdfds"
+    }
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 921,
+                "created_by": 53,
+                "from_number": "+13345103356",
+                "to_number": "+19382530055",
+                "conversation_id": 321,
+                "content": "dfdsfsdfsdfds",
+                "direction": "outbound",
+                "type": "sms",
+                "status": "delivered",
+                "is_read": true,
+                "delete_type": "",
+                "created_at": "2026-01-13T08:52:00Z",
+                "is_internal": true
+            }
+        ],
+        "meta": {
+            "total": 1,
+            "request_id": "d0aca6f4-b22c-411f-b08d-562c62b21aee"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

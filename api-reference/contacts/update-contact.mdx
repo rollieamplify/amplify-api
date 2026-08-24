@@ -1,0 +1,20 @@
+---
+title: "Update a contact"
+description: "Update fields on an existing contact."
+api: "PATCH /contacts/{contact_id}"
+public: true
+---
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+<ParamField path="contact_id" type="integer" required>Contact ID.</ParamField>
+
+Send only the fields that should change. The request supports the same contact properties, custom fields, groups, and duplicate fax-number behavior as contact creation.
+
+```bash
+curl --request PATCH \
+  --url 'https://api.amplify.xyz/v1/contacts/12345' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
+  --header 'Content-Type: application/json' \
+  --data '{"phone_number":"+14155550199"}'
+```
+

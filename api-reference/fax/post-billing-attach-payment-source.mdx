@@ -1,0 +1,32 @@
+---
+title: "POST /billing/attach_payment_source"
+description: "Captured contract for POST /billing/attach_payment_source."
+api: "POST /billing/attach_payment_source"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /billing/attach_payment_source.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+Attach Card details to the customer in Chargebee
+
+EndPoint:
+
+POST: api/billing/attach_payment_source
+
+
+
+
+Payload:
+
+{
+    "payment_intent_id": "AzqB4VVS3u6nnX0j7BkZ60kmBv97v13L8zQocuYhceiIn09qM"
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

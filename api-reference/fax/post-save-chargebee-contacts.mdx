@@ -1,0 +1,49 @@
+---
+title: "POST /save_chargebee_contacts"
+description: "Captured contract for POST /save_chargebee_contacts."
+api: "POST /save_chargebee_contacts"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /save_chargebee_contacts.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+# Save Chargebee Contacts API
+
+
+**Endpoint:**  
+POST: api/save_chargebee_contacts
+
+
+# Description :
+Adds a new billing contact to the Chargebee customer for the given user. Used when the frontend needs to add a contact (email, name, billing/account preferences) to Chargebee.  
+Expects `userID`, `email`, and `is_sandbox`; optional `firstName`, `lastName`, `account`, `billing`.
+
+
+# Request Body :
+{
+  "userID": "123",
+  "email": "billing@example.com",
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "account": true,
+  "billing": true,
+  "is_sandbox": 0
+}
+
+
+# Response Format :
+
+
+## Success Response (HTTP 200) :
+{
+  "data": "Contact added and permissions updated successfully."
+}
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

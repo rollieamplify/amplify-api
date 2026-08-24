@@ -1,0 +1,56 @@
+---
+title: "GET /conversations/{conversation_id}/secure_chat/export"
+description: "Captured contract for GET /conversations/{conversation_id}/secure_chat/export."
+api: "GET /conversations/{conversation_id}/secure_chat/export"
+public: true
+---
+
+This page documents the behavior captured for GET /conversations/{conversation_id}/secure_chat/export in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/conversations/{conversation_id}/secure_chat/export
+    
+    Response:
+    {
+        "data": [
+            {
+                "from_number": "13345103356",
+                "to_number": "12024280033",
+                "direction": "outbound",
+                "content": "First new secure message",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-04-16T12:13:24.000000Z"
+            },
+            {
+                "from_number": "13345103356",
+                "to_number": "12024280033",
+                "direction": "inbound",
+                "content": "received secure message",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-04-16T12:15:49.000000Z"
+            },
+            {
+                "from_number": "13345103356",
+                "to_number": "12024280033",
+                "direction": "outbound",
+                "content": "send message after revoke link",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-04-16T12:18:42.000000Z"
+            }
+        ],
+        "meta": {
+            "request_id": "01a6cc63-417a-4cd3-99f9-cfe0ccbb7045"
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

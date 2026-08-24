@@ -1,0 +1,126 @@
+---
+title: "GET /team_chats/{to_user_id}/messages"
+description: "Captured contract for GET /team_chats/{to_user_id}/messages."
+api: "GET /team_chats/{to_user_id}/messages"
+public: true
+---
+
+This page documents the behavior captured for GET /team_chats/{to_user_id}/messages in the Amplify API source materials.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+    Endpoint:
+    GET: api/team_chats/{to_user_id}/messages
+    
+    Response:
+    {
+        "data": [
+            {
+                "id": 4,
+                "from_user_id": 53,
+                "to_user_id": 322,
+                "content": "Hey sub user",
+                "direction": "outbound",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-05-04T05:55:46Z",
+                "reactions": []
+            },
+            {
+                "id": 7,
+                "from_user_id": 53,
+                "to_user_id": 322,
+                "content": "Hello Admin, Received your message",
+                "direction": "inbound",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-05-04T05:57:32Z",
+                "reactions": []
+            },
+            {
+                "id": 8,
+                "from_user_id": 53,
+                "to_user_id": 322,
+                "content": "",
+                "direction": "outbound",
+                "type": "mms",
+                "status": "delivered",
+                "created_at": "2026-05-04T06:24:31Z",
+                "reactions": [],
+                "file": {
+                    "name": "image (7).png",
+                    "url": "https://example.com/signed-upload-url
+                    "type": "png",
+                    "data": ""
+                }
+            },
+            {
+                "id": 10,
+                "from_user_id": 53,
+                "to_user_id": 322,
+                "content": "",
+                "direction": "outbound",
+                "type": "meeting",
+                "status": "delivered",
+                "created_at": "2026-05-04T06:29:08Z",
+                "reactions": [],
+                "meeting": {
+                    "room_id": "MpEx-kgr-abcd",
+                    "host_id": "53",
+                    "url": "https://beta.amplify.xyz/meet/MpEx-kgr-abcd"
+                }
+            },
+            {
+                "id": 12,
+                "from_user_id": 53,
+                "to_user_id": 322,
+                "content": "Hello sub user",
+                "direction": "outbound",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-05-04T06:33:39Z",
+                "reactions": []
+            },
+            {
+                "id": 14,
+                "from_user_id": 53,
+                "to_user_id": 322,
+                "content": "Hello again",
+                "direction": "outbound",
+                "type": "sms",
+                "status": "delivered",
+                "created_at": "2026-05-04T09:05:39Z",
+                "reactions": [
+                    {
+                        "id": 1682,
+                        "created_by": 53,
+                        "message_id": null,
+                        "team_message_id": "14",
+                        "created_at": "2026-05-04T09:53:33.000000Z",
+                        "content": "😂"
+                    },
+                    {
+                        "id": 1687,
+                        "created_by": 322,
+                        "message_id": null,
+                        "team_message_id": "14",
+                        "created_at": "2026-05-04T10:30:59.000000Z",
+                        "content": "👍"
+                    }
+                ]
+            }
+        ],
+        "meta": {
+            "total": 6,
+            "next_cursor": "",
+            "previous_cursor": "",
+            "limit": 20
+        }
+    }
+```
+
+<Note>Only behavior explicitly present in the captured endpoint material is shown. Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

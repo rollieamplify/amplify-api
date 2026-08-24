@@ -1,0 +1,63 @@
+---
+title: "POST /storage/upload_url"
+description: "Captured contract for POST /storage/upload_url."
+api: "POST /storage/upload_url"
+groups: ["internal"]
+---
+
+This internal review page records the behavior captured for POST /storage/upload_url.
+
+<ParamField header="access_token" type="string" required>API access token.</ParamField>
+
+## Captured contract
+
+```text
+EndPoint :
+POST : api/storage/upload_url
+
+Description :
+Returns a presigned **S3 PUT** URL so the client can upload a binary object (image, PDF slice, etc.) without sending file bytes through your API. 
+The object key is derived from the authenticated account (or from the document/form you pass in), the chosen `folder`, and `file_name`.
+
+ Authentication :
+  Include the Bearer Token in the request header. 
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+
+Request Body (JSON)
+Field | Type | Description
+----------------------------------------------------------------
+| `file_name` | `string` | **Required.** Object name placed under the folder prefix (e.g. `3e237e31365ebcd6eb3cbd4a078de878.png`). Same value you persist for signatures (`storage_id`) or theme (`background_image.url`). |
+| `folder` | `string` | **Required.** Target namespace. For theme backgrounds use **`theme`**. Other values include `download`, `thumbnail`, `attachment`, `stamp`, `branding`, `mms`, or omit/`signature` (default) for signature drawings. |
+| `content_type` | `string` | **Optional.** MIME type for the PUT to S3 (e.g. `image/png`). Recommended for images. |
+| `document_id` | `integer` / `string` | **Optional.** If set, the S3 path uses this document’s **account_id** (useful when the uploader’s default account should not own the object key). |
+| `form_id` | `integer` / `string` | **Optional.** Same as `document_id` but resolves **account_id** from the form. ||
+
+
+Request :
+{
+    "file_name": "3e237e31365ebcd6eb3cbd4a078de878.png",
+    "content_type": "image/png",
+    "folder": "signature"
+}
+
+
+Response :
+{
+    "data": {
+        "upload_url": "https://example.com/signed-url
+    },
+    "meta": {
+        "request_id": "eefdff6b-28e9-43fd-81b5-670f410ad81c"
+    }
+}
+
+Permissions :
+- User must be authenticated with Sanctum and have the e-sign feature enabled.
+
+Errors:
+422 VALIDATION_ERROR : Missing `file_name` or `folder`, or invalid payload.
+```
+
+<Note>Unspecified permissions, rate limits, idempotency, and error behavior remain under review.</Note>
+

@@ -1,0 +1,111 @@
+---
+title: "Organize Documents with Folders Using the Amplify API"
+sidebarTitle: "Organize Documents"
+description: "Learn how to create folders, move documents into them, and filter document lists by folder to keep your Amplify document library organized."
+---
+
+As your document library grows, folders help you group related files and retrieve them efficiently. You can create folders to mirror your business structure — for example, separating contracts by client, or grouping invoices by month — and then assign documents to them at upload time or by updating existing documents.
+
+## Create a folder
+
+Send a `POST` request to `/v1/folders` with a `name` for the new folder:
+
+```bash
+curl --request POST \
+  --url https://api.amplify.xyz/v1/folders \
+  --header 'access_token: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "name": "Q1 2024 Contracts"
+  }'
+```
+
+The response includes the folder's `id`, which you'll use to assign documents:
+
+```json
+{
+  "id": "fol_01hx...",
+  "name": "Q1 2024 Contracts",
+  "document_count": 0,
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+## Move a document to a folder
+
+### At upload time
+
+Include `folder_id` in your upload request to place the document directly into a folder:
+
+```bash
+curl --request POST \
+  --url https://api.amplify.xyz/v1/documents \
+  --header 'access_token: YOUR_API_KEY' \
+  --form 'file=@/path/to/contract.pdf' \
+  --form 'name=contract.pdf' \
+  --form 'folder_id=fol_01hx...'
+```
+
+### After upload
+
+To move an existing document, send a `PATCH` request to `/v1/documents/{id}` with the target `folder_id`:
+
+```bash
+curl --request PATCH \
+  --url https://api.amplify.xyz/v1/documents/doc_01hx... \
+  --header 'access_token: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "folder_id": "fol_01hx..."
+  }'
+```
+
+To remove a document from a folder without deleting it, set `folder_id` to `null`.
+
+## List documents in a folder
+
+Filter documents by `folder_id` using the query parameter on the documents list endpoint:
+
+```bash
+curl --request GET \
+  --url 'https://api.amplify.xyz/v1/documents?folder_id=fol_01hx...&limit=25' \
+  --header 'access_token: YOUR_API_KEY'
+```
+
+```json
+{
+  "data": [
+    {
+      "id": "doc_01hx...",
+      "name": "contract.pdf",
+      "size": 102400,
+      "mime_type": "application/pdf",
+      "folder_id": "fol_01hx...",
+      "created_at": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "next_cursor": null
+}
+```
+
+<Note>
+  Nested folders (folders within folders) are not currently supported through the API. All folders exist at the top level of your document library. If your use case requires hierarchical organisation, consider using a naming convention such as `"Clients / Acme Corp"`. Check the [Amplify changelog](https://app.amplify.xyz/changelog) for updates on nested folder support.
+</Note>
+
+## List all folders
+
+To retrieve all folders in your account:
+
+```bash
+curl --request GET \
+  --url https://api.amplify.xyz/v1/folders \
+  --header 'access_token: YOUR_API_KEY'
+```
+
+Each folder object includes a `document_count` so you can quickly gauge folder size without fetching the full document list.
+
+## Next steps
+
+- View the full folder and document schema in the [Folders API Reference](/api-reference/folders)
+- Upload new documents to your folders in [Upload Documents](/guides/documents/upload-documents)
+- Extract structured data from documents you've organised in [Extract Structured Data from Documents](/guides/documents/extract-document-data)

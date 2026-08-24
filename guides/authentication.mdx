@@ -1,9 +1,9 @@
 ---
 title: "Authentication"
-description: "Authenticate Amplify API requests with an access token or bearer token."
+description: "Authenticate Amplify API requests with an access token."
 ---
 
-The Amplify API supports two authentication methods. Send one credential with every request.
+Send your Amplify access token with every API request.
 
 ## Access token
 
@@ -12,15 +12,6 @@ Send your Amplify access token in the `access_token` header.
 ```bash
 curl "https://api.amplify.xyz/v1/numbers" \
   --header "access_token: $AMPLIFY_ACCESS_TOKEN"
-```
-
-## Bearer token
-
-Send a JWT bearer token in the `Authorization` header.
-
-```bash
-curl "https://api.amplify.xyz/v1/numbers" \
-  --header "Authorization: Bearer $AMPLIFY_ACCESS_TOKEN"
 ```
 
 <Warning>

@@ -1,0 +1,55 @@
+---
+title: "Amplify API: Unified Communications & Document Automation"
+sidebarTitle: "Introduction"
+description: "Amplify is a unified API platform for fax, eSignature, messaging, voice calls, document generation, and phone number management — built for developers."
+---
+
+Amplify is a unified communications and document automation platform designed for developers who need to add fax, eSignature, messaging, voice, document generation, and phone number management to their products without juggling a dozen different providers. Every capability is accessible through a single REST API with consistent authentication, predictable response shapes, and shared webhooks — so you spend less time on integration plumbing and more time building.
+
+## Who Amplify Is For
+
+Amplify is built for product teams and backend engineers who need reliable, programmable communications infrastructure. It fits equally well in healthcare platforms sending secure faxes, legal-tech products collecting eSignatures, logistics apps sending SMS updates, or any workflow that touches regulated document exchange. If your product needs to communicate with the outside world — or automate paperwork — Amplify has an endpoint for it.
+
+## Product Areas
+
+<CardGroup cols={2}>
+  <Card title="Fax" icon="fax" href="/guides/fax/send-a-fax">
+    Send and receive faxes over PSTN with delivery receipts, retry logic, and webhook callbacks on every status change.
+  </Card>
+  <Card title="eSign" icon="signature" href="/guides/esign/send-for-signature">
+    Create signature envelopes, place fields on documents, invite signers by email, and retrieve signed copies when complete.
+  </Card>
+  <Card title="Messaging" icon="message" href="/guides/messaging/send-a-message">
+    Send SMS and MMS messages from provisioned numbers, handle inbound messages, and access full conversation threads.
+  </Card>
+  <Card title="Calls" icon="phone" href="/guides/calls/make-a-call">
+    Initiate outbound calls, receive inbound calls, configure call routing, and retrieve recordings and transcripts.
+  </Card>
+  <Card title="Documents" icon="file-lines" href="/guides/documents/upload-documents">
+    Generate PDFs from reusable templates by injecting dynamic data — useful for contracts, invoices, and reports.
+  </Card>
+  <Card title="Numbers" icon="hashtag" href="/guides/numbers/manage-numbers">
+    Search available numbers by area code or region, provision them to your account, and assign them to any product area.
+  </Card>
+</CardGroup>
+
+## API Versioning
+
+The current stable version of the Amplify API is **v1**. All endpoints are prefixed with `https://api.amplify.xyz/v1`. Amplify follows a versioned release model — breaking changes will always be introduced under a new version prefix, and prior versions remain available for a minimum deprecation window with advance notice.
+
+<Note>
+  Always pin your integration to a specific version prefix (e.g., `/v1/`) so that future version releases don't affect your existing code unexpectedly.
+</Note>
+
+## Next Steps
+
+Ready to start building? Get your API key and make your first request in minutes.
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="bolt" href="/quickstart">
+    Go from zero to a successful API response in under five minutes.
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/overview">
+    Explore every endpoint, parameter, and response schema in the full reference.
+  </Card>
+</CardGroup>

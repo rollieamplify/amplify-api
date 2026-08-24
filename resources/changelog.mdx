@@ -1,0 +1,117 @@
+---
+title: "Amplify API Changelog — Updates and Release Notes"
+sidebarTitle: "Changelog"
+description: "Stay current with every Amplify API release: new endpoints, improvements, bug fixes, and breaking changes with migration guidance."
+---
+
+Stay up to date with every change made to the Amplify API. This changelog lists new features, improvements, bug fixes, and breaking changes in reverse-chronological order — review it regularly to ensure your integration continues to work as expected and to take advantage of new capabilities as they ship.
+
+<Note>
+  Subscribe to changelog notifications by visiting your [Amplify dashboard](https://app.amplify.xyz) and enabling **API release emails** under **Settings → Notifications**. You'll receive a summary email whenever a new entry is published.
+</Note>
+
+<Info>
+  Amplify follows a stable versioning policy — breaking changes are introduced only in a new major API version and are announced at least 90 days in advance. Learn more in the [API Versioning guide](/platform/api-versioning).
+</Info>
+
+## Release History
+
+<AccordionGroup>
+  <Accordion title="June 2024 — Automations API, document URL import, contact search improvements">
+    **Released:** June 2024
+
+    This release adds programmatic access to workflow automations, expands document upload options, and improves contact search accuracy.
+
+    - **New** — The **Automations API** is now available. List all configured automations, retrieve their settings, and manually trigger an automation via `POST /v1/automations/{id}/trigger`. Automation creation and step editing remain available in the dashboard.
+    - **New** — Documents can now be imported directly from a remote URL. Pass `document_url` to `POST /v1/documents` to have Amplify fetch and store the file on your behalf.
+    - **Improved** — Contact search (`GET /v1/contacts?search=`) now matches against phone numbers in addition to name and email, and handles partial E.164 number matching.
+    - **Fixed** — `GET /v1/contacts/{id}` no longer returns a `404` for contacts created via an inbound message when the contact's phone number contains formatting characters (e.g., dashes or spaces).
+  </Accordion>
+
+  <Accordion title="May 2024 — Permission Groups API, scoped API keys, webhook event expansion">
+    **Released:** May 2024
+
+    This release introduces granular access control via permission groups, scoped API key creation, and a broader set of subscribable webhook events.
+
+    - **New** — The **Permission Groups API** is now available at `/v1/permission-groups`. Retrieve the permission groups configured in your organization and assign them to users via `PATCH /v1/users/{id}`.
+    - **New** — API keys can now be scoped to a specific set of permissions. Pass a `permissions` array to `POST /v1/api-keys` to restrict what the key can access, independent of the creating user's broader access.
+    - **New** — Three additional webhook event types are now available: `esign.viewed` (a recipient opened the signing link), `form.extraction.completed` (data extraction finished), and `call.failed` (a voice call failed to connect).
+    - **Improved** — Webhook delivery retries now use exponential back-off with a maximum of 5 attempts over 24 hours. The final failure status and last attempted timestamp are recorded on the event object.
+    - **Fixed** — Webhooks registered with uppercase characters in the URL scheme (e.g., `HTTPS://`) are now accepted and normalized to lowercase.
+  </Accordion>
+
+  <Accordion title="April 2024 — Folders API, document metadata update, pagination cursor stability">
+    **Released:** April 2024
+
+    This release introduces folder organization for documents, adds metadata editing for uploaded files, and stabilizes pagination cursors across all list endpoints.
+
+    - **New** — The **Folders API** is now available at `/v1/folders`. Create nested folder hierarchies and organize documents by providing a `folder_id` when uploading or updating a document.
+    - **New** — `PATCH /v1/documents/{id}` now supports renaming a document and moving it between folders. Pass `folder_id: null` to move a document to the root level.
+    - **Improved** — Pagination cursors are now stable across concurrent writes. Adding or deleting records while iterating through pages no longer causes items to be skipped or duplicated in subsequent pages.
+    - **Fixed** — `GET /v1/documents` returned an empty `data` array instead of a `404` when the specified `folder_id` did not exist. It now returns `404 Not Found` with a descriptive error message.
+  </Accordion>
+
+  <Accordion title="March 2024 — Numbers API, inbound webhook routing, MMS support">
+    **Released:** March 2024
+
+    This release exposes phone number configuration via the API, adds per-number webhook routing, and enables MMS media retrieval.
+
+    - **New** — The **Numbers API** is now available at `/v1/numbers`. List all provisioned numbers, inspect their capabilities, and update their label and inbound webhook URL.
+    - **New** — Per-number webhook routing is now supported. Set `webhook_url` on a number via `PATCH /v1/numbers/{id}` to override the account-level default for inbound events on that number.
+    - **New** — Inbound MMS messages now include a `media` array in the webhook payload, with each entry containing a `url` and `content_type` for the attached media file.
+    - **Improved** — `GET /v1/numbers` now accepts `type` and `capability` query parameters so you can filter numbers by type (`local`, `toll-free`, `fax`) or capability (`sms`, `mms`, `voice`, `fax`).
+    - **Fixed** — Number labels containing non-ASCII characters (e.g., accented characters) are now stored and returned correctly.
+  </Accordion>
+
+  <Accordion title="February 2024 — API Keys resource, last_used_at tracking, error response improvements">
+    **Released:** February 2024
+
+    This release adds API-level key management, surfaces key usage metadata, and standardizes error response bodies across all endpoints.
+
+    - **New** — The **API Keys API** is now available at `/v1/api-keys`. Create keys with optional permission scopes, list all active keys, retrieve metadata, and revoke keys programmatically.
+    - **New** — API key records now include a `last_used_at` field, showing the ISO 8601 timestamp of the most recent authenticated request made with that key.
+    - **Improved** — All `4xx` and `5xx` error responses now include a consistent `error` object with a `code` (machine-readable string) and `message` (human-readable description) field. Update your error handling if you previously parsed bare message strings.
+    - **Fixed** — Creating an API key with an empty `permissions` array (`[]`) previously granted full access instead of returning a validation error. It now returns `422 Unprocessable Entity` with an appropriate message. Pass `null` or omit the field to create an unscoped key.
+  </Accordion>
+
+  <Accordion title="January 2024 — Conversations filtering, eSign roles, fax webhooks">
+    **Released:** January 2024
+
+    This release improves filtering capabilities for the Conversations API, expands eSign template flexibility, and enriches fax webhook payloads.
+
+    - **New** — The Conversations API now supports filtering by participant phone number. Pass the `participant_phone` query parameter to `/v1/conversations` to narrow results to a specific number.
+    - **New** — eSign templates now support multiple recipient roles. Define named roles (e.g., `signer`, `approver`, `witness`) on a template and assign contacts to each role at send time.
+    - **Improved** — Fax delivery webhooks now include a `page_count` field in the payload, giving you an accurate count of delivered pages without an additional API call.
+    - **Fixed** — The pagination cursor no longer produces incorrect results when iterating over large result sets (>10 000 records). Existing cursors remain valid; re-paginate from the start to pick up corrected ordering.
+  </Accordion>
+
+  <Accordion title="December 2023 — Forms API beta, call recordings, rate-limit headers, breaking fax status change">
+    **Released:** December 2023
+
+    This release introduces document data extraction, surfaces call recordings via the API, improves visibility into rate limits, and includes one breaking change to the fax response schema.
+
+    - **New** — The **Forms API** (beta) enables programmatic extraction of structured data from documents and filled forms. Access it at `/v1/forms`. Because this feature is in beta, the schema may change; pin to the `beta` preview header if you build against it.
+    - **New** — Call recordings are now available via the API. Retrieve a recording by calling `GET /v1/calls/{call_id}/recording`. Recordings are retained for 90 days by default.
+    - **Improved** — Rate-limit headers (`X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset`) are now included on **all** API responses, not just responses that hit the limit.
+    - **Breaking** — The `status` field in fax response objects has changed from an **integer** to a **string** (e.g., `1` → `"delivered"`). Update any code that compares `status` to a numeric value. See the [migration guide](/platform/api-versioning) for the full mapping table.
+  </Accordion>
+
+  <Accordion title="November 2023 — Initial public API release">
+    **Released:** November 2023
+
+    Welcome to the Amplify API. This is the first public release, covering the full suite of communications and document automation endpoints.
+
+    - **New** — Initial public API release at base URL `https://api.amplify.xyz/v1`.
+    - The following resource groups are available from day one:
+      - **Faxes** — Send, receive, and track fax transmissions.
+      - **eSign** — Create, send, and manage electronic signature envelopes and templates.
+      - **Messages** — Send and receive SMS and MMS messages.
+      - **Calls** — Initiate and manage voice calls programmatically.
+      - **Documents** — Upload, store, and retrieve documents.
+      - **Numbers** — Provision and manage phone numbers.
+      - **Contacts** — Create and manage your contact list.
+      - **Users** — Manage user accounts within your organization.
+      - **Webhooks** — Register and manage webhook endpoints for real-time event delivery.
+      - **API Keys** — Create, rotate, and revoke API keys for authentication.
+  </Accordion>
+</AccordionGroup>

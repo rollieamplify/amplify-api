@@ -1,0 +1,74 @@
+---
+title: "Amplify Webhooks Overview: Real-Time Notifications"
+sidebarTitle: "Overview"
+description: "Learn how Amplify webhooks notify your application in real time when fax, eSign, messaging, and call events occur across your account."
+---
+
+Webhooks let Amplify push real-time notifications to your application the moment something happens — a fax is delivered, a document is signed, or a call ends. Instead of polling the API repeatedly, you register an HTTPS endpoint and Amplify sends an HTTP POST request to it automatically whenever a subscribed event fires.
+
+## How Webhooks Work
+
+When an event occurs in Amplify, the platform constructs a signed JSON payload and immediately sends an HTTP POST request to every endpoint you have registered for that event type. Your server receives the request, verifies the signature, and processes the data. The entire flow completes in real time, without any action required on your part.
+
+<CardGroup cols={2}>
+  <Card title="Configure" icon="sliders" href="/platform/webhooks/configure">
+    Register and manage webhook endpoints via the dashboard or API.
+  </Card>
+  <Card title="Authentication" icon="shield-check" href="/platform/webhooks/authentication">
+    Verify webhook signatures to confirm payloads come from Amplify.
+  </Card>
+  <Card title="Retry Behavior" icon="arrows-rotate" href="/platform/webhooks/retry-behavior">
+    Understand how Amplify retries failed deliveries and handles timeouts.
+  </Card>
+  <Card title="Testing" icon="flask" href="/platform/webhooks/testing">
+    Test webhooks locally using tunneling tools and the dashboard test sender.
+  </Card>
+  <Card title="Event Types" icon="list" href="/platform/webhooks/event-types">
+    Browse every event type available across fax, eSign, messaging, and calls.
+  </Card>
+</CardGroup>
+
+## Common Use Cases
+
+Webhooks are most valuable when your application needs to react immediately to external changes. Here are some of the most common scenarios:
+
+- **Fax delivery** — update your records when a fax is successfully delivered or fails
+- **Signature completion** — trigger downstream workflows the moment all signers have signed a document
+- **Incoming messages** — respond to inbound SMS or chat messages in real time
+- **Call ended** — post-process call recordings or summaries as soon as a call completes
+
+## Webhook Event Structure
+
+Every webhook payload Amplify sends shares the same top-level envelope regardless of event type. The `event` field identifies what happened, `data` contains the event-specific details, and `created_at` records when the event was generated.
+
+| Field | Type | Description |
+|---|---|---|
+| `event` | string | The event type, e.g. `fax.delivered` |
+| `data` | object | Event-specific payload data |
+| `created_at` | string | ISO 8601 timestamp of when the event occurred |
+
+### Example Payload
+
+```json
+{
+  "event": "fax.delivered",
+  "data": {
+    "id": "fax_01hx...",
+    "status": "delivered",
+    "to": "+15551234567"
+  },
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+## Responding to Webhooks
+
+Your endpoint must return an HTTP `200` status code within **10 seconds** of receiving a request. Any response outside the `2xx` range, or no response within 10 seconds, is treated as a failed delivery and triggers Amplify's [retry logic](/platform/webhooks/retry-behavior).
+
+<Tip>
+  Return `200` immediately upon receipt and process the event asynchronously in a background job or queue. This prevents timeouts if your processing logic is slow.
+</Tip>
+
+<Warning>
+  Always validate the `Amplify-Signature` header on every incoming request before processing the payload. Never trust webhook data that has not been verified. See [Verify Webhook Signatures](/platform/webhooks/authentication) for implementation details.
+</Warning>

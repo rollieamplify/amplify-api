@@ -1,0 +1,202 @@
+---
+title: "Documents API Reference — Upload and Manage Files"
+sidebarTitle: "Documents"
+description: "Upload documents by file upload or URL, organize them in folders, update metadata, delete records, and download files using the Amplify Documents API."
+---
+
+The Documents resource lets you upload, manage, and retrieve document files stored in Amplify. You can upload a file directly using a multipart form request or provide a `document_url` for Amplify to fetch and store remotely. Optionally organize documents into [Folders](/api-reference/folders) by providing a `folder_id`. Documents stored here can also be referenced in other resources, such as the [Faxes](/api-reference/faxes) and [eSign Documents](/api-reference/esign-documents) APIs.
+
+<Note>
+  The full interactive reference for this resource is generated from the Amplify OpenAPI spec. The endpoints and parameters below reflect the current public API surface.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/v1/documents` | Upload a document |
+| `GET` | `/v1/documents` | List documents |
+| `GET` | `/v1/documents/{id}` | Get a document |
+| `PATCH` | `/v1/documents/{id}` | Update a document |
+| `DELETE` | `/v1/documents/{id}` | Delete a document |
+| `GET` | `/v1/documents/{id}/download` | Download a document |
+
+---
+
+## POST /v1/documents
+
+Upload a new document. Use multipart form data to upload a file directly, or provide a `document_url` to have Amplify fetch and store the file from a remote location.
+
+### Request body
+
+<ParamField body="file" type="file">
+  The document file to upload, sent as a `multipart/form-data` field. Required if `document_url` is not provided. Supported formats include PDF, DOCX, XLSX, PPTX, JPEG, PNG, and TIFF.
+</ParamField>
+
+<ParamField body="document_url" type="string">
+  Publicly accessible URL of a document to fetch and store. Required if `file` is not provided.
+</ParamField>
+
+<ParamField body="name" type="string">
+  Display name for the document. If omitted, Amplify uses the original filename or the last path segment of `document_url`.
+</ParamField>
+
+<ParamField body="folder_id" type="string">
+  ID of the folder to place this document in. If omitted, the document is stored at the root level.
+</ParamField>
+
+### Code examples
+
+<CodeGroup>
+
+```bash cURL (file upload)
+curl -X POST https://api.amplify.xyz/v1/documents \
+  -H "access_token: YOUR_API_KEY" \
+  -F "file=@/path/to/invoice.pdf" \
+  -F "name=Invoice June 2024" \
+  -F "folder_id=fld_01HZF9KMPQS3T6BVOW4R7YJCE"
+```
+
+```bash cURL (URL import)
+curl -X POST https://api.amplify.xyz/v1/documents \
+  -H "access_token: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "document_url": "https://example.com/report.pdf",
+    "name": "Q2 Report",
+    "folder_id": "fld_01HZF9KMPQS3T6BVOW4R7YJCE"
+  }'
+```
+
+</CodeGroup>
+
+---
+
+## GET /v1/documents
+
+Retrieve a paginated list of documents on your account.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+<ParamField query="folder_id" type="string">
+  Return only documents inside this folder. Use `root` to list documents not in any folder.
+</ParamField>
+
+<ParamField query="search" type="string">
+  Filter documents by name using a partial string match.
+</ParamField>
+
+---
+
+## GET /v1/documents/{id}
+
+Retrieve full metadata for a single document by its ID.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the document.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the document, prefixed with `doc_`.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the document.
+</ResponseField>
+
+<ResponseField name="size" type="integer">
+  File size in bytes.
+</ResponseField>
+
+<ResponseField name="mime_type" type="string">
+  MIME type of the document (e.g., `application/pdf`, `image/jpeg`).
+</ResponseField>
+
+<ResponseField name="folder_id" type="string">
+  ID of the folder containing this document. `null` if the document is at the root level.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the document was uploaded.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "doc_01HZFA9NQRS4T7CVPX5R8ZKGF",
+    "name": "Invoice June 2024",
+    "size": 204800,
+    "mime_type": "application/pdf",
+    "folder_id": "fld_01HZF9KMPQS3T6BVOW4R7YJCE",
+    "created_at": "2024-06-01T10:00:00Z"
+  }
+}
+```
+
+---
+
+## PATCH /v1/documents/{id}
+
+Update a document's metadata. You can rename the document or move it to a different folder.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the document to update.
+</ParamField>
+
+### Request body
+
+<ParamField body="name" type="string">
+  New display name for the document.
+</ParamField>
+
+<ParamField body="folder_id" type="string">
+  ID of the destination folder. Pass `null` to move the document to the root level.
+</ParamField>
+
+---
+
+## DELETE /v1/documents/{id}
+
+Permanently delete a document and its stored file. This action cannot be undone.
+
+<Warning>
+  Deleting a document removes the file from storage. Any faxes, eSign envelopes, or forms that referenced this document may be affected. Download the file before deleting if you need to retain a copy.
+</Warning>
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the document to delete.
+</ParamField>
+
+---
+
+## GET /v1/documents/{id}/download
+
+Download the raw document file as a binary stream.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the document to download.
+</ParamField>
+
+<Tip>
+  Check the `Content-Type` response header to determine the file format before writing the stream to disk.
+</Tip>

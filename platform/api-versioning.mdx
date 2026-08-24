@@ -1,0 +1,64 @@
+---
+title: "API Versioning and Stability Guarantees"
+sidebarTitle: "API Versioning"
+description: "Understand how Amplify versions its API, what changes are backward-compatible, and how breaking changes and deprecations are communicated."
+---
+
+Amplify versions the API in the URL path, giving you explicit control over which version your integration targets. You opt into the version you have tested against and are not automatically exposed to breaking changes when the API evolves. Understanding the versioning policy helps you build integrations that stay stable over time.
+
+## Current Version
+
+The current stable version of the Amplify API is **v1**. All API endpoints are available under:
+
+```text
+https://api.amplify.xyz/v1
+```
+
+Use this base URL for all requests. The version segment (`v1`) is a required part of the path — requests to `https://api.amplify.xyz/` without a version will not route correctly.
+
+## Versioning Policy
+
+Amplify follows a URL-based versioning strategy. Within a version, Amplify only makes **backward-compatible** changes. A new version number is introduced only when a **breaking change** is unavoidable. You will never encounter a breaking change without an explicit version migration.
+
+### What Counts as a Breaking Change
+
+The following changes are considered breaking and will only appear in a new API version:
+
+- Removing an existing field from a response
+- Changing the data type of an existing field (for example, changing an integer to a string)
+- Renaming an existing field or endpoint path
+- Changing the authentication method
+- Removing an existing query parameter or request body field
+- Changing the semantics of an existing status code or error code
+
+### What Does Not Break Compatibility
+
+The following changes may occur within an existing version at any time and are considered non-breaking:
+
+- Adding new fields to responses (your code should ignore fields it does not recognize)
+- Adding new optional request parameters or request body fields
+- Adding new endpoints or resource types
+- Adding new values to enum fields (your code should handle unknown enum values gracefully)
+- Adding new error codes for new failure scenarios
+
+<Note>
+Pin your integration to a specific version (for example, always use `/v1/`) and write defensive code that ignores unknown response fields. This protects you from unexpected behavior if your JSON deserializer throws on unrecognized keys, and ensures you are always using a predictable, tested version of the API.
+</Note>
+
+## Deprecation Policy
+
+When Amplify introduces a new API version, the previous version enters a deprecation period before being retired. Amplify commits to a **minimum 6-month notice period** before removing any API version. During this period, the deprecated version remains fully functional and you have time to migrate at your own pace.
+
+The deprecation timeline for any version will be:
+
+1. **Announcement** — Amplify announces the new version and the end-of-life date for the current version via the changelog and email notifications.
+2. **Deprecation period** — The old version continues to work for at least 6 months. Deprecation warnings may appear in response headers.
+3. **Retirement** — After the notice period, the deprecated version stops accepting requests and returns a `410 Gone` response.
+
+## Stay Informed
+
+Subscribe to the following channels to receive advance notice of version changes and deprecations:
+
+- **Changelog** — The [Amplify changelog](/resources/changelog) documents every API change, including new versions, deprecations, and non-breaking additions.
+- **Email notifications** — Account administrators automatically receive email announcements when a new API version is released or a deprecation timeline is set. Verify that your account's notification email address is up to date in **Settings → Account**.
+- **Status page** — Visit [status.amplify.xyz](https://status.amplify.xyz) for real-time information about API availability and any ongoing incidents.

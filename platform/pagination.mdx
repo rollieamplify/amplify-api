@@ -1,0 +1,112 @@
+---
+title: "Paginating Amplify API List Responses"
+sidebarTitle: "Pagination"
+description: "Navigate large result sets with cursor-based pagination on Amplify API list endpoints using limit and cursor parameters in every response."
+---
+
+Every list endpoint in the Amplify API returns a paginated response. Rather than returning thousands of records in a single call, the API gives you a manageable page of results along with a cursor you can use to fetch the next page. This keeps individual responses fast and predictable regardless of how many total records exist in your account.
+
+## How Cursor-Based Pagination Works
+
+Amplify uses **cursor-based pagination** instead of offset/page-number pagination. Each response includes an opaque cursor string that points to your position in the result set. To retrieve the next page, you pass that cursor back to the API. This approach is stable — if records are created or deleted between requests, your position in the list does not shift unexpectedly.
+
+## Query Parameters
+
+Pass these parameters on any list endpoint to control pagination:
+
+<ParamField query="limit" type="integer" default="20">
+  The number of records to return per page. Minimum is `1`, maximum is `100`. Defaults to `20` if omitted.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  An opaque cursor string returned from a previous response. Pass this value to retrieve the next page of results. Omit this parameter to start from the beginning of the list.
+</ParamField>
+
+## Response Shape
+
+Every list endpoint returns results wrapped in a consistent envelope:
+
+```json
+{
+  "data": [
+    { "id": "fax_01hx...", "status": "delivered" },
+    { "id": "fax_01hw...", "status": "sent" }
+  ],
+  "meta": {
+    "cursor": "eyJpZCI6ImZheF8wMWh4...",
+    "has_more": true,
+    "total": 143
+  }
+}
+```
+
+<ResponseField name="data" type="array">
+  The array of resource objects for the current page.
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Pagination metadata for the current response.
+
+  <Expandable title="meta fields">
+    <ResponseField name="meta.cursor" type="string">
+      An opaque cursor string pointing to the next page. Pass this as the `cursor` query parameter in your next request. This field is `null` when `has_more` is `false`.
+    </ResponseField>
+
+    <ResponseField name="meta.has_more" type="boolean">
+      `true` if additional pages of results exist beyond the current page. `false` when you have reached the end of the list.
+    </ResponseField>
+
+    <ResponseField name="meta.total" type="integer">
+      The total number of records matching your query across all pages.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Paginate Through All Results
+
+To retrieve every record in a list, loop through pages by passing the `cursor` from each response into the next request, stopping when `has_more` is `false`.
+
+```javascript Node.js
+import fetch from "node-fetch";
+
+async function fetchAllFaxes() {
+  const faxes = [];
+  let cursor = null;
+
+  do {
+    const url = new URL("https://api.amplify.xyz/v1/faxes");
+    url.searchParams.set("limit", "100");
+    if (cursor) {
+      url.searchParams.set("cursor", cursor);
+    }
+
+    const response = await fetch(url.toString(), {
+      headers: {
+        access_token: process.env.AMPLIFY_ACCESS_TOKEN,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
+    }
+
+    const { data, meta } = await response.json();
+
+    faxes.push(...data);
+    cursor = meta.has_more ? meta.cursor : null;
+
+    console.log(`Fetched ${faxes.length} of ${meta.total} faxes`);
+  } while (cursor !== null);
+
+  return faxes;
+}
+
+const allFaxes = await fetchAllFaxes();
+console.log(`Total faxes retrieved: ${allFaxes.length}`);
+```
+
+This pattern works across all list endpoints — replace the URL and array variable names to match the resource you are paginating.
+
+<Tip>
+Request only the records you actually need. If you are building a UI that displays 10 items at a time, set `limit=10` rather than fetching 100 and discarding the rest. Smaller pages reduce latency, lower memory usage, and help you stay within your [rate limits](/platform/rate-limits).
+</Tip>

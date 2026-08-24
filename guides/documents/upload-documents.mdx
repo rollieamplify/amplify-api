@@ -1,0 +1,99 @@
+---
+title: "Upload Documents to Amplify via File or URL Reference"
+sidebarTitle: "Upload Documents"
+description: "Learn how to upload documents to Amplify via multipart form upload or URL reference, and retrieve the resulting document object for use in workflows."
+---
+
+Amplify stores and manages documents that you can attach to messages, use as inputs for data extraction, or simply archive for later retrieval. You can upload a file directly from your server using `multipart/form-data`, or point Amplify at a publicly accessible URL and let the platform fetch the file for you.
+
+## Supported formats
+
+Amplify accepts the following file types for upload:
+
+| Format | MIME Type |
+|---|---|
+| PDF | `application/pdf` |
+| Word Document | `application/vnd.openxmlformats-officedocument.wordprocessingml.document` |
+| PNG Image | `image/png` |
+| JPEG Image | `image/jpeg` |
+
+<Tip>
+  After uploading, you can keep documents organised by placing them in folders. See [Organize Documents with Folders](/guides/documents/organize-documents) to learn how to create folders and move documents into them.
+</Tip>
+
+## Upload a file directly
+
+Send a `POST` request to `/v1/documents` with `Content-Type: multipart/form-data`. Include the file in the `file` field.
+
+<CodeGroup>
+  ```bash curl
+  curl --request POST \
+    --url https://api.amplify.xyz/v1/documents \
+    --header 'access_token: YOUR_API_KEY' \
+    --form 'file=@/path/to/contract.pdf' \
+    --form 'name=contract.pdf'
+  ```
+
+  ```javascript Node.js
+  import fs from "fs";
+  import FormData from "form-data";
+  import fetch from "node-fetch";
+
+  const form = new FormData();
+  form.append("file", fs.createReadStream("/path/to/contract.pdf"));
+  form.append("name", "contract.pdf");
+
+  const response = await fetch("https://api.amplify.xyz/v1/documents", {
+    method: "POST",
+    headers: {
+      access_token: "YOUR_ACCESS_TOKEN",
+      ...form.getHeaders(),
+    },
+    body: form,
+  });
+
+  const document = await response.json();
+  console.log(document);
+  ```
+</CodeGroup>
+
+## Upload via URL reference
+
+If the file is already hosted at an accessible URL, pass it as `source_url` in a JSON body instead:
+
+```bash
+curl --request POST \
+  --url https://api.amplify.xyz/v1/documents \
+  --header 'access_token: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "source_url": "https://yourapp.com/files/invoice.pdf",
+    "name": "invoice.pdf"
+  }'
+```
+
+Amplify fetches the file asynchronously. The returned document object will have a `status` of `processing` until the download completes, at which point it transitions to `ready`.
+
+## Response
+
+Both upload methods return a `201 Created` response with a document object:
+
+```json
+{
+  "id": "doc_01hx...",
+  "name": "contract.pdf",
+  "size": 102400,
+  "mime_type": "application/pdf",
+  "status": "ready",
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+Save the `id` — you'll reference it when organising documents into folders, attaching files to messages, or triggering data extraction.
+
+## Next steps
+
+- Review the full upload schema and optional metadata fields in the [Documents API Reference](/api-reference/documents)
+- Learn about multipart upload limits and resumable uploads in [File Uploads](/platform/file-uploads)
+- Organise your documents using folders in [Organize Documents with Folders](/guides/documents/organize-documents)
+- Pull structured data out of uploaded documents in [Extract Structured Data from Documents](/guides/documents/extract-document-data)

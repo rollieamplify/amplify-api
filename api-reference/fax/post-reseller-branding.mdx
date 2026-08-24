@@ -34,7 +34,7 @@ Case A — Configuration only
 Request
 
 POST /api/reseller/branding
-Authorization: Bearer {token}
+access_token: {token}
 Content-Type: application/json
 {
   "configuration": {
@@ -101,7 +101,7 @@ Case B — Custom branding only (JSON)
 Request
 
 POST /api/reseller/branding
-Authorization: Bearer {token}
+access_token: {token}
 Content-Type: application/json
 {
   "custom_branding": {
@@ -168,7 +168,7 @@ Case C — Configuration + custom branding together
 Request
 
 POST /api/reseller/branding
-Authorization: Bearer {token}
+access_token: {token}
 Content-Type: application/json
 {
   "configuration": {
@@ -238,7 +238,7 @@ Case D — Logo upload (multipart)
 Request
 
 POST /api/reseller/branding
-Authorization: Bearer {token}
+access_token: {token}
 Content-Type: multipart/form-data
 configuration[product_name]=Amplify
 configuration[provisioning_mode]=client

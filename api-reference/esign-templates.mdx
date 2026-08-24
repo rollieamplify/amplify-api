@@ -1,0 +1,139 @@
+---
+title: "eSign Templates — List and Retrieve Sign Templates"
+sidebarTitle: "eSign Templates"
+description: "List and retrieve reusable electronic signature templates — including defined roles and fields — using the Amplify eSign Templates API."
+---
+
+The eSign Templates resource provides access to reusable signature templates configured in your Amplify account. Templates pre-define the document layout, signature fields, and named signer roles so that you can send a document for signature without manually placing fields each time. Reference a template's `id` in the `template_id` field when creating a new eSign document envelope via `POST /v1/esign/documents`.
+
+<Note>
+  This resource reference will be auto-generated from the OpenAPI spec. The endpoints and parameters shown here are structural placeholders.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/v1/esign/templates` | List templates |
+| `GET` | `/v1/esign/templates/{id}` | Get a template |
+
+---
+
+## GET /v1/esign/templates
+
+Retrieve a paginated list of all eSign templates on your account.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+<ParamField query="search" type="string">
+  Filter templates by name using a partial string match.
+</ParamField>
+
+### Code examples
+
+<CodeGroup>
+
+```bash cURL
+curl https://api.amplify.xyz/v1/esign/templates \
+  -H "access_token: YOUR_API_KEY"
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/esign/templates", {
+  headers: {
+    "access_token": "YOUR_ACCESS_TOKEN",
+  },
+});
+
+const { data, meta } = await response.json();
+console.log(data.length, "template(s) found");
+```
+
+</CodeGroup>
+
+---
+
+## GET /v1/esign/templates/{id}
+
+Retrieve the full details for a single eSign template, including its defined roles and field configuration.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the template.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the template, prefixed with `tmpl_`.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the template.
+</ResponseField>
+
+<ResponseField name="roles" type="array">
+  Array of signer role objects defined in this template. When sending a document using this template, provide recipients mapped to these role names.
+
+  <Expandable title="Role fields">
+    <ResponseField name="roles[].name" type="string">
+      Identifier name for the role (e.g., `signer`, `approver`, `witness`).
+    </ResponseField>
+    <ResponseField name="roles[].label" type="string">
+      Human-readable label for this role as shown to signers.
+    </ResponseField>
+    <ResponseField name="roles[].order" type="integer">
+      Signing order index. Signers with a lower order value are prompted before those with a higher value.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when this template was created.
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  ISO 8601 timestamp of the most recent update to this template.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "tmpl_01HZES8VWAB0Y3HCTR9V2DNOJ",
+    "name": "Standard Service Agreement",
+    "roles": [
+      {
+        "name": "client",
+        "label": "Client",
+        "order": 1
+      },
+      {
+        "name": "provider",
+        "label": "Service Provider",
+        "order": 2
+      }
+    ],
+    "created_at": "2024-05-01T09:00:00Z",
+    "updated_at": "2024-05-20T14:30:00Z"
+  }
+}
+```
+
+<Tip>
+  Use the `roles[].name` values from this response as the `role` field when populating `recipients` in your `POST /v1/esign/documents` request. Mismatched role names will return a `422 Unprocessable Entity` error.
+</Tip>
+
+<Info>
+  Template creation and editing are available through the Amplify dashboard. API endpoints for managing template content will be documented here once available in the OpenAPI specification.
+</Info>

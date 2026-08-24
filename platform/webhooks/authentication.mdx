@@ -1,0 +1,121 @@
+---
+title: "Verify Amplify Webhook Signatures with HMAC-SHA256"
+sidebarTitle: "Authentication"
+description: "Use HMAC-SHA256 signature verification to confirm that every incoming webhook request genuinely originates from Amplify, not a third party."
+---
+
+Amplify signs every webhook payload so you can confirm that a request genuinely came from Amplify and was not tampered with in transit. Without signature verification, anyone who discovers your endpoint URL could send forged payloads and manipulate your application. Verifying signatures takes only a few lines of code and should be the first thing your webhook handler does.
+
+## Signature Mechanism
+
+When Amplify delivers a webhook, it computes an **HMAC-SHA256** digest of the raw request body using your endpoint's signing secret. It then sends that digest in the `Amplify-Signature` request header, prefixed with the algorithm name:
+
+```http
+Amplify-Signature: sha256=<hex-encoded digest>
+```
+
+To verify the request, you reproduce the same computation on your side and compare the result to the header value. If the two match, the payload is authentic. If they don't, reject the request immediately.
+
+## Verification Steps
+
+<Steps>
+  <Step title="Extract the signature header">
+    Read the `Amplify-Signature` header from the incoming HTTP request. If the header is absent, reject the request with a `400 Bad Request` response — Amplify always includes this header.
+  </Step>
+  <Step title="Compute the expected signature">
+    Using your endpoint's signing secret (the `whsec_...` value from endpoint creation), compute an HMAC-SHA256 digest of the **raw request body bytes**. Prefix the hex-encoded result with `sha256=` to match the header format.
+  </Step>
+  <Step title="Compare using constant-time equality">
+    Compare your computed signature against the header value using a **constant-time comparison** function. Standard string equality is vulnerable to timing attacks — always use a purpose-built function such as `crypto.timingSafeEqual` (Node.js) or `hmac.compare_digest` (Python).
+  </Step>
+  <Step title="Reject mismatched requests">
+    If the signatures do not match, return a `403 Forbidden` response and do not process the payload. Log the failure for monitoring purposes.
+  </Step>
+</Steps>
+
+## Code Examples
+
+<CodeGroup>
+```javascript Node.js
+const crypto = require('crypto');
+
+function verifyWebhook(rawBody, signature, secret) {
+  const expectedSig = crypto
+    .createHmac('sha256', secret)
+    .update(rawBody)
+    .digest('hex');
+  const expected = `sha256=${expectedSig}`;
+
+  // Both buffers must be the same length for timingSafeEqual
+  if (signature.length !== expected.length) {
+    return false;
+  }
+
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(expected)
+  );
+}
+
+// Express.js usage — requires raw body middleware
+app.post('/webhooks/amplify', express.raw({ type: 'application/json' }), (req, res) => {
+  const signature = req.headers['amplify-signature'];
+
+  if (!signature || !verifyWebhook(req.body, signature, process.env.AMPLIFY_WEBHOOK_SECRET)) {
+    return res.status(403).send('Invalid signature');
+  }
+
+  const event = JSON.parse(req.body);
+  // process event...
+  res.sendStatus(200);
+});
+```
+
+```python Python
+import hmac
+import hashlib
+
+def verify_webhook(raw_body: bytes, signature: str, secret: str) -> bool:
+    expected = hmac.new(
+        secret.encode(),
+        raw_body,
+        hashlib.sha256
+    ).hexdigest()
+    expected_sig = f"sha256={expected}"
+    return hmac.compare_digest(signature, expected_sig)
+
+# Flask usage
+from flask import Flask, request, abort
+import os
+
+app = Flask(__name__)
+
+@app.route('/webhooks/amplify', methods=['POST'])
+def handle_webhook():
+    signature = request.headers.get('Amplify-Signature', '')
+    raw_body = request.get_data()
+
+    if not verify_webhook(raw_body, signature, os.environ['AMPLIFY_WEBHOOK_SECRET']):
+        abort(403)
+
+    event = request.get_json()
+    # process event...
+    return '', 200
+```
+</CodeGroup>
+
+<Warning>
+  Always compute the HMAC over the **raw request body bytes**, before any JSON parsing. Parsing JSON and re-serializing it can alter whitespace or key ordering, which will produce a different digest and cause legitimate requests to fail verification.
+</Warning>
+
+<Warning>
+  Reject any request that is missing the `Amplify-Signature` header or whose signature does not match. Processing unverified webhook payloads exposes your application to spoofed events that could trigger unintended actions.
+</Warning>
+
+## Rotating Your Signing Secret
+
+If your signing secret is ever compromised, delete the affected webhook endpoint and create a new one. Amplify generates a fresh signing secret for each new endpoint. Update your application's environment variables with the new secret before deleting the old endpoint to avoid a gap in delivery.
+
+<Tip>
+  Store your signing secret in an environment variable or secrets manager — never hard-code it in your source code or commit it to version control.
+</Tip>

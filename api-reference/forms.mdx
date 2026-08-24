@@ -1,0 +1,234 @@
+---
+title: "Forms API Reference — Extract Data from Documents"
+sidebarTitle: "Forms"
+description: "List forms, submit documents for structured data extraction, and retrieve field-level results from processed documents using the Amplify Forms API."
+---
+
+The Forms resource provides document data extraction powered by Amplify's form intelligence engine. A form defines a set of fields to extract from a document — such as names, dates, amounts, or custom fields. Submit a document to a form's extract endpoint, and Amplify returns a structured set of key-value pairs populated from the document content. Retrieve the extraction result asynchronously using the form and result IDs.
+
+<Note>
+  The full interactive reference for this resource is generated from the Amplify OpenAPI spec. The endpoints and parameters below reflect the current public API surface.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/v1/forms` | List forms |
+| `GET` | `/v1/forms/{id}` | Get a form |
+| `POST` | `/v1/forms/{id}/extract` | Extract data from a document |
+| `GET` | `/v1/forms/{form_id}/results/{result_id}` | Get an extraction result |
+
+---
+
+## GET /v1/forms
+
+Retrieve a paginated list of all forms configured on your account.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+### Code example
+
+<CodeGroup>
+
+```bash cURL
+curl https://api.amplify.xyz/v1/forms \
+  -H "access_token: YOUR_API_KEY"
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/forms", {
+  headers: { "access_token": "YOUR_ACCESS_TOKEN" },
+});
+
+const { data } = await response.json();
+console.log(data); // Array of form objects
+```
+
+</CodeGroup>
+
+---
+
+## GET /v1/forms/{id}
+
+Retrieve the definition of a single form, including its configured extraction fields.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the form.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the form, prefixed with `form_`.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the form.
+</ResponseField>
+
+<ResponseField name="fields" type="array">
+  Array of field definition objects describing what this form extracts.
+
+  <Expandable title="Field definition">
+    <ResponseField name="fields[].key" type="string">
+      Machine-readable key used in the extraction result object (e.g., `invoice_number`, `total_amount`).
+    </ResponseField>
+    <ResponseField name="fields[].label" type="string">
+      Human-readable label for the field.
+    </ResponseField>
+    <ResponseField name="fields[].type" type="string">
+      Data type expected for this field. One of `string`, `number`, `date`, or `boolean`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the form was created.
+</ResponseField>
+
+---
+
+## POST /v1/forms/{id}/extract
+
+Submit a document for data extraction using the specified form. Amplify processes the document asynchronously and populates the form's fields from the document content. Poll the result endpoint or listen for the `form.extraction.completed` webhook event.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the form to use for extraction.
+</ParamField>
+
+### Request body
+
+<ParamField body="document_id" type="string" required>
+  ID of a document already uploaded to Amplify's [Documents](/api-reference/documents) resource. The extraction is performed on this document.
+</ParamField>
+
+### Code example
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://api.amplify.xyz/v1/forms/form_01HZGB5MRST4U8DXQW6S9BHIF/extract \
+  -H "access_token: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "document_id": "doc_01HZFA9NQRS4T7CVPX5R8ZKGF"
+  }'
+```
+
+```javascript Node.js
+const response = await fetch(
+  "https://api.amplify.xyz/v1/forms/form_01HZGB5MRST4U8DXQW6S9BHIF/extract",
+  {
+    method: "POST",
+    headers: {
+      "access_token": "YOUR_ACCESS_TOKEN",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      document_id: "doc_01HZFA9NQRS4T7CVPX5R8ZKGF",
+    }),
+  }
+);
+
+const { data } = await response.json();
+// Poll GET /v1/forms/{form_id}/results/{data.id} until status === "completed"
+console.log(data.id);
+```
+
+</CodeGroup>
+
+### Response
+
+Returns a result object with a `processing` status. Use the returned `id` to poll `GET /v1/forms/{form_id}/results/{result_id}` for the final extracted values.
+
+```json
+{
+  "data": {
+    "id": "res_01HZGC6NSTU5V9EYQX7T0CJIG",
+    "form_id": "form_01HZGB5MRST4U8DXQW6S9BHIF",
+    "document_id": "doc_01HZFA9NQRS4T7CVPX5R8ZKGF",
+    "status": "processing",
+    "fields": null,
+    "created_at": "2024-06-01T11:00:00Z"
+  }
+}
+```
+
+---
+
+## GET /v1/forms/{form_id}/results/{result_id}
+
+Retrieve the status and extracted field values for a completed extraction result.
+
+### Path parameters
+
+<ParamField path="form_id" type="string" required>
+  The unique identifier of the form used for extraction.
+</ParamField>
+
+<ParamField path="result_id" type="string" required>
+  The unique identifier of the extraction result.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for this extraction result, prefixed with `res_`.
+</ResponseField>
+
+<ResponseField name="form_id" type="string">
+  ID of the form used for this extraction.
+</ResponseField>
+
+<ResponseField name="document_id" type="string">
+  ID of the document that was processed.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Processing status. One of `processing`, `completed`, or `failed`.
+</ResponseField>
+
+<ResponseField name="fields" type="object">
+  Key-value pairs of extracted data, keyed by the form's field `key` values. `null` while status is `processing`.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the extraction was submitted.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "res_01HZGC6NSTU5V9EYQX7T0CJIG",
+    "form_id": "form_01HZGB5MRST4U8DXQW6S9BHIF",
+    "document_id": "doc_01HZFA9NQRS4T7CVPX5R8ZKGF",
+    "status": "completed",
+    "fields": {
+      "invoice_number": "INV-2024-0601",
+      "vendor_name": "Acme Supplies Co.",
+      "total_amount": 4250.00,
+      "invoice_date": "2024-06-01"
+    },
+    "created_at": "2024-06-01T11:00:00Z"
+  }
+}
+```
+
+<Tip>
+  Poll the result endpoint with a short delay (for example, every 2 seconds) until `status` changes from `processing` to `completed` or `failed`. For production workflows, use the `form.extraction.completed` webhook event to avoid polling entirely.
+</Tip>

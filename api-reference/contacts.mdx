@@ -1,0 +1,210 @@
+---
+title: "Contacts API Reference — Create and Manage Records"
+sidebarTitle: "Contacts"
+description: "Create, list, retrieve, update, and delete contact records to store and organize customer and team information using the Amplify Contacts API."
+---
+
+The Contacts resource lets you store and manage a directory of people associated with your Amplify account — customers, clients, or any other parties you communicate with. Each contact record holds identifying information such as name, email, and phone number. Use contacts to associate incoming and outgoing communications with known individuals, and to power automation and messaging workflows.
+
+<Note>
+  The full interactive reference for this resource is generated from the Amplify OpenAPI spec. The endpoints and parameters below reflect the current public API surface.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/v1/contacts` | Create a contact |
+| `GET` | `/v1/contacts` | List contacts |
+| `GET` | `/v1/contacts/{id}` | Get a contact |
+| `PATCH` | `/v1/contacts/{id}` | Update a contact |
+| `DELETE` | `/v1/contacts/{id}` | Delete a contact |
+
+---
+
+## POST /v1/contacts
+
+Create a new contact record. At least one of `email` or `phone` is recommended to allow Amplify to associate communications with the contact.
+
+### Request body
+
+<ParamField body="name" type="string" required>
+  Full name of the contact.
+</ParamField>
+
+<ParamField body="email" type="string">
+  Email address of the contact.
+</ParamField>
+
+<ParamField body="phone" type="string">
+  Phone number of the contact in E.164 format (e.g., `+14155550100`).
+</ParamField>
+
+<ParamField body="company" type="string">
+  Company or organization the contact is associated with.
+</ParamField>
+
+<ParamField body="notes" type="string">
+  Freeform notes about this contact.
+</ParamField>
+
+### Code example
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST https://api.amplify.xyz/v1/contacts \
+  -H "access_token: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "phone": "+14155550100",
+    "company": "Acme Corp"
+  }'
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/contacts", {
+  method: "POST",
+  headers: {
+    "access_token": "YOUR_ACCESS_TOKEN",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    name: "Jane Smith",
+    email: "jane@example.com",
+    phone: "+14155550100",
+    company: "Acme Corp",
+  }),
+});
+
+const { data } = await response.json();
+console.log(data.id); // cntct_01HZJF0MXRS4T7BVPW5R8ZKGF
+```
+
+</CodeGroup>
+
+---
+
+## GET /v1/contacts
+
+Retrieve a paginated list of contacts, with optional search and filtering.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+<ParamField query="search" type="string">
+  Filter contacts by name, email, or phone using a partial string match.
+</ParamField>
+
+---
+
+## GET /v1/contacts/{id}
+
+Retrieve the full record for a single contact by its ID.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the contact.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the contact, prefixed with `cntct_`.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Full name of the contact.
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address of the contact. `null` if not provided.
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Phone number of the contact in E.164 format. `null` if not provided.
+</ResponseField>
+
+<ResponseField name="company" type="string">
+  Company or organization name. `null` if not provided.
+</ResponseField>
+
+<ResponseField name="notes" type="string">
+  Freeform notes attached to this contact.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the contact was created.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "cntct_01HZJF0MXRS4T7BVPW5R8ZKGF",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "phone": "+14155550100",
+    "company": "Acme Corp",
+    "notes": null,
+    "created_at": "2024-06-01T09:00:00Z"
+  }
+}
+```
+
+---
+
+## PATCH /v1/contacts/{id}
+
+Update one or more fields on an existing contact. Only include the fields you want to change.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the contact to update.
+</ParamField>
+
+### Request body
+
+<ParamField body="name" type="string">
+  Updated full name.
+</ParamField>
+
+<ParamField body="email" type="string">
+  Updated email address.
+</ParamField>
+
+<ParamField body="phone" type="string">
+  Updated phone number in E.164 format.
+</ParamField>
+
+<ParamField body="company" type="string">
+  Updated company name.
+</ParamField>
+
+<ParamField body="notes" type="string">
+  Updated notes.
+</ParamField>
+
+---
+
+## DELETE /v1/contacts/{id}
+
+Permanently delete a contact record. This action cannot be undone. Associated communications are not deleted.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the contact to delete.
+</ParamField>

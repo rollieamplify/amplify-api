@@ -1,0 +1,134 @@
+---
+title: "Permission Groups API Reference — Manage User Access"
+sidebarTitle: "Permission Groups"
+description: "List and retrieve permission groups that define granular access control policies for users and API keys in your Amplify organization."
+---
+
+The Permission Groups resource lets you inspect the role-based access control groups configured in your Amplify organization. Each permission group defines a named collection of permission strings that control which API resources and actions members of that group can access. Assign a permission group to a user via the [Users](/api-reference/users) API to apply its permissions. Group creation and permission editing are managed through the Amplify dashboard.
+
+<Note>
+  The full interactive reference for this resource is generated from the Amplify OpenAPI spec. The endpoints and parameters below reflect the current public API surface.
+</Note>
+
+## Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/v1/permission-groups` | List permission groups |
+| `GET` | `/v1/permission-groups/{id}` | Get a permission group |
+
+---
+
+## GET /v1/permission-groups
+
+Retrieve a paginated list of all permission groups defined in your organization.
+
+### Query parameters
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Defaults to `20`, maximum `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  Pagination cursor from `meta.next_cursor` in the previous response.
+</ParamField>
+
+### Code example
+
+<CodeGroup>
+
+```bash cURL
+curl https://api.amplify.xyz/v1/permission-groups \
+  -H "access_token: YOUR_API_KEY"
+```
+
+```javascript Node.js
+const response = await fetch(
+  "https://api.amplify.xyz/v1/permission-groups",
+  {
+    headers: { "access_token": "YOUR_ACCESS_TOKEN" },
+  }
+);
+
+const { data } = await response.json();
+console.log(data); // Array of permission group objects
+```
+
+</CodeGroup>
+
+---
+
+## GET /v1/permission-groups/{id}
+
+Retrieve the full details for a single permission group, including its complete list of permission strings.
+
+### Path parameters
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the permission group.
+</ParamField>
+
+### Response fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the permission group, prefixed with `pgrp_`.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the permission group (e.g., `Support Agents`, `Billing Read-Only`).
+</ResponseField>
+
+<ResponseField name="permissions" type="array">
+  Array of permission strings granted to members of this group. Permission strings follow a `resource:action` format.
+
+  <Expandable title="Example permission strings">
+    | Permission | Description |
+    |------------|-------------|
+    | `faxes:read` | View fax records and status |
+    | `faxes:write` | Send and delete faxes |
+    | `messages:read` | View message records |
+    | `messages:write` | Send messages |
+    | `calls:read` | View call records |
+    | `calls:write` | Initiate calls |
+    | `documents:read` | View and download documents |
+    | `documents:write` | Upload and delete documents |
+    | `contacts:read` | View contacts |
+    | `contacts:write` | Create, update, and delete contacts |
+    | `users:read` | View user profiles |
+    | `users:write` | Update user settings |
+    | `webhooks:write` | Create and manage webhooks |
+    | `api-keys:write` | Create and revoke API keys |
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the permission group was created.
+</ResponseField>
+
+### Example response
+
+```json
+{
+  "data": {
+    "id": "pgrp_01HZLJ2NSTU5V9EYQX7T0CJIG",
+    "name": "Support Agents",
+    "permissions": [
+      "faxes:read",
+      "messages:read",
+      "messages:write",
+      "calls:read",
+      "contacts:read",
+      "contacts:write"
+    ],
+    "created_at": "2024-02-01T08:00:00Z"
+  }
+}
+```
+
+<Tip>
+  Retrieve all available permission groups and their `id` values with `GET /v1/permission-groups`, then assign the desired group to a user by passing its `id` as `permission_group_id` in a `PATCH /v1/users/{id}` request.
+</Tip>
+
+<Info>
+  To create, edit, or delete permission groups, use the Permissions section of the Amplify dashboard. API-based group management will be documented here once available in the OpenAPI specification.
+</Info>

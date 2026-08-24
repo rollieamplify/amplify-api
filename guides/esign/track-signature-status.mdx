@@ -1,0 +1,134 @@
+---
+title: "Track Electronic Signature Status in Amplify"
+sidebarTitle: "Track Status"
+description: "Monitor eSign document progress through polling or webhooks, understand status transitions, and take action when signing is complete or declined."
+---
+
+After you send a document for signature, Amplify tracks the signing state for both the document as a whole and for each individual recipient. Monitoring these statuses lets your application respond correctly when a document is fully signed, when a recipient declines, or when a signing request expires.
+
+## Document status values
+
+| Status | Description |
+|---|---|
+| `pending` | The document has been sent but no recipient has opened it yet. |
+| `in_progress` | At least one recipient has viewed or started signing the document. |
+| `completed` | All required signers have signed the document. |
+| `declined` | One or more recipients declined to sign. |
+| `expired` | The signing window closed before all recipients completed signing. |
+
+A document moves forward through `pending → in_progress → completed` when all signers complete their action. If any signer declines, the document moves to `declined` regardless of other recipients' statuses. If the configured expiry period passes without full completion, the document transitions to `expired`.
+
+## Option 1: Poll for status
+
+Retrieve the current state of any eSign document by making a `GET` request to `/v1/esign/documents/{id}`. The response includes both the document-level status and per-recipient statuses.
+
+<CodeGroup>
+
+```bash cURL
+curl --request GET \
+  --url https://api.amplify.xyz/v1/esign/documents/esign_01hx... \
+  --header 'access_token: YOUR_API_KEY'
+```
+
+```python Python
+import requests
+
+doc_id = "esign_01hx..."
+
+response = requests.get(
+    f"https://api.amplify.xyz/v1/esign/documents/{doc_id}",
+    headers={"access_token": "YOUR_ACCESS_TOKEN"},
+)
+
+doc = response.json()
+print(doc["status"])  # e.g. completed
+
+for recipient in doc["recipients"]:
+    print(recipient["email"], recipient["status"])
+```
+
+```javascript Node.js
+const docId = "esign_01hx...";
+
+const response = await fetch(
+  `https://api.amplify.xyz/v1/esign/documents/${docId}`,
+  {
+    headers: { access_token: "YOUR_ACCESS_TOKEN" },
+  }
+);
+
+const doc = await response.json();
+console.log(doc.status); // e.g. completed
+
+doc.recipients.forEach((r) => {
+  console.log(r.email, r.status);
+});
+```
+
+</CodeGroup>
+
+#### Example response
+
+```json
+{
+  "id": "esign_01hx...",
+  "status": "completed",
+  "created_at": "2024-01-15T10:30:00Z",
+  "completed_at": "2024-01-15T11:05:42Z",
+  "recipients": [
+    {
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "signer",
+      "status": "signed",
+      "signed_at": "2024-01-15T11:05:42Z"
+    },
+    {
+      "name": "Bob Lee",
+      "email": "bob@example.com",
+      "role": "cc",
+      "status": "delivered"
+    }
+  ]
+}
+```
+
+The `recipients` array shows the status for each person. Signer-specific status values include `pending`, `viewed`, `signed`, and `declined`.
+
+## Option 2: Use webhooks for real-time updates
+
+For production applications, subscribing to webhook events is more efficient than polling. Amplify pushes an event to your endpoint as soon as a meaningful status change occurs.
+
+| Event | Triggered when |
+|---|---|
+| `esign.viewed` | A recipient opens the document for the first time. |
+| `esign.completed` | All required signers have signed the document. |
+| `esign.declined` | A recipient declines to sign. |
+
+<Tip>
+  Webhooks eliminate polling latency and reduce your API usage. Use `esign.completed` to trigger downstream steps like downloading the signed document or notifying your team, and `esign.declined` to alert the sender so they can follow up with the recipient.
+</Tip>
+
+## When signing is completed
+
+Once the document status is `completed`, download the signed PDF by calling `GET /v1/esign/documents/{id}/download`. The signed document includes an audit trail page appended by Amplify, recording each recipient's name, email, IP address, and timestamp.
+
+```bash cURL
+curl --request GET \
+  --url https://api.amplify.xyz/v1/esign/documents/esign_01hx4kpz9m2q3r8s/download \
+  --header 'access_token: YOUR_API_KEY' \
+  --output signed-document.pdf
+```
+
+See the [eSign Documents API Reference](/api-reference/esign-documents) for the full response schema and error codes.
+
+## Expiry settings
+
+<Tip>
+  You can control how long recipients have to sign by setting an `expires_in` value (in hours) when creating the document. After expiry, the signing link deactivates and the document status moves to `expired`. Set a value that gives recipients enough time without leaving documents open indefinitely. See [API Reference: eSign Documents](/api-reference/esign-documents) for the full parameter details.
+</Tip>
+
+## Next steps
+
+- [Work with Templates](/guides/esign/work-with-templates) — streamline repeated sending with reusable document layouts
+- [API Reference: eSign Documents](/api-reference/esign-documents) — complete schema, webhook payloads, and error codes

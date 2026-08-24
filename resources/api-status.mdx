@@ -1,0 +1,48 @@
+---
+title: "Amplify API Status — Uptime and Incident Information"
+sidebarTitle: "API Status"
+description: "Check real-time Amplify API health, view active incidents, subscribe to uptime notifications, and learn what to do when a service disruption occurs."
+---
+
+Check the current health of all Amplify API services before you start debugging your integration. The Amplify status page provides real-time uptime data, active incident reports, and historical availability metrics — it is the authoritative source of truth whenever you suspect a service disruption on our end.
+
+<Note>
+  The status page covers every Amplify service in a single view: the **REST API**, **webhooks**, **dashboard**, **fax delivery**, and **messaging**. Check it first whenever you experience unexpected errors or degraded response times.
+</Note>
+
+## Live Status Page
+
+Visit the status page for up-to-the-minute service health. You can also subscribe to notifications directly from the page to receive alerts by email, SMS, or RSS whenever an incident is opened, updated, or resolved.
+
+<CardGroup cols={2}>
+  <Card title="Amplify Status Page" icon="signal-bars" href="https://status.amplify.xyz">
+    View real-time uptime, active incidents, and historical availability for all Amplify services.
+  </Card>
+  <Card title="Contact Support" icon="headset" href="mailto:support@amplify.xyz">
+    Reach the Amplify support team at **support@amplify.xyz** if you need direct assistance during or after an incident.
+  </Card>
+</CardGroup>
+
+## What to Do During an Incident
+
+If your API requests are failing or behaving unexpectedly, follow these steps before opening a support ticket:
+
+1. **Check [status.amplify.xyz](https://status.amplify.xyz)** for any active incidents or degraded components that match what you're experiencing. The page updates within minutes of a new incident being detected.
+2. **Subscribe to incident notifications** on the status page by clicking **Subscribe to Updates** and choosing your preferred channel (email, SMS, or RSS). You'll receive automatic updates as the incident progresses to resolution.
+3. **Contact support at [support@amplify.xyz](mailto:support@amplify.xyz)** if you cannot find a matching incident or if your issue persists after a listed incident is resolved. Include your account ID, the affected API endpoint, example request/response pairs, and a timestamp range to help the team triage quickly.
+
+<Info>
+  When contacting support, attach any relevant request IDs from the `X-Request-Id` response header. This header is present on every Amplify API response and allows the support team to locate your specific requests in our logs immediately.
+</Info>
+
+## Service Level Agreement (SLA)
+
+Amplify's uptime commitments vary by plan. Review your plan details in the [Amplify dashboard](https://app.amplify.xyz) under **Settings → Plan** for the exact SLA that applies to your account, including monthly uptime targets, credit eligibility, and the process for filing an SLA credit request.
+
+<Accordion title="General SLA guidance">
+  While specific uptime percentages are defined per plan, the following principles apply across all paid Amplify plans:
+
+  - **Scheduled maintenance** is announced at least 48 hours in advance on the status page and does not count against your uptime SLA.
+  - **SLA credits** are calculated based on the cumulative downtime in a given calendar month. Log in to your dashboard to submit a credit request within 30 days of the affected month.
+  - **Beta features** (such as the Forms API) are excluded from SLA commitments and may experience higher variability. They are clearly labeled `beta` in the API reference.
+</Accordion>

@@ -1,0 +1,296 @@
+---
+title: "Send a Document for Electronic Signature"
+sidebarTitle: "Send for Signature"
+description: "Send contracts and documents for electronic signature using the Amplify API, via a document URL or a reusable template with defined signing fields."
+---
+
+The Amplify eSign API lets you send documents to one or more recipients for electronic signature directly from your application. Each recipient receives an email with a secure signing link, completes the signing flow in their browser, and Amplify notifies you when the process is done. No plugins or downloads are required for signers.
+
+## Two paths to sending
+
+You can initiate an eSign request in two ways:
+
+- **Document URL** — point Amplify at a PDF hosted at a URL. Amplify uses the document as-is, without pre-defined field positions. Best for one-off or variable documents.
+- **Template** — use a template you've set up in the Amplify dashboard with signing fields already placed. Best for repeatable workflows like contracts or onboarding forms. See [Work with Templates](/guides/esign/work-with-templates).
+
+The steps below cover both sending paths.
+
+## Path 1: Send via document URL
+
+Use this path when you have a one-off PDF hosted at a reachable URL and you don't need pre-placed signing fields.
+
+<Steps>
+
+### Upload or reference your document
+
+Your document must be accessible as a PDF at a publicly reachable URL. If your document is not already hosted, upload it via the Amplify file upload API and use the returned URL in your request.
+
+Ensure the document is finalized before sending — recipients cannot edit the document content, only add their signature.
+
+### Send the document for signature
+
+Make a `POST` request to `/v1/esign/documents`, providing the document URL, the list of recipients, and optional email subject and message fields.
+
+<CodeGroup>
+
+```bash cURL
+curl --request POST \
+  --url https://api.amplify.xyz/v1/esign/documents \
+  --header 'access_token: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "document_url": "https://example.com/contract.pdf",
+    "recipients": [
+      {
+        "name": "Jane Smith",
+        "email": "jane@example.com",
+        "role": "signer"
+      }
+    ],
+    "subject": "Please sign this document",
+    "message": "Hi Jane, please review and sign."
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.amplify.xyz/v1/esign/documents",
+    headers={
+        "access_token": "YOUR_ACCESS_TOKEN",
+        "Content-Type": "application/json",
+    },
+    json={
+        "document_url": "https://example.com/contract.pdf",
+        "recipients": [
+            {
+                "name": "Jane Smith",
+                "email": "jane@example.com",
+                "role": "signer",
+            }
+        ],
+        "subject": "Please sign this document",
+        "message": "Hi Jane, please review and sign.",
+    },
+)
+
+doc = response.json()
+print(doc["id"])      # esign_01hx...
+print(doc["status"])  # pending
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/esign/documents", {
+  method: "POST",
+  headers: {
+    access_token: "YOUR_ACCESS_TOKEN",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    document_url: "https://example.com/contract.pdf",
+    recipients: [
+      {
+        name: "Jane Smith",
+        email: "jane@example.com",
+        role: "signer",
+      },
+    ],
+    subject: "Please sign this document",
+    message: "Hi Jane, please review and sign.",
+  }),
+});
+
+const doc = await response.json();
+console.log(doc.id);      // esign_01hx...
+console.log(doc.status);  // pending
+```
+
+</CodeGroup>
+
+#### Key request fields
+
+<ParamField body="document_url" type="string" required>
+  A publicly accessible URL pointing to the PDF document to be signed.
+</ParamField>
+
+<ParamField body="recipients" type="array" required>
+  An array of recipient objects. Each recipient must include `name`, `email`, and `role`. Use `"role": "signer"` for recipients who must sign, or `"role": "cc"` for recipients who receive a copy only.
+</ParamField>
+
+<ParamField body="subject" type="string">
+  The subject line of the email sent to recipients. Defaults to "You have a document to sign" if omitted.
+</ParamField>
+
+<ParamField body="message" type="string">
+  A personal message included in the body of the signing invitation email.
+</ParamField>
+
+#### Example response
+
+```json
+{
+  "id": "esign_01hx4kpz9m2q3r8s",
+  "status": "pending",
+  "document_url": "https://example.com/contract.pdf",
+  "recipients": [
+    {
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "signer",
+      "status": "pending"
+    }
+  ],
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+### Recipients receive their signing invitation
+
+Immediately after a successful API call, Amplify emails each signer a link to the Amplify signing portal. Recipients click the link, review the document, and apply their signature — no account creation required.
+
+The document status remains `pending` until the first recipient opens the signing link, at which point it transitions to `in_progress`.
+
+### Track signing status
+
+Store the `id` from the response and use it to monitor progress. You can poll the document endpoint or subscribe to webhook events for real-time updates.
+
+See [Track Signature Status](/guides/esign/track-signature-status) for a full walkthrough of status values and event handling.
+
+</Steps>
+
+## Path 2: Send via template
+
+Use this path when you send the same document type repeatedly — such as an NDA or service agreement — and want signing fields pre-placed for signers. Templates are created once in the Amplify dashboard and reused across every send.
+
+<Steps>
+
+### Retrieve your template ID
+
+Call `GET /v1/esign/templates` to list your templates and find the `id` of the one you want to use. See [Work with Templates](/guides/esign/work-with-templates) for full details on creating and listing templates.
+
+### Send from the template
+
+Make a `POST` request to `/v1/esign/documents` with `template_id` instead of `document_url`. Map each real recipient to the role defined in the template.
+
+<CodeGroup>
+
+```bash cURL
+curl --request POST \
+  --url https://api.amplify.xyz/v1/esign/documents \
+  --header 'access_token: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "template_id": "tmpl_01hx4kpz9m2q3r8s",
+    "recipients": [
+      {
+        "name": "Jane Smith",
+        "email": "jane@example.com",
+        "role": "signer"
+      }
+    ],
+    "subject": "Please sign the NDA",
+    "message": "Hi Jane, please review and sign the NDA at your earliest convenience."
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.amplify.xyz/v1/esign/documents",
+    headers={
+        "access_token": "YOUR_ACCESS_TOKEN",
+        "Content-Type": "application/json",
+    },
+    json={
+        "template_id": "tmpl_01hx4kpz9m2q3r8s",
+        "recipients": [
+            {
+                "name": "Jane Smith",
+                "email": "jane@example.com",
+                "role": "signer",
+            }
+        ],
+        "subject": "Please sign the NDA",
+        "message": "Hi Jane, please review and sign the NDA at your earliest convenience.",
+    },
+)
+
+doc = response.json()
+print(doc["id"])      # esign_01hx...
+print(doc["status"])  # pending
+```
+
+```javascript Node.js
+const response = await fetch("https://api.amplify.xyz/v1/esign/documents", {
+  method: "POST",
+  headers: {
+    access_token: "YOUR_ACCESS_TOKEN",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    template_id: "tmpl_01hx4kpz9m2q3r8s",
+    recipients: [
+      {
+        name: "Jane Smith",
+        email: "jane@example.com",
+        role: "signer",
+      },
+    ],
+    subject: "Please sign the NDA",
+    message: "Hi Jane, please review and sign the NDA at your earliest convenience.",
+  }),
+});
+
+const doc = await response.json();
+console.log(doc.id);      // esign_01hx...
+console.log(doc.status);  // pending
+```
+
+</CodeGroup>
+
+#### Key request fields
+
+<ParamField body="template_id" type="string" required>
+  The unique ID of the template to use, as returned by `GET /v1/esign/templates` or shown in the Amplify dashboard.
+</ParamField>
+
+<ParamField body="recipients" type="array" required>
+  An array of recipient objects. Each must include `name`, `email`, and `role`. The `role` value must exactly match a role defined in the template.
+</ParamField>
+
+#### Example response
+
+```json
+{
+  "id": "esign_02hx7mpz1n4q5r9t",
+  "status": "pending",
+  "template_id": "tmpl_01hx4kpz9m2q3r8s",
+  "recipients": [
+    {
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "signer",
+      "status": "pending"
+    }
+  ],
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+<Note>
+  The `role` value in each recipient object must exactly match a role name defined in your template. If the template defines `client`, passing `"role": "signer"` returns a validation error. Confirm role names from the `roles` array in your `GET /v1/esign/templates` response.
+</Note>
+
+### Track signing status
+
+Store the `id` from the response and use it to monitor progress, exactly as with the document URL path.
+
+</Steps>
+
+## Next steps
+
+- [Track Signature Status](/guides/esign/track-signature-status) — monitor signing progress and handle completion
+- [Work with Templates](/guides/esign/work-with-templates) — reuse document layouts with pre-placed signing fields
+- [API Reference: eSign Documents](/api-reference/esign-documents) — full parameter reference and error codes

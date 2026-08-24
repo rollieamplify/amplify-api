@@ -1,0 +1,102 @@
+---
+title: "Manage Two-Way Messaging Conversations"
+sidebarTitle: "Conversations"
+description: "List, read, and reply to two-way messaging conversations using the Amplify API, and handle inbound messages in real time with webhooks."
+---
+
+Conversations in Amplify group all messages exchanged between a specific pair of numbers into a single, ordered thread. When a recipient replies to a message you sent, Amplify automatically creates or appends to a conversation — giving you a clean record of the full exchange without any extra work on your end.
+
+## List conversations
+
+Retrieve all conversations for your account by calling `GET /v1/conversations`. The response is paginated; use the `cursor` parameter to page through results.
+
+```bash
+curl --request GET \
+  --url 'https://api.amplify.xyz/v1/conversations?limit=20' \
+  --header 'access_token: YOUR_API_KEY'
+```
+
+Each conversation object in the response includes:
+
+| Field | Description |
+|---|---|
+| `id` | Unique conversation identifier |
+| `participants` | Array of the two phone numbers in the thread |
+| `last_message_at` | Timestamp of the most recent message |
+| `unread_count` | Number of inbound messages you haven't acted on |
+
+```json
+{
+  "data": [
+    {
+      "id": "conv_01hx...",
+      "participants": ["+15557654321", "+15551234567"],
+      "last_message_at": "2024-01-15T10:35:00Z",
+      "unread_count": 2
+    }
+  ],
+  "next_cursor": "cur_01hy..."
+}
+```
+
+## Get messages in a conversation
+
+To read the individual messages within a conversation, call `GET /v1/conversations/{id}/messages`. Messages are returned in chronological order.
+
+```bash
+curl --request GET \
+  --url 'https://api.amplify.xyz/v1/conversations/conv_01hx.../messages' \
+  --header 'access_token: YOUR_API_KEY'
+```
+
+See the [Conversations API Reference](/api-reference/conversations) for the full list of query parameters, including `before`, `after`, and `limit` for fine-grained pagination.
+
+## Receive inbound messages via webhook
+
+Rather than polling, configure a webhook to receive inbound messages in real time. Amplify fires a `message.received` event whenever a reply or new inbound message arrives on one of your numbers.
+
+Register your endpoint in the [dashboard](https://app.amplify.xyz/settings/webhooks) or via the [Webhooks API](/platform/webhooks/overview), then handle the following payload in your application:
+
+```json
+{
+  "event": "message.received",
+  "created_at": "2024-01-15T10:35:00Z",
+  "data": {
+    "message_id": "msg_01hy...",
+    "conversation_id": "conv_01hx...",
+    "to": "+15557654321",
+    "from": "+15551234567",
+    "body": "Thanks, got it!",
+    "media_url": null
+  }
+}
+```
+
+Use the `conversation_id` field to look up or update the relevant thread in your database.
+
+## Reply to a conversation
+
+To send a reply within an existing conversation, include the `conversation_id` field in your standard `POST /v1/messages` request. Amplify automatically threads the outbound message into the correct conversation.
+
+```bash
+curl --request POST \
+  --url https://api.amplify.xyz/v1/messages \
+  --header 'access_token: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "to": "+15551234567",
+    "from": "+15557654321",
+    "body": "You'\''re welcome! Let us know if you need anything else.",
+    "conversation_id": "conv_01hx..."
+  }'
+```
+
+<Note>
+  Amplify uses the combination of `to` and `from` numbers to determine conversation threading. If you omit `conversation_id`, Amplify will still route the message to the correct existing conversation — or create a new one — based on the number pair. Providing `conversation_id` explicitly is recommended when you need guaranteed threading accuracy.
+</Note>
+
+## Next steps
+
+- Read the full schema and query parameters in the [Conversations API Reference](/api-reference/conversations)
+- Learn how to send the initial outbound message in [Send a Message](/guides/messaging/send-a-message)
+- Set up delivery and receipt events in the [Webhooks Overview](/platform/webhooks/overview)

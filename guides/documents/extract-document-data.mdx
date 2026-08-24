@@ -1,0 +1,116 @@
+---
+title: "Extract Structured Data from Documents Using Amplify"
+sidebarTitle: "Extract Data"
+description: "Learn how to apply Amplify form templates to uploaded documents and retrieve structured field data using the forms extraction API."
+---
+
+Amplify can read a document and return its contents as structured, typed fields — turning a scanned invoice or filled-out form into clean JSON you can pass directly into your database or downstream workflow. The extraction engine is powered by form templates you define in the Amplify dashboard, which tell the API which fields to look for and what data types to expect.
+
+## How extraction works
+
+The extraction workflow has three stages:
+
+1. **Upload** the document you want to process
+2. **Apply** a form template to trigger extraction
+3. **Retrieve** the extracted field values once processing completes
+
+<Note>
+  Form templates are created and managed in the **Amplify dashboard** under **Documents → Forms**. Each template defines the field names, types, and positions (or semantic descriptions) the extraction engine uses. You need at least one form template before calling the extraction API. See the [Forms API Reference](/api-reference/forms) for the full template schema.
+</Note>
+
+## Step 1 — Upload the document
+
+If you haven't already uploaded the document, do so now. See [Upload Documents](/guides/documents/upload-documents) for the full workflow. Once the document's `status` is `ready`, copy its `id` for the next step.
+
+```bash
+curl --request POST \
+  --url https://api.amplify.xyz/v1/documents \
+  --header 'access_token: YOUR_API_KEY' \
+  --form 'file=@/path/to/invoice.pdf'
+```
+
+Note the `id` in the response (e.g. `doc_01hx...`).
+
+## Step 2 — Apply a form template
+
+Trigger extraction by posting to `/v1/forms/{form_id}/extract` with the `document_id`:
+
+```bash
+curl --request POST \
+  --url https://api.amplify.xyz/v1/forms/form_01hx.../extract \
+  --header 'access_token: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "document_id": "doc_01hx..."
+  }'
+```
+
+```python Python
+import requests
+
+form_id = "form_01hx..."
+url = f"https://api.amplify.xyz/v1/forms/{form_id}/extract"
+headers = {
+    "access_token": "YOUR_ACCESS_TOKEN",
+    "Content-Type": "application/json",
+}
+payload = {"document_id": "doc_01hx..."}
+
+response = requests.post(url, json=payload, headers=headers)
+result = response.json()
+print(result["id"])  # Save this result ID
+```
+
+The response includes a `result_id` and an initial `status` of `pending`:
+
+```json
+{
+  "id": "result_01hx...",
+  "form_id": "form_01hx...",
+  "document_id": "doc_01hx...",
+  "status": "pending",
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+Save the `id` — you'll use it to poll for the completed extraction.
+
+## Step 3 — Retrieve the extracted data
+
+Poll `GET /v1/forms/{form_id}/results/{result_id}` until `status` is `completed`:
+
+```bash
+curl --request GET \
+  --url https://api.amplify.xyz/v1/forms/form_01hx.../results/result_01hx... \
+  --header 'access_token: YOUR_API_KEY'
+```
+
+A completed result looks like this:
+
+```json
+{
+  "id": "result_01hx...",
+  "status": "completed",
+  "fields": {
+    "invoice_number": "INV-2024-001",
+    "total_amount": "1250.00",
+    "due_date": "2024-02-15"
+  }
+}
+```
+
+The `fields` object contains one key per field defined in the form template. Values are returned as strings; apply any type casting your application requires.
+
+## Handle extraction failures
+
+If the extraction engine cannot confidently read a field, that field's value will be `null` in the response. The overall `status` is still `completed` — a `failed` status indicates a processing error rather than a missing field value. Inspect `fields` for `null` entries and decide whether to retry with a higher-quality document scan or handle the gap in your application logic.
+
+<Tip>
+  For best extraction accuracy, upload high-resolution scans (at least 150 DPI) and ensure the document matches the layout your form template was trained on. Rotated or heavily compressed images significantly reduce field detection confidence.
+</Tip>
+
+## Next steps
+
+- View the complete forms and results schema in the [Forms API Reference](/api-reference/forms)
+- Upload documents for extraction in [Upload Documents](/guides/documents/upload-documents)
+- Keep extracted documents organised in [Organize Documents with Folders](/guides/documents/organize-documents)

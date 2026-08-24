@@ -1,0 +1,81 @@
+---
+title: "Amplify Webhook Delivery Retries and Failure Handling"
+sidebarTitle: "Retry Behavior"
+description: "Understand how Amplify retries failed webhook deliveries, what counts as a failure, and how to handle duplicate event delivery safely."
+---
+
+Amplify makes a best-effort guarantee to deliver every webhook event to your endpoint. When a delivery attempt fails, the platform automatically retries using an exponential backoff schedule over the following 24 hours. Understanding this behavior helps you build endpoints that are resilient to transient failures and safe to receive the same event more than once.
+
+## Delivery Requirements
+
+For Amplify to consider a delivery successful, your endpoint must satisfy both of the following conditions:
+
+- Return an HTTP **`2xx` status code** (200–299)
+- Respond within **10 seconds** of receiving the request
+
+Any response outside the `2xx` range, a response that arrives after 10 seconds, or a failure to connect (DNS error, connection refused, TLS handshake failure) is treated as a failed delivery and queued for retry.
+
+<Tip>
+  Acknowledge the webhook immediately by returning `200 OK` as soon as you receive and verify the request. Move any time-intensive processing — database writes, calls to third-party APIs, sending emails — to a background job or message queue. This keeps your response time well inside the 10-second window.
+</Tip>
+
+## Retry Schedule
+
+Amplify retries a failed delivery up to **five times** using the following schedule, measured from the time of each failure:
+
+| Attempt | Delay After Failure |
+|---|---|
+| 1st retry | 5 minutes |
+| 2nd retry | 30 minutes |
+| 3rd retry | 2 hours |
+| 4th retry | 8 hours |
+| 5th retry | 24 hours |
+
+After the fifth retry fails, Amplify marks the delivery as **permanently failed** and stops attempting further deliveries for that event. The event remains visible in your webhook delivery logs in the dashboard.
+
+<Note>
+  Monitor your webhook delivery logs in **Settings → Webhooks → Delivery Logs** to catch endpoints that are failing silently. You can also set up dashboard alerts to notify you when an endpoint's failure rate exceeds a threshold.
+</Note>
+
+## What Triggers a Failure
+
+Amplify treats any of the following as a failed delivery attempt:
+
+- **Non-2xx HTTP response** — your server returned a `4xx` or `5xx` status code
+- **Timeout** — your server did not respond within 10 seconds
+- **Connection error** — Amplify could not establish a connection (DNS failure, connection refused, TLS error, network unreachable)
+
+Redirects (`3xx`) are **not** followed. If your endpoint URL redirects to another URL, update the registered URL to the final destination.
+
+## Handling Duplicate Deliveries
+
+Because Amplify may deliver the same event more than once — either due to a retry after a network hiccup that your server already processed, or in rare cases of internal platform redundancy — your endpoint must be **idempotent**: processing the same event twice should produce the same result as processing it once.
+
+Use the `data.id` field in the event payload as a deduplication key. Before processing an event, check whether you have already handled that ID. If you have, return `200` immediately without reprocessing.
+
+```json
+{
+  "event": "fax.delivered",
+  "data": {
+    "id": "fax_01hx...",
+    "status": "delivered",
+    "to": "+15551234567"
+  },
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+
+A simple approach is to store processed IDs in a database table or a fast key-value store such as Redis, with a short TTL that exceeds the maximum retry window (a few days is sufficient).
+
+## Delivery Logs
+
+Every delivery attempt — successful or failed — is recorded in the Amplify dashboard under **Settings → Webhooks → Delivery Logs**. Each log entry shows:
+
+- The event type and payload that was sent
+- The HTTP response code and body your endpoint returned
+- The timestamp of the attempt
+- Whether a retry is scheduled
+
+<Note>
+  Delivery logs are retained for **30 days**. Export or archive logs you need to keep longer before they are automatically purged.
+</Note>

@@ -1,0 +1,189 @@
+{
+  "projectType": "api-service",
+  "projectName": "Amplify API",
+  "projectDescription": "Amplify is a unified communications and document automation platform providing APIs for fax, eSign, messaging, calls, documents, and number management.",
+  "theme": "luma",
+  "primaryColor": "#6366F1",
+  "lightColor": "#818CF8",
+  "darkColor": "#4F46E5",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "authentication",
+              "first-request"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Fax",
+            "pages": [
+              "guides/fax/send-a-fax",
+              "guides/fax/receive-a-fax",
+              "guides/fax/track-fax-status",
+              "guides/fax/download-a-fax"
+            ]
+          },
+          {
+            "group": "eSign",
+            "pages": [
+              "guides/esign/send-for-signature",
+              "guides/esign/track-signature-status",
+              "guides/esign/work-with-templates"
+            ]
+          },
+          {
+            "group": "Messaging",
+            "pages": [
+              "guides/messaging/send-a-message",
+              "guides/messaging/work-with-conversations"
+            ]
+          },
+          {
+            "group": "Calls & Documents",
+            "pages": [
+              "guides/calls/make-a-call",
+              "guides/calls/access-recordings",
+              "guides/documents/upload-documents",
+              "guides/documents/organize-documents",
+              "guides/documents/extract-document-data",
+              "guides/numbers/manage-numbers"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Platform",
+        "groups": [
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "platform/authentication",
+              "platform/pagination",
+              "platform/errors",
+              "platform/rate-limits",
+              "platform/file-uploads",
+              "platform/file-downloads",
+              "platform/api-versioning"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "platform/webhooks/overview",
+              "platform/webhooks/configure",
+              "platform/webhooks/authentication",
+              "platform/webhooks/retry-behavior",
+              "platform/webhooks/testing",
+              "platform/webhooks/event-types"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference/overview"
+            ]
+          },
+          {
+            "group": "Communications",
+            "pages": [
+              "api-reference/faxes",
+              "api-reference/messages",
+              "api-reference/conversations",
+              "api-reference/calls",
+              "api-reference/call-recordings",
+              "api-reference/meetings"
+            ]
+          },
+          {
+            "group": "eSign",
+            "pages": [
+              "api-reference/esign-documents",
+              "api-reference/esign-templates"
+            ]
+          },
+          {
+            "group": "Documents & Numbers",
+            "pages": [
+              "api-reference/documents",
+              "api-reference/folders",
+              "api-reference/forms",
+              "api-reference/numbers"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "api-reference/contacts",
+              "api-reference/users",
+              "api-reference/permission-groups",
+              "api-reference/automations",
+              "api-reference/webhooks",
+              "api-reference/api-keys"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Resources",
+        "groups": [
+          {
+            "group": "Resources",
+            "pages": [
+              "resources/changelog",
+              "resources/api-status"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Send and receive faxes via REST API",
+    "Electronic signature workflows with template support",
+    "SMS/MMS messaging and conversation management",
+    "Voice calls with recording access",
+    "Document upload, organization, and data extraction",
+    "Phone and fax number management",
+    "Webhook event delivery for all product areas",
+    "API key-based authentication",
+    "Pagination, rate limiting, and versioned endpoints"
+  ],
+  "publicApiSurface": [
+    "POST /v1/faxes",
+    "GET /v1/faxes/{id}",
+    "GET /v1/faxes",
+    "POST /v1/esign/documents",
+    "GET /v1/esign/documents/{id}",
+    "GET /v1/esign/templates",
+    "POST /v1/messages",
+    "GET /v1/conversations",
+    "POST /v1/calls",
+    "GET /v1/calls/{id}/recordings",
+    "GET /v1/meetings",
+    "POST /v1/documents",
+    "GET /v1/folders",
+    "GET /v1/numbers",
+    "GET /v1/contacts",
+    "GET /v1/users",
+    "GET /v1/permission-groups",
+    "GET /v1/automations",
+    "POST /v1/webhooks",
+    "GET /v1/api-keys"
+  ]
+}

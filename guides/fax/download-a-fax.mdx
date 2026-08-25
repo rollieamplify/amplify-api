@@ -24,7 +24,7 @@ Make a `GET` request to `/v1/faxes/{id}/download`. Amplify responds with the fax
 ```bash cURL
 curl --request GET \
   --url https://api.amplify.xyz/v1/faxes/fax_01hx.../download \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --output fax_document.pdf
 ```
 
@@ -80,7 +80,7 @@ A successful download returns:
 There is no JSON envelope — the response body is the file itself. Write the raw bytes directly to disk or stream them to your storage backend.
 
 <Note>
-  Always download fax documents using the `/v1/faxes/{id}/download` endpoint with your API key. Do not cache or bookmark the `download_url` field returned in webhook payloads — those URLs are time-limited and will expire. The API endpoint always returns the current, valid document for as long as the fax record exists in your account.
+  Always download fax documents using the `/v1/faxes/{id}/download` endpoint with your access token. Do not cache or bookmark the `download_url` field returned in webhook payloads — those URLs are time-limited and will expire. The API endpoint always returns the current, valid document for as long as the fax record exists in your account.
 </Note>
 
 ## Save to cloud storage

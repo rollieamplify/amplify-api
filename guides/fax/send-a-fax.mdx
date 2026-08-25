@@ -10,7 +10,7 @@ Sending a fax through the Amplify API lets you integrate fax delivery directly i
 
 Before you send your first fax, make sure you have the following:
 
-- An Amplify API key, passed as a Bearer token in the `Authorization` header
+- An Amplify API key and an access token obtained through the [authentication flow](/guides/authentication)
 - A fax-enabled phone number provisioned in your Amplify account (used as the `from` number)
 
 <Steps>
@@ -32,7 +32,7 @@ Make a `POST` request to `/v1/faxes` with your document URL, destination number,
 ```bash cURL
 curl --request POST \
   --url https://api.amplify.xyz/v1/faxes \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "to": "+15551234567",

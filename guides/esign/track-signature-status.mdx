@@ -27,7 +27,7 @@ Retrieve the current state of any eSign document by making a `GET` request to `/
 ```bash cURL
 curl --request GET \
   --url https://api.amplify.xyz/v1/esign/documents/esign_01hx... \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 ```python Python
@@ -116,7 +116,7 @@ Once the document status is `completed`, download the signed PDF by calling `GET
 ```bash cURL
 curl --request GET \
   --url https://api.amplify.xyz/v1/esign/documents/esign_01hx4kpz9m2q3r8s/download \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --output signed-document.pdf
 ```
 

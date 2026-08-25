@@ -29,7 +29,7 @@ Send a `POST` request to `/v1/documents` with `Content-Type: multipart/form-data
   ```bash curl
   curl --request POST \
     --url https://api.amplify.xyz/v1/documents \
-    --header 'access_token: YOUR_API_KEY' \
+    --header 'access_token: YOUR_ACCESS_TOKEN' \
     --form 'file=@/path/to/contract.pdf' \
     --form 'name=contract.pdf'
   ```
@@ -64,7 +64,7 @@ If the file is already hosted at an accessible URL, pass it as `source_url` in a
 ```bash
 curl --request POST \
   --url https://api.amplify.xyz/v1/documents \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "source_url": "https://yourapp.com/files/invoice.pdf",

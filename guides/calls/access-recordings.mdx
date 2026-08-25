@@ -17,7 +17,7 @@ Set `"record": true` in the request body when you create the call via `POST /v1/
 ```bash
 curl --request POST \
   --url https://api.amplify.xyz/v1/calls \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "to": "+15551234567",
@@ -36,7 +36,7 @@ Once the call has a `completed` status, fetch the list of recordings attached to
 ```bash
 curl --request GET \
   --url https://api.amplify.xyz/v1/calls/call_01hx.../recordings \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 The response is an array of recording objects:
@@ -61,7 +61,7 @@ Most calls produce a single recording object. Calls that were placed on hold and
 
 ## Download a recording
 
-The `download_url` in each recording object is a pre-signed URL that allows direct download without an additional API key. Use it with any HTTP client:
+The `download_url` in each recording object is a pre-signed URL that allows direct download without an access token. Use it with any HTTP client:
 
 ```bash
 curl --output recording.mp3 \
@@ -89,7 +89,7 @@ To retrieve recordings across all calls — not just a single one — use the to
 ```bash
 curl --request GET \
   --url 'https://api.amplify.xyz/v1/recordings?limit=50' \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 Filter by date range using the `created_after` and `created_before` query parameters to scope results to a specific time window.

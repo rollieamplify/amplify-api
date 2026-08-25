@@ -8,23 +8,55 @@ description: "Authenticate and make your first Amplify API request."
 Before you begin, you need:
 
 - An Amplify account with API access
-- An Amplify access token or bearer token
+- An Amplify API key
 - A command-line HTTP client such as `curl`
 
 <Warning>
-  Keep credentials secret. Never expose an access token or bearer token in browser code, public repositories, or client-side applications.
+  Keep the API key and access token secret. Never expose either credential in browser code, public repositories, or client-side applications.
 </Warning>
 
 <Steps>
-  <Step title="Set your credential">
-    Store your access token in an environment variable so it does not appear directly in your command history.
+  <Step title="Store your API key">
+    Store your API key in an environment variable so it does not appear directly in your source code.
 
     ```bash
-    export AMPLIFY_ACCESS_TOKEN="your_access_token"
+    export AMPLIFY_API_KEY="your_api_key"
     ```
   </Step>
 
-  <Step title="Make a request">
+  <Step title="Request an access token">
+    Exchange the API key for an access token using the authentication endpoint.
+
+    ```bash
+    TOKEN_RESPONSE=$(curl --silent --request POST "https://dev-api.amplify.xyz/api/customer/auth" \
+      --header "Content-Type: application/json" \
+      --data "{\"api_secret_key\":\"$AMPLIFY_API_KEY\"}")
+    ```
+
+    A successful response contains the token at `data.access_token`, identifies its type as `Bearer`, and sets `expires_in` to `86400` seconds (24 hours).
+
+    ```json
+    {
+      "status": 1,
+      "message": "Token Generate Successfully",
+      "data": {
+        "access_token": "YOUR_ACCESS_TOKEN",
+        "token_type": "Bearer",
+        "expires_in": 86400
+      }
+    }
+    ```
+  </Step>
+
+  <Step title="Store the access token">
+    Extract the access token with `jq` and store it for subsequent requests.
+
+    ```bash
+    export AMPLIFY_ACCESS_TOKEN=$(echo "$TOKEN_RESPONSE" | jq -r '.data.access_token')
+    ```
+  </Step>
+
+  <Step title="Make your first API request">
     Retrieve a list of phone numbers from the production API.
 
     ```bash
@@ -64,7 +96,7 @@ Before you begin, you need:
     Review filters and the complete response schema.
   </Card>
   <Card title="Authentication" icon="key" href="/guides/authentication">
-    Choose the right authentication method.
+    Review the access-token flow and security guidance.
   </Card>
   <Card title="Requests and responses" icon="arrows-left-right" href="/guides/requests-and-responses">
     Learn the shared request and response formats.

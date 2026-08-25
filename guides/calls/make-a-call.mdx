@@ -10,7 +10,7 @@ Amplify's calls API lets you programmatically dial any phone number from a provi
 
 Before initiating a call, confirm you have:
 
-- An **Amplify API key** — available in your [dashboard settings](https://app.amplify.xyz/settings/api-keys)
+- An Amplify API key and an access token obtained through the [authentication flow](/guides/authentication)
 - A **provisioned phone number** in your Amplify account to use as the caller ID
 - A **publicly reachable webhook URL** to receive call lifecycle events
 
@@ -32,7 +32,7 @@ Before initiating a call, confirm you have:
       ```bash curl
       curl --request POST \
         --url https://api.amplify.xyz/v1/calls \
-        --header 'access_token: YOUR_API_KEY' \
+        --header 'access_token: YOUR_ACCESS_TOKEN' \
         --header 'Content-Type: application/json' \
         --data '{
           "to": "+15551234567",

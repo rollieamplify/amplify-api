@@ -13,7 +13,7 @@ Retrieve all conversations for your account by calling `GET /v1/conversations`. 
 ```bash
 curl --request GET \
   --url 'https://api.amplify.xyz/v1/conversations?limit=20' \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 Each conversation object in the response includes:
@@ -46,7 +46,7 @@ To read the individual messages within a conversation, call `GET /v1/conversatio
 ```bash
 curl --request GET \
   --url 'https://api.amplify.xyz/v1/conversations/conv_01hx.../messages' \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 See the [Conversations API Reference](/api-reference/conversations) for the full list of query parameters, including `before`, `after`, and `limit` for fine-grained pagination.
@@ -81,7 +81,7 @@ To send a reply within an existing conversation, include the `conversation_id` f
 ```bash
 curl --request POST \
   --url https://api.amplify.xyz/v1/messages \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "to": "+15551234567",

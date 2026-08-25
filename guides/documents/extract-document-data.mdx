@@ -25,7 +25,7 @@ If you haven't already uploaded the document, do so now. See [Upload Documents](
 ```bash
 curl --request POST \
   --url https://api.amplify.xyz/v1/documents \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --form 'file=@/path/to/invoice.pdf'
 ```
 
@@ -38,7 +38,7 @@ Trigger extraction by posting to `/v1/forms/{form_id}/extract` with the `documen
 ```bash
 curl --request POST \
   --url https://api.amplify.xyz/v1/forms/form_01hx.../extract \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "document_id": "doc_01hx..."
@@ -82,7 +82,7 @@ Poll `GET /v1/forms/{form_id}/results/{result_id}` until `status` is `completed`
 ```bash
 curl --request GET \
   --url https://api.amplify.xyz/v1/forms/form_01hx.../results/result_01hx... \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 A completed result looks like this:

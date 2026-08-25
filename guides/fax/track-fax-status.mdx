@@ -28,7 +28,7 @@ You can check the current status of any fax at any time by making a `GET` reques
 ```bash cURL
 curl --request GET \
   --url https://api.amplify.xyz/v1/faxes/fax_01hx... \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 ```python Python
@@ -76,7 +76,7 @@ console.log(fax.status); // e.g. delivered
 ```
 
 <Warning>
-  Avoid polling more frequently than once every 10 seconds. Aggressive polling can cause rate limiting on your API key and slows down delivery for other requests in your account.
+  Avoid polling more frequently than once every 10 seconds. Aggressive polling can cause rate limiting on your access token and slows down delivery for other requests in your account.
 </Warning>
 
 ## Option 2: Use webhooks for real-time updates

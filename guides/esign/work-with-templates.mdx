@@ -29,7 +29,7 @@ To retrieve a list of all templates in your account, make a `GET` request to `/v
 ```bash cURL
 curl --request GET \
   --url https://api.amplify.xyz/v1/esign/templates \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 ```python Python
@@ -86,7 +86,7 @@ To send a document using a template, make a `POST` request to `/v1/esign/documen
 ```bash cURL
 curl --request POST \
   --url https://api.amplify.xyz/v1/esign/documents \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "template_id": "tmpl_01hx...",

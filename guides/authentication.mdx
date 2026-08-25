@@ -1,13 +1,67 @@
 ---
 title: "Authentication"
-description: "Authenticate Amplify API requests with an access token."
+description: "Exchange your Amplify API key for an access token, then authenticate API requests."
 ---
 
-Send your Amplify access token with every API request.
+Amplify uses an access-token flow. First exchange your API key for an access token. Then send that access token with every API request.
 
-## Access token
+## Request an access token
 
-Send your Amplify access token in the `access_token` header.
+Send a JSON request to the authentication endpoint with your API key:
+
+```bash
+curl --request POST "https://dev-api.amplify.xyz/api/customer/auth" \
+  --header "Content-Type: application/json" \
+  --data '{"api_secret_key":"YOUR_API_KEY"}'
+```
+
+<ParamField body="api_secret_key" type="string" required>
+  Your Amplify API key. Keep this value server-side and do not send it with ordinary API requests.
+</ParamField>
+
+### Response
+
+A successful request returns the access token in `data.access_token`:
+
+```json
+{
+  "status": 1,
+  "message": "Token Generate Successfully",
+  "data": {
+    "access_token": "YOUR_ACCESS_TOKEN",
+    "token_type": "Bearer",
+    "expires_in": 86400
+  }
+}
+```
+
+<ResponseField name="status" type="integer">
+  Application-level result status. The successful example returns `1`.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Human-readable result message.
+</ResponseField>
+
+<ResponseField name="data.access_token" type="string">
+  Token used to authenticate subsequent Amplify API requests.
+</ResponseField>
+
+<ResponseField name="data.token_type" type="string">
+  Token type. The successful example returns `Bearer`.
+</ResponseField>
+
+<ResponseField name="data.expires_in" type="integer">
+  Token lifetime in seconds. The successful example returns `86400`, equivalent to 24 hours.
+</ResponseField>
+
+<Note>
+  Refresh behavior, scopes, authentication errors, and the production authentication URL are awaiting confirmation.
+</Note>
+
+## Authenticate an API request
+
+After obtaining an access token, send it in the `access_token` header. Do not send `api_secret_key` to resource endpoints.
 
 ```bash
 curl "https://api.amplify.xyz/v1/numbers" \
@@ -15,9 +69,9 @@ curl "https://api.amplify.xyz/v1/numbers" \
 ```
 
 <Warning>
-  Treat credentials like passwords. Store them in a secrets manager or environment variable and rotate them if they are exposed.
+  Treat the API key and access token like passwords. Store them in a secrets manager or environment variables, use them only from server-side applications, and rotate them if they are exposed.
 </Warning>
 
 ## Authentication errors
 
-The API returns `401 Unauthorized` when authentication is missing or invalid. A valid credential can still receive `403 Forbidden` when it does not have permission to perform an operation.
+The API returns `401 Unauthorized` when the access token is missing or invalid. A valid access token can still receive `403 Forbidden` when it does not have permission to perform an operation.

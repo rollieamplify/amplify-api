@@ -36,7 +36,7 @@ Make a `POST` request to `/v1/esign/documents`, providing the document URL, the 
 ```bash cURL
 curl --request POST \
   --url https://api.amplify.xyz/v1/esign/documents \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "document_url": "https://example.com/contract.pdf",
@@ -178,7 +178,7 @@ Make a `POST` request to `/v1/esign/documents` with `template_id` instead of `do
 ```bash cURL
 curl --request POST \
   --url https://api.amplify.xyz/v1/esign/documents \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "template_id": "tmpl_01hx4kpz9m2q3r8s",

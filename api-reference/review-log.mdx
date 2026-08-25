@@ -8,6 +8,12 @@ groups: ["internal"]
 
 This internal page records unresolved differences in the Basecamp endpoint materials. It is not part of the public API navigation.
 
+## Authentication
+
+| Endpoint or area | Issue | Documentation treatment | Follow-up |
+| --- | --- | --- | --- |
+| `POST https://dev-api.amplify.xyz/api/customer/auth` | The success response is confirmed: `data.access_token`, `token_type: Bearer`, and `expires_in: 86400`. Refresh behavior, scopes, errors, and the production URL remain undocumented. The `Bearer` token type may conflict with the previously confirmed `access_token` resource header. | The public authentication guide documents the confirmed API-key exchange and success response. Resource examples continue using the previously confirmed `access_token` header until transport behavior is clarified. | Confirm whether resource requests use `access_token: <token>`, `Authorization: Bearer <token>`, or both; also confirm refresh behavior, scopes, error responses, formal OAuth 2.0 status, and the production authentication URL. |
+
 ## Engage API
 
 | Endpoint or area | Issue | Documentation treatment | Follow-up |

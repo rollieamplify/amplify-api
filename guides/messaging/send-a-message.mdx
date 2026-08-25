@@ -10,7 +10,7 @@ Amplify makes it straightforward to send SMS and MMS messages programmatically. 
 
 Before you send your first message, make sure you have:
 
-- An **Amplify API key** — find yours in the [dashboard](https://app.amplify.xyz/settings/api-keys)
+- An Amplify API key and an access token obtained through the [authentication flow](/guides/authentication)
 - A **provisioned phone number** in your Amplify account to use as the sender
 
 <Note>
@@ -53,13 +53,13 @@ Before you send your first message, make sure you have:
   </Step>
 
   <Step title="POST to /v1/messages">
-    Send the request to the Amplify API. Replace `YOUR_API_KEY` with your actual key.
+    Send the request to the Amplify API. Replace `YOUR_ACCESS_TOKEN` with your actual key.
 
     <CodeGroup>
       ```bash curl
       curl --request POST \
         --url https://api.amplify.xyz/v1/messages \
-        --header 'access_token: YOUR_API_KEY' \
+        --header 'access_token: YOUR_ACCESS_TOKEN' \
         --header 'Content-Type: application/json' \
         --data '{
           "to": "+15551234567",

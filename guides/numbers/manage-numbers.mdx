@@ -13,7 +13,7 @@ Retrieve all numbers provisioned on your account by calling `GET /v1/numbers`:
 ```bash
 curl --request GET \
   --url https://api.amplify.xyz/v1/numbers \
-  --header 'access_token: YOUR_API_KEY'
+  --header 'access_token: YOUR_ACCESS_TOKEN'
 ```
 
 ```json
@@ -78,7 +78,7 @@ An unassigned number (where `assigned_to` is `null`) is provisioned but not yet 
 ```bash
 curl --request PATCH \
   --url https://api.amplify.xyz/v1/numbers/num_01hx... \
-  --header 'access_token: YOUR_API_KEY' \
+  --header 'access_token: YOUR_ACCESS_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
     "assigned_to": "workflow_01hx..."

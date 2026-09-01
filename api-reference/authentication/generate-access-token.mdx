@@ -1,0 +1,13 @@
+---
+title: "Generate an access token"
+description: "Exchange an Amplify API key for a Bearer access token."
+openapi: "POST /v1/auth"
+---
+
+Exchange the API key created in **Settings → Developer Tools → API Keys** for an access token. This endpoint does not use Bearer authentication.
+
+Use the returned token in the standard authorization header:
+
+```http
+Authorization: Bearer YOUR_ACCESS_TOKEN
+```

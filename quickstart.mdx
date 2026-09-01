@@ -28,7 +28,7 @@ Before you begin, you need:
     Exchange the API key for an access token using the authentication endpoint.
 
     ```bash
-    TOKEN_RESPONSE=$(curl --silent --request POST "https://dev-api.amplify.xyz/api/customer/auth" \
+    TOKEN_RESPONSE=$(curl --silent --request POST "https://dev-api.amplify.xyz/v1/auth" \
       --header "Content-Type: application/json" \
       --data "{\"api_secret_key\":\"$AMPLIFY_API_KEY\"}")
     ```
@@ -61,7 +61,7 @@ Before you begin, you need:
 
     ```bash
     curl "https://api.amplify.xyz/v1/numbers?limit=10" \
-      --header "access_token: $AMPLIFY_ACCESS_TOKEN" \
+      --header "Authorization: Bearer $AMPLIFY_ACCESS_TOKEN" \
       --header "Accept: application/json"
     ```
 

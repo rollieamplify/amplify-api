@@ -1,0 +1,58 @@
+---
+title: "Data formats"
+description: "Common formats used for phone numbers, timestamps, files, URLs, and API values."
+---
+
+Use these formats consistently when sending data to the Amplify API. Individual endpoint schemas may add further constraints.
+
+## Phone numbers
+
+Supply phone and fax numbers in [E.164](https://www.itu.int/rec/T-REC-E.164) format:
+
+```text
++12509997881
+```
+
+An E.164 number:
+
+- Begins with `+`.
+- Includes the country code and subscriber number.
+- Contains no spaces, parentheses, or hyphens.
+- Contains no more than 15 digits after the `+`.
+
+## Dates and timestamps
+
+Supply timestamps in ISO 8601 format. Use UTC when the value represents an exact moment in time:
+
+```text
+2026-05-06T09:42:00Z
+```
+
+Supply calendar dates without a time component as:
+
+```text
+2026-05-06
+```
+
+## PDF documents
+
+Endpoints that accept PDF documents in JSON support one of these representations:
+
+- `file_url`: A publicly accessible URL for the PDF.
+- `file_data`: The complete PDF file encoded as a Base64 string.
+
+When a request accepts multiple documents, provide them as objects in the endpoint's document array.
+
+## URLs
+
+Supply complete URLs, including the scheme and hostname:
+
+```text
+https://example.com/document.pdf
+```
+
+## Enumerated values
+
+Enum values are case-sensitive and use `snake_case` unless an endpoint states otherwise. The API reference lists the supported values for each enumerated field.
+
+For example, `fax_quality` accepts `low`, `standard`, or `hd`.

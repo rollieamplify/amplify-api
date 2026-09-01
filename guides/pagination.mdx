@@ -12,7 +12,7 @@ List endpoints use cursor-based pagination.
 
 ```bash
 curl "https://api.amplify.xyz/v1/numbers?limit=50&cursor=CURSOR" \
-  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+  --header "Authorization: Bearer $AMPLIFY_ACCESS_TOKEN"
 ```
 
 Pagination state appears in the response `meta` object:

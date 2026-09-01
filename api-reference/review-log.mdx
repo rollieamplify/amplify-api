@@ -12,7 +12,13 @@ This internal page records unresolved differences in the Basecamp endpoint mater
 
 | Endpoint or area | Issue | Documentation treatment | Follow-up |
 | --- | --- | --- | --- |
-| `POST https://dev-api.amplify.xyz/api/customer/auth` | The success response is confirmed: `data.access_token`, `token_type: Bearer`, and `expires_in: 86400`. Refresh behavior, scopes, errors, and the production URL remain undocumented. The `Bearer` token type may conflict with the previously confirmed `access_token` resource header. | The public authentication guide documents the confirmed API-key exchange and success response. Resource examples continue using the previously confirmed `access_token` header until transport behavior is clarified. | Confirm whether resource requests use `access_token: <token>`, `Authorization: Bearer <token>`, or both; also confirm refresh behavior, scopes, error responses, formal OAuth 2.0 status, and the production authentication URL. |
+| `POST https://dev-api.amplify.xyz/v1/auth` | The development URL, success response, and invalid-key `401` response are confirmed. Responses for a missing key and other authentication failures, refresh behavior, scopes, and the production URL remain undocumented. | The public authentication guide documents the API-key exchange, Bearer usage, and the confirmed invalid-key response. | Confirm refresh behavior, scopes, remaining error responses, formal OAuth 2.0 status, and the production authentication URL. |
+
+## Fax API
+
+| Endpoint or area | Issue | Documentation treatment | Follow-up |
+| --- | --- | --- | --- |
+| `POST /v1/faxes/send` | The customer Postman request confirms the multipart field inventory but does not identify required fields, allowed values, attachment-combination rules, permissions, or a success-response contract. | The public reference exposes the confirmed fields and three attachment mechanisms without inventing validation rules or a response body. | Confirm required fields, enums, document limits and formats, whether attachment mechanisms can be combined, success status and schema, permissions, rate limits, idempotency, and error responses. |
 
 ## Engage API
 
@@ -42,6 +48,6 @@ This internal page records unresolved differences in the Basecamp endpoint mater
 
 ## Publication gate
 
-The user approved publication of planned customer-facing Engage, Fax, Collect, Users, Webhooks, Integrations, and Reports endpoints. Publication is restricted by actual endpoint path rather than Basecamp group placement. Routes clearly associated with admin, callbacks, cron jobs, carriers, resellers, internal services, infrastructure, account plans, profiles, or unrelated product families remain marked `groups: ["internal"]` and are excluded from public navigation.
+The `Customer API v1` Postman collection is now the publication allowlist. It contains 115 customer-facing requests across Authentication, Send Fax, Numbers, Receive Fax, OCR & NLP, Contacts, Labels, Custom Field, Automations, Customer eSign Documents, and Customer eSign Templates. All other captured endpoint files remain available internally but are excluded from public navigation.
 
-The current public set contains 355 captured endpoint pages. Additional placeholder resource overviews remain visible where Basecamp did not contain a supported method-bearing contract for that resource.
+The public navigation currently references 102 existing endpoint pages that map to the approved collection. Thirteen approved Postman requests do not yet have a one-to-one Mintlify page or conflict with an older method/path contract; they should be authored or reconciled from the Postman request details before being added publicly. The known gaps are concentrated in Fax Report, several customer-specific Fax/Label/Custom Field operations, Numbers variants, Contacts detail/delete operations, and customer Automation routes.

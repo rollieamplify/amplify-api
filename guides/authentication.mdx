@@ -1,27 +1,59 @@
 ---
 title: "Authentication"
-description: "Exchange your Amplify API key for an access token, then authenticate API requests."
+description: "Learn how to exchange an Amplify API key for an access token and authenticate customer API requests."
 ---
 
-Amplify uses an access-token flow. First exchange your API key for an access token. Then send that access token with every API request.
+Amplify uses a two-step token flow. Your API key is used only to request an access token. The returned access token is then sent as a Bearer token with customer API requests.
 
-## Request an access token
+## How authentication works
 
-Send a JSON request to the authentication endpoint with your API key:
+<Steps>
+  <Step title="Get your API key">
+    Copy an API key from **Settings → Developer Tools → API Keys** in the Amplify dashboard.
+  </Step>
+
+  <Step title="Generate an access token">
+    Send the API key as `api_secret_key` in a JSON request to `POST /v1/auth`.
+  </Step>
+
+  <Step title="Authenticate API requests">
+    Send the returned `data.access_token` in the `Authorization` header using the `Bearer` scheme.
+  </Step>
+</Steps>
+
+<Warning>
+  API keys and access tokens grant access to your Amplify account. Keep them out of browser code, mobile applications, public repositories, logs, and support messages. Store them in server-side environment variables or a secrets manager.
+</Warning>
+
+## Get your API key
+
+In the Amplify dashboard, go to **Settings → Developer Tools → API Keys** and copy the API key you want your integration to use.
+
+Assign the key to a server-side environment variable before running the examples in this guide:
 
 ```bash
-curl --request POST "https://dev-api.amplify.xyz/api/customer/auth" \
-  --header "Content-Type: application/json" \
-  --data '{"api_secret_key":"YOUR_API_KEY"}'
+export AMPLIFY_API_KEY="<string>"
 ```
 
+Do not use the API key as the Bearer token and do not send `api_secret_key` to resource endpoints.
+
+## Generate an access token
+
+Send a JSON request to the development authentication endpoint:
+
+```bash
+curl --request POST "https://dev-api.amplify.xyz/v1/auth" \
+  --header "Content-Type: application/json" \
+  --data "{\"api_secret_key\":\"$AMPLIFY_API_KEY\"}"
+```
+
+The request body contains one required property:
+
 <ParamField body="api_secret_key" type="string" required>
-  Your Amplify API key. Keep this value server-side and do not send it with ordinary API requests.
+  The API key copied from **Settings → Developer Tools → API Keys**.
 </ParamField>
 
-### Response
-
-A successful request returns the access token in `data.access_token`:
+### Successful response
 
 ```json
 {
@@ -36,42 +68,88 @@ A successful request returns the access token in `data.access_token`:
 ```
 
 <ResponseField name="status" type="integer">
-  Application-level result status. The successful example returns `1`.
+  Application-level result status. The confirmed successful response returns `1`.
 </ResponseField>
 
 <ResponseField name="message" type="string">
   Human-readable result message.
 </ResponseField>
 
-<ResponseField name="data.access_token" type="string">
-  Token used to authenticate subsequent Amplify API requests.
-</ResponseField>
+<ResponseField name="data" type="object">
+  Authentication token details.
 
-<ResponseField name="data.token_type" type="string">
-  Token type. The successful example returns `Bearer`.
-</ResponseField>
+  <Expandable title="data fields">
+    <ResponseField name="access_token" type="string">
+      Token used to authenticate subsequent customer API requests.
+    </ResponseField>
 
-<ResponseField name="data.expires_in" type="integer">
-  Token lifetime in seconds. The successful example returns `86400`, equivalent to 24 hours.
-</ResponseField>
+    <ResponseField name="token_type" type="string">
+      Authentication scheme. The confirmed successful response returns `Bearer`.
+    </ResponseField>
 
-<Note>
-  Refresh behavior, scopes, authentication errors, and the production authentication URL are awaiting confirmation.
-</Note>
+    <ResponseField name="expires_in" type="integer">
+      Token lifetime in seconds. The confirmed successful response returns `86400`, equivalent to 24 hours.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
 
 ## Authenticate an API request
 
-After obtaining an access token, send it in the `access_token` header. Do not send `api_secret_key` to resource endpoints.
+Read `data.access_token` from the authentication response and store it securely. Include it in the standard authorization header for every protected customer API request:
 
-```bash
-curl "https://api.amplify.xyz/v1/numbers" \
-  --header "access_token: $AMPLIFY_ACCESS_TOKEN"
+```http
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
-<Warning>
-  Treat the API key and access token like passwords. Store them in a secrets manager or environment variables, use them only from server-side applications, and rotate them if they are exposed.
-</Warning>
+For example, to retrieve numbers:
 
-## Authentication errors
+```bash
+curl --request GET "https://dev-api.amplify.xyz/v1/numbers" \
+  --header "Authorization: Bearer $AMPLIFY_ACCESS_TOKEN"
+```
 
-The API returns `401 Unauthorized` when the access token is missing or invalid. A valid access token can still receive `403 Forbidden` when it does not have permission to perform an operation.
+The header must contain the word `Bearer`, followed by one space and the access token. Do not send the API key in this header.
+
+## Token lifetime
+
+The confirmed authentication response sets `expires_in` to `86400` seconds, or 24 hours. Do not assume an access token remains valid beyond that lifetime.
+
+Refresh-token behavior has not been confirmed. Design your integration so it can request another access token using the API key when necessary, and avoid generating a token before every API request.
+
+## Troubleshooting authentication
+
+### Invalid API key
+
+An invalid `api_secret_key` returns `401 Unauthorized`:
+
+```json
+{
+  "status": 0,
+  "message": "API Secret Key is invalid."
+}
+```
+
+Verify that the value was copied from **Settings → Developer Tools → API Keys**, has not been truncated, and does not contain extra spaces.
+
+### Authentication checklist
+
+Check the following before escalating an authentication problem:
+
+- The token request uses `POST https://dev-api.amplify.xyz/v1/auth`.
+- The request body is valid JSON and contains `api_secret_key`.
+- The API key is supplied as the value of `api_secret_key`.
+- Protected requests use `Authorization: Bearer <access_token>`.
+- The access token has not exceeded the lifetime reported by `expires_in`.
+- The API key and access token have not been truncated or copied with extra spaces.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Generate an access token" icon="key" href="/api-reference/authentication/generate-access-token">
+    Review the authentication endpoint and try it in the API playground.
+  </Card>
+
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Generate a token and make your first request to the Numbers API.
+  </Card>
+</CardGroup>

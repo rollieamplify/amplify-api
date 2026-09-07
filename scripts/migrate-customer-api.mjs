@@ -174,7 +174,7 @@ function nest(entries) {
 const collection = {
   info: {...source.info, name: 'Amplify Customer API', description: 'Source-of-truth collection for Amplify customer-facing API v1 endpoints.'},
   auth: {type: 'bearer', bearer: [{key: 'token', value: '{{accessToken}}', type: 'string'}]},
-  variable: [{key: 'baseUrl', value: 'https://dev-api.amplify.xyz', type: 'string'}, {key: 'accessToken', value: '', type: 'string'}],
+  variable: [{key: 'baseUrl', value: 'https://api.amplify.xyz', type: 'string'}, {key: 'accessToken', value: '', type: 'string'}],
   item: nest(normalized),
 };
 fs.mkdirSync(path.join(root, 'postman'), {recursive: true});

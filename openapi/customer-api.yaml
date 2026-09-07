@@ -8,6 +8,8 @@ info:
     x-amplify-validation-status: pending were migrated from the legacy Postman
     collection and must be validated before their contract is considered final.
 servers:
+- url: https://api.amplify.xyz
+  description: Production
 - url: https://dev-api.amplify.xyz
   description: Development
 tags:

@@ -39,10 +39,10 @@ Do not use the API key as the Bearer token and do not send `api_secret_key` to r
 
 ## Generate an access token
 
-Send a JSON request to the development authentication endpoint:
+Send a JSON request to the production authentication endpoint:
 
 ```bash
-curl --request POST "https://dev-api.amplify.xyz/v1/auth" \
+curl --request POST "https://api.amplify.xyz/v1/auth" \
   --header "Content-Type: application/json" \
   --data "{\"api_secret_key\":\"$AMPLIFY_API_KEY\"}"
 ```
@@ -104,7 +104,7 @@ Authorization: Bearer YOUR_ACCESS_TOKEN
 For example, to retrieve numbers:
 
 ```bash
-curl --request GET "https://dev-api.amplify.xyz/v1/numbers" \
+curl --request GET "https://api.amplify.xyz/v1/numbers" \
   --header "Authorization: Bearer $AMPLIFY_ACCESS_TOKEN"
 ```
 
@@ -135,7 +135,7 @@ Verify that the value was copied from **Settings → Developer Tools → API Key
 
 Check the following before escalating an authentication problem:
 
-- The token request uses `POST https://dev-api.amplify.xyz/v1/auth`.
+- The token request uses `POST https://api.amplify.xyz/v1/auth`.
 - The request body is valid JSON and contains `api_secret_key`.
 - The API key is supplied as the value of `api_secret_key`.
 - Protected requests use `Authorization: Bearer <access_token>`.

@@ -1,0 +1,11 @@
+---
+title: "List scheduled faxes"
+description: "Retrieve faxes scheduled for future transmission."
+openapi: "GET /v1/faxes/schedule"
+---
+
+Retrieve scheduled faxes for the authenticated account. Use `limit` and `cursor` to page through the results.
+
+Each scheduled fax includes its `job_id`, sending and receiving numbers, page count, creation time, and scheduled transmission time. The current API returns `created_at` and `scheduled_time` as Unix timestamps.
+
+When the list is empty, the response contains `status`, `message`, and `meta`, and omits the `data` property.

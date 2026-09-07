@@ -1,0 +1,17 @@
+---
+title: "Forward a fax"
+description: "Forward the documents from an existing fax job to another fax number."
+openapi: "POST /v1/faxes/forward"
+---
+
+Forward the documents associated with an existing fax job. Authenticate with a Bearer access token obtained from [Generate an access token](/api-reference/authentication/generate-access-token).
+
+## Required information
+
+Provide the existing fax `job_id` and the destination `fax_number`. Supply the destination in [E.164 format](/guides/data-formats#phone-numbers).
+
+## Caller ID
+
+Provide `caller_id` to select the sending number explicitly. When omitted, the account's default `fax_as` value is used.
+
+The response returns a new `job_id` for the forwarded fax. If the source `job_id` cannot be found, the API returns `404 Not Found`.

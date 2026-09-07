@@ -1,0 +1,9 @@
+---
+title: "Resend a fax"
+description: "Resubmit a cancelled or failed fax."
+openapi: "POST /v1/faxes/resend"
+---
+
+Provide the required `job_id` of the fax you want to resend. Only cancelled or failed faxes can be resent; delivered faxes return a `400` response.
+
+When accepted, the response uses the same structure as [Send a fax](/api-reference/fax/post-fax-send). The API reuses and returns the original `job_id`.

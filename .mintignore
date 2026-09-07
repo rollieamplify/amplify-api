@@ -5,3 +5,7 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Legacy generated artifact. Mintlify must resolve endpoint pages from the
+# canonical OpenAPI YAML configured in docs.json.
+openapi/customer-api.json

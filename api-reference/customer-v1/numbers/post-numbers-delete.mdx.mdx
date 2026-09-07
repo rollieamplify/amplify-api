@@ -1,0 +1,11 @@
+---
+title: "Delete a number"
+description: "Remove an owned phone number from Amplify and deprovision it from the carrier."
+openapi: "POST /v1/numbers/delete"
+---
+
+Removes a phone number from the Amplify account and deprovisions it from the carrier. Identify the number using both its `number_id` and `order_id` from [List owned numbers](/api-reference/customer-v1/numbers/get-numbers-list.mdx).
+
+<Warning>
+  This operation deprovisions the number from the carrier. Applications should require explicit confirmation before sending the request.
+</Warning>

@@ -1,0 +1,7 @@
+---
+title: "Remove a fax custom field"
+description: "Clear custom-field values from a fax."
+openapi: "POST /v1/custom/field/remove"
+---
+
+Provide the required fax identifier in `job_id` and the field identifiers to clear in the required `custom_fields` array. Cleared fields may remain listed with `value: null`. Authenticate with a Bearer access token.

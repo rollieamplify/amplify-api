@@ -1,0 +1,11 @@
+---
+title: "Cancel a fax"
+description: "Cancel a fax that has not completed transmission."
+openapi: "POST /v1/faxes/cancel"
+---
+
+Provide the required `job_id` of the fax to cancel. The API returns `400 Bad Request` if the fax cannot be found or is already cancelled.
+
+<Note>
+The current API returns `status: 0` even when cancellation succeeds. Use the HTTP status and `message` to interpret the result.
+</Note>

@@ -1,0 +1,11 @@
+---
+title: "Purchase a number"
+description: "Purchase an available phone number for your Amplify account."
+openapi: "POST /v1/numbers/purchase"
+---
+
+Purchases the specified available number when additional regulatory information is not required in the request.
+
+Provide `number` in [E.164 format](/guides/api-conventions), including the leading `+` (for example, `+13346412481`). A number without the leading `+` is invalid.
+
+The optional `type` field selects the service type. Its currently accepted values are `fax` and `voice`.

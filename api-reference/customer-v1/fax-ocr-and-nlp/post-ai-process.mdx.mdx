@@ -1,0 +1,11 @@
+---
+title: "Request OCR and NLP processing"
+description: "Request OCR or NLP processing for a fax."
+openapi: "POST /v1/ai/process"
+---
+
+Provide the required `job_id`, `direction`, and `type` fields. Set `direction` to `inbound` or `outbound`. The `type` value is case-sensitive and accepts `OCR` or `NLP`. Authenticate with a Bearer access token.
+
+<Warning>
+The current API returns `Fax NLP request submitted successfully` after both OCR and NLP submissions. For OCR requests, use the HTTP status and `status` field to determine success.
+</Warning>

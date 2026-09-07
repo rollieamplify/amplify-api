@@ -1,0 +1,7 @@
+---
+title: "Unassign a fax from a user"
+description: "Remove a fax assignment from one or more workspace users."
+openapi: "POST /v1/faxes/unassign"
+---
+
+Provide the required fax identifier in `job_id` and workspace-user email addresses in the required `emails` field. You can unassign multiple users in the same API call. Authenticate with a Bearer access token.

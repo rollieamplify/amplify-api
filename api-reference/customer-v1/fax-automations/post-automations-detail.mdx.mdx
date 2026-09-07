@@ -1,0 +1,9 @@
+---
+title: "Get automation details"
+description: "Retrieve an automation and its complete configuration."
+openapi: "POST /v1/automations/detail"
+---
+
+Retrieve one automation using the encrypted `id` returned by [List automations](/api-reference/customer-v1/fax-automations/get-automations-list.mdx).
+
+The response includes its conditions and action settings. Empty settings can be returned as empty strings or arrays.

@@ -1,0 +1,99 @@
+---
+title: "OCR and NLP response formats"
+description: "Understand the different extraction result shapes returned for OCR and NLP."
+---
+
+The [Extract OCR and NLP data](/api-reference/customer-v1/fax-ocr-and-nlp/post-ai-extract.mdx) endpoint uses the same response envelope for both processing types:
+
+```json
+{
+  "status": 1,
+  "message": "<string>",
+  "data": {
+    "json_text": "<OCR array or NLP object>"
+  }
+}
+```
+
+The structure of `data.json_text` depends on the case-sensitive `type` supplied in the request.
+
+## OCR results
+
+For `type: "OCR"`, `json_text` is an array of detected document blocks. Blocks can represent a page, line, word, or another detected element. Properties vary by `BlockType`.
+
+```json
+{
+  "status": 1,
+  "message": "JSON OCR data retrieved successfully.",
+  "data": {
+    "json_text": [
+      {
+        "BlockType": "PAGE",
+        "Id": "0faea376-249c-4c4f-bb6f-a70241af2d65",
+        "Page": 1,
+        "Geometry": {
+          "BoundingBox": {
+            "Width": 1,
+            "Height": 1,
+            "Left": 0,
+            "Top": 0
+          }
+        }
+      },
+      {
+        "BlockType": "LINE",
+        "Confidence": 100,
+        "Text": "FAX",
+        "Id": "27f2be95-f9d5-494b-80bd-643d75d10bc3",
+        "Page": 1
+      }
+    ]
+  }
+}
+```
+
+Common OCR block properties include:
+
+- `BlockType`: The detected element type, such as `PAGE`, `LINE`, or `WORD`.
+- `Text`: Recognized text for textual blocks.
+- `Confidence`: Recognition confidence returned by the OCR service.
+- `Geometry`: Normalized bounding-box and polygon coordinates.
+- `Id`: Unique identifier for the block.
+- `Relationships`: Links to related blocks, such as a page's child elements.
+- `Page`: One-based page number containing the block.
+
+## NLP results
+
+For `type: "NLP"`, `json_text` is an object containing processing metadata and structured values extracted from the fax.
+
+```json
+{
+  "status": 1,
+  "message": "JSON NLP data retrieved successfully.",
+  "data": {
+    "json_text": {
+      "task_id": "8cd23e57-ed34-49fd-a81c-ca068a263076",
+      "action": "combined",
+      "status": "success",
+      "DPI": "200",
+      "result_type": "object",
+      "result": {
+        "document_type": {
+          "overall": {
+            "class": "Other",
+            "confidence": 0,
+            "index": -1
+          }
+        }
+      },
+      "errors": []
+    }
+  }
+}
+```
+
+The `result` object can contain document classification, patient information, sender and recipient details, insurance information, metadata, and other document-specific fields. Fields without a detected value may be empty or `null`.
+
+<Note>
+The examples on this page are intentionally shortened. Use the response schema to integrate defensively because extracted fields depend on the document and processing type.
+</Note>

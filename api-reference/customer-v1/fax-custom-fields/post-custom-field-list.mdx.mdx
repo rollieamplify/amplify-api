@@ -1,0 +1,7 @@
+---
+title: "List fax custom fields"
+description: "List custom fields associated with a fax."
+openapi: "POST /v1/custom/field/list"
+---
+
+Provide the required fax identifier in `job_id`. A custom field whose value was cleared may remain in the response with `value: null`. Authenticate with a Bearer access token.

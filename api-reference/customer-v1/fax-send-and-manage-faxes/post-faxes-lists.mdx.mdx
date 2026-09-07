@@ -1,0 +1,9 @@
+---
+title: "List sent faxes"
+description: "Retrieve sent fax jobs and their current transmission results."
+openapi: "POST /v1/faxes/lists"
+---
+
+Returns sent faxes for the authenticated account. Each record includes its `job_id`, sender and receiver, page counts, current status, and transmission time.
+
+The response includes cursor pagination metadata. Additional request-side pagination controls have not yet been confirmed.

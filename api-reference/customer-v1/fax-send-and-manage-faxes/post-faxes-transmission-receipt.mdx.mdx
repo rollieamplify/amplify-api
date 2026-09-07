@@ -1,0 +1,7 @@
+---
+title: "Get a fax transmission receipt"
+description: "Download a fax transmission receipt as a Base64-encoded PDF."
+openapi: "POST /v1/faxes/transmission-receipt"
+---
+
+Provide the required fax `job_id` and its `direction`. The response contains the receipt as a `data:application/pdf;base64,...` data URL.

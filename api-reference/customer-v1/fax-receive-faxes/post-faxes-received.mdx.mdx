@@ -1,0 +1,9 @@
+---
+title: "List received faxes"
+description: "Retrieve received faxes for a specified account number and order."
+openapi: "POST /v1/faxes/received"
+---
+
+Provide all three required fields: `number_id`, `order_id`, and `marked_as`.
+
+The response contains the matching received faxes. The current API returns `duration` and `pages` as strings, `received_time` as a Unix timestamp, and `sender` and `receiver` as phone-number strings without the leading `+`.

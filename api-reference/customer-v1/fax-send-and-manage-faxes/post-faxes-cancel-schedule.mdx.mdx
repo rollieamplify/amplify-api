@@ -1,0 +1,7 @@
+---
+title: "Cancel a scheduled fax"
+description: "Cancel a fax before its scheduled transmission time."
+openapi: "POST /v1/faxes/cancel-schedule"
+---
+
+Provide the required `job_id` of the scheduled fax. A successful request removes the fax from the scheduled-fax list. If the fax cannot be found, the API returns `404 Not Found`.

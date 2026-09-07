@@ -1,0 +1,9 @@
+---
+title: "Get fax status"
+description: "Retrieve the current transmission status and delivery details for a fax job."
+openapi: "POST /v1/faxes/status"
+---
+
+Use the `job_id` returned by [Send a fax](/api-reference/fax/post-fax-send) or [Forward a fax](/api-reference/fax/post-fax-forward) to retrieve the latest state of that fax. `job_id` is required.
+
+The response includes the current status, sending and destination numbers, page counts, call timing, and any status message or code reported by the fax service.

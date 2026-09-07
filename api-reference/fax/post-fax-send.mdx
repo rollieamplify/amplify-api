@@ -15,6 +15,14 @@ Send the request as `application/json`. The `fax_data` property is an array of d
 
 Do not include both `file_url` and `file_data` for the same document.
 
+## Fax templates
+
+Use `template_id` to apply a Fax Default as the cover-page template. Customers can find the ID beneath the Fax Default name under **Settings → iFax Settings → Fax Defaults**.
+
+Use `smart_document_id` to apply a Smart Template. Customers can find the ID beneath the Smart Template name under **Settings → iFax Settings → Smart Templates**.
+
+`template_id` and `smart_document_id` cannot be used together. The `fax_data` array is always required with either option.
+
 ## Phone number format
 
 Supply `fax_number` and `caller_id` in [E.164 format](/guides/data-formats#phone-numbers). Begin the number with `+`, followed by the country code and subscriber number, with no spaces, parentheses, or hyphens.
@@ -32,6 +40,16 @@ Set `fax_quality` to one of the following values:
 | `low` | Low |
 | `standard` | Standard |
 | `hd` | High definition |
+
+If omitted, fax quality comes from the selected Fax Default. When `template_id` is omitted, the account's default Fax Default is used.
+
+## Fax priority
+
+Set `fax_priority` to `high` or `regular`. The default is `regular`.
+
+## Caller ID
+
+Supply `caller_id` to select the sending number explicitly. If omitted, caller ID comes from the selected Fax Default. When `template_id` is omitted, the `fax_as` value from the account's default Fax Default is used.
 
 ## Scheduling
 

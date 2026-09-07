@@ -29,6 +29,7 @@
           "guides/authentication",
           "guides/api-conventions",
           "guides/data-formats",
+          "guides/ocr-nlp-response-formats",
           "guides/requests-and-responses",
           "guides/pagination",
           "guides/errors",
@@ -46,233 +47,239 @@
         ]
       },
       {
-        "group": "API reference",
+        "group": "Authentication",
         "pages": [
-          "api-reference/introduction",
-          {
-            "group": "Authentication",
-            "pages": [
-              "api-reference/authentication/overview",
-              "api-reference/authentication/generate-access-token"
-            ]
-          }
+          "api-reference/authentication/generate-access-token"
         ]
       },
       {
-        "group": "Fax API",
+        "group": "Faxes",
         "pages": [
           {
-            "group": "Send and manage faxes",
+            "group": "Send faxes",
             "pages": [
-              "api-reference/fax/overview",
               "api-reference/fax/post-fax-send",
-              "api-reference/fax/post-fax-forward-bulk",
-              "api-reference/fax/post-fax-schedule-cancel",
-              "api-reference/fax/delete-faxes",
-              "api-reference/fax/post-fax-resend",
-              "api-reference/fax/post-schedule-fax-list",
-              "api-reference/fax/post-fax-sent-list",
-              "api-reference/fax/post-fax-pending-approvals",
-              "api-reference/fax/post-fax-approval",
-              "api-reference/fax/post-fax-download",
-              "api-reference/fax/post-fax-status",
-              "api-reference/fax/post-faxes-mark-status",
-              "api-reference/fax/post-fax-transmission-receipt",
-              "api-reference/fax/post-fax-cancel"
+              "api-reference/fax/post-fax-forward",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-resend.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-lists.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-status.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/get-faxes-schedule.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-cancel-schedule.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-cancel.mdx"
             ]
           },
           {
             "group": "Receive faxes",
             "pages": [
-              "api-reference/fax/post-fax-inbox-list",
-              "api-reference/fax/post-fax-all-list",
-              "api-reference/fax/post-fax-assign",
-              "api-reference/fax/delete-fax-fax-uuid-users"
+              "api-reference/customer-v1/fax-receive-faxes/post-faxes-received.mdx",
+              "api-reference/customer-v1/fax-receive-faxes/get-faxes-all-received.mdx"
+            ]
+          },
+          {
+            "group": "Manage faxes",
+            "pages": [
+              "api-reference/customer-v1/fax-receive-faxes/post-faxes-assign.mdx",
+              "api-reference/customer-v1/fax-receive-faxes/post-faxes-unassign.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-download.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-transmission-receipt.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-pending-approval.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-approval.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-mark-as-done.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/post-faxes-mark-as-not-done.mdx",
+              "api-reference/customer-v1/fax-send-and-manage-faxes/delete-faxes-delete.mdx"
             ]
           },
           {
             "group": "OCR and NLP",
             "pages": [
-              "api-reference/fax/post-fax-ocr",
-              "api-reference/fax/post-faxes-nlp-data"
-            ]
-          },
-          {
-            "group": "Labels",
-            "pages": [
-              "api-reference/labels/overview",
-              "api-reference/labels/get-labels",
-              "api-reference/fax/patch-assign-labels-to-fax-fax-uuid"
-            ]
-          },
-          {
-            "group": "Fax custom fields",
-            "pages": [
-              "api-reference/fax/post-fax-custom-field-save"
-            ]
-          },
-          {
-            "group": "Automations",
-            "pages": [
-              "api-reference/automations/overview",
-              "api-reference/automations/get-automations",
-              "api-reference/automations/get-automations-segments",
-              "api-reference/automations/post-automations",
-              "api-reference/automations/get-automations-automation-id"
+              "api-reference/customer-v1/fax-ocr-and-nlp/post-ai-process.mdx",
+              "api-reference/customer-v1/fax-ocr-and-nlp/post-ai-extract.mdx"
             ]
           }
         ]
       },
       {
-        "group": "Numbers API",
+        "group": "Workspace",
         "pages": [
-          "api-reference/numbers/overview",
-          "api-reference/numbers/list-numbers",
-          "api-reference/numbers/create-number",
-          "api-reference/numbers/delete-number",
-          "api-reference/numbers/search-available-numbers",
-          "api-reference/numbers/list-available-areas",
-          "api-reference/numbers/list-available-countries",
-          "api-reference/numbers/list-filled-requirements",
-          "api-reference/numbers/purchase-with-requirements",
-          "api-reference/numbers/create-verification-address",
-          "api-reference/numbers/upload-verification-document",
-          "api-reference/numbers/submit-did-requirements"
-        ]
-      },
-      {
-        "group": "Contacts API",
-        "pages": [
-          "api-reference/contacts/overview",
           {
-            "group": "Contacts",
+            "group": "Labels",
             "pages": [
-              "api-reference/contacts/list-contacts",
-              "api-reference/contacts/create-contact",
-              "api-reference/contacts/list-picker-contacts",
-              "api-reference/contacts/update-contact"
-            ]
-          },
-          {
-            "group": "Contact groups",
-            "pages": [
-              "api-reference/contacts/list-contact-groups",
-              "api-reference/contacts/create-contact-group",
-              "api-reference/contacts/update-contact-group",
-              "api-reference/contacts/delete-contact-group"
+              "api-reference/customer-v1/fax-labels/get-labels-list.mdx",
+              "api-reference/customer-v1/fax-labels/post-labels-assign.mdx",
+              "api-reference/customer-v1/fax-labels/post-labels-remove.mdx"
             ]
           },
           {
             "group": "Custom fields",
             "pages": [
-              "api-reference/contacts/list-contact-fields",
-              "api-reference/contacts/create-contact-field",
-              "api-reference/contacts/update-contact-field",
-              "api-reference/contacts/delete-contact-field"
-            ]
-          },
-          {
-            "group": "Patient contacts",
-            "pages": [
-              "api-reference/contacts/upload-patient-document",
-              "api-reference/contacts/match-patient-contacts",
-              "api-reference/contacts/save-patient-contact"
+              "api-reference/customer-v1/fax-custom-fields/post-custom-field-list.mdx",
+              "api-reference/customer-v1/fax-custom-fields/post-custom-field-save.mdx",
+              "api-reference/customer-v1/fax-custom-fields/post-custom-field-remove.mdx"
             ]
           }
         ]
       },
       {
-        "group": "Collect API",
+        "group": "Numbers",
+        "pages": [
+          "api-reference/customer-v1/numbers/get-numbers-country-list.mdx",
+          "api-reference/customer-v1/numbers/post-numbers-area-list.mdx",
+          "api-reference/customer-v1/numbers/post-numbers-available-list.mdx",
+          "api-reference/customer-v1/numbers/post-numbers-search.mdx",
+          "api-reference/customer-v1/numbers/post-numbers-filled-requirements.mdx",
+          "api-reference/customer-v1/numbers/post-numbers-purchase.mdx",
+          "api-reference/customer-v1/numbers/post-numbers-purchase-with-requirements.mdx",
+          "api-reference/customer-v1/numbers/get-numbers-list.mdx",
+          "api-reference/customer-v1/numbers/post-numbers-delete.mdx",
+          {
+            "group": "Verification",
+            "pages": [
+              "api-reference/customer-v1/numbers-verification/post-numbers-verification-create-address.mdx",
+              "api-reference/customer-v1/numbers-verification/post-numbers-verification-upload-document.mdx",
+              "api-reference/customer-v1/numbers-verification/post-numbers-verification-upload-did-requirements.mdx"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Contacts",
+        "pages": [
+          "api-reference/customer-v1/contacts/post-contacts-create.mdx",
+          "api-reference/customer-v1/contacts/post-contacts-upload-patient-doc.mdx",
+          "api-reference/customer-v1/contacts/post-contacts-list.mdx",
+          "api-reference/customer-v1/contacts/post-contacts-details.mdx",
+          "api-reference/customer-v1/contacts/post-contacts-update.mdx",
+          "api-reference/customer-v1/contacts/post-contacts-delete.mdx",
+          {
+            "group": "Groups",
+            "pages": [
+              "api-reference/customer-v1/contacts-groups/get-contacts-group-list.mdx",
+              "api-reference/customer-v1/contacts-groups/post-contacts-group-create.mdx",
+              "api-reference/customer-v1/contacts-groups/post-contacts-group-update.mdx",
+              "api-reference/customer-v1/contacts-groups/post-contacts-group-delete.mdx"
+            ]
+          },
+          {
+            "group": "Custom Fields",
+            "pages": [
+              "api-reference/customer-v1/contacts-custom-fields/get-contacts-custom-field-list.mdx",
+              "api-reference/customer-v1/contacts-custom-fields/post-contacts-custom-field-create.mdx",
+              "api-reference/customer-v1/contacts-custom-fields/post-contacts-custom-field-update.mdx",
+              "api-reference/customer-v1/contacts-custom-fields/post-contacts-custom-field-delete.mdx"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Documents",
         "pages": [
           {
-            "group": "Documents",
+            "group": "Variables",
             "pages": [
-              "api-reference/esign-documents/overview",
-              "api-reference/esign-documents/get-esign-documents",
-              "api-reference/esign-documents/post-esign-documents",
-              "api-reference/esign-documents/patch-esign-documents-document-id",
-              "api-reference/esign-documents/post-esign-documents-document-id-send",
-              "api-reference/esign-documents/post-esign-documents-document-id-download-document",
-              "api-reference/esign-documents/delete-esign-documents-document-id",
-              "api-reference/esign-documents/delete-esign-documents-esign-document-id-pages-page-number"
+              "api-reference/customer-v1/collect-documents-document-variables/post-esign-documents-documentid-variables.mdx",
+              "api-reference/customer-v1/collect-documents-document-variables/get-esign-documents-documentid-variables.mdx",
+              "api-reference/customer-v1/collect-documents-document-variables/get-esign-documents-documentid-variables-variableid.mdx",
+              "api-reference/customer-v1/collect-documents-document-variables/patch-esign-documents-documentid-variables-variableid.mdx",
+              "api-reference/customer-v1/collect-documents-document-variables/delete-esign-documents-documentid-variables-variableid.mdx"
             ]
           },
           {
-            "group": "Document variables",
+            "group": "Fields",
             "pages": [
-              "api-reference/esign-documents/post-esign-documents-esign-document-id-variables",
-              "api-reference/esign-documents/get-esign-documents-esign-document-id-variables",
-              "api-reference/esign-documents/get-esign-documents-esign-document-id-variables-variable-id",
-              "api-reference/esign-documents/patch-esign-documents-esign-document-id-variables-variable-id",
-              "api-reference/esign-documents/delete-esign-documents-esign-document-id-variables-variable-id"
+              "api-reference/customer-v1/collect-documents-document-fields/post-esign-documents-documentid-fields.mdx",
+              "api-reference/customer-v1/collect-documents-document-fields/get-esign-documents-documentid-fields.mdx",
+              "api-reference/customer-v1/collect-documents-document-fields/get-esign-documents-documentid-fields-fieldid.mdx",
+              "api-reference/customer-v1/collect-documents-document-fields/patch-esign-documents-documentid-fields.mdx",
+              "api-reference/customer-v1/collect-documents-document-fields/patch-esign-documents-documentid-fields-fieldid.mdx",
+              "api-reference/customer-v1/collect-documents-document-fields/delete-esign-documents-documentid-fields-fieldid.mdx",
+              "api-reference/customer-v1/collect-documents-document-fields/post-esign-documents-documentid-fields-delete.mdx"
             ]
           },
           {
-            "group": "Document fields",
+            "group": "Theme",
             "pages": [
-              "api-reference/esign-documents/post-esign-documents-esign-document-id-fields",
-              "api-reference/esign-documents/get-esign-documents-esign-document-id-fields",
-              "api-reference/esign-documents/get-esign-documents-esign-document-id-fields-field-id",
-              "api-reference/esign-documents/patch-esign-documents-esign-document-id-fields",
-              "api-reference/esign-documents/patch-esign-documents-esign-document-id-fields-field-id",
-              "api-reference/esign-documents/delete-esign-documents-esign-document-id-fields-field-id",
-              "api-reference/esign-documents/delete-esign-documents-esign-document-id-fields-delete"
+              "api-reference/customer-v1/collect-documents-document-theme/post-esign-documents-documentid-theme.mdx",
+              "api-reference/customer-v1/collect-documents-document-theme/get-esign-documents-documentid-theme.mdx",
+              "api-reference/customer-v1/collect-documents-document-theme/patch-esign-documents-documentid-theme.mdx",
+              "api-reference/customer-v1/collect-documents-document-theme/delete-esign-documents-documentid-theme.mdx"
             ]
           },
           {
-            "group": "Document themes and rules",
+            "group": "Field rules",
             "pages": [
-              "api-reference/esign-documents/post-esign-documents-document-id-theme",
-              "api-reference/esign-documents/get-esign-documents-document-id-theme",
-              "api-reference/esign-documents/patch-esign-documents-document-id-theme",
-              "api-reference/esign-documents/post-esign-documents-document-id-field-rule",
-              "api-reference/esign-documents/get-esign-documents-document-id-field-rule",
-              "api-reference/esign-documents/patch-esign-documents-document-id-field-rule-field-rule-id",
-              "api-reference/esign-documents/delete-esign-documents-document-id-field-rule-field-rule-id"
+              "api-reference/customer-v1/collect-documents-document-field-rules/post-esign-documents-documentid-field-rule.mdx",
+              "api-reference/customer-v1/collect-documents-document-field-rules/get-esign-documents-documentid-field-rule.mdx",
+              "api-reference/customer-v1/collect-documents-document-field-rules/patch-esign-documents-documentid-field-rule-fieldruleid.mdx",
+              "api-reference/customer-v1/collect-documents-document-field-rules/delete-esign-documents-documentid-field-rule-fieldruleid.mdx"
             ]
           },
           {
-            "group": "Templates",
+            "group": "Document operations",
             "pages": [
-              "api-reference/esign-templates/overview",
-              "api-reference/esign-templates/get-esign-templates",
-              "api-reference/esign-templates/post-esign-templates",
-              "api-reference/esign-templates/get-esign-templates-template-id",
-              "api-reference/esign-templates/patch-esign-templates-template-id",
-              "api-reference/esign-templates/delete-esign-templates-template-id",
-              "api-reference/esign-templates/delete-esign-templates-esign-template-id-pages-page-number"
+              "api-reference/customer-v1/collect-documents/get-esign-documents.mdx",
+              "api-reference/customer-v1/collect-documents/post-esign-documents.mdx",
+              "api-reference/customer-v1/collect-documents/get-esign-documents-documentid.mdx",
+              "api-reference/customer-v1/collect-documents/patch-esign-documents-documentid.mdx",
+              "api-reference/customer-v1/collect-documents/post-esign-documents-documentid-send.mdx",
+              "api-reference/customer-v1/collect-documents/get-esign-documents-documentid-download.mdx",
+              "api-reference/customer-v1/collect-documents/delete-esign-documents-documentid.mdx",
+              "api-reference/customer-v1/collect-documents/delete-esign-documents-documentid-pages-pagenumber.mdx"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Templates",
+        "pages": [
+          {
+            "group": "Variables",
+            "pages": [
+              "api-reference/customer-v1/collect-templates-template-variables/post-esign-templates-templateid-variables.mdx",
+              "api-reference/customer-v1/collect-templates-template-variables/get-esign-templates-templateid-variables.mdx",
+              "api-reference/customer-v1/collect-templates-template-variables/get-esign-templates-templateid-variables-templatevariableid.mdx",
+              "api-reference/customer-v1/collect-templates-template-variables/patch-esign-templates-templateid-variables-templatevariableid.mdx",
+              "api-reference/customer-v1/collect-templates-template-variables/delete-esign-templates-templateid-variables-templatevariableid.mdx"
             ]
           },
           {
-            "group": "Template variables",
+            "group": "Theme",
             "pages": [
-              "api-reference/esign-templates/post-esign-templates-esign-template-id-variables",
-              "api-reference/esign-templates/get-esign-templates-esign-template-id-variables",
-              "api-reference/esign-templates/get-esign-templates-esign-template-id-variables-template-variable-id",
-              "api-reference/esign-templates/patch-esign-templates-esign-template-id-variables-template-variable-id",
-              "api-reference/esign-templates/delete-esign-templates-esign-template-id-variables-template-variable-id"
+              "api-reference/customer-v1/collect-templates-template-theme/post-esign-templates-templateid-theme.mdx",
+              "api-reference/customer-v1/collect-templates-template-theme/get-esign-templates-templateid-theme.mdx",
+              "api-reference/customer-v1/collect-templates-template-theme/patch-esign-templates-templateid-theme.mdx",
+              "api-reference/customer-v1/collect-templates-template-theme/delete-esign-templates-templateid-theme.mdx"
             ]
           },
           {
-            "group": "Template fields",
+            "group": "Fields",
             "pages": [
-              "api-reference/esign-templates/post-esign-templates-esign-template-id-fields",
-              "api-reference/esign-templates/get-esign-templates-esign-template-id-fields",
-              "api-reference/esign-templates/get-esign-templates-esign-template-id-fields-field-template-id",
-              "api-reference/esign-templates/patch-esign-templates-esign-template-id-fields",
-              "api-reference/esign-templates/post-esign-templates-esign-template-id-fields-delete"
+              "api-reference/customer-v1/collect-templates-template-fields/post-esign-templates-templateid-fields.mdx",
+              "api-reference/customer-v1/collect-templates-template-fields/get-esign-templates-templateid-fields.mdx",
+              "api-reference/customer-v1/collect-templates-template-fields/get-esign-templates-templateid-fields-fieldtemplateid.mdx",
+              "api-reference/customer-v1/collect-templates-template-fields/patch-esign-templates-templateid-fields.mdx",
+              "api-reference/customer-v1/collect-templates-template-fields/patch-esign-templates-templateid-fields-fieldtemplateid.mdx",
+              "api-reference/customer-v1/collect-templates-template-fields/delete-esign-templates-templateid-fields-fieldtemplateid.mdx",
+              "api-reference/customer-v1/collect-templates-template-fields/post-esign-templates-templateid-fields-delete.mdx"
             ]
           },
           {
-            "group": "Template themes and rules",
+            "group": "Field rules",
             "pages": [
-              "api-reference/esign-templates/post-esign-templates-template-id-theme",
-              "api-reference/esign-templates/get-esign-templates-esign-template-id-theme",
-              "api-reference/esign-templates/patch-esign-templates-template-id-theme",
-              "api-reference/esign-templates/post-esign-templates-template-id-field-rule",
-              "api-reference/esign-templates/get-esign-templates-template-id-field-rule",
-              "api-reference/esign-templates/patch-esign-templates-template-id-field-rule-field-rule-id",
-              "api-reference/esign-templates/delete-esign-templates-template-id-field-rule-field-rule-id"
+              "api-reference/customer-v1/collect-templates-template-field-rules/post-esign-templates-templateid-field-rule.mdx",
+              "api-reference/customer-v1/collect-templates-template-field-rules/get-esign-templates-templateid-field-rule.mdx",
+              "api-reference/customer-v1/collect-templates-template-field-rules/patch-esign-templates-templateid-field-rule-templatefieldruleid.mdx",
+              "api-reference/customer-v1/collect-templates-template-field-rules/delete-esign-templates-templateid-field-rule-templatefieldruleid.mdx"
+            ]
+          },
+          {
+            "group": "Template operations",
+            "pages": [
+              "api-reference/customer-v1/collect-templates/get-esign-templates.mdx",
+              "api-reference/customer-v1/collect-templates/post-esign-templates.mdx",
+              "api-reference/customer-v1/collect-templates/get-esign-templates-templateid.mdx",
+              "api-reference/customer-v1/collect-templates/patch-esign-templates-templateid.mdx",
+              "api-reference/customer-v1/collect-templates/delete-esign-templates-templateid.mdx",
+              "api-reference/customer-v1/collect-templates/delete-esign-templates-templateid-pages-pagenumber.mdx"
             ]
           }
         ]

@@ -1,0 +1,6341 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Amplify Customer API",
+    "version": "1.0.0",
+    "description": "Source-of-truth contract for Amplify customer-facing API v1 endpoints migrated from the Customer API v1 Postman collection."
+  },
+  "servers": [
+    {
+      "url": "https://dev-api.amplify.xyz",
+      "description": "Development"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication"
+    },
+    {
+      "name": "Fax"
+    },
+    {
+      "name": "Numbers"
+    },
+    {
+      "name": "Contacts"
+    },
+    {
+      "name": "Collect"
+    }
+  ],
+  "paths": {
+    "/v1/auth": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "generateAccessToken",
+        "summary": "Generate an access token",
+        "description": "Exchanges an Amplify API key for a Bearer access token.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateAccessTokenRequest"
+              },
+              "example": {
+                "api_secret_key": "<string>"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access token generated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateAccessTokenResponse"
+                },
+                "example": {
+                  "status": 1,
+                  "message": "Token Generate Successfully",
+                  "data": {
+                    "access_token": "YOUR_ACCESS_TOKEN",
+                    "token_type": "Bearer",
+                    "expires_in": 86400
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The supplied API secret key is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidApiKeyResponse"
+                },
+                "example": {
+                  "status": 0,
+                  "message": "API Secret Key is invalid."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/send": {
+      "post": {
+        "tags": [
+          "Faxes"
+        ],
+        "operationId": "sendFax",
+        "summary": "Send a fax",
+        "description": "Sends a fax with one or more PDF documents supplied as JSON.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendFaxJsonRequest"
+              },
+              "example": {
+                "fax_number": "+12509997881",
+                "fax_data": [
+                  {
+                    "file_name": "document.pdf",
+                    "file_url": "https://example.com/document.pdf"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fax processed for sending.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendFaxResponse"
+                },
+                "example": {
+                  "status": 1,
+                  "message": "Fax processed for sending",
+                  "data": {
+                    "job_id": "01M1NMGG0WY0THD0YA3ZWN9WY7"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/forward": {
+      "post": {
+        "tags": [
+          "Faxes"
+        ],
+        "operationId": "forwardFax",
+        "summary": "Forward a fax",
+        "description": "Forwards the documents from an existing fax job to another fax number.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForwardFaxRequest"
+              },
+              "example": {
+                "job_id": "12345",
+                "fax_number": "+12509997881"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fax processed for sending.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardFaxResponse"
+                },
+                "example": {
+                  "status": 1,
+                  "message": "Fax processed for sending",
+                  "data": {
+                    "job_id": "01M1NMGG0WY0THD0YA3ZWN9WY7"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/report": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1Report",
+        "summary": "Generate a fax report",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Report.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start_date": {
+                    "type": "string"
+                  },
+                  "end_date": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "start_date": "2026-03-17",
+                "end_date": "2026-03-18"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/cancel-schedule": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesCancelSchedule",
+        "summary": "Cancel Scheduled Fax",
+        "description": "Migrated from Customer API v1: Send Fax > Cancel Scheduled Fax.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KM5FAY79TDPXDDXX1EW4QJ5M"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/delete": {
+      "delete": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "deletev1FaxesDelete",
+        "summary": "Delete a fax",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Delete.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KKB70Q219TKKBSW1VRQP1XZ0"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/resend": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesResend",
+        "summary": "Resend a fax",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Resend.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KP352V1K013YQHRFS68NRV9F"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/schedule": {
+      "get": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "getv1FaxesSchedule",
+        "summary": "List scheduled faxes",
+        "description": "Migrated from Customer API v1: Send Fax > Scheduled Fax List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/lists": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesLists",
+        "summary": "List sent faxes",
+        "description": "Migrated from Customer API v1: Send Fax > Send Fax List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sort_by": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "sort_by": "Newest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/pending-approval": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesPendingApproval",
+        "summary": "List pending fax approvals",
+        "description": "Migrated from Customer API v1: Send Fax > Pending Fax Approval List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sort_by": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "sort_by": "Newest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/approval": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesApproval",
+        "summary": "Approve or reject a fax",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Approval.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": [
+                  "01KRJFN3NFSF1DZYSQTCEA9NBC"
+                ],
+                "type": "reject",
+                "comment": "Not Need To send this for now"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/download": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesDownload",
+        "summary": "Download a fax",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Download.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KM5CRXJZSQNQSCX0W5CA9W17"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/status": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesStatus",
+        "summary": "Get fax status",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Status.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KQRNWGGMCX5G3S9NYB3241MA"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/mark-as-done": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesMarkAsDone",
+        "summary": "Mark a fax as done",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Mark As Done.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KM5D2STYZQ3QTA6BB2FMJ7TE",
+                "type": "inbound"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/mark-as-not-done": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesMarkAsNotDone",
+        "summary": "Mark a fax as not done",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Mark As Not Done.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KM5D2STYZQ3QTA6BB2FMJ7TE",
+                "type": "outbound"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/transmission-receipt": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesTransmissionReceipt",
+        "summary": "Get a fax transmission receipt",
+        "description": "Migrated from Customer API v1: Send Fax > Fax Transmission Report.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "direction": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KKGWHA9ZES6M918QWHJPBPBB",
+                "direction": "outbound"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/cancel": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesCancel",
+        "summary": "Cancel a fax",
+        "description": "Migrated from Customer API v1: Send Fax > Cancel Fax.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KP352V1K013YQHRFS68NRV9F"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/verification/create_address": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersVerificationCreateAddress",
+        "summary": "Create Address",
+        "description": "Migrated from Customer API v1: Numbers > Verification > Create Address.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "street_address": {
+                    "type": "string"
+                  },
+                  "locality": {
+                    "type": "string"
+                  },
+                  "country_code": {
+                    "type": "string"
+                  },
+                  "postal_code": {
+                    "type": "string"
+                  },
+                  "administrative_area": {
+                    "type": "string"
+                  },
+                  "address_components": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "long_name": {
+                          "type": "string"
+                        },
+                        "short_name": {
+                          "type": "string"
+                        },
+                        "types": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "name": "John doe",
+                "street_address": "1 Wilerstrasse",
+                "locality": "Amlikon-Bissegg",
+                "country_code": "CH",
+                "postal_code": "8514",
+                "administrative_area": "TG",
+                "address_components": [
+                  {
+                    "long_name": "Wilerstrasse",
+                    "short_name": "Wilerstrasse",
+                    "types": [
+                      "route"
+                    ]
+                  },
+                  {
+                    "long_name": "Amlikon-Bissegg",
+                    "short_name": "Amlikon-Bissegg",
+                    "types": [
+                      "locality",
+                      "political"
+                    ]
+                  },
+                  {
+                    "long_name": "Weinfelden",
+                    "short_name": "Weinfelden",
+                    "types": [
+                      "administrative_area_level_2",
+                      "political"
+                    ]
+                  },
+                  {
+                    "long_name": "Thurgau",
+                    "short_name": "TG",
+                    "types": [
+                      "administrative_area_level_1",
+                      "political"
+                    ]
+                  },
+                  {
+                    "long_name": "Switzerland",
+                    "short_name": "CH",
+                    "types": [
+                      "country",
+                      "political"
+                    ]
+                  },
+                  {
+                    "long_name": "8514",
+                    "short_name": "8514",
+                    "types": [
+                      "postal_code"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/verification/upload_document": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersVerificationUploadDocument",
+        "summary": "Upload Document",
+        "description": "Migrated from Customer API v1: Numbers > Verification > Upload Document.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file_name": {
+                    "type": "string"
+                  },
+                  "file_url": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/verification/upload_did_requirements": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersVerificationUploadDidRequirements",
+        "summary": "Upload Did Requirements",
+        "description": "Migrated from Customer API v1: Numbers > Verification > Upload Did Requirements.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "number_id": {
+                    "type": "integer"
+                  },
+                  "requirements": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "requirement_id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "string"
+                        },
+                        "other_data": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "number_id": 2413,
+                "requirements": [
+                  {
+                    "requirement_id": "0b42b42a-d827-4b53-a2bb-8eeef919f798",
+                    "type": "address",
+                    "data": "3033482171152074501",
+                    "other_data": "ASDF, Jalan Boulevard Bukit Gading Raya, RT.6/RW.14, West Kelapa Gading, North Jakarta City, Jakarta, Indonesia"
+                  },
+                  {
+                    "requirement_id": "1cfde0b1-f85e-4444-9c1a-413cfa3f079f",
+                    "type": "document",
+                    "data": "e1f76bee-ca67-4553-9839-511074c072ca.pdf",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "2708e569-696a-4fc7-9305-5fdb3eb9c7dd",
+                    "type": "textual",
+                    "data": "Test Verification",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "6d3e2643-efaa-4bd3-8c31-77b6cda1d6a2",
+                    "type": "document",
+                    "data": "756af69c-de74-411e-b974-7cde2ed9b918.pdf",
+                    "other_data": ""
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/country-list": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "getv1NumbersCountryList",
+        "summary": "List available countries",
+        "description": "Migrated from Customer API v1: Numbers > Country list.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      }
+    },
+    "/v1/numbers/area-list": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersAreaList",
+        "summary": "List available areas",
+        "description": "Migrated from Customer API v1: Numbers > Area list.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "country_code": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "country_code": "AU"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/available-list": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersAvailableList",
+        "summary": "List available numbers",
+        "description": "Migrated from Customer API v1: Numbers > Available Number list.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "country_code": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "country_code": "CH",
+                "code": "91"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/search": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersSearch",
+        "summary": "Search available numbers",
+        "description": "Migrated from Customer API v1: Numbers > Search number.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "number": "+390802180993"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/filled_requirements": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersFilledRequirements",
+        "summary": "List filled requirements",
+        "description": "Migrated from Customer API v1: Numbers > Filled Requirements.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "country_code": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "country_code": "CH"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/purchase": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersPurchase",
+        "summary": "Purchase a number",
+        "description": "Migrated from Customer API v1: Numbers > Purchase number.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "number": "+13346412481",
+                "type": "fax"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/purchase_with_requirements": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersPurchaseWithRequirements",
+        "summary": "Purchase a number with requirements",
+        "description": "Migrated from Customer API v1: Numbers > Purchase number with requirements.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "country_code": {
+                    "type": "string"
+                  },
+                  "tier": {
+                    "type": "integer"
+                  },
+                  "requirements": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "requirement_id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "string"
+                        },
+                        "other_data": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "number": "+41912470050",
+                "type": "fax",
+                "country_code": "CH",
+                "tier": 1,
+                "requirements": [
+                  {
+                    "requirement_id": "0b42b42a-d827-4b53-a2bb-8eeef919f798",
+                    "type": "textual",
+                    "data": "478458786548",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "2708e569-696a-4fc7-9305-5fdb3eb9c7dd",
+                    "type": "textual",
+                    "data": "John doe",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "9ef887b6-7a28-47c3-964e-380680776561",
+                    "type": "document",
+                    "data": "98853a6a-a3e2-4b59-b676-6bb081faf5e3.pdf",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "a7d9a3a3-70ed-4cb4-821b-b94e8ea6dc9b",
+                    "type": "address",
+                    "data": "3034108885616035274",
+                    "other_data": "Wilerstrasse 3918, Amlikon-Bissegg, Switzerland"
+                  },
+                  {
+                    "requirement_id": "b0197fa1-c2fd-4500-9875-2c658b2396eb",
+                    "type": "document",
+                    "data": "811a8f00-41c3-4e2d-8050-58c4c57b2663.pdf",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "bf1cb27c-3693-41af-bbf6-ff4de8d41006",
+                    "type": "textual",
+                    "data": "john@doe.com",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "d3641c72-734e-4421-8bca-510b4137c0c5",
+                    "type": "textual",
+                    "data": "John fintech",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "ec029bc6-357f-404d-bdfd-f61d4e578896",
+                    "type": "document",
+                    "data": "094ab602-4ea3-4497-836c-809a5d2ded86.pdf",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "80b88912-a16a-401d-afe4-28a47d31bf89",
+                    "type": "textual",
+                    "data": "6985478521",
+                    "other_data": ""
+                  },
+                  {
+                    "requirement_id": "d28957ae-1170-4b17-919f-e78b5b6dcdba",
+                    "type": "document",
+                    "data": "67eb742d-e7ea-4e51-a144-f455037f2e92.pdf",
+                    "other_data": ""
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/numbers/list": {
+      "get": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "getv1NumbersList",
+        "summary": "List",
+        "description": "Migrated from Customer API v1: Numbers > List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      }
+    },
+    "/v1/numbers/delete": {
+      "post": {
+        "tags": [
+          "Numbers"
+        ],
+        "operationId": "postv1NumbersDelete",
+        "summary": "Delete a number",
+        "description": "Migrated from Customer API v1: Numbers > Delete number.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "number_id": {
+                    "type": "string"
+                  },
+                  "order_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "number_id": "2412",
+                "order_id": "3030535845615502435"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/received": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesReceived",
+        "summary": "List received faxes",
+        "description": "Migrated from Customer API v1: Receive Fax > Received Fax List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string"
+                  },
+                  "marked_as": {
+                    "type": "string"
+                  },
+                  "number_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "order_id": "3030597725256156236",
+                "marked_as": "Not Done",
+                "number_id": "2415"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/all/received": {
+      "get": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "getv1FaxesAllReceived",
+        "summary": "List all received faxes",
+        "description": "Migrated from Customer API v1: Receive Fax > Received All Fax List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      }
+    },
+    "/v1/faxes/assign": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesAssign",
+        "summary": "Assign a fax to a user",
+        "description": "Migrated from Customer API v1: Receive Fax > Assign Fax To User.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "emails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KKXJYK63GH7CX01FFJZ7M61N",
+                "emails": [
+                  "web55@moontechnolabs.com"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/faxes/unassign": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1FaxesUnassign",
+        "summary": "Unassign a fax from a user",
+        "description": "Migrated from Customer API v1: Receive Fax > Un-Assign Fax To User.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "emails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KKXJYK63GH7CX01FFJZ7M61N",
+                "emails": [
+                  "web55@moontechnolabs.com"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ai/process": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1AiProcess",
+        "summary": "Request OCR and NLP processing",
+        "description": "Migrated from Customer API v1: OCR & NLP > Request OCR & NLP.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "direction": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KKTE796DZDD1XET84QTPJJCR",
+                "direction": "outbound",
+                "type": "OCR"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ai/extract": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1AiExtract",
+        "summary": "Extract OCR and NLP data",
+        "description": "Migrated from Customer API v1: OCR & NLP > Extract OCR & NLP Data.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "direction": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KKXJMQMDZ6JAFVHCEG9TZ65M",
+                "direction": "outbound",
+                "type": "NLP"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/group-list": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "getv1ContactsGroupList",
+        "summary": "List contact groups",
+        "description": "Migrated from Customer API v1: Contacts > Groups > List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      }
+    },
+    "/v1/contacts/group-create": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsGroupCreate",
+        "summary": "Create a contact group",
+        "description": "Migrated from Customer API v1: Contacts > Groups > Create.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "My customers"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/group-update": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsGroupUpdate",
+        "summary": "Update a contact group",
+        "description": "Migrated from Customer API v1: Contacts > Groups > Update.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": 453,
+                "name": "Test Reseller Group CRSM"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/group-delete": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsGroupDelete",
+        "summary": "Delete a contact group",
+        "description": "Migrated from Customer API v1: Contacts > Groups > Delete.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 492
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/custom-field/list": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "getv1ContactsCustomFieldList",
+        "summary": "List contact custom fields",
+        "description": "Migrated from Customer API v1: Contacts > Custom Fields > List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      }
+    },
+    "/v1/contacts/custom-field/create": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsCustomFieldCreate",
+        "summary": "Create a contact custom field",
+        "description": "Migrated from Customer API v1: Contacts > Custom Fields > Create.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "contact_type": {
+                    "type": "string"
+                  },
+                  "validation": {
+                    "type": "string"
+                  },
+                  "contact_group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "label": "New customers field",
+                "contact_type": "patient",
+                "validation": "string_only",
+                "contact_group_ids": [
+                  453
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/custom-field/update": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsCustomFieldUpdate",
+        "summary": "Update a contact custom field",
+        "description": "Migrated from Customer API v1: Contacts > Custom Fields > Update.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "contact_type": {
+                    "type": "string"
+                  },
+                  "validation": {
+                    "type": "string"
+                  },
+                  "contact_group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "id": 1024,
+                "label": "New field",
+                "contact_type": "patient",
+                "validation": "email",
+                "contact_group_ids": [
+                  453
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/custom-field/delete": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsCustomFieldDelete",
+        "summary": "Delete a contact custom field",
+        "description": "Migrated from Customer API v1: Contacts > Custom Fields > Delete.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 968
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/create": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsCreate",
+        "summary": "Create a contact",
+        "description": "Migrated from Customer API v1: Contacts > Create.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "is_organization": {
+                    "type": "boolean"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "middle_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "suffix": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "fax_number": {
+                    "type": "string"
+                  },
+                  "dob": {
+                    "type": "string"
+                  },
+                  "gender": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "type": "individual",
+                "is_organization": false,
+                "first_name": "Primary one",
+                "middle_name": "Primary two",
+                "last_name": "Contact",
+                "suffix": "Jr",
+                "email": "web20+781111119@moontechnolabs.com",
+                "fax_number": "1 (205) 897-6411",
+                "dob": "02-09-1996",
+                "gender": "male"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/upload-patient-doc": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsUploadPatientDoc",
+        "summary": "Upload patient doc",
+        "description": "Migrated from Customer API v1: Contacts > Upload patient doc.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file_name": {
+                    "type": "string"
+                  },
+                  "file_data": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/list": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsList",
+        "summary": "List contacts",
+        "description": "Migrated from Customer API v1: Contacts > List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/details": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsDetails",
+        "summary": "Details",
+        "description": "Migrated from Customer API v1: Contacts > Details.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": "11RqmcZPbn7j3uX2OxgoKw=="
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/update": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsUpdate",
+        "summary": "Update a contact",
+        "description": "Migrated from Customer API v1: Contacts > Update.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "is_organization": {
+                    "type": "boolean"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "middle_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "suffix": {
+                    "type": "string"
+                  },
+                  "direct_message": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "address_line_2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "zip": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "organization_name": {
+                    "type": "string"
+                  },
+                  "position": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  },
+                  "is_favorite": {
+                    "type": "boolean"
+                  },
+                  "is_blocked": {
+                    "type": "boolean"
+                  },
+                  "is_accesible_to_others": {
+                    "type": "boolean"
+                  },
+                  "fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "groups": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "previous_last_name": {
+                    "type": "string"
+                  },
+                  "dob": {
+                    "type": "string"
+                  },
+                  "gender": {
+                    "type": "string"
+                  },
+                  "preferred_language": {
+                    "type": "string"
+                  },
+                  "interpreter_needed": {
+                    "type": "boolean"
+                  },
+                  "races": {
+                    "type": "string"
+                  },
+                  "ethnicity": {
+                    "type": "string"
+                  },
+                  "medical_record_number": {
+                    "type": "string"
+                  },
+                  "patient_status": {
+                    "type": "string"
+                  },
+                  "external_patient_id": {
+                    "type": "string"
+                  },
+                  "pcp_internal_contact": {
+                    "type": "string"
+                  },
+                  "pcp_external_name": {
+                    "type": "string"
+                  },
+                  "emergency_contact_name": {
+                    "type": "string"
+                  },
+                  "emergency_contact_relationship": {
+                    "type": "string"
+                  },
+                  "emergency_contact_phone": {
+                    "type": "string"
+                  },
+                  "preferred_contact_methods": {
+                    "type": "string"
+                  },
+                  "sms_opt_in": {
+                    "type": "boolean"
+                  },
+                  "email_opt_in": {
+                    "type": "boolean"
+                  },
+                  "do_not_contact": {
+                    "type": "boolean"
+                  },
+                  "coverage_type": {
+                    "type": "string"
+                  },
+                  "insurance_provider": {
+                    "type": "string"
+                  },
+                  "plan_name": {
+                    "type": "string"
+                  },
+                  "member_id": {
+                    "type": "string"
+                  },
+                  "group_number": {
+                    "type": "string"
+                  },
+                  "payer_phone": {
+                    "type": "string"
+                  },
+                  "subscriber_name": {
+                    "type": "string"
+                  },
+                  "subscriber_dob": {
+                    "type": "string"
+                  },
+                  "subscriber_relationship": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": "QrJ3MauNG0w7iFkMIodrMg==",
+                "type": "individual",
+                "is_organization": false,
+                "first_name": "Primary one",
+                "middle_name": "Primary two",
+                "last_name": "Contact",
+                "suffix": "Jr",
+                "direct_message": "",
+                "address": "Address One",
+                "address_line_2": "Address two",
+                "city": "Test city",
+                "state": "CA",
+                "zip": "898989",
+                "country": "US",
+                "organization_name": "sdfdsfds",
+                "position": "",
+                "notes": "",
+                "is_favorite": false,
+                "is_blocked": false,
+                "is_accesible_to_others": false,
+                "fields": [
+                  {
+                    "id": 357,
+                    "value": "1 (205) 369-8533"
+                  }
+                ],
+                "groups": [
+                  "249"
+                ],
+                "previous_last_name": "test",
+                "dob": "2026-03-19",
+                "gender": "male",
+                "preferred_language": "spanish",
+                "interpreter_needed": false,
+                "races": "Black or African American",
+                "ethnicity": "hispanic_or_latino",
+                "medical_record_number": "dfsfsfdsf",
+                "patient_status": "active",
+                "external_patient_id": "",
+                "pcp_internal_contact": "",
+                "pcp_external_name": "",
+                "emergency_contact_name": "dsffsf",
+                "emergency_contact_relationship": "spouse",
+                "emergency_contact_phone": "",
+                "preferred_contact_methods": "Email",
+                "sms_opt_in": false,
+                "email_opt_in": false,
+                "do_not_contact": false,
+                "coverage_type": "tertiary",
+                "insurance_provider": "",
+                "plan_name": "",
+                "member_id": "",
+                "group_number": "",
+                "payer_phone": "",
+                "subscriber_name": "",
+                "subscriber_dob": "",
+                "subscriber_relationship": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/delete": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsDelete",
+        "summary": "Delete a contact",
+        "description": "Migrated from Customer API v1: Contacts > Delete.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": "11RqmcZPbn7j3uX2OxgoKw=="
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/patient/save": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsPatientSave",
+        "summary": "Patient save",
+        "description": "Migrated from Customer API v1: Contacts > Patient save.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nlp_data_id": {
+                    "type": "integer"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "columns": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        },
+                        "key_slug": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "nlp_data_id": 5852,
+                "first_name": "Olivia",
+                "last_name": "Carter",
+                "columns": [
+                  {
+                    "key": "Document Type",
+                    "value": "Lab Test",
+                    "key_slug": "document_type"
+                  },
+                  {
+                    "key": "Priority",
+                    "value": "No",
+                    "key_slug": "priority"
+                  },
+                  {
+                    "key": "Patient Full Name",
+                    "value": "Olivia Carter",
+                    "key_slug": "patient_full_name"
+                  },
+                  {
+                    "key": "Patient First Name",
+                    "value": "Olivia",
+                    "key_slug": "patient_first_name"
+                  },
+                  {
+                    "key": "Patient Last Name",
+                    "value": "Carter",
+                    "key_slug": "patient_last_name"
+                  },
+                  {
+                    "key": "Patient Gender",
+                    "value": "Female",
+                    "key_slug": "patient_gender"
+                  },
+                  {
+                    "key": "Patient Email",
+                    "value": "sdfds@fgdfgerrr.com",
+                    "key_slug": "patient_email"
+                  },
+                  {
+                    "key": "Patient Phone",
+                    "value": "5553128821",
+                    "key_slug": "patient_phone"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/contacts/patient/get_matched_contacts": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "operationId": "postv1ContactsPatientGetMatchedContacts",
+        "summary": "Get matched contacts (NLP)",
+        "description": "Migrated from Customer API v1: Contacts > Get matched contacts (NLP).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fax_uuid": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "fax_uuid": "01KVQ5MD8ZJXHJTPRP45JAQXQS"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/labels/list": {
+      "get": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "getv1LabelsList",
+        "summary": "List labels",
+        "description": "Migrated from Customer API v1: Labels > Label List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      }
+    },
+    "/v1/labels/assign": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1LabelsAssign",
+        "summary": "Assign a label to a fax",
+        "description": "Migrated from Customer API v1: Labels > Assign Label To Fax.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "label_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01M0FAT727W7PX5RFT6FH2ARY2",
+                "label_ids": [
+                  1997,
+                  1998
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/labels/remove": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1LabelsRemove",
+        "summary": "Remove a label from a fax",
+        "description": "Migrated from Customer API v1: Labels > Remove Fax Lable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "label_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01M0FAT727W7PX5RFT6FH2ARY2",
+                "label_ids": [
+                  1998
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/custom/field/list": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1CustomFieldList",
+        "summary": "List fax custom fields",
+        "description": "Migrated from Customer API v1: Custom Field > Custom Field List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KM4QNX8CKW47RGXAT90KB74C"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/custom/field/save": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1CustomFieldSave",
+        "summary": "Create or update a fax custom field",
+        "description": "Migrated from Customer API v1: Custom Field > Add/Update Custom Field.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "custom_fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KM4QKKCRSS0V2R4SCKVW7MZN",
+                "custom_fields": [
+                  {
+                    "id": "test",
+                    "value": "Today"
+                  },
+                  {
+                    "id": "test1",
+                    "value": "Jhon Deo"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/custom/field/remove": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1CustomFieldRemove",
+        "summary": "Remove a fax custom field",
+        "description": "Migrated from Customer API v1: Custom Field > Remove Custom Field List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string"
+                  },
+                  "custom_fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "job_id": "01KM4QKKCRSS0V2R4SCKVW7MZN",
+                "custom_fields": [
+                  "test",
+                  "test1"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/automations/list": {
+      "get": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "getv1AutomationsList",
+        "summary": "List",
+        "description": "Migrated from Customer API v1: Automations > List.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/automations/segments": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1AutomationsSegments",
+        "summary": "List automation segments",
+        "description": "Migrated from Customer API v1: Automations > segments.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "trigger_type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "trigger_type": "fax_delivered"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/automations/create": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1AutomationsCreate",
+        "summary": "Create an automation",
+        "description": "Migrated from Customer API v1: Automations > Create.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "trigger": {
+                    "type": "string"
+                  },
+                  "conditions_logic": {
+                    "type": "string"
+                  },
+                  "conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "operator": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "template_id": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "settings": {
+                    "type": "object",
+                    "properties": {
+                      "check_duplicate": {
+                        "type": "integer"
+                      },
+                      "skip_other_automation": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "name": "New Lead Automation",
+                "trigger": "lead_created",
+                "conditions_logic": "all",
+                "conditions": [
+                  {
+                    "key": "country",
+                    "operator": "equals",
+                    "value": "India"
+                  },
+                  {
+                    "key": "status",
+                    "operator": "equals",
+                    "value": "new"
+                  }
+                ],
+                "actions": [
+                  {
+                    "type": "send_email",
+                    "template_id": 12
+                  },
+                  {
+                    "type": "assign_user",
+                    "user_id": 45
+                  }
+                ],
+                "settings": {
+                  "check_duplicate": 1,
+                  "skip_other_automation": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/automations/detail": {
+      "post": {
+        "tags": [
+          "Fax"
+        ],
+        "operationId": "postv1AutomationsDetail",
+        "summary": "Get automation details",
+        "description": "Migrated from Customer API v1: Automations > detail.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": "FKVmLho4RS+RA7ZW9Wka5A=="
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_documents/{documentId}/variables": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignDocumentsByDocumentIdVariables",
+        "summary": "Create Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Variables > Create Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "page": {
+                    "type": "integer"
+                  },
+                  "x_position": {
+                    "type": "integer"
+                  },
+                  "y_position": {
+                    "type": "integer"
+                  },
+                  "height": {
+                    "type": "integer"
+                  },
+                  "width": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "name": "company_name",
+                "value": "Acme Inc",
+                "page": 1,
+                "x_position": 100,
+                "y_position": 120,
+                "height": 20,
+                "width": 150
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentIdVariables",
+        "summary": "List Variables",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Variables > List Variables.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents/{documentId}/variables/{variableId}": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentIdVariablesByVariableId",
+        "summary": "Get Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Variables > Get Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignDocumentsByDocumentIdVariablesByVariableId",
+        "summary": "Update Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Variables > Update Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "value": "Acme Corporation"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignDocumentsByDocumentIdVariablesByVariableId",
+        "summary": "Delete Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Variables > Delete Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents/{documentId}/fields": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignDocumentsByDocumentIdFields",
+        "summary": "Create Fields",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Fields > Create Fields.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "linked_field_id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "document_user_id": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "x_position": {
+                          "type": "integer"
+                        },
+                        "y_position": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "required": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "fields": [
+                  {
+                    "linked_field_id": "LNK-1",
+                    "type": "text",
+                    "title": "Full Name",
+                    "document_user_id": 1,
+                    "page": 1,
+                    "x_position": 100,
+                    "y_position": 150,
+                    "height": 20,
+                    "width": 200,
+                    "required": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentIdFields",
+        "summary": "List Fields",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Fields > List Fields.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignDocumentsByDocumentIdFields",
+        "summary": "Update Fields (Bulk)",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Fields > Update Fields (Bulk).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "required": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "fields": [
+                  {
+                    "id": "<fieldId>",
+                    "title": "Updated Full Name",
+                    "required": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_documents/{documentId}/fields/{fieldId}": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentIdFieldsByFieldId",
+        "summary": "Get Field",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Fields > Get Field.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignDocumentsByDocumentIdFieldsByFieldId",
+        "summary": "Update Field (Single Route)",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Fields > Update Field (Single Route).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "fields": [
+                  {
+                    "id": "<fieldId>",
+                    "title": "Updated Single Field"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignDocumentsByDocumentIdFieldsByFieldId",
+        "summary": "Delete Field",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Fields > Delete Field.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents/{documentId}/fields/delete": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignDocumentsByDocumentIdFieldsDelete",
+        "summary": "Delete Multiple Fields",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Fields > Delete Multiple Fields.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "ids": [
+                  "<fieldId>"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_documents/{documentId}/theme": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignDocumentsByDocumentIdTheme",
+        "summary": "Create document theme",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Theme > Save Theme (POST).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "object",
+                    "properties": {
+                      "font": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "style": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "capitalization": {
+                        "type": "string"
+                      },
+                      "line_spacing": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "background": {
+                    "type": "object",
+                    "properties": {
+                      "color": {
+                        "type": "string"
+                      },
+                      "opacity": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "background_image": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "string"
+                      },
+                      "is_repeating": {
+                        "type": "boolean"
+                      },
+                      "opacity": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "applied_to_page": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "text": {
+                  "font": "Lora",
+                  "size": "10px",
+                  "style": [],
+                  "color": "#000000",
+                  "capitalization": "unset",
+                  "line_spacing": 1
+                },
+                "background": {
+                  "color": "#FFFFFF",
+                  "opacity": 100
+                },
+                "background_image": {
+                  "url": "",
+                  "size": "cover",
+                  "position": "left_top",
+                  "is_repeating": false,
+                  "opacity": 100
+                },
+                "applied_to_page": "all_pages"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentIdTheme",
+        "summary": "Get Theme",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Theme > Get Theme.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignDocumentsByDocumentIdTheme",
+        "summary": "Update document theme",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Theme > Save Theme (PATCH).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "object",
+                    "properties": {
+                      "font": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "style": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "capitalization": {
+                        "type": "string"
+                      },
+                      "line_spacing": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "background": {
+                    "type": "object",
+                    "properties": {
+                      "color": {
+                        "type": "string"
+                      },
+                      "opacity": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "background_image": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "string"
+                      },
+                      "is_repeating": {
+                        "type": "boolean"
+                      },
+                      "opacity": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "applied_to_page": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "text": {
+                  "font": "Arial",
+                  "size": "18px",
+                  "style": [],
+                  "color": "#000000",
+                  "capitalization": "unset",
+                  "line_spacing": 2
+                },
+                "background": {
+                  "color": "#FFFFFF",
+                  "opacity": 100
+                },
+                "background_image": {
+                  "url": "",
+                  "size": "cover",
+                  "position": "left_top",
+                  "is_repeating": false,
+                  "opacity": 100
+                },
+                "applied_to_page": "all_pages"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignDocumentsByDocumentIdTheme",
+        "summary": "Delete Theme",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Theme > Delete Theme.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents/{documentId}/field_rule": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignDocumentsByDocumentIdFieldRule",
+        "summary": "Create Field Rule",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Field Rules > Create Field Rule.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "field_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "condition_value": {
+                    "type": "string"
+                  },
+                  "actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field_type": {
+                          "type": "string"
+                        },
+                        "field_value": {
+                          "type": "string"
+                        },
+                        "show_fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "field_id": "<fieldId>",
+                "name": "Rule 1",
+                "condition_value": "yes",
+                "actions": [
+                  {
+                    "field_type": "text",
+                    "field_value": "",
+                    "show_fields": [
+                      "<fieldId>"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentIdFieldRule",
+        "summary": "List Field Rules",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Field Rules > List Field Rules.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents/{documentId}/field_rule/{fieldRuleId}": {
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignDocumentsByDocumentIdFieldRuleByFieldRuleId",
+        "summary": "Update Field Rule",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Field Rules > Update Field Rule.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldRuleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "field_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "condition_value": {
+                    "type": "boolean"
+                  },
+                  "actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field_type": {
+                          "type": "string"
+                        },
+                        "field_value": {
+                          "type": "boolean"
+                        },
+                        "show_fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "reference_id": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "field_id": 115806,
+                "name": "Checkbox1",
+                "condition_value": true,
+                "actions": [
+                  {
+                    "field_type": "checkbox",
+                    "field_value": true,
+                    "show_fields": [
+                      {
+                        "id": 115229,
+                        "title": "Name",
+                        "reference_id": "18108e8501ee4c5bab003cbd38bade9e"
+                      },
+                      {
+                        "id": 115940,
+                        "title": "Signature",
+                        "reference_id": "8c2eb61af03e4117b4fa8e0b55be5af8"
+                      },
+                      {
+                        "id": 115941,
+                        "title": "Company",
+                        "reference_id": "e33e1c1a066c410b803b74fee2f2f522"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignDocumentsByDocumentIdFieldRuleByFieldRuleId",
+        "summary": "Delete Field Rule",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Field Rules > Delete Field Rule.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldRuleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocuments",
+        "summary": "List Documents",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > List Documents.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignDocuments",
+        "summary": "Create Document",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Create Document.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string"
+                  },
+                  "has_sign_order": {
+                    "type": "boolean"
+                  },
+                  "users": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string"
+                        },
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "sign_order": {
+                          "type": "integer"
+                        },
+                        "redirect_url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "due_date": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "My New Document",
+                "file": "base64 converted pdf ",
+                "has_sign_order": true,
+                "users": [
+                  {
+                    "email": "signer@example.com",
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "sign_order": 1,
+                    "redirect_url": "https://example.com/success"
+                  }
+                ],
+                "due_date": "2026-07-07"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_documents/{documentId}": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentId",
+        "summary": "Get document status",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Document Status.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignDocumentsByDocumentId",
+        "summary": "Update Document",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Update Document.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "page_count": {
+                    "type": "integer"
+                  },
+                  "page_no": {
+                    "type": "integer"
+                  },
+                  "is_active": {
+                    "type": "boolean"
+                  },
+                  "has_sign_order": {
+                    "type": "boolean"
+                  },
+                  "is_fields_placed": {
+                    "type": "boolean"
+                  },
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "due_date": {},
+                      "expiry_date": {},
+                      "message": {
+                        "type": "string"
+                      },
+                      "notify_emails": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "allow_download": {
+                        "type": "boolean"
+                      },
+                      "attach_document": {
+                        "type": "boolean"
+                      },
+                      "attach_document_cc": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "name": "Updated Document Name",
+                "status": "draft",
+                "page_count": 1,
+                "page_no": 1,
+                "is_active": false,
+                "has_sign_order": false,
+                "is_fields_placed": true,
+                "config": {
+                  "due_date": null,
+                  "expiry_date": null,
+                  "message": "Please sign",
+                  "notify_emails": [],
+                  "allow_download": true,
+                  "attach_document": true,
+                  "attach_document_cc": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignDocumentsByDocumentId",
+        "summary": "Delete Document",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Delete Document.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents/{documentId}/send": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignDocumentsByDocumentIdSend",
+        "summary": "Send Document",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Send Document.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "device_name": {
+                    "type": "string"
+                  },
+                  "ip_address": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "is_from_copy_link": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "example": {
+                "device_name": "Postman",
+                "ip_address": "127.0.0.1",
+                "location": "Local",
+                "is_from_copy_link": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_documents/{documentId}/download": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignDocumentsByDocumentIdDownload",
+        "summary": "Download Document",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Download Document.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_documents/{documentId}/pages/{pageNumber}": {
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignDocumentsByDocumentIdPagesByPageNumber",
+        "summary": "Delete Document Page",
+        "description": "Migrated from Customer API v1: Customer eSign Documents > Delete Document Page.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates/{templateId}/variables": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignTemplatesByTemplateIdVariables",
+        "summary": "Create Template Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Variables > Create Template Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "company_name",
+                "value": "Acme Inc"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplatesByTemplateIdVariables",
+        "summary": "List Template Variables",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Variables > List Template Variables.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates/{templateId}/variables/{templateVariableId}": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplatesByTemplateIdVariablesByTemplateVariableId",
+        "summary": "Get Template Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Variables > Get Template Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateVariableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignTemplatesByTemplateIdVariablesByTemplateVariableId",
+        "summary": "Update Template Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Variables > Update Template Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateVariableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "value": "Acme Corporation"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignTemplatesByTemplateIdVariablesByTemplateVariableId",
+        "summary": "Delete Template Variable",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Variables > Delete Template Variable.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateVariableId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates/{templateId}/theme": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignTemplatesByTemplateIdTheme",
+        "summary": "Create template theme",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Theme > Save Template Theme (POST).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "object",
+                    "properties": {
+                      "font": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "style": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "capitalization": {
+                        "type": "string"
+                      },
+                      "line_spacing": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "background": {
+                    "type": "object",
+                    "properties": {
+                      "color": {
+                        "type": "string"
+                      },
+                      "opacity": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "background_image": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "position": {
+                        "type": "string"
+                      },
+                      "is_repeating": {
+                        "type": "boolean"
+                      },
+                      "opacity": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "applied_to_page": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "text": {
+                  "font": "Arial",
+                  "size": "18px",
+                  "style": [],
+                  "color": "#000000",
+                  "capitalization": "unset",
+                  "line_spacing": 2
+                },
+                "background": {
+                  "color": "#FFFFFF",
+                  "opacity": 100
+                },
+                "background_image": {
+                  "url": "",
+                  "size": "cover",
+                  "position": "left_top",
+                  "is_repeating": false,
+                  "opacity": 100
+                },
+                "applied_to_page": "all_pages"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplatesByTemplateIdTheme",
+        "summary": "Get Template Theme",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Theme > Get Template Theme.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignTemplatesByTemplateIdTheme",
+        "summary": "Update template theme",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Theme > Save Template Theme (PATCH).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "font": {
+                    "type": "string"
+                  },
+                  "font_size": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "string"
+                  },
+                  "opacity": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "font": "Arial",
+                "font_size": "16",
+                "color": "#1F2937",
+                "opacity": 100
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignTemplatesByTemplateIdTheme",
+        "summary": "Delete Template Theme",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Theme > Delete Template Theme.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates/{templateId}/fields": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignTemplatesByTemplateIdFields",
+        "summary": "Create Template Fields",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Fields > Create Template Fields.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "linked_field_id": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "user_role_id": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "x_position": {
+                          "type": "integer"
+                        },
+                        "y_position": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "required": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "fields": [
+                  {
+                    "linked_field_id": "LNK-1",
+                    "type": "text",
+                    "title": "Template Field",
+                    "user_role_id": 1,
+                    "page": 1,
+                    "x_position": 100,
+                    "y_position": 150,
+                    "height": 20,
+                    "width": 200,
+                    "required": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplatesByTemplateIdFields",
+        "summary": "List Template Fields",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Fields > List Template Fields.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignTemplatesByTemplateIdFields",
+        "summary": "Update Template Fields (Bulk)",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Fields > Update Template Fields (Bulk).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "fields": [
+                  {
+                    "id": "<fieldTemplateId>",
+                    "title": "Updated Template Field"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_templates/{templateId}/fields/{fieldTemplateId}": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplatesByTemplateIdFieldsByFieldTemplateId",
+        "summary": "Get Template Field",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Fields > Get Template Field.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldTemplateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignTemplatesByTemplateIdFieldsByFieldTemplateId",
+        "summary": "Update Template Field (Single Route)",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Fields > Update Template Field (Single Route).",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldTemplateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "fields": [
+                  {
+                    "id": "<fieldTemplateId>",
+                    "title": "Updated Template Field"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignTemplatesByTemplateIdFieldsByFieldTemplateId",
+        "summary": "Delete Template Field",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Fields > Delete Template Field.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fieldTemplateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates/{templateId}/fields/delete": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignTemplatesByTemplateIdFieldsDelete",
+        "summary": "Delete Multiple Template Fields",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Fields > Delete Multiple Template Fields.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "ids": [
+                  "<fieldTemplateId>"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_templates/{templateId}/field_rule": {
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignTemplatesByTemplateIdFieldRule",
+        "summary": "Create Template Field Rule",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Field Rules > Create Template Field Rule.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "field_id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "condition_value": {
+                    "type": "string"
+                  },
+                  "actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field_type": {
+                          "type": "string"
+                        },
+                        "field_value": {
+                          "type": "string"
+                        },
+                        "show_fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "field_id": "<fieldTemplateId>",
+                "name": "Template Rule",
+                "condition_value": "yes",
+                "actions": [
+                  {
+                    "field_type": "text",
+                    "field_value": "",
+                    "show_fields": [
+                      "<fieldTemplateId>"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplatesByTemplateIdFieldRule",
+        "summary": "List Template Field Rules",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Field Rules > List Template Field Rules.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates/{templateId}/field_rule/{templateFieldRuleId}": {
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignTemplatesByTemplateIdFieldRuleByTemplateFieldRuleId",
+        "summary": "Update Template Field Rule",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Field Rules > Update Template Field Rule.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateFieldRuleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "actions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "field_type": {
+                          "type": "string"
+                        },
+                        "field_value": {
+                          "type": "string"
+                        },
+                        "show_fields": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "name": "Updated Template Rule",
+                "actions": [
+                  {
+                    "field_type": "text",
+                    "field_value": "",
+                    "show_fields": [
+                      "<fieldTemplateId>"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignTemplatesByTemplateIdFieldRuleByTemplateFieldRuleId",
+        "summary": "Delete Template Field Rule",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Field Rules > Delete Template Field Rule.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "templateFieldRuleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplates",
+        "summary": "List Templates",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > List Templates.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "postv1EsignTemplates",
+        "summary": "Create Template",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Create Template.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "file": {
+                    "type": "string"
+                  },
+                  "signers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "name": "check temp",
+                "file": "base64 converted pdf ",
+                "signers": [
+                  "CEO",
+                  "DEV"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/esign_templates/{templateId}": {
+      "get": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "getv1EsignTemplatesByTemplateId",
+        "summary": "Get template details",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Template Details.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "patchv1EsignTemplatesByTemplateId",
+        "summary": "Update Template",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Update Template.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file_type": {
+                    "type": "string"
+                  },
+                  "page_count": {
+                    "type": "integer"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "template_source": {
+                    "type": "string"
+                  },
+                  "template_source_id": {
+                    "type": "integer"
+                  },
+                  "theme": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "object",
+                        "properties": {
+                          "font": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "string"
+                          },
+                          "style": {
+                            "type": "array",
+                            "items": {}
+                          },
+                          "color": {
+                            "type": "string"
+                          },
+                          "capitalization": {
+                            "type": "string"
+                          },
+                          "line_spacing": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "background": {
+                        "type": "object",
+                        "properties": {
+                          "color": {
+                            "type": "string"
+                          },
+                          "opacity": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "background_image": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "string"
+                          },
+                          "position": {
+                            "type": "string"
+                          },
+                          "is_repeating": {
+                            "type": "boolean"
+                          },
+                          "opacity": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "applied_to_page": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      },
+                      "notify_emails": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "redirect_url": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "file_type": "pdf",
+                "page_count": 1,
+                "source": "app",
+                "template_source": "blank",
+                "template_source_id": 0,
+                "theme": {
+                  "text": {
+                    "font": "Arial",
+                    "size": "14px",
+                    "style": [],
+                    "color": "#000000",
+                    "capitalization": "unset",
+                    "line_spacing": 1
+                  },
+                  "background": {
+                    "color": "#FFFFFF",
+                    "opacity": 100
+                  },
+                  "background_image": {
+                    "url": "",
+                    "size": "cover",
+                    "position": "left_top",
+                    "is_repeating": false,
+                    "opacity": 100
+                  },
+                  "applied_to_page": "all_pages"
+                },
+                "config": {
+                  "message": "Please review this document online.\n\nBest regards,\nweb one",
+                  "notify_emails": [],
+                  "redirect_url": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignTemplatesByTemplateId",
+        "summary": "Delete Template",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Delete Template.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/esign_templates/{templateId}/pages/{pageNumber}": {
+      "delete": {
+        "tags": [
+          "Collect"
+        ],
+        "operationId": "deletev1EsignTemplatesByTemplateIdPagesByPageNumber",
+        "summary": "Delete Template Page",
+        "description": "Migrated from Customer API v1: Customer eSign Templates > Delete Template Page.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response. Response body was not included in the source collection."
+          }
+        },
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "GenerateAccessTokenRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "api_secret_key"
+        ],
+        "properties": {
+          "api_secret_key": {
+            "type": "string",
+            "description": "API key created in the Amplify dashboard.",
+            "example": "<string>"
+          }
+        }
+      },
+      "GenerateAccessTokenResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 1
+          },
+          "message": {
+            "type": "string",
+            "example": "Token Generate Successfully"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "access_token",
+              "token_type",
+              "expires_in"
+            ],
+            "properties": {
+              "access_token": {
+                "type": "string",
+                "description": "Bearer token used for subsequent API requests.",
+                "example": "YOUR_ACCESS_TOKEN"
+              },
+              "token_type": {
+                "type": "string",
+                "const": "Bearer"
+              },
+              "expires_in": {
+                "type": "integer",
+                "description": "Token lifetime in seconds.",
+                "example": 86400
+              }
+            }
+          }
+        }
+      },
+      "InvalidApiKeyResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "const": 0
+          },
+          "message": {
+            "type": "string",
+            "const": "API Secret Key is invalid."
+          }
+        }
+      },
+      "SendFaxJsonRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fax_number",
+          "fax_data"
+        ],
+        "not": {
+          "required": [
+            "template_id",
+            "smart_document_id"
+          ]
+        },
+        "properties": {
+          "fax_number": {
+            "type": "string",
+            "description": "Destination fax number in E.164 format.",
+            "pattern": "^\\+[1-9][0-9]{1,14}$",
+            "example": "+12509997881"
+          },
+          "caller_id": {
+            "type": "string",
+            "description": "Caller ID or sending fax number in E.164 format. When omitted, the value comes from the selected Fax Default or the account's default Fax Default.",
+            "pattern": "^\\+[1-9][0-9]{1,14}$",
+            "example": "+12513120176"
+          },
+          "template_id": {
+            "type": "string",
+            "description": "ID of a Fax Default used as the cover-page template. Find it under Settings > iFax Settings > Fax Defaults. Cannot be combined with smart_document_id.",
+            "example": "1055"
+          },
+          "is_required_approval": {
+            "type": "boolean",
+            "description": "Whether the fax requires approval before it is sent.",
+            "example": false
+          },
+          "fax_priority": {
+            "type": "string",
+            "description": "Fax priority.",
+            "enum": [
+              "high",
+              "regular"
+            ],
+            "default": "regular",
+            "example": "high"
+          },
+          "smart_document_id": {
+            "type": "string",
+            "description": "ID of a Smart Template. Find it under Settings > iFax Settings > Smart Templates. Cannot be combined with template_id.",
+            "example": "10210"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Fax subject.",
+            "example": "Test Subject"
+          },
+          "from_name": {
+            "type": "string",
+            "description": "Sender name.",
+            "example": "Sender Name"
+          },
+          "to_name": {
+            "type": "string",
+            "description": "Recipient name.",
+            "example": "Recipient Name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message associated with the fax.",
+            "example": "Fax sent through the Amplify API"
+          },
+          "scheduled_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Scheduled transmission date and time in ISO 8601 format.",
+            "example": "2026-05-06T09:42:00Z"
+          },
+          "fax_quality": {
+            "type": "string",
+            "description": "Requested fax quality. When omitted, the value comes from the selected Fax Default or the account's default Fax Default.",
+            "enum": [
+              "low",
+              "standard",
+              "hd"
+            ],
+            "example": "hd"
+          },
+          "fax_data": {
+            "type": "array",
+            "description": "Documents to include in the fax.",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/SendFaxJsonDocument"
+            }
+          }
+        }
+      },
+      "SendFaxJsonDocument": {
+        "type": "object",
+        "additionalProperties": false,
+        "oneOf": [
+          {
+            "required": [
+              "file_data"
+            ]
+          },
+          {
+            "required": [
+              "file_url"
+            ]
+          }
+        ],
+        "required": [
+          "file_name"
+        ],
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Document file name.",
+            "example": "document.pdf"
+          },
+          "file_data": {
+            "type": "string",
+            "description": "Base64-encoded contents of a PDF file."
+          },
+          "file_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Publicly accessible URL of a PDF file.",
+            "example": "https://example.com/document.pdf"
+          }
+        }
+      },
+      "SendFaxResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "const": 1
+          },
+          "message": {
+            "type": "string",
+            "const": "Fax processed for sending"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "job_id"
+            ],
+            "properties": {
+              "job_id": {
+                "type": "string",
+                "description": "Unique identifier for the submitted fax job.",
+                "example": "01M1NMGG0WY0THD0YA3ZWN9WY7"
+              }
+            }
+          }
+        }
+      },
+      "ForwardFaxRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "job_id",
+          "fax_number"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "description": "ID of the existing fax job whose documents will be forwarded.",
+            "example": "12345"
+          },
+          "fax_number": {
+            "type": "string",
+            "description": "Destination fax number in E.164 format.",
+            "pattern": "^\\+[1-9][0-9]{1,14}$",
+            "example": "+12509997881"
+          },
+          "caller_id": {
+            "type": "string",
+            "description": "Caller ID in E.164 format. When omitted, the account's default fax_as value is used.",
+            "pattern": "^\\+[1-9][0-9]{1,14}$",
+            "example": "+12513120176"
+          }
+        }
+      },
+      "ForwardFaxResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "message",
+          "data"
+        ],
+        "properties": {
+          "status": {
+            "type": "integer",
+            "const": 1
+          },
+          "message": {
+            "type": "string",
+            "const": "Fax processed for sending"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "job_id"
+            ],
+            "properties": {
+              "job_id": {
+                "type": "string",
+                "description": "ID of the new fax job created by the forward operation.",
+                "example": "01M1NMGG0WY0THD0YA3ZWN9WY7"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+---
+title: "Create or update a fax custom field"
+description: "Create or update custom-field values for a fax."
+openapi: "POST /v1/custom/field/save"
+---
+
+Provide the required fax identifier in `job_id` and the fields to save in the required `custom_fields` array. Every item requires `id`. Include `value` whenever you are adding or updating a field value. Authenticate with a Bearer access token.

@@ -1,0 +1,13 @@
+---
+title: "Purchase a number with requirements"
+description: "Purchase a phone number and submit its regulatory requirements."
+openapi: "POST /v1/numbers/purchase_with_requirements"
+---
+
+Purchases the specified number while submitting the textual, document, and address evidence required for regulatory approval.
+
+The optional top-level `type` field accepts `fax` or `voice`. Within each item in `requirements`, the observed `type` values are:
+
+- `textual` for text-based evidence
+- `document` for an uploaded verification document
+- `address` for a verification address

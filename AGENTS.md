@@ -1,7 +1,3 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
-
 # Documentation project instructions
 
 ## About this project
@@ -14,8 +10,11 @@
 
 ## Terminology
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- Use "Amplify API" for the public REST API.
+- Use "resource" for an API object such as a fax, document, or contact.
+- Use "access token" for credentials sent in the `access_token` header.
+- Use "bearer token" for credentials sent in the `Authorization` header.
+- Format field names, parameter names, paths, and header names as code.
 
 ## Style preferences
 
@@ -29,5 +28,7 @@
 
 ## Content boundaries
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Document only behavior supported by an approved API contract.
+- Do not document internal implementation details or unconfirmed roadmap features.
+- Do not publish real credentials, tenant data, or personally identifiable information in examples.
+- Call out unsupported v1 capabilities instead of implying that they are available.

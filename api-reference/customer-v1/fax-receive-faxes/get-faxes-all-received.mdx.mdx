@@ -1,0 +1,9 @@
+---
+title: "List all received faxes"
+description: "Retrieve every received fax available to the authenticated account."
+openapi: "GET /v1/faxes/all/received"
+---
+
+Retrieve received faxes across the authenticated account. Use `limit` and `cursor` to page through the results.
+
+Each fax includes its job identifier, sender and receiver, duration, page count, and received time.

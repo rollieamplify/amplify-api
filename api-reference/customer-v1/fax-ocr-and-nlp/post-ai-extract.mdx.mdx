@@ -1,0 +1,11 @@
+---
+title: "Extract OCR and NLP data"
+description: "Retrieve OCR or NLP data generated for a fax."
+openapi: "POST /v1/ai/extract"
+---
+
+Provide the required `job_id`, `direction`, and `type` fields. Set `direction` to `inbound` or `outbound`. The `type` value is case-sensitive and accepts `OCR` or `NLP`. Authenticate with a Bearer access token.
+
+<Note>
+The `200` response has separate shortened OCR and NLP examples. OCR returns an array of detected blocks in `data.json_text`; NLP returns a structured object. See [OCR and NLP response formats](/guides/ocr-nlp-response-formats).
+</Note>

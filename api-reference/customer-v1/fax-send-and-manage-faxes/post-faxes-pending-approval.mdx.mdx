@@ -1,0 +1,11 @@
+---
+title: "List pending fax approvals"
+description: "Retrieve faxes waiting for approval."
+openapi: "POST /v1/faxes/pending-approval"
+---
+
+Retrieve pending fax approvals for the authenticated account. Use `limit` and `cursor` to page through results and `sort_by` to select the supported sort order.
+
+Each pending fax includes its `job_id`, read state, direction, sender and receiver, page count, status, and creation and update times.
+
+When there are no pending approvals, the API omits the `data` property.

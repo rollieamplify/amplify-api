@@ -1,7 +1,7 @@
 ---
 title: "Send a fax"
 sidebarTitle: "Send a fax"
-description: "Send a fax with a document upload, encoded document data, or a document URL."
+description: "Send a fax with Base64-encoded PDF data or a publicly accessible PDF URL."
 ---
 
 Use the Fax API to send PDF documents from your server to a destination fax number. Send requests as `application/json`.
@@ -55,7 +55,22 @@ Include `scheduled_date` to schedule the transmission. Use an [ISO 8601 timestam
 
 ## Choose the fax quality
 
-Set `fax_quality` to `low`, `standard`, or `hd`.
+Set `fax_quality` to `low`, `standard`, or `hd`. If omitted, the selected Fax Default determines the quality. Without `template_id`, the account's default Fax Default is used.
+
+## Apply a template
+
+Use `template_id` for a Fax Default cover-page template or `smart_document_id` for a Smart Template. You cannot provide both fields in the same request, and `fax_data` remains required.
+
+Find these IDs in the Amplify dashboard:
+
+- **Settings → iFax Settings → Fax Defaults** for `template_id`
+- **Settings → iFax Settings → Smart Templates** for `smart_document_id`
+
+## Set priority and approval
+
+Set `fax_priority` to `high` or `regular`. When omitted, it defaults to `regular`.
+
+Set `is_required_approval` to the JSON boolean `true` or `false`.
 
 ## Other supported fields
 

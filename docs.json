@@ -296,8 +296,9 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/amplify-logo.png",
+    "dark": "/logo/amplify-logo.png",
+    "href": "https://amplify.xyz"
   },
   "navbar": {
     "links": [

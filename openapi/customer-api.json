@@ -9,10 +9,6 @@
     {
       "url": "https://api.amplify.xyz",
       "description": "Production"
-    },
-    {
-      "url": "https://dev-api.amplify.xyz",
-      "description": "Development"
     }
   ],
   "tags": [

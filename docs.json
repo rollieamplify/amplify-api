@@ -4,8 +4,8 @@
   "name": "Amplify API",
   "colors": {
     "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "light": "#f0e9e9",
+    "dark": "#0f0f0f"
   },
   "favicon": "/favicon.svg",
   "api": {
@@ -324,5 +324,14 @@
       "cursor",
       "vscode"
     ]
+  },
+  "background": {
+    "color": {
+      "light": "#ffffff",
+      "dark": "#000000"
+    }
+  },
+  "icons": {
+    "library": "fontawesome"
   }
 }

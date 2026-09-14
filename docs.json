@@ -3,11 +3,14 @@
   "theme": "mint",
   "name": "Amplify API",
   "colors": {
-    "primary": "#16A34A",
+    "primary": "#9432FD",
     "light": "#f0e9e9",
     "dark": "#0f0f0f"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/images/icon.png",
+    "dark": "/images/icon_white.png"
+  },
   "api": {
     "openapi": "openapi/customer-api.yaml",
     "mdx": {

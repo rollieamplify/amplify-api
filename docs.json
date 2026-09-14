@@ -7,15 +7,49 @@
     "light": "#f0e9e9",
     "dark": "#0f0f0f"
   },
+  "background": {
+    "color": {
+      "light": "#ffffff",
+      "dark": "#000000"
+    }
+  },
+  "appearance": {
+    "default": "system",
+    "strict": false
+  },
+  "fonts": {
+    "family": "Inter"
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "logo": {
+    "light": "/images/132.svg",
+    "dark": "/images/Layer_2.svg",
+    "href": "https://amplify.xyz"
+  },
   "favicon": {
-    "light": "/images/icon.png",
-    "dark": "/images/icon_white.png"
+    "light": "/images/Light.png",
+    "dark": "/images/FAV.png"
   },
   "api": {
     "openapi": "openapi/customer-api.yaml",
     "mdx": {
       "server": "https://api.amplify.xyz"
     }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ],
+    "display": "header"
   },
   "navigation": {
     "pages": [
@@ -298,11 +332,6 @@
       ]
     }
   },
-  "logo": {
-    "light": "/logo/amplify-logo.png",
-    "dark": "/logo/amplify-logo.png",
-    "href": "https://amplify.xyz"
-  },
   "navbar": {
     "links": [
       {
@@ -315,26 +344,5 @@
       "label": "API reference",
       "href": "/api-reference/introduction"
     }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
-  },
-  "background": {
-    "color": {
-      "light": "#ffffff",
-      "dark": "#000000"
-    }
-  },
-  "icons": {
-    "library": "fontawesome"
   }
 }

@@ -183,6 +183,7 @@
         "pages": [
           "api-reference/customer-v1/contacts/post-contacts-create.mdx",
           "api-reference/customer-v1/contacts/post-contacts-upload-patient-doc.mdx",
+          "api-reference/customer-v1/contacts/post-contacts-upload-lab-doc.mdx",
           "api-reference/customer-v1/contacts/post-contacts-list.mdx",
           "api-reference/customer-v1/contacts/post-contacts-details.mdx",
           "api-reference/customer-v1/contacts/post-contacts-update.mdx",

@@ -2654,7 +2654,12 @@ paths:
       - Contacts
       operationId: postv1ContactsCreate
       summary: Create a contact
-      description: Creates an individual or organization contact in the authenticated workspace.
+      description: |-
+        Creates an individual, organization, or patient contact in the authenticated workspace.
+
+        Set `type` to choose the contact type. All contact types accept the common fields. Organization contacts also accept the organization fields, individual contacts accept the individual fields, and patient contacts accept the patient demographic, contact preference, insurance, and document fields.
+
+        To attach documents to a patient contact, upload each file first and pass the returned `doc_id` in `documents`.
       security:
       - bearerAuth: []
       responses:
@@ -2676,39 +2681,79 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                type:
-                  type: string
-                is_organization:
-                  type: boolean
-                first_name:
-                  type: string
-                middle_name:
-                  type: string
-                last_name:
-                  type: string
-                suffix:
-                  type: string
-                email:
-                  type: string
-                fax_number:
-                  type: string
-                dob:
-                  type: string
-                gender:
-                  type: string
-            example:
-              type: individual
-              is_organization: false
-              first_name: Primary one
-              middle_name: Primary two
-              last_name: Contact
-              suffix: Jr
-              email: web20+781111119@moontechnolabs.com
-              fax_number: "+12058976411"
-              dob: '1996-09-02'
-              gender: male
+              $ref: '#/components/schemas/ContactCreateRequest'
+            examples:
+              individual:
+                summary: Individual contact
+                value:
+                  type: individual
+                  is_organization: false
+                  first_name: Jordan
+                  last_name: Rivera
+                  suffix: Jr
+                  email: jordan.rivera@example.com
+                  phone_number: 1 (205) 555-0142
+                  fax_number: 1 (205) 555-0198
+                  previous_last_name: ''
+                  role_title: Office manager
+                  groups:
+                  - '153'
+              organization:
+                summary: Organization contact
+                value:
+                  type: organization
+                  is_organization: true
+                  organization_name: Example Family Clinic
+                  primary_contact_name: Sam Lee
+                  organization_type: clinic
+                  website: https://www.example.com
+                  npi: '1234567890'
+                  tax_id: 12-3456789
+                  fax_number: 1 (205) 555-0177
+              patient:
+                summary: Patient contact
+                value:
+                  type: patient
+                  is_organization: false
+                  first_name: Alex
+                  middle_name: Morgan
+                  last_name: Patient
+                  email: alex.patient@example.com
+                  phone_number: 1 (205) 555-0110
+                  address: 100 Example Street
+                  city: Example City
+                  state: CA
+                  zip: '90001'
+                  country: US
+                  dob: '1985-04-12'
+                  gender: female
+                  preferred_language: english
+                  interpreter_needed: false
+                  ethnicity: not_hispanic_or_latino
+                  medical_record_number: MRN-000123
+                  patient_status: active
+                  emergency_contact_name: Casey Patient
+                  emergency_contact_relationship: spouse
+                  emergency_contact_phone: 1 (205) 555-0111
+                  sms_opt_in: false
+                  email_opt_in: true
+                  do_not_contact: false
+                  coverage_type: primary
+                  insurance_provider: aetna
+                  plan_name: Example PPO
+                  member_id: MEM0001234
+                  group_number: GRP-5678
+                  payer_phone: 1 (800) 555-0100
+                  subscriber_name: Alex Patient
+                  subscriber_dob: '1985-04-12'
+                  subscriber_relationship: self
+                  documents:
+                  - doc_id: 171
+                    document_type: patient_profile
+                    document_date: '2026-03-19'
+                    document_name: patient-profile.pdf
+                    document_notes: Intake profile
+                    document_size: 80418
       x-amplify-validation-status: partially-validated
   "/v1/contacts/upload-patient-doc":
     post:
@@ -2745,6 +2790,60 @@ paths:
                 file_data:
                   type: string
               required: [file_name]
+      x-amplify-validation-status: pending
+  "/v1/contacts/upload-lab-doc":
+    post:
+      tags:
+      - Contacts
+      operationId: postv1ContactsUploadLabDoc
+      summary: Upload a lab document
+      description: |-
+        Uploads a lab document and returns its `doc_id`.
+
+        Provide the document in exactly one of `file`, `file_data`, or `file_url`. To add the document to an existing lab data record, pass its `lab_data_id`.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Lab document uploaded successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabDocumentUploadResponse'
+              example:
+                status: 1
+                message: Lab document uploaded successfully.
+                data:
+                  doc_id: 584
+                  lab_data_id: null
+                  name: lab-results.pdf
+                  extension: pdf
+                  url: https://example-bucket.s3.us-west-2.amazonaws.com/lab-documents/lab-results.pdf?X-Amz-Expires=3600
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The document file to upload. Provide this, `file_data`, or `file_url`.
+                file_data:
+                  type: string
+                  format: byte
+                  description: The document content as Base64-encoded data. Provide this, `file`, or `file_url`.
+                file_url:
+                  type: string
+                  format: uri
+                  description: A publicly accessible URL of the document. Provide this, `file`, or `file_data`.
+                file_name:
+                  type: string
+                  description: The name of the uploaded file.
+                lab_data_id:
+                  type: integer
+                  description: The ID of an existing lab data record. Pass this to add the document to that record.
       x-amplify-validation-status: pending
   "/v1/contacts/list":
     post:
@@ -2792,7 +2891,10 @@ paths:
       - Contacts
       operationId: postv1ContactsDetails
       summary: Get contact details
-      description: Returns a contact by the encrypted identifier provided by List contacts.
+      description: |-
+        Returns a contact by the encrypted identifier provided by List contacts.
+
+        Patient contacts include demographic, contact preference, insurance, and document fields. Each item in `contact_documents` includes a temporary `document_url` that expires after one hour.
       security:
       - bearerAuth: []
       responses:
@@ -2814,6 +2916,68 @@ paths:
                       first_name: James
                       last_name: John
                       type: individual
+                patient:
+                  summary: Patient contact found
+                  value:
+                    status: 1
+                    message: Contact retrieved successfully.
+                    data:
+                      id: 11RqmcZPbn7j3uX2OxgoKw==
+                      is_organization: false
+                      type: patient
+                      first_name: Alex
+                      middle_name: Morgan
+                      last_name: Patient
+                      email: alex.patient@example.com
+                      phone_number: '12055550110'
+                      address: 100 Example Street
+                      city: Example City
+                      state: CA
+                      zip: '90001'
+                      country: US
+                      dob: '1985-04-12'
+                      gender: female
+                      preferred_language: english
+                      interpreter_needed: 0
+                      ethnicity: not_hispanic_or_latino
+                      medical_record_number: MRN-000123
+                      patient_status: active
+                      external_patient_id: ''
+                      pcp_internal_contact: ''
+                      pcp_external_name: ''
+                      emergency_contact_name: Casey Patient
+                      emergency_contact_relationship: spouse
+                      emergency_contact_phone: 1 (205) 555-0111
+                      sms_opt_in: 0
+                      email_opt_in: 1
+                      do_not_contact: 0
+                      coverage_type: primary
+                      insurance_provider: aetna
+                      plan_name: Example PPO
+                      member_id: MEM0001234
+                      group_number: GRP-5678
+                      payer_phone: 1 (800) 555-0100
+                      subscriber_name: Alex Patient
+                      subscriber_dob: '1985-04-12'
+                      subscriber_relationship: self
+                      is_favorite: false
+                      is_blocked: false
+                      is_accesible_to_others: true
+                      created_at: '2026-03-19T08:20:58.000000Z'
+                      updated_at: '2026-03-19T10:52:39.000000Z'
+                      contact_documents:
+                      - id: 95
+                        doc_id: '171'
+                        document_type: patient_profile
+                        document_date: '2026-03-19'
+                        document_name: patient-profile.pdf
+                        document_notes: Intake profile
+                        document_size: '80418'
+                        document_url: https://example-bucket.s3.us-west-2.amazonaws.com/patient/patient-profile.pdf?X-Amz-Expires=3600
+                      fields: []
+                      groups:
+                      - id: 153
+                        name: Patients
                 notFound:
                   summary: Contact not found
                   value: { status: 1, message: Contact not found }
@@ -2843,7 +3007,12 @@ paths:
       - Contacts
       operationId: postv1ContactsUpdate
       summary: Update a contact
-      description: Replaces the supported profile, preference, group, and custom-field values of an existing contact.
+      description: |-
+        Replaces the supported profile, preference, group, custom-field, and patient values of an existing contact.
+
+        Pass the encrypted contact `id` returned by List contacts. The request accepts the same fields as Create a contact.
+
+        For patient contacts, use `documents` to add or update attached documents and `documents_delete` to remove documents by `doc_id`.
       security:
       - bearerAuth: []
       responses:
@@ -2865,172 +3034,56 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                type:
-                  type: string
-                is_organization:
-                  type: boolean
-                first_name:
-                  type: string
-                middle_name:
-                  type: string
-                last_name:
-                  type: string
-                suffix:
-                  type: string
-                direct_message:
-                  type: string
-                address:
-                  type: string
-                address_line_2:
-                  type: string
-                city:
-                  type: string
-                state:
-                  type: string
-                zip:
-                  type: string
-                country:
-                  type: string
-                organization_name:
-                  type: string
-                position:
-                  type: string
-                notes:
-                  type: string
-                is_favorite:
-                  type: boolean
-                is_blocked:
-                  type: boolean
-                is_accesible_to_others:
-                  type: boolean
-                fields:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      value:
-                        type: string
-                groups:
-                  type: array
-                  items:
-                    type: string
-                previous_last_name:
-                  type: string
-                dob:
-                  type: string
-                gender:
-                  type: string
-                preferred_language:
-                  type: string
-                interpreter_needed:
-                  type: boolean
-                races:
-                  type: string
-                ethnicity:
-                  type: string
-                medical_record_number:
-                  type: string
-                patient_status:
-                  type: string
-                external_patient_id:
-                  type: string
-                pcp_internal_contact:
-                  type: string
-                pcp_external_name:
-                  type: string
-                emergency_contact_name:
-                  type: string
-                emergency_contact_relationship:
-                  type: string
-                emergency_contact_phone:
-                  type: string
-                preferred_contact_methods:
-                  type: string
-                sms_opt_in:
-                  type: boolean
-                email_opt_in:
-                  type: boolean
-                do_not_contact:
-                  type: boolean
-                coverage_type:
-                  type: string
-                insurance_provider:
-                  type: string
-                plan_name:
-                  type: string
-                member_id:
-                  type: string
-                group_number:
-                  type: string
-                payer_phone:
-                  type: string
-                subscriber_name:
-                  type: string
-                subscriber_dob:
-                  type: string
-                subscriber_relationship:
-                  type: string
-              required: [id]
-            example:
-              id: QrJ3MauNG0w7iFkMIodrMg==
-              type: individual
-              is_organization: false
-              first_name: Primary one
-              middle_name: Primary two
-              last_name: Contact
-              suffix: Jr
-              direct_message: ''
-              address: Address One
-              address_line_2: Address two
-              city: Test city
-              state: CA
-              zip: '898989'
-              country: US
-              organization_name: sdfdsfds
-              position: ''
-              notes: ''
-              is_favorite: false
-              is_blocked: false
-              is_accesible_to_others: false
-              fields:
-              - id: 357
-                value: 1 (205) 369-8533
-              groups:
-              - '249'
-              previous_last_name: test
-              dob: '2026-03-19'
-              gender: male
-              preferred_language: spanish
-              interpreter_needed: false
-              races: Black or African American
-              ethnicity: hispanic_or_latino
-              medical_record_number: dfsfsfdsf
-              patient_status: active
-              external_patient_id: ''
-              pcp_internal_contact: ''
-              pcp_external_name: ''
-              emergency_contact_name: dsffsf
-              emergency_contact_relationship: spouse
-              emergency_contact_phone: ''
-              preferred_contact_methods: Email
-              sms_opt_in: false
-              email_opt_in: false
-              do_not_contact: false
-              coverage_type: tertiary
-              insurance_provider: ''
-              plan_name: ''
-              member_id: ''
-              group_number: ''
-              payer_phone: ''
-              subscriber_name: ''
-              subscriber_dob: ''
-              subscriber_relationship: ''
+              $ref: '#/components/schemas/ContactUpdateRequest'
+            examples:
+              patient:
+                summary: Update a patient contact
+                value:
+                  id: QrJ3MauNG0w7iFkMIodrMg==
+                  type: patient
+                  is_organization: false
+                  first_name: Alex
+                  last_name: Patient
+                  email: alex.patient@example.com
+                  dob: '1985-04-12'
+                  gender: female
+                  preferred_language: spanish
+                  interpreter_needed: true
+                  ethnicity: not_hispanic_or_latino
+                  medical_record_number: MRN-000123
+                  patient_status: active
+                  sms_opt_in: true
+                  coverage_type: secondary
+                  insurance_provider: cigna
+                  member_id: MEM0009876
+                  documents:
+                  - doc_id: 172
+                    document_type: consent_form
+                    document_date: '2026-03-19'
+                    document_name: consent-form.pdf
+                    document_notes: Signed consent
+                    document_size: 76210
+                  documents_delete:
+                  - 171
+              individual:
+                summary: Update an individual contact
+                value:
+                  id: QrJ3MauNG0w7iFkMIodrMg==
+                  type: individual
+                  is_organization: false
+                  first_name: Jordan
+                  last_name: Rivera
+                  address: 100 Example Street
+                  city: Example City
+                  state: CA
+                  zip: '90001'
+                  country: US
+                  is_favorite: true
+                  fields:
+                  - id: 357
+                    value: 1 (205) 555-0133
+                  groups:
+                  - '249'
       x-amplify-validation-status: partially-validated
   "/v1/contacts/delete":
     post:
@@ -6680,7 +6733,8 @@ components:
           format: date-time
         contact_documents:
           type: array
-          items: {}
+          items:
+            $ref: '#/components/schemas/ContactDocument'
         fields:
           type: array
           items:
@@ -6689,7 +6743,344 @@ components:
           type: array
           items:
             type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        previous_last_name:
+          type: string
+        address:
+          type: string
+        address_line_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+        notes:
+          type: string
+        preferred_language:
+          type: string
+        interpreter_needed:
+          type: integer
+          description: '`1` if an interpreter is needed, otherwise `0`.'
+        ethnicity:
+          type: string
+        medical_record_number:
+          type: string
+        patient_status:
+          type: string
+        external_patient_id:
+          type: string
+        pcp_internal_contact:
+          type: string
+        pcp_external_name:
+          type: string
+        emergency_contact_name:
+          type: string
+        emergency_contact_relationship:
+          type: string
+        emergency_contact_phone:
+          type: string
+        sms_opt_in:
+          type: integer
+          description: '`1` if opted in, otherwise `0`.'
+        email_opt_in:
+          type: integer
+          description: '`1` if opted in, otherwise `0`.'
+        do_not_contact:
+          type: integer
+          description: '`1` if the patient should not be contacted, otherwise `0`.'
+        coverage_type:
+          type: string
+        insurance_provider:
+          type: string
+        plan_name:
+          type: string
+        member_id:
+          type: string
+        group_number:
+          type: string
+        payer_phone:
+          type: string
+        subscriber_name:
+          type: string
+        subscriber_dob:
+          type: string
+        subscriber_relationship:
+          type: string
       additionalProperties: true
+    ContactCommonFields:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [individual, organization, patient]
+          description: Contact type. Determines which additional fields apply.
+        is_organization:
+          type: boolean
+          description: Whether the contact is an organization. Set to `true` when `type` is `organization`.
+        first_name:
+          type: string
+        middle_name:
+          type: string
+        last_name:
+          type: string
+        suffix:
+          type: string
+          enum: [Jr, Sr, II, III, IV, V, other]
+        email:
+          type: string
+          format: email
+        phone_number:
+          type: string
+        work_number:
+          type: string
+        fax_number:
+          type: string
+        address:
+          type: string
+        address_line_2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+          description: Two-letter country code.
+        organization_name:
+          type: string
+        position:
+          type: string
+        notes:
+          type: string
+        is_favorite:
+          type: boolean
+        is_blocked:
+          type: boolean
+        is_accesible_to_others:
+          type: boolean
+          description: Whether the contact is accessible to other users. The property name reflects the current API spelling.
+        fields:
+          type: array
+          description: Custom field values. Get field IDs from List contact custom fields.
+          items:
+            type: object
+            required: [id, value]
+            properties:
+              id:
+                type: integer
+              value:
+                type: string
+        groups:
+          type: array
+          description: Contact group IDs. Get group IDs from List contact groups.
+          items:
+            type: string
+    ContactOrganizationFields:
+      type: object
+      description: Fields that apply when `type` is `organization`.
+      properties:
+        primary_contact_name:
+          type: string
+        organization_type:
+          type: string
+          enum: [hospital, clinic, lab, pharmacy, insurance, other]
+        website:
+          type: string
+          format: uri
+        npi:
+          type: string
+          description: National Provider Identifier.
+        tax_id:
+          type: string
+    ContactIndividualFields:
+      type: object
+      description: Fields that apply when `type` is `individual`.
+      properties:
+        previous_last_name:
+          type: string
+        role_title:
+          type: string
+    ContactPatientFields:
+      type: object
+      description: Fields that apply when `type` is `patient`.
+      properties:
+        previous_last_name:
+          type: string
+        dob:
+          type: string
+          format: date
+          description: Date of birth in `YYYY-MM-DD` format.
+        gender:
+          type: string
+          enum: [male, female, other, unknown, not_to_say]
+        preferred_language:
+          type: string
+          enum: [english, spanish, french, german, other]
+        interpreter_needed:
+          type: boolean
+        ethnicity:
+          type: string
+          enum: [hispanic_or_latino, not_hispanic_or_latino, unknown]
+        medical_record_number:
+          type: string
+        patient_status:
+          type: string
+          enum: [active, inactive, deceased]
+        external_patient_id:
+          type: string
+          description: Patient identifier from an external system.
+        pcp_internal_contact:
+          type: string
+          description: Primary care provider, as an existing contact in the workspace.
+        pcp_external_name:
+          type: string
+          description: Primary care provider name, when the provider is not a workspace contact.
+        emergency_contact_name:
+          type: string
+        emergency_contact_relationship:
+          type: string
+          enum: [self, spouse, parent, child, sibling, relative, friend, caregiver, other]
+        emergency_contact_phone:
+          type: string
+        sms_opt_in:
+          type: boolean
+        email_opt_in:
+          type: boolean
+        do_not_contact:
+          type: boolean
+        coverage_type:
+          type: string
+          enum: [primary, secondary, tertiary]
+        insurance_provider:
+          type: string
+          enum: [aetna, anthem, bcbs, cigna, humana, kaiser, medicare, medicaid, united, tricare, other]
+        plan_name:
+          type: string
+        member_id:
+          type: string
+        group_number:
+          type: string
+        payer_phone:
+          type: string
+        subscriber_name:
+          type: string
+        subscriber_dob:
+          type: string
+          format: date
+          description: Subscriber date of birth in `YYYY-MM-DD` format.
+        subscriber_relationship:
+          type: string
+          enum: [self, spouse, parent, child, sibling, relative, friend, caregiver, other]
+        documents:
+          type: array
+          description: Documents to attach to the patient contact.
+          items:
+            $ref: '#/components/schemas/ContactDocumentInput'
+    ContactDocumentInput:
+      type: object
+      required: [doc_id, document_type]
+      properties:
+        doc_id:
+          type: integer
+          description: ID of an uploaded document.
+        document_type:
+          type: string
+          enum: [admin_note, consult_note, cover_page, imaging_note, insurance_authorization, intake_forms, lab_test, patient_profile, prescriptions, referral_letter, requisition_form, insurance_authorization_request_form, consent_form, other]
+          description: Document category.
+        document_date:
+          type: string
+          format: date
+        document_name:
+          type: string
+        document_notes:
+          type: string
+        document_size:
+          type: integer
+          description: File size in bytes.
+    ContactDocument:
+      type: object
+      properties:
+        id:
+          type: integer
+        doc_id:
+          type: string
+        document_type:
+          type: string
+        document_date:
+          type: string
+          format: date
+        document_name:
+          type: string
+        document_notes:
+          type: string
+        document_size:
+          type: string
+          description: File size in bytes.
+        document_url:
+          type: string
+          format: uri
+          description: Temporary download URL. Expires after one hour.
+    ContactCreateRequest:
+      allOf:
+      - $ref: '#/components/schemas/ContactCommonFields'
+      - $ref: '#/components/schemas/ContactOrganizationFields'
+      - $ref: '#/components/schemas/ContactIndividualFields'
+      - $ref: '#/components/schemas/ContactPatientFields'
+    ContactUpdateRequest:
+      allOf:
+      - type: object
+        required: [id]
+        properties:
+          id:
+            type: string
+            description: Encrypted contact identifier from List contacts.
+          direct_message:
+            type: string
+          documents_delete:
+            type: array
+            description: IDs of patient documents to remove from the contact.
+            items:
+              type: integer
+      - $ref: '#/components/schemas/ContactCommonFields'
+      - $ref: '#/components/schemas/ContactOrganizationFields'
+      - $ref: '#/components/schemas/ContactIndividualFields'
+      - $ref: '#/components/schemas/ContactPatientFields'
+    LabDocumentUploadResponse:
+      type: object
+      required: [status, message, data]
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            doc_id:
+              type: integer
+              description: ID of the uploaded document.
+            lab_data_id:
+              type: integer
+              nullable: true
+              description: ID of the lab data record, when one was provided.
+            name:
+              type: string
+            extension:
+              type: string
+            url:
+              type: string
+              format: uri
+              description: Temporary download URL. Expires after one hour.
     ContactListResponse:
       type: object
       required: [status, message, data]
